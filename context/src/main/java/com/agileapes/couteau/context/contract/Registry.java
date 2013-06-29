@@ -10,11 +10,15 @@ import java.util.Collection;
  */
 public interface Registry<E> {
 
+    Class<E> getContextType();
+
     boolean contains(String name);
 
     void register(String name, E item) throws RegistryException;
 
     E get(String name) throws RegistryException;
+
+    <T extends E> T get(String name, Class<T> type) throws RegistryException;
 
     Collection<E> getBeans();
 

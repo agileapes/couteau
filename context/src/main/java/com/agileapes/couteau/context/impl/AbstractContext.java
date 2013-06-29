@@ -1,9 +1,9 @@
 package com.agileapes.couteau.context.impl;
 
-import com.agileapes.couteau.context.contract.BeanProcessor;
-import com.agileapes.couteau.context.contract.ContextProcessor;
-import com.agileapes.couteau.context.contract.ReconfigurableContext;
+import com.agileapes.couteau.context.contract.*;
+import com.agileapes.couteau.context.contract.EventListener;
 import com.agileapes.couteau.context.error.RegistryException;
+import com.agileapes.couteau.context.util.ClassUtils;
 
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -16,8 +16,39 @@ public abstract class AbstractContext<E> extends AbstractRegistry<E> implements 
 
     private final List<BeanProcessor<E>> beanProcessors = new CopyOnWriteArrayList<BeanProcessor<E>>();
     private final List<ContextProcessor<E>> contextProcessors = new CopyOnWriteArrayList<ContextProcessor<E>>();
+    private final List<SmartEventListener> eventListeners = new CopyOnWriteArrayList<SmartEventListener>();
     private Date startupDate = null;
     private long startupTime = System.currentTimeMillis();
+    private final Class<E> contextType;
+
+    public AbstractContext() {
+        //noinspection unchecked
+        contextType = (Class<E>) ClassUtils.resolveTypeArgument(getClass(), AbstractContext.class);
+        addBeanProcessor(new BeanProcessorAdapter<E>() {
+            @Override
+            public E postProcessBeforeRegistration(E bean, String name) throws RegistryException {
+                if (bean instanceof ContextAware) {
+                    final ContextAware contextAware = (ContextAware) bean;
+                    final Class<?> awareType = ClassUtils.resolveTypeArgument(contextAware.getClass(), ContextAware.class);
+                    final Class<?> currentType = getContextType();
+                    if (awareType.isAssignableFrom(currentType)) {
+                        //noinspection unchecked
+                        contextAware.setContext(AbstractContext.this);
+                    }
+                }
+                return bean;
+            }
+        });
+        addBeanProcessor(new BeanProcessorAdapter<E>() {
+            @Override
+            public E postProcessBeforeRegistration(E bean, String name) throws RegistryException {
+                if (bean instanceof EventListener) {
+                    addEventListener((EventListener) bean);
+                }
+                return bean;
+            }
+        });
+    }
 
     public void addContextProcessor(ContextProcessor<E> processor) {
         contextProcessors.add(processor);
@@ -26,7 +57,7 @@ public abstract class AbstractContext<E> extends AbstractRegistry<E> implements 
     @Override
     public void addBeanProcessor(BeanProcessor<E> processor) {
         beanProcessors.add(processor);
-        Collections.sort(beanProcessors, new OrderedBeanComparator());
+//        Collections.sort(beanProcessors, new OrderedBeanComparator());
     }
 
     @Override
@@ -99,16 +130,51 @@ public abstract class AbstractContext<E> extends AbstractRegistry<E> implements 
     }
 
     @Override
-    public Map<String, ? extends E> getBeansOfType(Class<? extends E> type) throws RegistryException {
+    public <T extends E> Map<String, T> getBeansOfType(Class<T> type) throws RegistryException {
         final Collection<String> beanNames = getBeanNames();
-        final HashMap<String, E> map = new HashMap<String, E>();
+        final HashMap<String, T> map = new HashMap<String, T>();
         for (String beanName : beanNames) {
             final E bean = get(beanName);
             if (type.isInstance(bean)) {
-                map.put(beanName, bean);
+                //noinspection unchecked
+                map.put(beanName, (T) bean);
             }
         }
         return map;
     }
 
+    @Override
+    public void register(E item) throws RegistryException {
+        final String canonicalName = item.getClass().getCanonicalName();
+        String name = canonicalName == null ? item.getClass().toString().replaceAll("\\s+", "") : canonicalName;
+        name = name.trim() + "#" + (getBeanNames().size() + 1);
+        register(name, item);
+    }
+
+    @Override
+    public void addEventListener(EventListener<? extends Event> eventListener) {
+        SmartEventListener smartEventListener;
+        if (eventListener instanceof SmartEventListener) {
+            smartEventListener = (SmartEventListener) eventListener;
+        } else {
+            //noinspection unchecked
+            smartEventListener = new SmartEventListener((EventListener<Event>) eventListener);
+        }
+        eventListeners.add(smartEventListener);
+    }
+
+    @Override
+    public <E extends Event> E publishEvent(E event) {
+        for (SmartEventListener listener : eventListeners) {
+            if (listener.supportsEvent(event)) {
+                listener.onEvent(event);
+            }
+        }
+        return event;
+    }
+
+    @Override
+    public Class<E> getContextType() {
+        return contextType;
+    }
 }

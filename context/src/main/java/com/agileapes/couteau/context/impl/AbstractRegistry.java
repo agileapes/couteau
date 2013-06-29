@@ -1,10 +1,7 @@
 package com.agileapes.couteau.context.impl;
 
 import com.agileapes.couteau.context.contract.Registry;
-import com.agileapes.couteau.context.error.DuplicateItemException;
-import com.agileapes.couteau.context.error.NoSuchItemException;
-import com.agileapes.couteau.context.error.RegistrationFailedException;
-import com.agileapes.couteau.context.error.RegistryException;
+import com.agileapes.couteau.context.error.*;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
@@ -30,10 +27,19 @@ public abstract class AbstractRegistry<E> implements Registry<E> {
 
     @Override
     public E get(String name) throws RegistryException {
+        return get(name, getContextType());
+    }
+
+    @Override
+    public <T extends E> T get(String name, Class<T> type) throws RegistryException {
         if (!contains(name)) {
             throw new NoSuchItemException(name);
         }
-        return read(name);
+        final E item = read(name);
+        if (!type.isInstance(item)) {
+            throw new InvalidBeanTypeException(name, type, item.getClass());
+        }
+        return type.cast(item);
     }
 
 }
