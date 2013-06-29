@@ -2,7 +2,10 @@ package com.agileapes.couteau.context.impl;
 
 import com.agileapes.couteau.context.contract.*;
 import com.agileapes.couteau.context.contract.EventListener;
+import com.agileapes.couteau.context.error.FatalRegistryException;
 import com.agileapes.couteau.context.error.RegistryException;
+import com.agileapes.couteau.context.event.ContextRefreshedEvent;
+import com.agileapes.couteau.context.event.ContextStartupEvent;
 import com.agileapes.couteau.context.util.ClassUtils;
 
 import java.util.*;
@@ -42,22 +45,23 @@ public abstract class AbstractContext<E> extends AbstractRegistry<E> implements 
         addBeanProcessor(new BeanProcessorAdapter<E>() {
             @Override
             public E postProcessBeforeRegistration(E bean, String name) throws RegistryException {
-                if (bean instanceof EventListener) {
-                    addEventListener((EventListener) bean);
+                if (bean instanceof EventListener<?>) {
+                    addEventListener((EventListener<?>) bean);
                 }
                 return bean;
             }
         });
+        publishEvent(new ContextStartupEvent(this));
     }
 
     public void addContextProcessor(ContextProcessor<E> processor) {
         contextProcessors.add(processor);
+        startupDate = null;
     }
 
     @Override
     public void addBeanProcessor(BeanProcessor<E> processor) {
         beanProcessors.add(processor);
-//        Collections.sort(beanProcessors, new OrderedBeanComparator());
     }
 
     @Override
@@ -71,7 +75,7 @@ public abstract class AbstractContext<E> extends AbstractRegistry<E> implements 
     @Override
     public Date getStartupDate() {
         if (!isContextReady()) {
-            throw new IllegalStateException("Context has not started up");
+            throw new IllegalStateException("Context has not started up. You must refresh the context before use.");
         }
         return startupDate;
     }
@@ -89,9 +93,7 @@ public abstract class AbstractContext<E> extends AbstractRegistry<E> implements 
 
     @Override
     public void register(String name, E item) throws RegistryException {
-        for (BeanProcessor<E> processor : beanProcessors) {
-            item = processor.postProcessBeforeRegistration(item, name);
-        }
+        item = postProcessBeanBeforeRegistration(name, item);
         super.register(name, item);
     }
 
@@ -101,7 +103,7 @@ public abstract class AbstractContext<E> extends AbstractRegistry<E> implements 
             throw new IllegalStateException("Context not started up");
         }
         E item = super.get(name);
-        item = postProcessBean(name, item);
+        item = postProcessBeanBeforeAccess(name, item);
         return item;
     }
 
@@ -109,15 +111,25 @@ public abstract class AbstractContext<E> extends AbstractRegistry<E> implements 
         return startupDate != null;
     }
 
-    private E postProcessBean(String name, E item) {
+    private E postProcessBeanBeforeRegistration(String name, E item) throws RegistryException {
+        final ArrayList<BeanProcessor<E>> beanProcessors = new ArrayList<BeanProcessor<E>>(this.beanProcessors);
+        Collections.sort(beanProcessors, new OrderedBeanComparator());
         for (BeanProcessor<E> processor : beanProcessors) {
-            try {
-                item = processor.postProcessBeforeAccess(item, name);
-            } catch (RegistryException e) {
-                e.printStackTrace();
-            }
+            item = processor.postProcessBeforeRegistration(item, name);
             if (item == null) {
-                throw new NullPointerException("Item cannot be nullified by a post processor");
+                throw new FatalRegistryException("Item cannot be nullified by a post processor");
+            }
+        }
+        return item;
+    }
+
+    private E postProcessBeanBeforeAccess(String name, E item) throws RegistryException {
+        final ArrayList<BeanProcessor<E>> beanProcessors = new ArrayList<BeanProcessor<E>>(this.beanProcessors);
+        Collections.sort(beanProcessors, new OrderedBeanComparator());
+        for (BeanProcessor<E> processor : beanProcessors) {
+            item = processor.postProcessBeforeAccess(item, name);
+            if (item == null) {
+                throw new FatalRegistryException("Item cannot be nullified by a post processor");
             }
         }
         return item;
@@ -127,6 +139,7 @@ public abstract class AbstractContext<E> extends AbstractRegistry<E> implements 
     public void refresh() {
         startupDate = null;
         ready();
+        publishEvent(new ContextRefreshedEvent(this));
     }
 
     @Override
@@ -177,4 +190,5 @@ public abstract class AbstractContext<E> extends AbstractRegistry<E> implements 
     public Class<E> getContextType() {
         return contextType;
     }
+
 }

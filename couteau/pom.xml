@@ -13,6 +13,7 @@
         <module>../parent</module>
         <module>../basics</module>
         <module>../context</module>
+        <module>../context-spring</module>
     </modules>
     
 </project>
