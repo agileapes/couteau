@@ -66,7 +66,7 @@ public abstract class AbstractMappedEventsTranslationScheme implements Translati
             }
             field.setAccessible(true);
             try {
-                field.set(originalEvent, method.invoke(originalEvent));
+                field.set(applicationEvent, method.invoke(originalEvent));
             } catch (Exception e) {
                 throw new EventTranslationException("Failed to set property: " + fieldName, e);
             }
@@ -86,6 +86,7 @@ public abstract class AbstractMappedEventsTranslationScheme implements Translati
             if (field == null || !method.getParameterTypes()[0].isAssignableFrom(field.getType())) {
                 continue;
             }
+            field.setAccessible(true);
             try {
                 method.invoke(originalEvent, field.get(translated));
             } catch (Exception e) {
