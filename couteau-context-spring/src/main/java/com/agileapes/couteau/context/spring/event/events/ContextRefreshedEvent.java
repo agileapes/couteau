@@ -1,13 +1,13 @@
 package com.agileapes.couteau.context.spring.event.events;
 
 import com.agileapes.couteau.context.contract.Context;
-import org.springframework.context.ApplicationEvent;
+import com.agileapes.couteau.context.spring.event.TranslatedEvent;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (6/29/13, 4:45 PM)
+ * @since 1.0 (6/29/13, 5:13 PM)
  */
-public class ContextStartedEvent extends ApplicationEvent {
+public class ContextRefreshedEvent extends TranslatedEvent {
 
     private Context<?> context;
 
@@ -16,7 +16,7 @@ public class ContextStartedEvent extends ApplicationEvent {
      *
      * @param source the component that published the event (never {@code null})
      */
-    public ContextStartedEvent(Object source) {
+    public ContextRefreshedEvent(Object source) {
         super(source);
     }
 

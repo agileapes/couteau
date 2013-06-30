@@ -1,6 +1,7 @@
 package com.agileapes.couteau.context.spring.event.impl;
 
 import com.agileapes.couteau.context.contract.Event;
+import com.agileapes.couteau.context.spring.error.EventTranslationException;
 import com.agileapes.couteau.context.spring.event.TranslationScheme;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.util.ReflectionUtils;
@@ -22,31 +23,31 @@ public class GenericTranslationScheme implements TranslationScheme {
     }
 
     @Override
-    public ApplicationEvent translate(Event originalEvent) {
+    public ApplicationEvent translate(Event originalEvent) throws EventTranslationException {
         final Method[] methods = ReflectionUtils.getAllDeclaredMethods(originalEvent.getClass());
         final GenericApplicationEvent applicationEvent = new GenericApplicationEvent(originalEvent.getSource());
         for (Method method : methods) {
             if (!isGetter(method)) {
                 continue;
             }
+            final String propertyName = StringUtils.uncapitalize(method.getName().substring(method.getName().startsWith("get") ? 3 : 2));
             try {
-                final Object value = method.invoke(originalEvent);
-                final String propertyName = StringUtils.uncapitalize(method.getName().substring(method.getName().startsWith("get") ? 3 : 2));
-                applicationEvent.setProperty(propertyName, value);
-            } catch (Exception ignored) {
+                applicationEvent.setProperty(propertyName, method.invoke(originalEvent));
+            } catch (Exception e) {
+                throw new EventTranslationException("Failed to set property on translated event: " + propertyName);
             }
         }
         return applicationEvent;
     }
 
     static boolean isGetter(Method method) {
-        return !(!Modifier.isPublic(method.getModifiers()) || method.getParameterTypes().length != 0 ||
-                method.getReturnType().equals(void.class)) && !(!method.getName().matches("get[A-Z].*") ||
-                (!method.getReturnType().equals(boolean.class) && !method.getName().matches("is[A-Z].*")));
+        return Modifier.isPublic(method.getModifiers()) && !Modifier.isStatic(method.getModifiers())
+                && method.getParameterTypes().length == 0 && !method.getReturnType().equals(void.class)
+                && (method.getName().matches("get[A-Z].*") || (method.getName().matches("is[A-Z].*") && method.getReturnType().equals(boolean.class)));
     }
 
     @Override
-    public void fillIn(Event originalEvent, ApplicationEvent translated) {
+    public void fillIn(Event originalEvent, ApplicationEvent translated) throws EventTranslationException {
         if (!(translated instanceof GenericApplicationEvent)) {
             return;
         }
@@ -61,7 +62,8 @@ public class GenericTranslationScheme implements TranslationScheme {
             }
             try {
                 method.invoke(originalEvent, value);
-            } catch (Exception ignored) {
+            } catch (Exception e) {
+                throw new EventTranslationException("Failed to call setter on original event", e);
             }
         }
     }

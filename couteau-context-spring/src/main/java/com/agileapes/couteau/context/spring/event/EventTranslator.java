@@ -55,7 +55,11 @@ public class EventTranslator implements EventListener<Event>, ApplicationContext
             return;
         }
         applicationContext.publishEvent(applicationEvent);
-        targetScheme.fillIn(event, applicationEvent);
+        try {
+            targetScheme.fillIn(event, applicationEvent);
+        } catch (com.agileapes.couteau.context.spring.error.EventTranslationException e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -1,6 +1,6 @@
 package com.agileapes.couteau.context.spring.event.impl;
 
-import org.springframework.context.ApplicationEvent;
+import com.agileapes.couteau.context.spring.event.TranslatedEvent;
 
 import java.util.Enumeration;
 import java.util.Properties;
@@ -9,7 +9,7 @@ import java.util.Properties;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (6/29/13, 4:29 PM)
  */
-public class GenericApplicationEvent extends ApplicationEvent {
+public class GenericApplicationEvent extends TranslatedEvent {
 
     private final Properties properties = new Properties();
 

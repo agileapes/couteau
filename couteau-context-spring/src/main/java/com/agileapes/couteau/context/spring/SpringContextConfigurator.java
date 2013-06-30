@@ -22,8 +22,11 @@ public class SpringContextConfigurator implements BeanFactoryPostProcessor {
         this.beanFactory = beanFactory;
     }
 
-    public void register(String name, Context<?> context) throws RegistryException {
-        beanFactory.registerSingleton(name, context);
+    public <C extends Context<?>> void configure(C context) throws RegistryException {
+        configure(context, null);
+    }
+
+    public <C extends Context<?>> void configure(C context, ContextConfigurator<C> configurator) throws RegistryException {
         if (context instanceof BeanFactoryAwareContext) {
             ((BeanFactoryAwareContext) context).setBeanFactory(beanFactory);
         }
@@ -49,6 +52,9 @@ public class SpringContextConfigurator implements BeanFactoryPostProcessor {
                 context.addContextProcessor(processor);
             }
         }
+        if (configurator != null) {
+            configurator.configure(context, beanFactory);
+        }
         if (needsRefresh) {
             if (context instanceof ReconfigurableContext<?>) {
                 ((ReconfigurableContext<?>) context).refresh();
@@ -63,7 +69,7 @@ public class SpringContextConfigurator implements BeanFactoryPostProcessor {
             }
         }
         for (String beanName : context.getBeanNames()) {
-            beanFactory.registerSingleton(name.concat(".").concat(beanName), context.get(name));
+            beanFactory.registerSingleton(context.getClass().getCanonicalName().concat(".").concat(beanName), context.get(beanName));
         }
     }
 
