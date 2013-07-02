@@ -34,7 +34,7 @@ public abstract class AbstractContext<E> extends AbstractRegistry<E> implements 
                     final ContextAware contextAware = (ContextAware) bean;
                     final Class<?> awareType = ClassUtils.resolveTypeArgument(contextAware.getClass(), ContextAware.class);
                     final Class<?> currentType = getContextType();
-                    if (awareType.isAssignableFrom(currentType)) {
+                    if ((awareType == null && currentType.equals(Object.class)) || (awareType != null && awareType.isAssignableFrom(currentType))) {
                         //noinspection unchecked
                         contextAware.setContext(AbstractContext.this);
                     }
@@ -54,14 +54,16 @@ public abstract class AbstractContext<E> extends AbstractRegistry<E> implements 
         publishEvent(new ContextStartupEvent(this));
     }
 
-    public void addContextProcessor(ContextProcessor<E> processor) {
+    public Context<E> addContextProcessor(ContextProcessor<E> processor) {
         contextProcessors.add(processor);
         startupDate = null;
+        return this;
     }
 
     @Override
-    public void addBeanProcessor(BeanProcessor<E> processor) {
+    public Context<E> addBeanProcessor(BeanProcessor<E> processor) {
         beanProcessors.add(processor);
+        return this;
     }
 
     @Override
@@ -157,15 +159,16 @@ public abstract class AbstractContext<E> extends AbstractRegistry<E> implements 
     }
 
     @Override
-    public void register(E item) throws RegistryException {
+    public Context<E> register(E item) throws RegistryException {
         final String canonicalName = item.getClass().getCanonicalName();
         String name = canonicalName == null ? item.getClass().toString().replaceAll("\\s+", "") : canonicalName;
         name = name.trim() + "#" + (getBeanNames().size() + 1);
         register(name, item);
+        return this;
     }
 
     @Override
-    public void addEventListener(EventListener<? extends Event> eventListener) {
+    public Context<E> addEventListener(EventListener<? extends Event> eventListener) {
         SmartEventListener smartEventListener;
         if (eventListener instanceof SmartEventListener) {
             smartEventListener = (SmartEventListener) eventListener;
@@ -174,6 +177,7 @@ public abstract class AbstractContext<E> extends AbstractRegistry<E> implements 
             smartEventListener = new SmartEventListener((EventListener<Event>) eventListener);
         }
         eventListeners.add(smartEventListener);
+        return this;
     }
 
     @Override

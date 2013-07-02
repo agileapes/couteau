@@ -11,18 +11,18 @@ import java.util.Map;
  */
 public interface Context<E> extends Registry<E>, EventPublisher {
 
-    void addContextProcessor(ContextProcessor<E> processor);
+    Context<E> addContextProcessor(ContextProcessor<E> processor);
 
-    void addBeanProcessor(BeanProcessor<E> processor);
+    Context<E> addBeanProcessor(BeanProcessor<E> processor);
 
     long getStartupTime();
 
     Date getStartupDate();
 
+    Context<E> register(E item) throws RegistryException;
+
+    Context<E> addEventListener(EventListener<? extends Event> eventListener);
+
     <T extends E> Map<String, T> getBeansOfType(Class<T> type) throws RegistryException;
-
-    void register(E item) throws RegistryException;
-
-    void addEventListener(EventListener<? extends Event> eventListener);
 
 }
