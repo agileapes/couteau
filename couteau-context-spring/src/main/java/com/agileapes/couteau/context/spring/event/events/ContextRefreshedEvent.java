@@ -4,6 +4,8 @@ import com.agileapes.couteau.context.contract.Context;
 import com.agileapes.couteau.context.spring.event.TranslatedEvent;
 
 /**
+ * The Spring translation for {@link com.agileapes.couteau.context.event.ContextRefreshedEvent}
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (6/29/13, 5:13 PM)
  */

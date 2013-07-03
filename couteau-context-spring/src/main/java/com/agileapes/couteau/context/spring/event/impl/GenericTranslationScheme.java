@@ -12,6 +12,10 @@ import java.lang.reflect.Modifier;
 import java.util.Enumeration;
 
 /**
+ * This translation scheme will translate any given event into an instance of {@link GenericApplicationEvent}
+ * and back into the original format. By including this translator, all events, event those that don't have any
+ * exact matches will be translatable.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (6/29/13, 4:32 PM)
  */
@@ -25,7 +29,7 @@ public class GenericTranslationScheme implements TranslationScheme {
     @Override
     public ApplicationEvent translate(Event originalEvent) throws EventTranslationException {
         final Method[] methods = ReflectionUtils.getAllDeclaredMethods(originalEvent.getClass());
-        final GenericApplicationEvent applicationEvent = new GenericApplicationEvent(originalEvent.getSource());
+        final GenericApplicationEvent applicationEvent = new GenericApplicationEvent(originalEvent.getSource(), originalEvent);
         for (Method method : methods) {
             if (!isGetter(method)) {
                 continue;

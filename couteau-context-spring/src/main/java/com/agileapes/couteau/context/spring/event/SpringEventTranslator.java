@@ -15,10 +15,14 @@ import java.util.Comparator;
 import java.util.List;
 
 /**
+ * This class, when included in a Spring application context, will enable the translation
+ * of events going through Couteau contexts into events that can be listened to by Spring
+ * ApplicationListener instances.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (6/29/13, 4:15 PM)
  */
-public class EventTranslator implements EventListener<Event>, ApplicationContextAware {
+public class SpringEventTranslator implements EventListener<Event>, ApplicationContextAware {
 
     private final List<TranslationScheme> schemes = new ArrayList<TranslationScheme>();
     private ApplicationContext applicationContext;

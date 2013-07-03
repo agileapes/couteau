@@ -17,6 +17,15 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
+ * This class is built with the assumption that for each Couteau instance there is an exact POJO model
+ * event class that is its translation. It asks its extenders to provide the mapping from one event
+ * to another.
+ *
+ * Each mapping will be done only once to reduce the overhead of the -- possibly heavy -- operation of
+ * mapping one class to another.
+ *
+ * Mapped classes are expected to be have a constructor with one argument of type {@link Object}
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (6/29/13, 4:51 PM)
  */

@@ -1,25 +1,31 @@
 package com.agileapes.couteau.context.spring.event.impl;
 
+import com.agileapes.couteau.context.contract.Event;
 import com.agileapes.couteau.context.spring.event.TranslatedEvent;
 
 import java.util.Enumeration;
 import java.util.Properties;
 
 /**
+ * This is a generic event that has a set of properties.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (6/29/13, 4:29 PM)
  */
 public class GenericApplicationEvent extends TranslatedEvent {
 
     private final Properties properties = new Properties();
+    private final Event originalEvent;
 
     /**
      * Create a new ApplicationEvent.
      *
-     * @param source the component that published the event (never {@code null})
+     * @param source            the component that published the event (never {@code null})
+     * @param originalEvent     the event originally raised by Couteau
      */
-    public GenericApplicationEvent(Object source) {
+    public GenericApplicationEvent(Object source, Event originalEvent) {
         super(source);
+        this.originalEvent = originalEvent;
     }
 
     public Enumeration<?> getPropertyNames() {
@@ -34,4 +40,7 @@ public class GenericApplicationEvent extends TranslatedEvent {
         properties.put(name, value);
     }
 
+    public Event getOriginalEvent() {
+        return originalEvent;
+    }
 }

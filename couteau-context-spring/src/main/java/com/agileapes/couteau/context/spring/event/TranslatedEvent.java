@@ -3,6 +3,8 @@ package com.agileapes.couteau.context.spring.event;
 import org.springframework.context.ApplicationEvent;
 
 /**
+ * This is the intended root for all events translated through Couteau.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/6/30, 10:13)
  */

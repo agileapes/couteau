@@ -4,10 +4,12 @@ import com.agileapes.couteau.context.contract.Context;
 import com.agileapes.couteau.context.spring.event.TranslatedEvent;
 
 /**
+ * Translation for {@link com.agileapes.couteau.context.event.ContextStartupEvent}
+ * 
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (6/29/13, 4:45 PM)
  */
-public class ContextStartedEvent extends TranslatedEvent {
+public class ContextStartupEvent extends TranslatedEvent {
 
     private Context<?> context;
 
@@ -16,7 +18,7 @@ public class ContextStartedEvent extends TranslatedEvent {
      *
      * @param source the component that published the event (never {@code null})
      */
-    public ContextStartedEvent(Object source) {
+    public ContextStartupEvent(Object source) {
         super(source);
     }
 
