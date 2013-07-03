@@ -10,6 +10,10 @@ import com.agileapes.couteau.context.value.ValueReaderContext;
  */
 public class DefaultValueReaderContext extends AbstractTypeSpecificContext<ValueReader> implements ValueReaderContext {
 
+    public DefaultValueReaderContext() {
+        ready();
+    }
+
     private ValueReader getValueReader(Class<?> type, boolean mandatory) {
         for (ValueReader reader : getBeans()) {
             if (reader.canRead(type)) {

@@ -21,6 +21,7 @@ public class PrimitiveValueReader implements ValueReader {
         return classes.contains(type);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public <E> E read(String text, Class<E> type) {
         if (text.equals("null")) {
@@ -30,24 +31,24 @@ public class PrimitiveValueReader implements ValueReader {
             text = "null";
         }
         if (type.equals(int.class) || type.equals(Integer.class)) {
-            return type.cast(Integer.parseInt(text));
+            return (E) ((Integer) Integer.parseInt(text));
         } else if (type.equals(long.class) || type.equals(Long.class)) {
-            return type.cast(Long.parseLong(text));
+            return (E) ((Long) Long.parseLong(text));
         } else if (type.equals(short.class) || type.equals(Short.class)) {
-            return type.cast(Short.parseShort(text));
+            return (E) ((Short) Short.parseShort(text));
         } else if (type.equals(boolean.class) || type.equals(Boolean.class)) {
-            return type.cast(Boolean.parseBoolean(text));
+            return (E) ((Boolean) Boolean.parseBoolean(text));
         } else if (type.equals(char.class) || type.equals(Character.class)) {
             if (text.length() != 1) {
                 throw new IllegalArgumentException(text + " is not a valid character");
             }
-            return type.cast(text.charAt(0));
+            return (E) ((Character) text.charAt(0));
         } else if (type.equals(float.class) || type.equals(Float.class)) {
-            return type.cast(Float.parseFloat(text));
+            return (E) ((Float) Float.parseFloat(text));
         } else if (type.equals(double.class) || type.equals(Double.class)) {
-            return type.cast(Double.parseDouble(text));
+            return (E) ((Double) Double.parseDouble(text));
         } else if (type.equals(String.class)) {
-            return type.cast(text);
+            return (E) text;
         }
         throw new IllegalArgumentException(text + " is not a valid input for " + getClass().getSimpleName());
     }
