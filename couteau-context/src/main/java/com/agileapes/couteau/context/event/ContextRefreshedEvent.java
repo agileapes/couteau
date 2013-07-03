@@ -4,6 +4,8 @@ import com.agileapes.couteau.context.contract.Context;
 import com.agileapes.couteau.context.contract.Event;
 
 /**
+ * This event is fired whenever the context is refreshed.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (6/29/13, 4:27 PM)
  */

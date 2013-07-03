@@ -32,9 +32,9 @@ public abstract class AbstractContext<E> extends AbstractRegistry<E> implements 
             public E postProcessBeforeRegistration(E bean, String name) throws RegistryException {
                 if (bean instanceof ContextAware) {
                     final ContextAware contextAware = (ContextAware) bean;
-                    final Class<?> awareType = ClassUtils.resolveTypeArgument(contextAware.getClass(), ContextAware.class);
+                    final Class<?> contextType = ClassUtils.resolveTypeArgument(contextAware.getClass(), ContextAware.class);
                     final Class<?> currentType = getContextType();
-                    if ((awareType == null && currentType.equals(Object.class)) || (awareType != null && awareType.isAssignableFrom(currentType))) {
+                    if ((contextType == null && currentType.equals(Object.class)) || (contextType != null && contextType.isAssignableFrom(currentType))) {
                         //noinspection unchecked
                         contextAware.setContext(AbstractContext.this);
                     }
@@ -47,6 +47,21 @@ public abstract class AbstractContext<E> extends AbstractRegistry<E> implements 
             public E postProcessBeforeRegistration(E bean, String name) throws RegistryException {
                 if (bean instanceof EventListener<?>) {
                     addEventListener((EventListener<?>) bean);
+                }
+                return bean;
+            }
+        });
+        addBeanProcessor(new BeanProcessorAdapter<E>() {
+            @Override
+            public E postProcessBeforeRegistration(E bean, String name) throws RegistryException {
+                if (bean instanceof ContextProcessor) {
+                    ContextProcessor processor = (ContextProcessor) bean;
+                    final Class<?> contextType = ClassUtils.resolveTypeArgument(processor.getClass(), ContextProcessor.class);
+                    final Class<E> currentType = getContextType();
+                    if ((contextType == null && currentType.equals(Object.class)) || (contextType != null && contextType.isAssignableFrom(currentType))) {
+                        //noinspection unchecked
+                        addContextProcessor(processor);
+                    }
                 }
                 return bean;
             }
@@ -95,6 +110,9 @@ public abstract class AbstractContext<E> extends AbstractRegistry<E> implements 
 
     @Override
     public void register(String name, E item) throws RegistryException {
+        if (item instanceof NamedBean) {
+            ((NamedBean) item).setName(name);
+        }
         item = postProcessBeanBeforeRegistration(name, item);
         super.register(name, item);
     }
@@ -168,7 +186,7 @@ public abstract class AbstractContext<E> extends AbstractRegistry<E> implements 
     }
 
     @Override
-    public Context<E> addEventListener(EventListener<? extends Event> eventListener) {
+    public void addEventListener(EventListener<? extends Event> eventListener) {
         SmartEventListener smartEventListener;
         if (eventListener instanceof SmartEventListener) {
             smartEventListener = (SmartEventListener) eventListener;
@@ -177,7 +195,6 @@ public abstract class AbstractContext<E> extends AbstractRegistry<E> implements 
             smartEventListener = new SmartEventListener((EventListener<Event>) eventListener);
         }
         eventListeners.add(smartEventListener);
-        return this;
     }
 
     @Override
