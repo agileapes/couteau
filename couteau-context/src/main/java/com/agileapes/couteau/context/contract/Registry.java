@@ -17,7 +17,7 @@ public interface Registry<E> {
      * Determines the supertype of objects that can be registered with this registry.
      * @return the type of objects in the registry
      */
-    Class<E> getContextType();
+    Class<E> getRegistryType();
 
     /**
      * Will determine whether an object of the given name has been registered with this registry

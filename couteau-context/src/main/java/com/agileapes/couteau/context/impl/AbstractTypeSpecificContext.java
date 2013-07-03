@@ -6,6 +6,10 @@ import com.agileapes.couteau.context.error.RegistryException;
 import static com.agileapes.couteau.context.contract.OrderedBean.HIGHEST_PRECEDENCE;
 
 /**
+ * This is a thread-safe context that requires items to be named after the canonical names
+ * of their classes. This ensures that singleton objects within the context are unique by
+ * their types as well.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (6/27/13, 4:35 PM)
  */

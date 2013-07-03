@@ -37,7 +37,7 @@ public class SpringContextConfigurator implements BeanFactoryPostProcessor {
         final Map<String, BeanProcessor> processors = beanFactory.getBeansOfType(BeanProcessor.class, false, true);
         for (BeanProcessor processor : processors.values()) {
             final Class<?> processorType = ClassUtils.resolveTypeArgument(processor.getClass(), BeanProcessor.class);
-            if (context.getContextType().isAssignableFrom(processorType)) {
+            if (context.getRegistryType().isAssignableFrom(processorType)) {
                 //noinspection unchecked
                 context.addBeanProcessor(processor);
             }
@@ -46,7 +46,7 @@ public class SpringContextConfigurator implements BeanFactoryPostProcessor {
         final Map<String, ContextProcessor> contextProcessors = beanFactory.getBeansOfType(ContextProcessor.class, false, true);
         for (ContextProcessor processor : contextProcessors.values()) {
             final Class<?> processorType = ClassUtils.resolveTypeArgument(processor.getClass(), ContextProcessor.class);
-            if (context.getContextType().isAssignableFrom(processorType)) {
+            if (context.getRegistryType().isAssignableFrom(processorType)) {
                 needsRefresh = true;
                 //noinspection unchecked
                 context.addContextProcessor(processor);
@@ -63,7 +63,7 @@ public class SpringContextConfigurator implements BeanFactoryPostProcessor {
         final Map<String, ContextAware> contextAwareBeans = beanFactory.getBeansOfType(ContextAware.class, false, true);
         for (ContextAware bean : contextAwareBeans.values()) {
             final Class<?> contextType = ClassUtils.resolveTypeArgument(bean.getClass(), ContextAware.class);
-            if (contextType.isAssignableFrom(context.getContextType())) {
+            if (contextType.isAssignableFrom(context.getRegistryType())) {
                 //noinspection unchecked
                 bean.setContext(context);
             }
