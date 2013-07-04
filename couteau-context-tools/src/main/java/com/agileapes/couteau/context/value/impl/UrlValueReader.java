@@ -15,10 +15,13 @@
 
 package com.agileapes.couteau.context.value.impl;
 
+import com.agileapes.couteau.context.error.InvalidInputValueError;
+import com.agileapes.couteau.context.error.InvalidValueTypeError;
 import com.agileapes.couteau.context.value.ValueReader;
 
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 /**
@@ -37,16 +40,22 @@ public class UrlValueReader implements ValueReader {
     @Override
     @SuppressWarnings("unchecked")
     public <E> E read(String text, Class<E> type) {
+        if (!canRead(type)) {
+            throw new InvalidValueTypeError(type);
+        }
         if (type.equals(URL.class)) {
             try {
                 return (E) new URL(text);
             } catch (MalformedURLException e) {
-                throw new IllegalArgumentException("Malformed URL entered: " + text, e);
+                throw new InvalidInputValueError(text, type, e);
             }
-        } else if (type.equals(URI.class)) {
-            return (E) URI.create(text);
+        } else {
+            try {
+                return (E) new URI(text);
+            } catch (URISyntaxException e) {
+                throw new InvalidInputValueError(text, type, e);
+            }
         }
-        throw new IllegalArgumentException();
     }
 
 }

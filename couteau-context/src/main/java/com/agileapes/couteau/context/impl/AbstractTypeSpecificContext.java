@@ -1,5 +1,6 @@
 package com.agileapes.couteau.context.impl;
 
+import com.agileapes.couteau.context.contract.Context;
 import com.agileapes.couteau.context.error.InvalidBeanNameException;
 import com.agileapes.couteau.context.error.RegistryException;
 
@@ -26,4 +27,11 @@ public abstract class AbstractTypeSpecificContext<E> extends AbstractThreadSafeC
             }
         });
     }
+
+    @Override
+    public Context<E> register(E item) throws RegistryException {
+        register(item.getClass().getCanonicalName(), item);
+        return this;
+    }
+
 }

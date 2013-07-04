@@ -15,6 +15,7 @@
 
 package com.agileapes.couteau.context.value.impl;
 
+import com.agileapes.couteau.context.error.InvalidValueTypeError;
 import com.agileapes.couteau.context.value.ValueReader;
 
 import java.io.File;
@@ -34,11 +35,11 @@ public class FileValueReader implements ValueReader {
 
     @Override
     public <E> E read(String text, Class<E> type) {
-        if (type.equals(File.class)) {
-            //noinspection unchecked
-            return (E) new File(text);
+        if (!canRead(type)) {
+            throw new InvalidValueTypeError(type);
         }
-        throw new IllegalArgumentException();
+        //noinspection unchecked
+        return (E) new File(text);
     }
 
 }

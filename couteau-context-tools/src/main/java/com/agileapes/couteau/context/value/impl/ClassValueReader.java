@@ -15,6 +15,9 @@
 
 package com.agileapes.couteau.context.value.impl;
 
+import com.agileapes.couteau.context.error.InvalidInputValueError;
+import com.agileapes.couteau.context.error.InvalidValueTypeError;
+import com.agileapes.couteau.context.error.ValueReaderError;
 import com.agileapes.couteau.context.util.ClassUtils;
 import com.agileapes.couteau.context.value.ValueReader;
 
@@ -40,14 +43,14 @@ public class ClassValueReader implements ValueReader {
 
     @Override
     @SuppressWarnings("unchecked")
-    public <E> E read(String text, Class<E> type) {
-        if (type.equals(Class.class)) {
-            try {
-                return (E) ClassUtils.forName(text, classLoader);
-            } catch (ClassNotFoundException e) {
-                throw new IllegalStateException("Specified class was not found: " + text, e);
-            }
+    public <E> E read(String text, Class<E> type) throws ValueReaderError{
+        if (!canRead(type)) {
+            throw new InvalidValueTypeError(type);
         }
-        throw new IllegalArgumentException(text + " is not a valid input for " + getClass().getSimpleName());
+        try {
+            return (E) ClassUtils.forName(text, classLoader);
+        } catch (ClassNotFoundException e) {
+            throw new InvalidInputValueError(text, type, e);
+        }
     }
 }

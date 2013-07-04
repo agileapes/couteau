@@ -15,6 +15,8 @@
 
 package com.agileapes.couteau.context.value.impl;
 
+import com.agileapes.couteau.context.error.InvalidEnumValueError;
+import com.agileapes.couteau.context.error.InvalidValueTypeError;
 import com.agileapes.couteau.context.value.ValueReader;
 
 /**
@@ -32,15 +34,16 @@ public class EnumValueReader implements ValueReader {
 
     @Override
     public <E> E read(String text, Class<E> type) {
-        if (type.isEnum()) {
-            final E[] constants = type.getEnumConstants();
-            for (E constant : constants) {
-                if (constant.toString().equalsIgnoreCase(text)) {
-                    return constant;
-                }
+        if (!canRead(type)) {
+            throw new InvalidValueTypeError(type);
+        }
+        final E[] constants = type.getEnumConstants();
+        for (E constant : constants) {
+            if (constant.toString().equalsIgnoreCase(text)) {
+                return constant;
             }
         }
-        throw new IllegalArgumentException(text);
+        throw new InvalidEnumValueError(text, type);
     }
 
 }

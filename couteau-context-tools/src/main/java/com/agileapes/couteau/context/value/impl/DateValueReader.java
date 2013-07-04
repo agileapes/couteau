@@ -15,6 +15,8 @@
 
 package com.agileapes.couteau.context.value.impl;
 
+import com.agileapes.couteau.context.error.InvalidInputValueError;
+import com.agileapes.couteau.context.error.InvalidValueTypeError;
 import com.agileapes.couteau.context.value.ValueReader;
 
 import java.util.Date;
@@ -39,6 +41,9 @@ public class DateValueReader implements ValueReader {
     @Override
     @SuppressWarnings("unchecked")
     public <E> E read(String text, Class<E> type) {
+        if (!canRead(type)) {
+            throw new InvalidValueTypeError(type);
+        }
         if (Date.class.equals(type)) {
             final Matcher matcher = Pattern.compile("(\\d+)/(\\d+)/(\\d+)(?:\\s+(\\d+):(\\d+)(?::(\\d+))?)?").matcher(text);
             if (matcher.find()) {
@@ -50,10 +55,11 @@ public class DateValueReader implements ValueReader {
                 int second = matcher.groupCount() > 5 ? Integer.parseInt(matcher.group(6)) : 0;
                 final GregorianCalendar calendar = new GregorianCalendar(year, month, day, hour, minute, second);
                 return (E) calendar.getTime();
+            } else {
+                throw new InvalidInputValueError(text, type);
             }
-        } else if (java.sql.Date.class.equals(type)) {
+        } else {
             return (E) new java.sql.Date(read(text, Date.class).getTime());
         }
-        throw new IllegalArgumentException();
     }
 }
