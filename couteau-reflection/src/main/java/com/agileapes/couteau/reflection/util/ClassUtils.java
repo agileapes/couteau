@@ -1,4 +1,4 @@
-package com.agileapes.couteau.context.util;
+package com.agileapes.couteau.reflection.util;
 
 import java.lang.reflect.*;
 import java.util.*;
@@ -17,7 +17,9 @@ public abstract class ClassUtils {
     private static final String INTERNAL_ARRAY_PREFIX = "[";
     private static final String NON_PRIMITIVE_ARRAY_PREFIX = "[L";
 
-    /** Cache from Class to TypeVariable Map */
+    /**
+     * Cache from Class to TypeVariable Map
+     */
     private static final Map<Class, Map<TypeVariable, Type>> typeVariableCache =
             Collections.synchronizedMap(new WeakHashMap<Class, Map<TypeVariable, Type>>());
 
@@ -60,15 +62,13 @@ public abstract class ClassUtils {
         }
         try {
             return classLoaderToUse.loadClass(name);
-        }
-        catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex) {
             int lastDotIndex = name.lastIndexOf('.');
             if (lastDotIndex != -1) {
                 String innerClassName = name.substring(0, lastDotIndex) + '$' + name.substring(lastDotIndex + 1);
                 try {
                     return classLoaderToUse.loadClass(innerClassName);
-                }
-                catch (ClassNotFoundException ex2) {
+                } catch (ClassNotFoundException ex2) {
                     // swallow - let original exception get through
                 }
             }
@@ -98,7 +98,8 @@ public abstract class ClassUtils {
      * Resolve the single type argument of the given generic interface against
      * the given target class which is assumed to implement the generic interface
      * and possibly declare a concrete type for its type variable.
-     * @param clazz the target class to check against
+     *
+     * @param clazz      the target class to check against
      * @param genericIfc the generic interface or superclass to resolve the type argument from
      * @return the resolved type of the argument, or {@code null} if not resolvable
      */
@@ -118,10 +119,11 @@ public abstract class ClassUtils {
      * Resolve the type arguments of the given generic interface against the given
      * target class which is assumed to implement the generic interface and possibly
      * declare concrete types for its type variables.
-     * @param clazz the target class to check against
+     *
+     * @param clazz      the target class to check against
      * @param genericIfc the generic interface or superclass to resolve the type argument from
      * @return the resolved type of each argument, with the array size matching the
-     * number of actual type arguments, or {@code null} if not resolvable
+     *         number of actual type arguments, or {@code null} if not resolvable
      */
     public static Class[] resolveTypeArguments(Class<?> clazz, Class<?> genericIfc) {
         return doResolveTypeArguments(clazz, clazz, genericIfc);
@@ -132,7 +134,7 @@ public abstract class ClassUtils {
             if (genericIfc.isInterface()) {
                 final List<Type> types = new ArrayList<Type>();
                 types.addAll(Arrays.asList(classToIntrospect.getGenericInterfaces()));
-                types.addAll(Arrays.asList(classToIntrospect.getGenericSuperclass()));
+                types.add(classToIntrospect.getGenericSuperclass());
                 Type[] ifcs = types.toArray(new Type[types.size()]);
                 for (Type ifc : ifcs) {
                     Class[] result = doResolveTypeArguments(ownerClass, ifc, genericIfc);
@@ -140,15 +142,13 @@ public abstract class ClassUtils {
                         return result;
                     }
                 }
-            }
-            else {
+            } else {
                 try {
                     Class[] result = doResolveTypeArguments(ownerClass, classToIntrospect.getGenericSuperclass(), genericIfc);
                     if (result != null) {
                         return result;
                     }
-                }
-                catch (MalformedParameterizedTypeException ex) {
+                } catch (MalformedParameterizedTypeException ex) {
                     // from getGenericSuperclass() - return null to skip further superclass traversal
                     return null;
                 }
@@ -170,12 +170,10 @@ public abstract class ClassUtils {
                     result[i] = extractClass(ownerClass, arg);
                 }
                 return result;
-            }
-            else if (genericIfc.isAssignableFrom((Class) rawType)) {
+            } else if (genericIfc.isAssignableFrom((Class) rawType)) {
                 return doResolveTypeArguments(ownerClass, (Class) rawType, genericIfc);
             }
-        }
-        else if (ifc != null && genericIfc.isAssignableFrom((Class) ifc)) {
+        } else if (ifc != null && genericIfc.isAssignableFrom((Class) ifc)) {
             return doResolveTypeArguments(ownerClass, (Class) ifc, genericIfc);
         }
         return null;
@@ -187,20 +185,17 @@ public abstract class ClassUtils {
     private static Class<?> extractClass(Class<?> ownerClass, Type arg) {
         if (arg instanceof ParameterizedType) {
             return extractClass(ownerClass, ((ParameterizedType) arg).getRawType());
-        }
-        else if (arg instanceof GenericArrayType) {
+        } else if (arg instanceof GenericArrayType) {
             GenericArrayType gat = (GenericArrayType) arg;
             Type gt = gat.getGenericComponentType();
             Class<?> componentClass = extractClass(ownerClass, gt);
             return Array.newInstance(componentClass, 0).getClass();
-        }
-        else if (arg instanceof TypeVariable) {
+        } else if (arg instanceof TypeVariable) {
             TypeVariable tv = (TypeVariable) arg;
             arg = getTypeVariableMap(ownerClass).get(tv);
             if (arg == null) {
                 arg = extractBoundForTypeVariable(tv);
-            }
-            else {
+            } else {
                 arg = extractClass(ownerClass, arg);
             }
         }
@@ -233,8 +228,7 @@ public abstract class ClassUtils {
                     extractTypeVariablesFromGenericInterfaces(type.getSuperclass().getGenericInterfaces(), typeVariableMap);
                     type = type.getSuperclass();
                 }
-            }
-            catch (MalformedParameterizedTypeException ex) {
+            } catch (MalformedParameterizedTypeException ex) {
                 // from getGenericSuperclass() - ignore and continue with member class check
             }
 
@@ -249,8 +243,7 @@ public abstract class ClassUtils {
                     }
                     type = type.getEnclosingClass();
                 }
-            }
-            catch (MalformedParameterizedTypeException ex) {
+            } catch (MalformedParameterizedTypeException ex) {
                 // from getGenericSuperclass() - ignore and preserve previously accumulated type variables
             }
 
@@ -284,8 +277,7 @@ public abstract class ClassUtils {
                     extractTypeVariablesFromGenericInterfaces(
                             ((Class) pt.getRawType()).getGenericInterfaces(), typeVariableMap);
                 }
-            }
-            else if (genericInterface instanceof Class) {
+            } else if (genericInterface instanceof Class) {
                 extractTypeVariablesFromGenericInterfaces(
                         ((Class) genericInterface).getGenericInterfaces(), typeVariableMap);
             }
@@ -300,11 +292,11 @@ public abstract class ClassUtils {
      * <p>Consider this case:
      * <pre class="code>
      * public interface Foo<S, T> {
-     *  ..
+     * ..
      * }
-     *
+     * <p/>
      * public class FooImpl implements Foo<String, Integer> {
-     *  ..
+     * ..
      * }</pre>
      * For '{@code FooImpl}' the following mappings would be added to the {@link java.util.Map}:
      * {S=java.lang.String, T=java.lang.Integer}.
@@ -318,14 +310,11 @@ public abstract class ClassUtils {
                 TypeVariable variable = typeVariables[i];
                 if (actualTypeArgument instanceof Class) {
                     typeVariableMap.put(variable, actualTypeArgument);
-                }
-                else if (actualTypeArgument instanceof GenericArrayType) {
+                } else if (actualTypeArgument instanceof GenericArrayType) {
                     typeVariableMap.put(variable, actualTypeArgument);
-                }
-                else if (actualTypeArgument instanceof ParameterizedType) {
+                } else if (actualTypeArgument instanceof ParameterizedType) {
                     typeVariableMap.put(variable, actualTypeArgument);
-                }
-                else if (actualTypeArgument instanceof TypeVariable) {
+                } else if (actualTypeArgument instanceof TypeVariable) {
                     // We have a type that is parameterized at instantiation time
                     // the nearest match on the bridge method will be the bounded type.
                     TypeVariable typeVariableArgument = (TypeVariable) actualTypeArgument;
