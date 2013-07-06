@@ -6,7 +6,7 @@ import com.agileapes.couteau.context.error.FatalRegistryException;
 import com.agileapes.couteau.context.error.RegistryException;
 import com.agileapes.couteau.context.event.ContextRefreshedEvent;
 import com.agileapes.couteau.context.event.ContextStartupEvent;
-import com.agileapes.couteau.context.util.ClassUtils;
+import com.agileapes.couteau.reflection.util.ClassUtils;
 
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;

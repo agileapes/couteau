@@ -2,7 +2,7 @@ package com.agileapes.couteau.context.spring;
 
 import com.agileapes.couteau.context.contract.*;
 import com.agileapes.couteau.context.error.RegistryException;
-import com.agileapes.couteau.context.util.ClassUtils;
+import com.agileapes.couteau.reflection.util.ClassUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.FatalBeanException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;

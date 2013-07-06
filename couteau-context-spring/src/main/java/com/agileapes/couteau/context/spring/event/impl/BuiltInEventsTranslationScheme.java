@@ -1,7 +1,7 @@
 package com.agileapes.couteau.context.spring.event.impl;
 
 import com.agileapes.couteau.context.contract.Event;
-import com.agileapes.couteau.context.util.ClassUtils;
+import com.agileapes.couteau.reflection.util.ClassUtils;
 
 /**
  * This translator will translate all events in {@code couteau-context} into their counterparts understandable by Spring

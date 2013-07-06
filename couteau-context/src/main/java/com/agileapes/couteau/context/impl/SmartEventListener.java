@@ -2,7 +2,7 @@ package com.agileapes.couteau.context.impl;
 
 import com.agileapes.couteau.context.contract.Event;
 import com.agileapes.couteau.context.contract.EventListener;
-import com.agileapes.couteau.context.util.ClassUtils;
+import com.agileapes.couteau.reflection.util.ClassUtils;
 
 /**
  * This event listener is an event listener that is capable of determining whether it is interested in

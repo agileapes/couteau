@@ -18,7 +18,7 @@ package com.agileapes.couteau.context.value.impl;
 import com.agileapes.couteau.context.error.InvalidInputValueError;
 import com.agileapes.couteau.context.error.InvalidValueTypeError;
 import com.agileapes.couteau.context.error.ValueReaderError;
-import com.agileapes.couteau.context.util.ClassUtils;
+import com.agileapes.couteau.reflection.util.ClassUtils;
 import com.agileapes.couteau.context.value.ValueReader;
 
 /**
