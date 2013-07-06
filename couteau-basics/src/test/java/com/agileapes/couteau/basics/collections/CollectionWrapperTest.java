@@ -36,7 +36,7 @@ public class CollectionWrapperTest {
 
     @Test
     public void testFiltering() throws Exception {
-        final List<Integer> list = with(1, 2, 3, 4, 5, 6).filter(new Filter<Integer>() {
+        final List<Integer> list = with(1, 2, 3, 4, 5, 6).keep(new Filter<Integer>() {
             @Override
             public boolean accepts(Integer item) throws Exception {
                 return item % 2 == 0;

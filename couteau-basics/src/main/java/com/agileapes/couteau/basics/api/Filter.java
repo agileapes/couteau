@@ -11,7 +11,7 @@ package com.agileapes.couteau.basics.api;
 public interface Filter<E> {
 
     /**
-     * Will determine whether or not an item is accepted by the filter
+     * Will determine whether or not an item is accepted by the keep
      * @param item    the item
      * @return {@code true} if the item is accepted
      * @throws Exception

@@ -64,7 +64,7 @@ public class CollectionWrapper<I> {
      * @param comparator    the comparator for wrapped items
      * @return the wrapper for sorted items
      */
-    public CollectionWrapper<I> sort(Comparator<I> comparator) {
+    public CollectionWrapper<I> sort(Comparator<? super I> comparator) {
         final ArrayList<I> sorted = new ArrayList<I>(items);
         Collections.sort(sorted, comparator);
         return new CollectionWrapper<I>(sorted);
@@ -76,7 +76,7 @@ public class CollectionWrapper<I> {
      * @return the wrapper again
      * @throws Exception
      */
-    public CollectionWrapper<I> each(Processor<I> processor) throws Exception {
+    public CollectionWrapper<I> each(Processor<? super I> processor) throws Exception {
         for (I item : items) {
             processor.process(item);
         }
@@ -84,15 +84,31 @@ public class CollectionWrapper<I> {
     }
 
     /**
-     * Will return a <em>new</em> wrapper for all items acceptable by the filter
-     * @param filter    the filter which determines which items will pass through
+     * Will return a <em>new</em> wrapper for all items acceptable by the keep
+     * @param filter    the keep which determines which items will pass through
      * @return the wrapper for all accepted items
      * @throws Exception
      */
-    public CollectionWrapper<I> filter(Filter<I> filter) throws Exception {
+    public CollectionWrapper<I> keep(Filter<? super I> filter) throws Exception {
         final ArrayList<I> filtered = new ArrayList<I>();
         for (I item : items) {
             if (filter.accepts(item)) {
+                filtered.add(item);
+            }
+        }
+        return new CollectionWrapper<I>(filtered);
+    }
+
+    /**
+     * Will return a <em>new</em> wrapper for all items not acceptable by the keep
+     * @param filter    the keep which determines which items will pass through
+     * @return the wrapper for all accepted items
+     * @throws Exception
+     */
+    public CollectionWrapper<I> drop(Filter<? super I> filter) throws Exception {
+        final ArrayList<I> filtered = new ArrayList<I>();
+        for (I item : items) {
+            if (!filter.accepts(item)) {
                 filtered.add(item);
             }
         }
@@ -106,7 +122,7 @@ public class CollectionWrapper<I> {
      * @return the <em>newly instantiated</em> wrapper for the mapper's output
      * @throws Exception
      */
-    public <O> CollectionWrapper<O> map(Mapper<I, O> mapper) throws Exception {
+    public <O> CollectionWrapper<O> map(Mapper<? super I, O> mapper) throws Exception {
         final ArrayList<O> mapped = new ArrayList<O>();
         for (I item : items) {
             mapped.add(mapper.map(item));
