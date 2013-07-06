@@ -15,6 +15,7 @@
         <module>../couteau-context</module>
         <module>../couteau-context-spring</module>
         <module>../couteau-context-tools</module>
+        <module>../couteau-reflection</module>
     </modules>
     
 </project>
