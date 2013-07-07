@@ -1,6 +1,9 @@
 package com.agileapes.couteau.reflection.util;
 
 import com.agileapes.couteau.basics.collections.CollectionWrapper;
+import com.agileapes.couteau.reflection.util.assets.MemberModifierFilter;
+import com.agileapes.couteau.reflection.util.assets.MemberNameFilter;
+import com.agileapes.couteau.reflection.util.assets.Modifiers;
 
 import java.io.File;
 import java.lang.reflect.Field;
@@ -9,6 +12,7 @@ import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 /**
  * This is basically a collection of utility methods (functions) designed to help

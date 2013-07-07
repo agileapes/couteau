@@ -85,14 +85,22 @@ public class CollectionWrapper<I> {
 
     /**
      * Will return a <em>new</em> wrapper for all items acceptable by the keep
-     * @param filter    the keep which determines which items will pass through
+     * @param filters    The filters that decide whether or not this item will be kept.
+     *                   If any one filter accepts the item, the item will be kept.
      * @return the wrapper for all accepted items
      * @throws Exception
      */
-    public CollectionWrapper<I> keep(Filter<? super I> filter) throws Exception {
+    public CollectionWrapper<I> keep(Filter<? super I>... filters) throws Exception {
         final ArrayList<I> filtered = new ArrayList<I>();
         for (I item : items) {
-            if (filter.accepts(item)) {
+            boolean kept = false;
+            for (Filter<? super I> filter : filters) {
+                if (filter.accepts(item)) {
+                    kept = true;
+                    break;
+                }
+            }
+            if (kept) {
                 filtered.add(item);
             }
         }
@@ -101,14 +109,22 @@ public class CollectionWrapper<I> {
 
     /**
      * Will return a <em>new</em> wrapper for all items not acceptable by the keep
-     * @param filter    the keep which determines which items will pass through
+     * @param filters    the filters that decide whether or not the item will be dropped.
+     *                   If any single filter accepts the item, it will drop.
      * @return the wrapper for all accepted items
      * @throws Exception
      */
-    public CollectionWrapper<I> drop(Filter<? super I> filter) throws Exception {
+    public CollectionWrapper<I> drop(Filter<? super I>... filters) throws Exception {
         final ArrayList<I> filtered = new ArrayList<I>();
         for (I item : items) {
-            if (!filter.accepts(item)) {
+            boolean dropped = false;
+            for (Filter<? super I> filter : filters) {
+                if (filter.accepts(item)) {
+                    dropped = true;
+                    break;
+                }
+            }
+            if (!dropped) {
                 filtered.add(item);
             }
         }
