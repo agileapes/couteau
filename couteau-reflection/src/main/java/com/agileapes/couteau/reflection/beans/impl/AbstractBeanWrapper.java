@@ -61,7 +61,8 @@ public abstract class AbstractBeanWrapper<E> extends AbstractBeanAccessor<E> imp
             throw new NoSuchPropertyException(getBeanType(), propertyName);
         }
         final WritePropertyAccessor<?> accessor = writeAccessors.get(propertyName);
-        if  (propertyType.isAssignableFrom(accessor.getPropertyType())) {
+        final Class<?> actualType = accessor.getPropertyType().isPrimitive() ? primitives.get(accessor.getPropertyType()) : accessor.getPropertyType();
+        if  (propertyType.isAssignableFrom(actualType)) {
             //noinspection unchecked
             return (WritePropertyAccessor<T>) accessor;
         }
