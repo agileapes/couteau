@@ -9,7 +9,7 @@ import java.lang.reflect.Field;
 public abstract class AbstractFieldPropertyAccessor<E> extends AbstractPropertyAccessor<E> {
 
     private final Field field;
-    private final Object target;
+    private Object target;
 
     public AbstractFieldPropertyAccessor(String propertyName, Class<E> propertyType, Field field, Object target) {
         super(propertyName, propertyType);
@@ -37,6 +37,10 @@ public abstract class AbstractFieldPropertyAccessor<E> extends AbstractPropertyA
     protected void set(Object value) throws Exception {
         getField().setAccessible(true);
         getField().set(getTarget(), value);
+    }
+
+    public void setTarget(Object target) {
+        this.target = target;
     }
 
 }

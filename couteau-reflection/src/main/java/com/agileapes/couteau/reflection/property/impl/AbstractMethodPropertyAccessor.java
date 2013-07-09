@@ -11,7 +11,7 @@ import java.lang.reflect.Method;
 public abstract class AbstractMethodPropertyAccessor<E> extends AbstractPropertyAccessor<E> {
 
     private final Method method;
-    private final Object target;
+    private Object target;
 
     public AbstractMethodPropertyAccessor(String propertyName, Class<E> propertyType, Method method, Object target) {
         super(propertyName, propertyType);
@@ -33,6 +33,10 @@ public abstract class AbstractMethodPropertyAccessor<E> extends AbstractProperty
 
     protected Class<?> getTargetType() {
         return target.getClass();
+    }
+
+    public void setTarget(Object target) {
+        this.target = target;
     }
 
 }

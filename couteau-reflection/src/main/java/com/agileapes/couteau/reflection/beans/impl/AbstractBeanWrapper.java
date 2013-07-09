@@ -62,7 +62,7 @@ public abstract class AbstractBeanWrapper<E> extends AbstractBeanAccessor<E> imp
             throw new NoSuchPropertyException(getBeanType(), propertyName);
         }
         final WritePropertyAccessor<?> accessor = writeAccessors.get(propertyName);
-        if  (propertyType.isAssignableFrom(ReflectionUtils.mapType(accessor.getPropertyType()))) {
+        if  (ReflectionUtils.mapType(propertyType).isAssignableFrom(ReflectionUtils.mapType(accessor.getPropertyType()))) {
             //noinspection unchecked
             return (WritePropertyAccessor<T>) accessor;
         }

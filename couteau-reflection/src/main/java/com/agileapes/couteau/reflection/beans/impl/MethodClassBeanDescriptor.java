@@ -1,6 +1,10 @@
 package com.agileapes.couteau.reflection.beans.impl;
 
 import com.agileapes.couteau.basics.api.Processor;
+import com.agileapes.couteau.reflection.property.ReadPropertyAccessor;
+import com.agileapes.couteau.reflection.property.WritePropertyAccessor;
+import com.agileapes.couteau.reflection.property.impl.MethodReadPropertyAccessor;
+import com.agileapes.couteau.reflection.property.impl.MethodWritePropertyAccessor;
 import com.agileapes.couteau.reflection.util.ReflectionUtils;
 import com.agileapes.couteau.reflection.util.assets.GetterMethodFilter;
 
@@ -19,12 +23,28 @@ public class MethodClassBeanDescriptor<E> extends AbstractClassBeanDescriptor<E>
     }
 
     @Override
-    protected Map<String, Class<?>> getProperties() throws Exception {
-        final Map<String, Class<?>> map = new HashMap<String, Class<?>>();
+    protected Map<String,ReadPropertyAccessor<?>> getReaders() throws Exception {
+        final HashMap<String, ReadPropertyAccessor<?>> map = new HashMap<String, ReadPropertyAccessor<?>>();
         ReflectionUtils.withMethods(getBeanType()).keep(new GetterMethodFilter()).each(new Processor<Method>() {
             @Override
             public void process(Method input) throws Exception {
-                map.put(ReflectionUtils.getPropertyName(input.getName()), input.getReturnType());
+                final String propertyName = ReflectionUtils.getPropertyName(input.getName());
+                //noinspection unchecked
+                map.put(propertyName, new MethodReadPropertyAccessor(propertyName, input.getReturnType(), input, null));
+            }
+        });
+        return map;
+    }
+
+    @Override
+    protected Map<String, WritePropertyAccessor<?>> getWriters() throws Exception {
+        final HashMap<String, WritePropertyAccessor<?>> map = new HashMap<String, WritePropertyAccessor<?>>();
+        ReflectionUtils.withMethods(getBeanType()).keep(new GetterMethodFilter()).each(new Processor<Method>() {
+            @Override
+            public void process(Method input) throws Exception {
+                final String propertyName = ReflectionUtils.getPropertyName(input.getName());
+                //noinspection unchecked
+                map.put(propertyName, new MethodWritePropertyAccessor(propertyName, input.getParameterTypes()[0], input, null));
             }
         });
         return map;

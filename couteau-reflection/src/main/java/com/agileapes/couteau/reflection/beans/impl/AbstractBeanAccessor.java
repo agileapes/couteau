@@ -80,7 +80,7 @@ public abstract class AbstractBeanAccessor<E> implements BeanAccessor<E>, ReadAc
             throw new NoSuchPropertyException(getBeanType(), propertyName);
         }
         final ReadPropertyAccessor<?> accessor = accessors.get(propertyName);
-        if  (propertyType.isAssignableFrom(ReflectionUtils.mapType(accessor.getPropertyType()))) {
+        if  (ReflectionUtils.mapType(propertyType).isAssignableFrom(ReflectionUtils.mapType(accessor.getPropertyType()))) {
             //noinspection unchecked
             return (ReadPropertyAccessor<T>) accessor;
         }

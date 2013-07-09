@@ -30,7 +30,7 @@ public class MethodBeanWrapper<E> extends AbstractBeanWrapper<E> {
             public void process(Method input) throws Exception {
                 final String propertyName = ReflectionUtils.getPropertyName(input.getName());
                 //noinspection unchecked
-                map.put(propertyName, new MethodWritePropertyAccessor(propertyName, input.getReturnType(), input, getBean()));
+                map.put(propertyName, new MethodWritePropertyAccessor(propertyName, input.getParameterTypes()[0], input, getBean()));
             }
         });
         return map;
