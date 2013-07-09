@@ -20,8 +20,13 @@ public class MethodInvocation {
         this.arguments = arguments;
     }
 
-    public Object invoke() throws InvocationTargetException, IllegalAccessException {
-        return method.invoke(target, arguments);
+    public Object invoke() throws InvocationTargetException {
+        method.setAccessible(true);
+        try {
+            return method.invoke(target, arguments);
+        } catch (IllegalAccessException e) {
+            return null;
+        }
     }
 
     @Override
