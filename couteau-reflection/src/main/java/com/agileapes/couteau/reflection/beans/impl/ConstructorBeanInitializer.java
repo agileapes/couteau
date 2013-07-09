@@ -2,6 +2,7 @@ package com.agileapes.couteau.reflection.beans.impl;
 
 import com.agileapes.couteau.reflection.beans.BeanInitializer;
 import com.agileapes.couteau.reflection.error.BeanInstantiationException;
+import com.agileapes.couteau.reflection.util.ReflectionUtils;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -20,17 +21,6 @@ import java.util.Set;
  */
 public class ConstructorBeanInitializer implements BeanInitializer {
 
-    private final static Map<Class<?>, Class<?>> primitives = new HashMap<Class<?>, Class<?>>();
-    static {
-        primitives.put(int.class, Integer.class);
-        primitives.put(float.class, Float.class);
-        primitives.put(double.class, Double.class);
-        primitives.put(long.class, Long.class);
-        primitives.put(short.class, Short.class);
-        primitives.put(char.class, Character.class);
-        primitives.put(boolean.class, Boolean.class);
-    }
-
     @Override
     public <E> E initialize(Class<E> type, Class[] argumentTypes, Object[] arguments) throws BeanInstantiationException {
         if (argumentTypes == null) {
@@ -43,7 +33,7 @@ public class ConstructorBeanInitializer implements BeanInitializer {
             throw new BeanInstantiationException("Argument types must match arguments");
         }
         for (int i = 0; i < argumentTypes.length; i++) {
-            Class argumentType = primitives.containsKey(argumentTypes[i]) ? primitives.get(argumentTypes[i]) :  argumentTypes[i];
+            final Class argumentType = ReflectionUtils.mapType(argumentTypes[i]);
             final Object argument = arguments[i];
             if (!argumentType.isInstance(argument) && ((argumentType.isPrimitive() || argument != null))) {
                 throw new BeanInstantiationException("Arguments do not match the provided types");

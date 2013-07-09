@@ -5,6 +5,7 @@ import com.agileapes.couteau.reflection.beans.ReadAccessorAware;
 import com.agileapes.couteau.reflection.error.NoSuchPropertyException;
 import com.agileapes.couteau.reflection.error.PropertyAccessException;
 import com.agileapes.couteau.reflection.property.ReadPropertyAccessor;
+import com.agileapes.couteau.reflection.util.ReflectionUtils;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -16,17 +17,6 @@ import java.util.Set;
  * @since 1.0 (7/9/13, 12:51 PM)
  */
 public abstract class AbstractBeanAccessor<E> implements BeanAccessor<E>, ReadAccessorAware {
-
-    protected final static Map<Class<?>, Class<?>> primitives = new HashMap<Class<?>, Class<?>>();
-    static {
-        primitives.put(int.class, Integer.class);
-        primitives.put(float.class, Float.class);
-        primitives.put(double.class, Double.class);
-        primitives.put(long.class, Long.class);
-        primitives.put(short.class, Short.class);
-        primitives.put(char.class, Character.class);
-        primitives.put(boolean.class, Boolean.class);
-    }
 
     private final Map<String, ReadPropertyAccessor<?>> accessors = new HashMap<String, ReadPropertyAccessor<?>>();
     private final E bean;
@@ -90,8 +80,7 @@ public abstract class AbstractBeanAccessor<E> implements BeanAccessor<E>, ReadAc
             throw new NoSuchPropertyException(getBeanType(), propertyName);
         }
         final ReadPropertyAccessor<?> accessor = accessors.get(propertyName);
-        final Class<?> actualType = accessor.getPropertyType().isPrimitive() ? primitives.get(accessor.getPropertyType()) : accessor.getPropertyType();
-        if  (propertyType.isAssignableFrom(actualType)) {
+        if  (propertyType.isAssignableFrom(ReflectionUtils.mapType(accessor.getPropertyType()))) {
             //noinspection unchecked
             return (ReadPropertyAccessor<T>) accessor;
         }

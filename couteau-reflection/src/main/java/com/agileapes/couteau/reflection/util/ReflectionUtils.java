@@ -1,18 +1,13 @@
 package com.agileapes.couteau.reflection.util;
 
 import com.agileapes.couteau.basics.collections.CollectionWrapper;
-import com.agileapes.couteau.reflection.util.assets.MemberModifierFilter;
-import com.agileapes.couteau.reflection.util.assets.MemberNameFilter;
-import com.agileapes.couteau.reflection.util.assets.Modifiers;
 
 import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.net.URI;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * This is basically a collection of utility methods (functions) designed to help
@@ -23,6 +18,17 @@ import java.util.List;
  * @since 1.0 (7/6/13, 2:15 PM)
  */
 public abstract class ReflectionUtils {
+
+    private final static Map<Class<?>, Class<?>> MAPPED_TYPES = new HashMap<Class<?>, Class<?>>();
+    static {
+        MAPPED_TYPES.put(int.class, Integer.class);
+        MAPPED_TYPES.put(float.class, Float.class);
+        MAPPED_TYPES.put(double.class, Double.class);
+        MAPPED_TYPES.put(long.class, Long.class);
+        MAPPED_TYPES.put(short.class, Short.class);
+        MAPPED_TYPES.put(char.class, Character.class);
+        MAPPED_TYPES.put(boolean.class, Boolean.class);
+    }
 
     public static CollectionWrapper<Method> withMethods(Class<?> type) {
         final ArrayList<Method> methods = new ArrayList<Method>();
@@ -139,6 +145,14 @@ public abstract class ReflectionUtils {
             throw new IllegalArgumentException();
         }
         return methodName.substring(0, 1).toLowerCase().concat(methodName.substring(1));
+    }
+
+    public static Class<?> mapType(Class<?> type) {
+        if (MAPPED_TYPES.containsKey(type)) {
+            return MAPPED_TYPES.get(type);
+        } else {
+            return type;
+        }
     }
 
 }

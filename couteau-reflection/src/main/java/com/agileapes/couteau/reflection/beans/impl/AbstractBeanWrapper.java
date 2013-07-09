@@ -6,6 +6,7 @@ import com.agileapes.couteau.reflection.error.NoSuchPropertyException;
 import com.agileapes.couteau.reflection.error.PropertyAccessException;
 import com.agileapes.couteau.reflection.error.PropertyTypeMismatchException;
 import com.agileapes.couteau.reflection.property.WritePropertyAccessor;
+import com.agileapes.couteau.reflection.util.ReflectionUtils;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -61,8 +62,7 @@ public abstract class AbstractBeanWrapper<E> extends AbstractBeanAccessor<E> imp
             throw new NoSuchPropertyException(getBeanType(), propertyName);
         }
         final WritePropertyAccessor<?> accessor = writeAccessors.get(propertyName);
-        final Class<?> actualType = accessor.getPropertyType().isPrimitive() ? primitives.get(accessor.getPropertyType()) : accessor.getPropertyType();
-        if  (propertyType.isAssignableFrom(actualType)) {
+        if  (propertyType.isAssignableFrom(ReflectionUtils.mapType(accessor.getPropertyType()))) {
             //noinspection unchecked
             return (WritePropertyAccessor<T>) accessor;
         }
