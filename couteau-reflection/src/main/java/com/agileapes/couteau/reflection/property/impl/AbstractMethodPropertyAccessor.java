@@ -10,7 +10,6 @@ import java.lang.reflect.Method;
  */
 public abstract class AbstractMethodPropertyAccessor<E> extends AbstractPropertyAccessor<E> {
 
-    private final MethodInvocation methodInvocation;
     private final Method method;
     private final Object target;
 
@@ -18,11 +17,10 @@ public abstract class AbstractMethodPropertyAccessor<E> extends AbstractProperty
         super(propertyName, propertyType);
         this.method = method;
         this.target = target;
-        methodInvocation = new MethodInvocation(method, target);
     }
 
     protected Object invoke(Object... arguments) throws Exception {
-        return methodInvocation.invoke();
+        return method.invoke(target, arguments);
     }
 
     protected Method getMethod() {

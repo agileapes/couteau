@@ -24,10 +24,6 @@ public class MethodInvocation {
         return method.invoke(target, arguments);
     }
 
-    public Object invoke(Object... arguments) throws InvocationTargetException, IllegalAccessException {
-        return method.invoke(target, arguments);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
