@@ -1,7 +1,7 @@
 package com.agileapes.couteau.basics.collections;
 
 import com.agileapes.couteau.basics.api.Filter;
-import com.agileapes.couteau.basics.api.Mapper;
+import com.agileapes.couteau.basics.api.Transformer;
 import com.agileapes.couteau.basics.api.Processor;
 
 import java.util.*;
@@ -133,17 +133,21 @@ public class CollectionWrapper<I> {
 
     /**
      * Will return a wrapper for a collection of items that are produced through the mapping of the currently wrapped items
-     * @param mapper    the mapper
+     * @param transformer    the transformer
      * @param <O>       the type of output objects
-     * @return the <em>newly instantiated</em> wrapper for the mapper's output
+     * @return the <em>newly instantiated</em> wrapper for the transformer's output
      * @throws Exception
      */
-    public <O> CollectionWrapper<O> map(Mapper<? super I, O> mapper) throws Exception {
-        final ArrayList<O> mapped = new ArrayList<O>();
+    public <O> CollectionWrapper<O> transform(Transformer<? super I, O> transformer) throws Exception {
+        return new CollectionWrapper<O>(map(transformer).values());
+    }
+
+    public <O> Map<I, O> map(Transformer<? super I, O> transformer) throws Exception {
+        final HashMap<I, O> map = new HashMap<I, O>();
         for (I item : items) {
-            mapped.add(mapper.map(item));
+            map.put(item, transformer.map(item));
         }
-        return new CollectionWrapper<O>(mapped);
+        return map;
     }
 
     /**
@@ -153,19 +157,19 @@ public class CollectionWrapper<I> {
      * @return the wrapper
      * @throws Exception
      */
-    public CollectionWrapper<Collection<I>> expand(Mapper<Collection<I>, Collection<Collection<I>>> expander) throws Exception {
+    public CollectionWrapper<Collection<I>> expand(Transformer<Collection<I>, Collection<Collection<I>>> expander) throws Exception {
         return new CollectionWrapper<Collection<I>>(expander.map(new ArrayList<I>(items)));
     }
 
     /**
-     * Will map all the items in the collection into instances of the wrapped items. This is useful when reducing
+     * Will transform all the items in the collection into instances of the wrapped items. This is useful when reducing
      * certain items in the collection
-     * @param mapper    the mapper
+     * @param transformer    the transformer
      * @return the wrapper
      * @throws Exception
      */
-    public CollectionWrapper<I> all(Mapper<Collection<I>, Collection<I>> mapper) throws Exception {
-        return new CollectionWrapper<I>(mapper.map(new ArrayList<I>(items)));
+    public CollectionWrapper<I> all(Transformer<Collection<I>, Collection<I>> transformer) throws Exception {
+        return new CollectionWrapper<I>(transformer.map(new ArrayList<I>(items)));
     }
 
     /**

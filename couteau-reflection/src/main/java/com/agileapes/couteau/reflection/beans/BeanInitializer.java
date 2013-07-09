@@ -1,4 +1,4 @@
-package com.agileapes.couteau.reflection.contract;
+package com.agileapes.couteau.reflection.beans;
 
 import com.agileapes.couteau.reflection.error.BeanInstantiationException;
 

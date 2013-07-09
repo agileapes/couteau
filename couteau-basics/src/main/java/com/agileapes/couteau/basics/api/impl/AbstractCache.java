@@ -74,7 +74,7 @@ public abstract class AbstractCache<K, V> implements Cache<K, V> {
     private final RemovePolicy removePolicy;
 
     /**
-     * This method will return the map that will be used as the storage unit
+     * This method will return the transform that will be used as the storage unit
      * for the cached data.
      * @return the storage
      */

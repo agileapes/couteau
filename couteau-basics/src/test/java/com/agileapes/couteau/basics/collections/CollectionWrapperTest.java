@@ -1,7 +1,7 @@
 package com.agileapes.couteau.basics.collections;
 
 import com.agileapes.couteau.basics.api.Filter;
-import com.agileapes.couteau.basics.api.Mapper;
+import com.agileapes.couteau.basics.api.Transformer;
 import com.agileapes.couteau.basics.api.Processor;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -50,7 +50,7 @@ public class CollectionWrapperTest {
 
     @Test
     public void testMapping() throws Exception {
-        final List<Integer> list = with(1, 2, 3, 4).map(new Mapper<Integer, Integer>() {
+        final List<Integer> list = with(1, 2, 3, 4).transform(new Transformer<Integer, Integer>() {
             @Override
             public Integer map(Integer input) throws Exception {
                 return input * 2;
@@ -65,7 +65,7 @@ public class CollectionWrapperTest {
 
     @Test
     public void testExpansion() throws Exception {
-        final List<Collection<Integer>> list = with(1, 2, 3, 4, 5, 6).expand(new Mapper<Collection<Integer>, Collection<Collection<Integer>>>() {
+        final List<Collection<Integer>> list = with(1, 2, 3, 4, 5, 6).expand(new Transformer<Collection<Integer>, Collection<Collection<Integer>>>() {
             @Override
             public Collection<Collection<Integer>> map(Collection<Integer> input) throws Exception {
                 final ArrayList<Collection<Integer>> collections = new ArrayList<Collection<Integer>>();
@@ -100,7 +100,7 @@ public class CollectionWrapperTest {
     public void testReduction() throws Exception {
         //noinspection unchecked
         final List<Integer> list = with(Arrays.asList(1, 2, 3), Arrays.asList(4, 5, 6), Arrays.asList(7, 8, 9))
-                .all(new Mapper<Collection<List<Integer>>, Collection<List<Integer>>>() {
+                .all(new Transformer<Collection<List<Integer>>, Collection<List<Integer>>>() {
                     @Override
                     public Collection<List<Integer>> map(Collection<List<Integer>> input) throws Exception {
                         final ArrayList<List<Integer>> lists = new ArrayList<List<Integer>>();
@@ -114,7 +114,7 @@ public class CollectionWrapperTest {
                         return lists;
                     }
                 })
-                .map(new Mapper<List<Integer>, Integer>() {
+                .transform(new Transformer<List<Integer>, Integer>() {
                     @Override
                     public Integer map(List<Integer> input) throws Exception {
                         return input.iterator().next();

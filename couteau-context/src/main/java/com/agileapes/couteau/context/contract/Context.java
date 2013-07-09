@@ -57,11 +57,11 @@ public interface Context<E> extends Registry<E>, EventPublisher {
     Context<E> register(E item) throws RegistryException;
 
     /**
-     * Will return a map of beans with their names as keys that are the subtype of the given
+     * Will return a transform of beans with their names as keys that are the subtype of the given
      * type
      * @param type    the desired type for which the lookup will be performed
      * @param <T>     the type argument
-     * @return a map of bean names to bean instances for the given type
+     * @return a transform of bean names to bean instances for the given type
      * @throws RegistryException
      */
     <T extends E> Map<String, T> getBeansOfType(Class<T> type) throws RegistryException;

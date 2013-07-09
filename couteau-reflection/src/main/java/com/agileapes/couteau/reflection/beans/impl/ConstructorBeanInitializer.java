@@ -1,6 +1,6 @@
-package com.agileapes.couteau.reflection.impl;
+package com.agileapes.couteau.reflection.beans.impl;
 
-import com.agileapes.couteau.reflection.contract.BeanInitializer;
+import com.agileapes.couteau.reflection.beans.BeanInitializer;
 import com.agileapes.couteau.reflection.error.BeanInstantiationException;
 
 import java.lang.reflect.Constructor;

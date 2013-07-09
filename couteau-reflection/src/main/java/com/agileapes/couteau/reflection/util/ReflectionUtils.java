@@ -130,4 +130,15 @@ public abstract class ReflectionUtils {
         return value;
     }
 
+    public static String getPropertyName(String methodName) {
+        if (methodName.matches("(?:get|set)[A-Z].*")) {
+            methodName = methodName.substring(3);
+        } else if (methodName.matches("(?:is)[A-Z].*")) {
+            methodName = methodName.substring(2);
+        } else {
+            throw new IllegalArgumentException();
+        }
+        return methodName.substring(0, 1).toLowerCase().concat(methodName.substring(1));
+    }
+
 }
