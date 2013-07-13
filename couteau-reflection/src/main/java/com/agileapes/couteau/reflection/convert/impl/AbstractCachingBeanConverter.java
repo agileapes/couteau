@@ -12,6 +12,7 @@ import com.agileapes.couteau.reflection.error.BeanConversionException;
 import com.agileapes.couteau.reflection.error.BeanInstantiationException;
 import com.agileapes.couteau.reflection.error.FatalBeanConversionException;
 import com.agileapes.couteau.reflection.property.PropertyDescriptor;
+import com.agileapes.couteau.reflection.util.ReflectionUtils;
 import com.agileapes.couteau.reflection.util.assets.Modifiers;
 import com.sun.corba.se.impl.ior.IORImpl;
 import com.sun.corba.se.impl.ior.IORTemplateImpl;
@@ -94,9 +95,10 @@ public abstract class AbstractCachingBeanConverter implements BeanConverter {
         final BeanAccessor<I> source = accessorFactory.getBeanAccessor(bean);
         final O targetInstance;
         try {
-            targetInstance = initializer.initialize(targetType, new Class[0]);
+            //noinspection unchecked
+            targetInstance = (O) initializer.initialize(ReflectionUtils.mapType(targetType), new Class[0]);
         } catch (BeanInstantiationException e) {
-            throw new FatalBeanConversionException("Failed to instantiate bean of type: " + targetType.getCanonicalName());
+            throw new FatalBeanConversionException("Failed to instantiate bean of type: " + targetType.getCanonicalName(), e);
         }
         final BeanWrapper<O> target = wrapperFactory.getBeanWrapper(targetInstance);
         doConvert(source, target);
@@ -113,7 +115,7 @@ public abstract class AbstractCachingBeanConverter implements BeanConverter {
         if (decision.equals(ConversionDecision.IGNORE)) {
             return null;
         }
-        if (decision.equals(ConversionDecision.PASS) && targetType.isInstance(descriptor.getValue())) {
+        if (decision.equals(ConversionDecision.PASS) && ReflectionUtils.mapType(targetType).isInstance(descriptor.getValue())) {
             return descriptor.getValue();
         }
         final Object result;

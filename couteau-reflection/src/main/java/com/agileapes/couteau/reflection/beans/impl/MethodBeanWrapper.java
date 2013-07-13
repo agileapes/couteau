@@ -1,12 +1,14 @@
 package com.agileapes.couteau.reflection.beans.impl;
 
 import com.agileapes.couteau.basics.api.Processor;
+import com.agileapes.couteau.basics.collections.CollectionWrapper;
 import com.agileapes.couteau.reflection.property.ReadPropertyAccessor;
 import com.agileapes.couteau.reflection.property.WritePropertyAccessor;
 import com.agileapes.couteau.reflection.property.impl.MethodReadPropertyAccessor;
 import com.agileapes.couteau.reflection.property.impl.MethodWritePropertyAccessor;
 import com.agileapes.couteau.reflection.util.ReflectionUtils;
 import com.agileapes.couteau.reflection.util.assets.GetterMethodFilter;
+import com.agileapes.couteau.reflection.util.assets.SetterMethodFilter;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -25,7 +27,7 @@ public class MethodBeanWrapper<E> extends AbstractBeanWrapper<E> {
     @Override
     protected Map<String, WritePropertyAccessor<?>> getWriteAccessors() throws Exception {
         final HashMap<String, WritePropertyAccessor<?>> map = new HashMap<String, WritePropertyAccessor<?>>();
-        ReflectionUtils.withMethods(getBeanType()).keep(new GetterMethodFilter()).each(new Processor<Method>() {
+        ReflectionUtils.withMethods(getBeanType()).keep(new SetterMethodFilter()).each(new Processor<Method>() {
             @Override
             public void process(Method input) throws Exception {
                 final String propertyName = ReflectionUtils.getPropertyName(input.getName());

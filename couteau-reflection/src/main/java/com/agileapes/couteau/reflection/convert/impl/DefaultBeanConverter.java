@@ -43,6 +43,12 @@ public class DefaultBeanConverter extends AbstractCachingBeanConverter {
             if (!target.hasProperty(property)) {
                 continue;
             }
+            try {
+                if (!target.isWritable(property)) {
+                    continue;
+                }
+            } catch (NoSuchPropertyException ignored) {
+            }
             Class<?> propertyType = null;
             try {
                 propertyType = target.getPropertyType(property);
