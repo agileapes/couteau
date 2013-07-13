@@ -5,6 +5,7 @@ import com.agileapes.couteau.reflection.beans.BeanAccessorFactory;
 import com.agileapes.couteau.reflection.beans.BeanWrapper;
 import com.agileapes.couteau.reflection.beans.BeanWrapperFactory;
 import com.agileapes.couteau.reflection.convert.ConversionDecision;
+import com.agileapes.couteau.reflection.convert.ConversionStrategy;
 import com.agileapes.couteau.reflection.error.*;
 import com.agileapes.couteau.reflection.property.impl.SimplePropertyDescriptor;
 
@@ -15,15 +16,19 @@ import com.agileapes.couteau.reflection.property.impl.SimplePropertyDescriptor;
 public class DefaultBeanConverter extends AbstractCachingBeanConverter {
 
     public DefaultBeanConverter() {
-        super(null);
+        super();
     }
 
-    public DefaultBeanConverter(BeanWrapperFactory wrapperFactory) {
-        super(wrapperFactory, null);
+    public DefaultBeanConverter(ConversionStrategy conversionStrategy) {
+        super(conversionStrategy);
     }
 
-    public DefaultBeanConverter(BeanAccessorFactory accessorFactory, BeanWrapperFactory wrapperFactory) {
-        super(accessorFactory, wrapperFactory, null);
+    public DefaultBeanConverter(BeanWrapperFactory wrapperFactory, ConversionStrategy conversionStrategy) {
+        super(wrapperFactory, conversionStrategy);
+    }
+
+    public DefaultBeanConverter(BeanAccessorFactory accessorFactory, BeanWrapperFactory wrapperFactory, ConversionStrategy conversionStrategy) {
+        super(accessorFactory, wrapperFactory, conversionStrategy);
     }
 
     @Override
