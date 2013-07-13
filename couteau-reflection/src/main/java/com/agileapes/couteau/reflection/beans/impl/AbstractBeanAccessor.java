@@ -7,6 +7,7 @@ import com.agileapes.couteau.reflection.error.PropertyAccessException;
 import com.agileapes.couteau.reflection.property.ReadPropertyAccessor;
 import com.agileapes.couteau.reflection.util.ReflectionUtils;
 
+import java.lang.reflect.Type;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -62,6 +63,11 @@ public abstract class AbstractBeanAccessor<E> implements BeanAccessor<E>, ReadAc
     @Override
     public Class<?> getPropertyType(String propertyName) throws NoSuchPropertyException {
         return getPropertyReader(propertyName).getPropertyType();
+    }
+
+    @Override
+    public Type getGenericPropertyType(String propertyName) throws NoSuchPropertyException {
+        return getPropertyReader(propertyName).getGenericPropertyType();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.agileapes.couteau.reflection.property.impl;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
@@ -43,4 +44,8 @@ public abstract class AbstractFieldPropertyAccessor<E> extends AbstractPropertyA
         this.target = target;
     }
 
+    @Override
+    public Type getGenericPropertyType() {
+        return getField().getGenericType();
+    }
 }

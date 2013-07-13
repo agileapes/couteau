@@ -22,7 +22,7 @@ import java.util.Set;
 public class ConstructorBeanInitializer implements BeanInitializer {
 
     @Override
-    public <E> E initialize(Class<E> type, Class[] argumentTypes, Object[] arguments) throws BeanInstantiationException {
+    public <E> E initialize(Class<E> type, Class[] argumentTypes, Object... arguments) throws BeanInstantiationException {
         if (argumentTypes == null) {
             throw new BeanInstantiationException("Argument types cannot be null");
         }

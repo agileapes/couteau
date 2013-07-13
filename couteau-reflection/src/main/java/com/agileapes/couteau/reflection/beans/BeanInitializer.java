@@ -24,6 +24,6 @@ public interface BeanInitializer {
      * @return an instance of the bean in question
      * @throws BeanInstantiationException
      */
-    <E> E initialize(Class<E> type, Class[] argumentTypes, Object[] arguments) throws BeanInstantiationException;
+    <E> E initialize(Class<E> type, Class[] argumentTypes, Object... arguments) throws BeanInstantiationException;
 
 }

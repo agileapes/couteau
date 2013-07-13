@@ -2,6 +2,7 @@ package com.agileapes.couteau.reflection.beans;
 
 import com.agileapes.couteau.reflection.error.NoSuchPropertyException;
 
+import java.lang.reflect.Type;
 import java.util.Set;
 
 /**
@@ -15,6 +16,8 @@ public interface BeanDescriptor<E> {
     Set<String> getPropertyNames();
 
     Class<?> getPropertyType(String propertyName) throws NoSuchPropertyException;
+
+    Type getGenericPropertyType(String propertyName) throws NoSuchPropertyException;
 
     boolean hasProperty(String propertyName);
 

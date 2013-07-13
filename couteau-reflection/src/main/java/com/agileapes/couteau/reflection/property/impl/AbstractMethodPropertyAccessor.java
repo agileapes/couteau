@@ -3,6 +3,7 @@ package com.agileapes.couteau.reflection.property.impl;
 import com.agileapes.couteau.reflection.beans.impl.MethodInvocation;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
@@ -39,4 +40,8 @@ public abstract class AbstractMethodPropertyAccessor<E> extends AbstractProperty
         this.target = target;
     }
 
+    @Override
+    public Type getGenericPropertyType() {
+        return getMethod().getGenericReturnType();
+    }
 }

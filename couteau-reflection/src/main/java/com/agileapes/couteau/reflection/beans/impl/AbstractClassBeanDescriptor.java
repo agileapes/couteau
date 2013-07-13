@@ -9,6 +9,7 @@ import com.agileapes.couteau.reflection.property.ReadPropertyAccessor;
 import com.agileapes.couteau.reflection.property.WritePropertyAccessor;
 import com.agileapes.couteau.reflection.util.ReflectionUtils;
 
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -110,6 +111,12 @@ public abstract class AbstractClassBeanDescriptor<E> implements BeanDescriptor<E
             throw new NoSuchPropertyException(getBeanType(), propertyName);
         }
         return writers.containsKey(propertyName);
+    }
+
+
+    @Override
+    public Type getGenericPropertyType(String propertyName) throws NoSuchPropertyException {
+        return getPropertyReader(propertyName).getGenericPropertyType();
     }
 
 }
