@@ -5,6 +5,8 @@ import com.agileapes.couteau.basics.collections.CollectionWrapper;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.net.URI;
 import java.net.URL;
 import java.util.*;
@@ -46,6 +48,10 @@ public abstract class ReflectionUtils {
             type = type.getSuperclass();
         }
         return CollectionWrapper.with(fields);
+    }
+
+    public static String getGetterName(String propertyName) {
+        return "get" + propertyName.substring(0, 1).toUpperCase().concat(propertyName.substring(1));
     }
 
     private static class Name {
@@ -153,6 +159,27 @@ public abstract class ReflectionUtils {
         } else {
             return type;
         }
+    }
+
+    public static Class[] resolveTypeArguments(Type type, int length) {
+        final Class[] classes = new Class[length];
+        int i = 0;
+        if (type instanceof ParameterizedType) {
+            ParameterizedType parameterizedType = (ParameterizedType) type;
+            for (Type argument : parameterizedType.getActualTypeArguments()) {
+                final Class resolved;
+                if (argument instanceof Class) {
+                    resolved = (Class) argument;
+                } else {
+                    resolved = Object.class;
+                }
+                classes[i ++] = resolved;
+            }
+        }
+        for (int j = i; j < length; j ++) {
+            classes[j] = Object.class;
+        }
+        return classes;
     }
 
 }

@@ -8,6 +8,7 @@ import com.agileapes.couteau.reflection.beans.impl.MethodBeanWrapperFactory;
 import com.agileapes.couteau.reflection.convert.BeanConverter;
 import com.agileapes.couteau.reflection.convert.ConversionDecision;
 import com.agileapes.couteau.reflection.convert.ConversionStrategy;
+import com.agileapes.couteau.reflection.convert.ConversionTarget;
 import com.agileapes.couteau.reflection.error.BeanConversionException;
 import com.agileapes.couteau.reflection.error.BeanInstantiationException;
 import com.agileapes.couteau.reflection.error.FatalBeanConversionException;
@@ -17,8 +18,6 @@ import com.agileapes.couteau.reflection.util.ReflectionUtils;
 import com.agileapes.couteau.reflection.util.assets.Modifiers;
 
 import javax.script.SimpleBindings;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -96,6 +95,10 @@ public abstract class AbstractCachingBeanConverter implements BeanConverter {
         } catch (BeanInstantiationException e) {
             throw new FatalBeanConversionException("Failed to instantiate bean of type: " + targetType.getCanonicalName(), e);
         }
+        if (targetInstance instanceof ConversionTarget) {
+            ConversionTarget target = (ConversionTarget) targetInstance;
+            target.setBean(bean);
+        }
         final BeanWrapper<O> target = wrapperFactory.getBeanWrapper(targetInstance);
         doConvert(source, target);
         cache.write(key, target.getBean());
@@ -118,11 +121,11 @@ public abstract class AbstractCachingBeanConverter implements BeanConverter {
         if (Collection.class.isAssignableFrom(descriptor.getType())) {
             //noinspection unchecked
             Class<? extends Collection> collectionType = (Class<? extends Collection>) targetType;
-            result = convertCollection((Collection<?>) descriptor.getValue(), collectionType, resolveTypeArguments(descriptor.getGenericType(), 1)[0]);
+            result = convertCollection((Collection<?>) descriptor.getValue(), collectionType, ReflectionUtils.resolveTypeArguments(descriptor.getGenericType(), 1)[0]);
         } else if (Map.class.isAssignableFrom(descriptor.getType())) {
             //noinspection unchecked
             Class<? extends Map> mapType = (Class<? extends Map>) targetType;
-            final Class[] types = resolveTypeArguments(descriptor.getGenericType(), 2);
+            final Class[] types = ReflectionUtils.resolveTypeArguments(descriptor.getGenericType(), 2);
             result = convertMap((Map<?, ?>) descriptor.getValue(), mapType, types[0], types[1]);
         } else {
             result = convert(descriptor.getValue(), targetType);
@@ -206,27 +209,6 @@ public abstract class AbstractCachingBeanConverter implements BeanConverter {
 
     protected Collection<Class<?>> getSupportedMapTypes() {
         return SUPPORTED_MAPS;
-    }
-
-    private static Class[] resolveTypeArguments(Type type, int length) {
-        final Class[] classes = new Class[length];
-        int i = 0;
-        if (type instanceof ParameterizedType) {
-            ParameterizedType parameterizedType = (ParameterizedType) type;
-            for (Type argument : parameterizedType.getActualTypeArguments()) {
-                final Class resolved;
-                if (argument instanceof Class) {
-                    resolved = (Class) argument;
-                } else {
-                    resolved = Object.class;
-                }
-                classes[i ++] = resolved;
-            }
-        }
-        for (int j = i; j < length; j ++) {
-            classes[j] = Object.class;
-        }
-        return classes;
     }
 
 }
