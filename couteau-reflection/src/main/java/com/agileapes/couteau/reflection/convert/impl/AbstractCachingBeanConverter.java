@@ -12,12 +12,9 @@ import com.agileapes.couteau.reflection.error.BeanConversionException;
 import com.agileapes.couteau.reflection.error.BeanInstantiationException;
 import com.agileapes.couteau.reflection.error.FatalBeanConversionException;
 import com.agileapes.couteau.reflection.property.PropertyDescriptor;
+import com.agileapes.couteau.reflection.property.impl.SimplePropertyDescriptor;
 import com.agileapes.couteau.reflection.util.ReflectionUtils;
 import com.agileapes.couteau.reflection.util.assets.Modifiers;
-import com.sun.corba.se.impl.ior.IORImpl;
-import com.sun.corba.se.impl.ior.IORTemplateImpl;
-import com.sun.corba.se.impl.ior.iiop.IIOPProfileTemplateImpl;
-import com.sun.corba.se.impl.orbutil.graph.GraphImpl;
 
 import javax.script.SimpleBindings;
 import java.lang.reflect.ParameterizedType;
@@ -41,12 +38,11 @@ public abstract class AbstractCachingBeanConverter implements BeanConverter {
 
     @SuppressWarnings("unchecked")
     private static final Set<Class<?>> SUPPORTED_SETS = new HashSet<Class<?>>(
-            Arrays.asList(HashSet.class, TreeSet.class, GraphImpl.class)
+            Arrays.asList(HashSet.class, TreeSet.class)
     );
     @SuppressWarnings("unchecked")
     private static final Set<Class<?>> SUPPORTED_LISTS = new HashSet<Class<?>>(
-            Arrays.asList(ArrayList.class, IIOPProfileTemplateImpl.class, IORImpl.class,
-                    IORTemplateImpl.class)
+            Arrays.asList(ArrayList.class)
     );
 
     @SuppressWarnings("unchecked")
@@ -156,8 +152,14 @@ public abstract class AbstractCachingBeanConverter implements BeanConverter {
             throw new FatalBeanConversionException("Failed to instantiate bean of type: " + type.getCanonicalName());
         }
         for (Object item : original) {
-            //noinspection unchecked
-            collection.add(convert(item, itemType));
+            final ConversionDecision decision = conversionStrategy.decide(new SimplePropertyDescriptor("", item.getClass(), item.getClass()));
+            if (decision.equals(ConversionDecision.CONVERT)) {
+                //noinspection unchecked
+                collection.add(convert(item, itemType));
+            } else {
+                //noinspection unchecked
+                collection.add(item);
+            }
         }
         return collection;
     }

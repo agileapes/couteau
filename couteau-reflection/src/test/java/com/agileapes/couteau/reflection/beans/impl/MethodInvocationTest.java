@@ -1,11 +1,14 @@
 package com.agileapes.couteau.reflection.beans.impl;
 
+import com.agileapes.couteau.reflection.test.Author;
 import com.agileapes.couteau.reflection.test.Book;
 import com.agileapes.couteau.reflection.test.PublishedBook;
 import com.agileapes.couteau.reflection.util.ReflectionUtils;
 import com.agileapes.couteau.reflection.util.assets.MemberNameFilter;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.Arrays;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
@@ -29,13 +32,13 @@ public class MethodInvocationTest {
     public void testMethodInvocation() throws Exception {
         final Book book = new Book();
         book.setTitle("My Book");
-        book.setAuthor("Myself");
+        book.setAuthors(Arrays.asList(new Author()));
         book.setYearOfWriting(1990);
-        final MethodInvocation invocation = new MethodInvocation(ReflectionUtils.withMethods(Book.class).first(), book, 2000, "My Publisher");
+        final MethodInvocation invocation = new MethodInvocation(ReflectionUtils.withMethods(Book.class).keep(new MemberNameFilter("publish")).first(), book, 2000, "My Publisher");
         final Object result = invocation.invoke();
         Assert.assertTrue(result instanceof PublishedBook);
         final PublishedBook publishedBook = (PublishedBook) result;
-        Assert.assertEquals(publishedBook.getAuthor(), book.getAuthor());
+        Assert.assertEquals(publishedBook.getAuthors(), book.getAuthors());
         Assert.assertEquals(publishedBook.getTitle(), book.getTitle());
         Assert.assertEquals(publishedBook.getYearOfWriting(), book.getYearOfWriting());
         Assert.assertEquals(publishedBook.getPublisher(), "My Publisher");

@@ -54,7 +54,12 @@ public class DefaultBeanConverter extends AbstractCachingBeanConverter {
                 propertyType = target.getPropertyType(property);
             } catch (NoSuchPropertyException ignored) {
             }
-            assert propertyType != null;
+            if (propertyType == null) {
+                try {
+                    propertyType = source.getPropertyType(property);
+                } catch (NoSuchPropertyException ignored) {
+                }
+            }
             Object convertedValue;
             SimplePropertyDescriptor propertyDescriptor = null;
             try {
@@ -77,4 +82,5 @@ public class DefaultBeanConverter extends AbstractCachingBeanConverter {
         }
 
     }
+
 }

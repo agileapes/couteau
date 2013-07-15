@@ -1,5 +1,6 @@
 package com.agileapes.couteau.reflection.test;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -9,7 +10,7 @@ import java.util.UUID;
 public class Book {
 
     private String title;
-    private String author;
+    private List<Author> authors;
     private int yearOfWriting;
 
     public String getTitle() {
@@ -20,12 +21,12 @@ public class Book {
         this.title = title;
     }
 
-    public String getAuthor() {
-        return author;
+    public List<Author> getAuthors() {
+        return authors;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setAuthors(List<Author> authors) {
+        this.authors = authors;
     }
 
     public int getYearOfWriting() {

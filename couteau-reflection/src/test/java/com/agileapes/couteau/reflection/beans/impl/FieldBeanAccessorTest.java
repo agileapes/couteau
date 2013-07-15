@@ -14,7 +14,6 @@ public class FieldBeanAccessorTest {
     public void testFields() throws Exception {
         final Book book = new Book();
         book.setTitle("My Book");
-        book.setAuthor("Myself");
         book.setYearOfWriting(2000);
         final FieldBeanAccessor<Book> accessor = new FieldBeanAccessor<Book>(book);
         Assert.assertEquals(accessor.getPropertyNames().size(), 3);
@@ -25,7 +24,6 @@ public class FieldBeanAccessorTest {
         Assert.assertEquals(accessor.getPropertyType("author"), String.class);
         Assert.assertEquals(accessor.getPropertyType("yearOfWriting"), int.class);
         Assert.assertEquals(accessor.getPropertyValue("title"), book.getTitle());
-        Assert.assertEquals(accessor.getPropertyValue("author"), book.getAuthor());
         //noinspection AssertEqualsBetweenInconvertibleTypesTestNG
         Assert.assertEquals(accessor.getPropertyValue("yearOfWriting"), book.getYearOfWriting());
     }
