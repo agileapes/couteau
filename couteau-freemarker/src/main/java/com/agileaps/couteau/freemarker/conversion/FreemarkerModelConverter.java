@@ -8,7 +8,16 @@ import com.agileapes.couteau.reflection.convert.GenericBeanConverter;
 import com.agileapes.couteau.reflection.convert.impl.DefaultBeanConverter;
 import com.agileapes.couteau.reflection.error.BeanConversionException;
 import com.agileaps.couteau.freemarker.model.GenericFreemarkerModel;
+import com.agileaps.couteau.freemarker.utils.FreemarkerUtils;
+import freemarker.ext.beans.BeansWrapper;
+import freemarker.ext.beans.MapModel;
+import freemarker.template.SimpleCollection;
 import freemarker.template.TemplateModel;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
@@ -29,6 +38,22 @@ public class FreemarkerModelConverter implements GenericBeanConverter<Object, Te
 
     @Override
     public TemplateModel convert(Object bean) throws BeanConversionException {
+        if (bean instanceof Collection<?>) {
+            final Collection<?> collection = (Collection<?>) bean;
+            final ArrayList<TemplateModel> models = new ArrayList<TemplateModel>();
+            for (Object object : collection) {
+                models.add(convert(object));
+            }
+            return new SimpleCollection(models);
+        } else if (bean instanceof Map<?, ?>) {
+            final HashMap<TemplateModel, TemplateModel> map = new HashMap<TemplateModel, TemplateModel>();
+            for (Map.Entry<?, ?> entry : ((Map<?, ?>) bean).entrySet()) {
+                map.put(convert(entry.getKey()), convert(entry.getValue()));
+            }
+            return new MapModel(map, BeansWrapper.getDefaultInstance());
+        } else if (FreemarkerUtils.canConvert(bean)) {
+            return FreemarkerUtils.convertItem(bean);
+        }
         return converter.convert(bean, GenericFreemarkerModel.class);
     }
 

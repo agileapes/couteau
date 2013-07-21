@@ -1,6 +1,5 @@
 package com.agileaps.couteau.freemarker.model;
 
-import com.agileapes.couteau.basics.api.Transformer;
 import com.agileapes.couteau.reflection.beans.BeanWrapper;
 import com.agileapes.couteau.reflection.beans.impl.MethodBeanWrapper;
 import com.agileapes.couteau.reflection.convert.ConversionDecision;
@@ -12,17 +11,12 @@ import com.agileapes.couteau.reflection.property.impl.SimplePropertyDescriptor;
 import com.agileapes.couteau.reflection.util.ReflectionUtils;
 import com.agileapes.couteau.reflection.util.assets.SimpleParameterizedType;
 import com.agileaps.couteau.freemarker.conversion.FreemarkerConversionStrategy;
-import freemarker.ext.beans.BeansWrapper;
-import freemarker.ext.beans.BooleanModel;
-import freemarker.ext.beans.DateModel;
-import freemarker.ext.beans.MapModel;
+import com.agileaps.couteau.freemarker.utils.FreemarkerUtils;
 import freemarker.template.*;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.*;
-
-import static com.agileapes.couteau.basics.collections.CollectionWrapper.with;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
@@ -166,48 +160,10 @@ public class GenericFreemarkerModel implements TemplateHashModelEx, BeanWrapper<
         }
         values.put(propertyName, propertyValue);
         try {
-            models.put(propertyName, convertItem(propertyValue));
+            models.put(propertyName, FreemarkerUtils.convertItem(propertyValue));
         } catch (IllegalArgumentException e) {
             throw new PropertyTypeMismatchException(GenericFreemarkerModel.class, propertyName);
         }
-    }
-
-    private TemplateModel convertItem(Object propertyValue) {
-        TemplateModel model;
-        if (propertyValue instanceof TemplateModel) {
-            model = (TemplateModel) propertyValue;
-        } else if (propertyValue instanceof Number) {
-            model = new SimpleNumber((Number) propertyValue);
-        } else if (propertyValue instanceof Boolean) {
-            model = new BooleanModel((Boolean) propertyValue, BeansWrapper.getDefaultInstance());
-        } else if (propertyValue instanceof String) {
-            model = new SimpleScalar((String) propertyValue);
-        } else if (propertyValue instanceof Date) {
-            model = new DateModel((Date) propertyValue, BeansWrapper.getDefaultInstance());
-        } else if (propertyValue instanceof Class) {
-            model = new SimpleClassModel((Class) propertyValue);
-        } else if (propertyValue instanceof Collection) {
-            try {
-                //noinspection unchecked
-                model = new SimpleCollection(with(((Collection) propertyValue)).transform(new Transformer<Object, TemplateModel>() {
-                    @Override
-                    public TemplateModel map(Object input) throws Exception {
-                        return convertItem(input);
-                    }
-                }).list());
-            } catch (Exception e) {
-                throw new IllegalArgumentException();
-            }
-        } else if (propertyValue instanceof Map) {
-            final Map<TemplateModel, TemplateModel> map = new HashMap<TemplateModel, TemplateModel>();
-            for (Map.Entry<?, ?> entry : ((Map<?, ?>) propertyValue).entrySet()) {
-                map.put(convertItem(entry.getKey()), convertItem(entry.getValue()));
-            }
-            model = new MapModel(map, BeansWrapper.getDefaultInstance());
-        } else {
-            throw new IllegalArgumentException();
-        }
-        return model;
     }
 
 }

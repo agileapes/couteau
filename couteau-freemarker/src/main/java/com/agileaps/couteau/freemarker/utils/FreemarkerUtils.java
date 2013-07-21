@@ -1,16 +1,25 @@
 package com.agileaps.couteau.freemarker.utils;
 
+import com.agileapes.couteau.basics.api.Transformer;
 import com.agileapes.couteau.reflection.util.ClassUtils;
 import com.agileaps.couteau.freemarker.conversion.FreemarkerModelConverter;
+import com.agileaps.couteau.freemarker.model.SimpleClassModel;
 import freemarker.cache.ClassTemplateLoader;
-import freemarker.template.Configuration;
-import freemarker.template.DefaultObjectWrapper;
-import freemarker.template.Template;
-import freemarker.template.TemplateModel;
+import freemarker.ext.beans.BeansWrapper;
+import freemarker.ext.beans.BooleanModel;
+import freemarker.ext.beans.DateModel;
+import freemarker.ext.beans.MapModel;
+import freemarker.template.*;
 
 import java.io.File;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.agileapes.couteau.basics.collections.CollectionWrapper.with;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
@@ -176,4 +185,76 @@ public abstract class FreemarkerUtils {
         write(writer, object);
         return writer.toString();
     }
+
+    public static boolean canConvert(Object input) {
+        TemplateModel model;
+        if (input instanceof TemplateModel) {
+            return true;
+        } else if (input instanceof Number) {
+            return true;
+        } else if (input instanceof Boolean) {
+            return true;
+        } else if (input instanceof String) {
+            return true;
+        } else if (input instanceof Date) {
+            return true;
+        } else if (input instanceof Class) {
+            return true;
+        } else if (input instanceof Collection) {
+            for (Object item : ((Collection) input)) {
+                if (!canConvert(item)) {
+                    return false;
+                }
+            }
+            return true;
+        } else if (input instanceof Map) {
+            for (Map.Entry<?, ?> entry : ((Map<?, ?>) input).entrySet()) {
+                if (!canConvert(entry.getKey()) || !canConvert(entry.getValue())) {
+                    return false;
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static TemplateModel convertItem(Object input) {
+        TemplateModel model;
+        if (input instanceof TemplateModel) {
+            model = (TemplateModel) input;
+        } else if (input instanceof Number) {
+            model = new SimpleNumber((Number) input);
+        } else if (input instanceof Boolean) {
+            model = new BooleanModel((Boolean) input, BeansWrapper.getDefaultInstance());
+        } else if (input instanceof String) {
+            model = new SimpleScalar((String) input);
+        } else if (input instanceof Date) {
+            model = new DateModel((Date) input, BeansWrapper.getDefaultInstance());
+        } else if (input instanceof Class) {
+            model = new SimpleClassModel((Class) input);
+        } else if (input instanceof Collection) {
+            try {
+                //noinspection unchecked
+                model = new SimpleCollection(with(((Collection) input)).transform(new Transformer<Object, TemplateModel>() {
+                    @Override
+                    public TemplateModel map(Object input) throws Exception {
+                        return convertItem(input);
+                    }
+                }).list());
+            } catch (Exception e) {
+                throw new IllegalArgumentException();
+            }
+        } else if (input instanceof Map) {
+            final Map<TemplateModel, TemplateModel> map = new HashMap<TemplateModel, TemplateModel>();
+            for (Map.Entry<?, ?> entry : ((Map<?, ?>) input).entrySet()) {
+                map.put(convertItem(entry.getKey()), convertItem(entry.getValue()));
+            }
+            model = new MapModel(map, BeansWrapper.getDefaultInstance());
+        } else {
+            throw new IllegalArgumentException();
+        }
+        return model;
+    }
+
 }
