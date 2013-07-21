@@ -61,16 +61,18 @@ public class DefaultBeanConverter extends AbstractCachingBeanConverter {
                 }
             }
             Object convertedValue;
-            SimplePropertyDescriptor propertyDescriptor = null;
+            SimplePropertyDescriptor targetPropertyDescriptor = null;
+            SimplePropertyDescriptor sourcePropertyDescriptor = null;
             try {
-                propertyDescriptor = new SimplePropertyDescriptor(property, propertyType, target.getGenericPropertyType(property), propertyValue);
+                targetPropertyDescriptor = new SimplePropertyDescriptor(property, propertyType, target.getGenericPropertyType(property), propertyValue);
+                sourcePropertyDescriptor = new SimplePropertyDescriptor(property, source.getPropertyType(property), source.getGenericPropertyType(property), propertyValue);
             } catch (NoSuchPropertyException ignored) {
             }
-            final ConversionDecision decision = getConversionStrategy().decide(propertyDescriptor);
+            final ConversionDecision decision = getConversionStrategy().decide(sourcePropertyDescriptor);
             if (decision.equals(ConversionDecision.IGNORE)) {
                 continue;
             } else {
-                convertedValue = convertProperty(propertyDescriptor, decision);
+                convertedValue = convertProperty(targetPropertyDescriptor, decision);
             }
             try {
                 target.setPropertyValue(property, convertedValue);
