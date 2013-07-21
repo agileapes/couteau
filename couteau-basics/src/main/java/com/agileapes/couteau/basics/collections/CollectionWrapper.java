@@ -1,8 +1,8 @@
 package com.agileapes.couteau.basics.collections;
 
 import com.agileapes.couteau.basics.api.Filter;
-import com.agileapes.couteau.basics.api.Transformer;
 import com.agileapes.couteau.basics.api.Processor;
+import com.agileapes.couteau.basics.api.Transformer;
 
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;

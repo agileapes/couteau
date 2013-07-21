@@ -1,7 +1,5 @@
 package com.agileapes.couteau.reflection.property.impl;
 
-import com.agileapes.couteau.reflection.beans.impl.MethodInvocation;
-
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 

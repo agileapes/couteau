@@ -18,8 +18,8 @@ package com.agileapes.couteau.context.value.impl;
 import com.agileapes.couteau.context.error.InvalidInputValueError;
 import com.agileapes.couteau.context.error.InvalidValueTypeError;
 import com.agileapes.couteau.context.error.ValueReaderError;
-import com.agileapes.couteau.reflection.util.ClassUtils;
 import com.agileapes.couteau.context.value.ValueReader;
+import com.agileapes.couteau.reflection.util.ClassUtils;
 
 /**
  * This value reader will take as input the fully qualified name of a class within the classpath

@@ -1,7 +1,6 @@
 package com.agileapes.couteau.reflection.beans.impl;
 
 import com.agileapes.couteau.basics.api.Processor;
-import com.agileapes.couteau.reflection.error.NoSuchPropertyException;
 import com.agileapes.couteau.reflection.property.ReadPropertyAccessor;
 import com.agileapes.couteau.reflection.property.WritePropertyAccessor;
 import com.agileapes.couteau.reflection.property.impl.FieldReadPropertyAccessor;
@@ -11,7 +10,6 @@ import com.agileapes.couteau.reflection.util.assets.MemberModifierFilter;
 import com.agileapes.couteau.reflection.util.assets.Modifiers;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 

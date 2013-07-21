@@ -1,9 +1,6 @@
 package com.agileaps.couteau.freemarker.model;
 
 import com.agileapes.couteau.basics.api.Transformer;
-import com.agileapes.couteau.reflection.beans.BeanWrapper;
-import com.agileapes.couteau.reflection.beans.impl.MethodBeanWrapper;
-import com.agileapes.couteau.reflection.error.NoSuchPropertyException;
 import freemarker.ext.beans.BeansWrapper;
 import freemarker.ext.beans.BooleanModel;
 import freemarker.template.*;

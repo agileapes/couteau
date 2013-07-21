@@ -187,7 +187,6 @@ public abstract class FreemarkerUtils {
     }
 
     public static boolean canConvert(Object input) {
-        TemplateModel model;
         if (input instanceof TemplateModel) {
             return true;
         } else if (input instanceof Number) {
