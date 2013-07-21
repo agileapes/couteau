@@ -18,6 +18,7 @@ import com.agileapes.couteau.reflection.util.ReflectionUtils;
 import com.agileapes.couteau.reflection.util.assets.Modifiers;
 
 import javax.script.SimpleBindings;
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -107,30 +108,65 @@ public abstract class AbstractCachingBeanConverter implements BeanConverter {
 
     protected abstract void doConvert(BeanAccessor<?> source, BeanWrapper<?> target) throws BeanConversionException;
 
-    protected Object convertProperty(PropertyDescriptor descriptor, Class<?> targetType, ConversionDecision decision) throws BeanConversionException {
+    protected Object convertProperty(PropertyDescriptor descriptor, ConversionDecision decision) throws BeanConversionException {
         if (descriptor.isNull()) {
             return null;
         }
         if (decision.equals(ConversionDecision.IGNORE)) {
             return null;
         }
-        if (decision.equals(ConversionDecision.PASS) && ReflectionUtils.mapType(targetType).isInstance(descriptor.getValue())) {
+        if (decision.equals(ConversionDecision.PASS) || ReflectionUtils.mapType(descriptor.getType()).isInstance(descriptor.getValue())) {
             return descriptor.getValue();
         }
         final Object result;
-        if (Collection.class.isAssignableFrom(descriptor.getType())) {
+        if (descriptor.getType().isArray()) {
+            result = convertArray(descriptor);
+        } else if (Collection.class.isAssignableFrom(descriptor.getType())) {
             //noinspection unchecked
-            Class<? extends Collection> collectionType = (Class<? extends Collection>) targetType;
+            Class<? extends Collection> collectionType = (Class<? extends Collection>) descriptor.getType();
             result = convertCollection((Collection<?>) descriptor.getValue(), collectionType, ReflectionUtils.resolveTypeArguments(descriptor.getGenericType(), 1)[0]);
         } else if (Map.class.isAssignableFrom(descriptor.getType())) {
             //noinspection unchecked
-            Class<? extends Map> mapType = (Class<? extends Map>) targetType;
+            Class<? extends Map> mapType = (Class<? extends Map>) descriptor.getType();
             final Class[] types = ReflectionUtils.resolveTypeArguments(descriptor.getGenericType(), 2);
             result = convertMap((Map<?, ?>) descriptor.getValue(), mapType, types[0], types[1]);
         } else {
-            result = convert(descriptor.getValue(), targetType);
+            result = convert(descriptor.getValue(), descriptor.getType());
         }
         return result;
+    }
+
+    private Object convertArray(PropertyDescriptor descriptor) throws BeanConversionException {
+        final int expected = ReflectionUtils.getArrayDimensions(descriptor.getType());
+        final int actual = ReflectionUtils.getArrayDimensions(descriptor.getValue().getClass());
+        if (expected != actual) {
+            throw new FatalBeanConversionException("Array dimensions do not match: actual: " + actual + ", expected: " + expected);
+        }
+        return doConvertArray(ReflectionUtils.getComponentType(descriptor.getType()), (Object[]) descriptor.getValue());
+    }
+
+    private Object[] doConvertArray(Class<?> type, Object[] value) throws BeanConversionException {
+        final int[] dimensions = new int[ReflectionUtils.getArrayDimensions(value.getClass())];
+        dimensions[0] = value.length;
+        final Object[] converted = (Object[]) Array.newInstance(type, dimensions);
+        for (int i = 0; i < value.length; i++) {
+            Object item = value[i];
+            if (item == null) {
+                converted[i] = null;
+            } else if (item.getClass().isArray()) {
+                converted[i] = doConvertArray(type, (Object[]) item);
+            } else {
+                final ConversionDecision decision = getConversionStrategy().decide(new SimplePropertyDescriptor("", type, type, item));
+                if (decision.equals(ConversionDecision.IGNORE)) {
+                    converted[i] = null;
+                } else if (decision.equals(ConversionDecision.PASS) || (ReflectionUtils.mapType(type).isAssignableFrom(ReflectionUtils.getComponentType(item.getClass())))) {
+                    converted[i] = item;
+                } else if (decision.equals(ConversionDecision.CONVERT)) {
+                    converted[i] = convert(item, type);
+                }
+            }
+        }
+        return converted;
     }
 
     protected ConversionStrategy getConversionStrategy() {

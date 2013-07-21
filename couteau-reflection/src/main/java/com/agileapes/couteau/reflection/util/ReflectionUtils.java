@@ -182,4 +182,16 @@ public abstract class ReflectionUtils {
         return classes;
     }
 
+    public static int getArrayDimensions(Class<?> arrayType) {
+        if (arrayType.isArray()) {
+            return 1 + getArrayDimensions(arrayType.getComponentType());
+        } else {
+            return 0;
+        }
+    }
+
+    public static Class<?> getComponentType(Class<?> arrayClass) {
+        return arrayClass.isArray() ? getComponentType(arrayClass.getComponentType()) : arrayClass;
+    }
+
 }

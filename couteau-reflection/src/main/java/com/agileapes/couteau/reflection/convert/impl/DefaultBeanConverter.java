@@ -70,7 +70,7 @@ public class DefaultBeanConverter extends AbstractCachingBeanConverter {
             if (decision.equals(ConversionDecision.IGNORE)) {
                 continue;
             } else {
-                convertedValue = convertProperty(propertyDescriptor, propertyType, decision);
+                convertedValue = convertProperty(propertyDescriptor, decision);
             }
             try {
                 target.setPropertyValue(property, convertedValue);
