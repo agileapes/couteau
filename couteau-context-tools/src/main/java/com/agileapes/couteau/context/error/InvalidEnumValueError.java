@@ -10,8 +10,27 @@ import java.util.Arrays;
  */
 public class InvalidEnumValueError extends InvalidInputValueError {
 
-    public InvalidEnumValueError(String value, Class<?> type) {
-        super("Expected value (" + value + ") to be one of " + Arrays.toString(type.getEnumConstants()));
+    private static final String MESSAGE = "Expected value (%s) to be one of %s";
+    private final String value;
+    private final Class<?> expectedType;
+
+    /**
+     * Instantiates the exception
+     * @param value    the value being read
+     * @param expectedType     the expected type against which the value is being evaluated
+     */
+    public InvalidEnumValueError(String value, Class<?> expectedType) {
+        super(String.format(MESSAGE, value, Arrays.toString(expectedType.getEnumConstants())));
+        this.value = value;
+        this.expectedType = expectedType;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public Class<?> getExpectedType() {
+        return expectedType;
     }
 
 }

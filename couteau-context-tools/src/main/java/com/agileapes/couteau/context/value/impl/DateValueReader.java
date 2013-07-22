@@ -33,6 +33,10 @@ import java.util.regex.Pattern;
  */
 public class DateValueReader implements ValueReader {
 
+    /**
+     * @param type    the type to be queried
+     * @return {@code true} if the type in question is a {@link Date}
+     */
     @Override
     public boolean canRead(Class<?> type) {
         return Date.class.equals(type) || java.sql.Date.class.equals(type);

@@ -9,8 +9,19 @@ package com.agileapes.couteau.context.error;
  */
 public class InvalidValueTypeError extends ValueReaderError {
 
+    private static final String MESSAGE = "This value reader is not capable of reading values of type: %s";
+    private final Class<?> type;
+
+    /**
+     * Instantiates the exception
+     * @param type    the input type expected of the value reader to handle
+     */
     public InvalidValueTypeError(Class<?> type) {
-        super("This value reader is not capable of reading values of type: " + type.getCanonicalName());
+        super(String.format(MESSAGE, type.getCanonicalName()));
+        this.type = type;
     }
 
+    public Class<?> getType() {
+        return type;
+    }
 }

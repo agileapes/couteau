@@ -32,10 +32,18 @@ public class ClassValueReader implements ValueReader {
 
     private ClassLoader classLoader = getClass().getClassLoader();
 
+    /**
+     * Sets the class loader through which specified classes will be loaded dynamically
+     * @param classLoader    the class loader to be used
+     */
     public void setClassLoader(ClassLoader classLoader) {
         this.classLoader = classLoader;
     }
 
+    /**
+     * @param type    the type to be queried
+     * @return {@code true} if the type is a descendant of {@link Class}
+     */
     @Override
     public boolean canRead(Class<?> type) {
         return Class.class.equals(type);

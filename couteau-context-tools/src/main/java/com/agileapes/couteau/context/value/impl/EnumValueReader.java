@@ -27,6 +27,11 @@ import com.agileapes.couteau.context.value.ValueReader;
  */
 public class EnumValueReader implements ValueReader {
 
+    /**
+     * Accepts all types that are enums
+     * @param type    the type to be queried
+     * @return {@code true} if the type is an enum
+     */
     @Override
     public boolean canRead(Class<?> type) {
         return type.isEnum();

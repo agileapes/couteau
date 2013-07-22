@@ -32,6 +32,10 @@ import java.net.URL;
  */
 public class UrlValueReader implements ValueReader {
 
+    /**
+     * @param type    the type to be queried
+     * @return {@code true} if it is either a {@link URL} or a {@link URI}
+     */
     @Override
     public boolean canRead(Class<?> type) {
         return URL.class.equals(type) || URI.class.equals(type);

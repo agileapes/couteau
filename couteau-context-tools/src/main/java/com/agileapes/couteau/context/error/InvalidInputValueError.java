@@ -9,22 +9,39 @@ package com.agileapes.couteau.context.error;
  */
 public class InvalidInputValueError extends ValueReaderError {
 
-    protected static String createMessage(String value, Class<?> type) {
-        return "Specified value (" + value + ") is not a valid representation of type " + type.getCanonicalName();
+    private static final String MESSAGE = "Specified value (%s) is not a valid representation of type %s";
+
+    /**
+     * Instantiates the exception
+     * @param value    the value being read
+     * @param expectedType     the expected type against which the value is being evaluated
+     */
+    public InvalidInputValueError(String value, Class<?> expectedType) {
+        this(String.format(MESSAGE, value, expectedType.getCanonicalName()));
     }
 
-    public InvalidInputValueError(String value, Class<?> type) {
-        this(createMessage(value, type));
+    /**
+     * Instantiates the exception
+     * @param value    the value being read
+     * @param expectedType     the expected type against which the value is being evaluated
+     */
+    public InvalidInputValueError(String value, Class<?> expectedType, Throwable cause) {
+        this(String.format(MESSAGE, value, expectedType.getCanonicalName()), cause);
     }
 
-    public InvalidInputValueError(String value, Class<?> type, Throwable cause) {
-        this(createMessage(value, type), cause);
-    }
-
+    /**
+     * Instantiates the exception
+     * @param message   the explanation for the error
+     */
     public InvalidInputValueError(String message) {
         super(message);
     }
 
+    /**
+     * Instantiates the exception
+     * @param message   the explanation for the error
+     * @param cause     the root cause for this error
+     */
     public InvalidInputValueError(String message, Throwable cause) {
         super(message, cause);
     }

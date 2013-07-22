@@ -11,20 +11,24 @@ import java.util.List;
  * This is a value reader capable of reading values for all the primitive value type defined
  * in Java.
  *
- * @see #classes See the types this reader understand
+ * @see #CLASSES See the types this reader understand
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/6/30, 13:57)
  */
 public class PrimitiveValueReader implements ValueReader {
 
     @SuppressWarnings("unchecked")
-    private final static List<? extends Class> classes = Arrays.asList(int.class, long.class, short.class, boolean.class, char.class,
+    private final static List<? extends Class> CLASSES = Arrays.asList(int.class, long.class, short.class, boolean.class, char.class,
             float.class, double.class, Integer.class, Long.class, Short.class, Boolean.class,
             Character.class, Float.class, Double.class, String.class);
 
+    /**
+     * @param type    the type to be queried
+     * @return {@code true} if it is one of the types in {@link #CLASSES}
+     */
     @Override
     public boolean canRead(Class<?> type) {
-        return classes.contains(type);
+        return CLASSES.contains(type);
     }
 
     @SuppressWarnings("unchecked")

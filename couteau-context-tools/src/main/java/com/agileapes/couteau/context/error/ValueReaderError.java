@@ -9,10 +9,19 @@ package com.agileapes.couteau.context.error;
  */
 public class ValueReaderError extends RuntimeException {
 
+    /**
+     * Instantiates the exception
+     * @param message    the message explaining why a fatal error has occurred
+     */
     public ValueReaderError(String message) {
         super(message);
     }
 
+    /**
+     * Instantiates the exception, specifying the root cause of the error
+     * @param message    the message explaining why a fatal error has occurred
+     * @param cause      the cause of the error
+     */
     public ValueReaderError(String message, Throwable cause) {
         super(message, cause);
     }

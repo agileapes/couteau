@@ -28,6 +28,10 @@ import java.io.File;
  */
 public class FileValueReader implements ValueReader {
 
+    /**
+     * @param type    the type to be queried
+     * @return {@code true} if the type is a file
+     */
     @Override
     public boolean canRead(Class<?> type) {
         return File.class.equals(type);
