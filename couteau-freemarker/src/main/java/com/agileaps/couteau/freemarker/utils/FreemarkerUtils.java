@@ -138,6 +138,7 @@ public abstract class FreemarkerUtils {
      * @return the XML representation
      * @throws Exception
      */
+    @Deprecated
     public static String getXml(Object object) throws Exception {
         return writeString(getConfiguration(FreemarkerUtils.class, "/"), "object.xml.ftl", object);
     }
@@ -174,18 +175,38 @@ public abstract class FreemarkerUtils {
         write(writer, templateName, object);
     }
 
+    /**
+     * This method will take a configuration and an object as input and write the object into the configured
+     * template, returning it as a String
+     * @param configuration    the configuration
+     * @param object           the input object
+     * @return the string value resulting from the injection of the object into the template
+     * @throws Exception
+     */
     public static String writeString(Configuration configuration, Object object) throws Exception {
         final StringWriter writer = new StringWriter();
         write(configuration, writer, object);
         return writer.toString();
     }
 
+    /**
+     * This method will write the given object into the template that matches it best.
+     * @param object    the object to be injected into a model
+     * @return the string value of the processed template
+     * @throws Exception
+     */
     public static String writeString(Object object) throws Exception {
         final Writer writer = new StringWriter();
         write(writer, object);
         return writer.toString();
     }
 
+    /**
+     * Determines whether the input object can be readily converted using
+     * {@link #convertItem(Object)}
+     * @param input    the input object
+     * @return {@code true} if it can be converted via the conversion utility method
+     */
     public static boolean canConvert(Object input) {
         if (input instanceof TemplateModel) {
             return true;
@@ -218,6 +239,15 @@ public abstract class FreemarkerUtils {
         }
     }
 
+    /**
+     * <p>This method converts all input objects that are considered <em>essential primitives</em> of the
+     * Java language.</p>
+     * <p>This includes all numbers, String values, date objects, boolean values, and collections and maps of
+     * these items.</p>
+     * <p>If the input is already an instance of {@link TemplateModel} it will be returned immediately.</p>
+     * @param input    the object to be converted.
+     * @return the template model object representing the given value
+     */
     public static TemplateModel convertItem(Object input) {
         TemplateModel model;
         if (input instanceof TemplateModel) {

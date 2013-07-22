@@ -19,6 +19,9 @@ import java.lang.reflect.Type;
 import java.util.*;
 
 /**
+ * This model is the focal point where the conversion framework is concentrated. Any beans converted through
+ * this framework will be turned into instances of this class.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/15/13, 5:10 PM)
  */

@@ -20,21 +20,29 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * This generic bean converter will take an arbitrary object as input and return an instance of
+ * {@link TemplateModel} reflecting the properties within that object. This will allow for easy
+ * conversion of any Java bean into a valid input for a Freemarker template.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/15/13, 5:09 PM)
  */
 public class FreemarkerModelConverter implements GenericBeanConverter<Object, TemplateModel> {
 
-    private final BeanConverter converter = new DefaultBeanConverter(new BeanWrapperFactory() {
-        @Override
-        public <E> BeanWrapper<E> getBeanWrapper(E bean) {
-            if (bean instanceof GenericFreemarkerModel) {
-                //noinspection unchecked
-                return (BeanWrapper<E>) bean;
+    private final BeanConverter converter;
+
+    public FreemarkerModelConverter() {
+        converter = new DefaultBeanConverter(new BeanWrapperFactory() {
+            @Override
+            public <E> BeanWrapper<E> getBeanWrapper(E bean) {
+                if (bean instanceof GenericFreemarkerModel) {
+                    //noinspection unchecked
+                    return (BeanWrapper<E>) bean;
+                }
+                return new MethodBeanWrapper<E>(bean);
             }
-            return new MethodBeanWrapper<E>(bean);
-        }
-    }, new FreemarkerConversionStrategy());
+        }, new FreemarkerConversionStrategy());
+    }
 
     @Override
     public TemplateModel convert(Object bean) throws BeanConversionException {
