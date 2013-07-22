@@ -1,6 +1,8 @@
 package com.agileapes.couteau.reflection.error;
 
 /**
+ * Denotes an error occurring during the process of bean instantiation
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/4/13, 6:59 PM)
  */

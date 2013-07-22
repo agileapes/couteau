@@ -4,7 +4,6 @@ import com.agileapes.couteau.reflection.beans.BeanDescriptor;
 import com.agileapes.couteau.reflection.beans.ReadAccessorAware;
 import com.agileapes.couteau.reflection.beans.WriteAccessorAware;
 import com.agileapes.couteau.reflection.error.NoSuchPropertyException;
-import com.agileapes.couteau.reflection.error.PropertyAccessException;
 import com.agileapes.couteau.reflection.property.ReadPropertyAccessor;
 import com.agileapes.couteau.reflection.property.WritePropertyAccessor;
 import com.agileapes.couteau.reflection.util.ReflectionUtils;
@@ -15,16 +14,33 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * This is a bean descriptor that will take in a bean class and then project all its properties through the use of
+ * read/write accessors.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/9/13, 2:10 PM)
  */
 public abstract class AbstractClassBeanDescriptor<E> implements BeanDescriptor<E>, ReadAccessorAware, WriteAccessorAware {
 
+    /**
+     * The bean class being described
+     */
     private final Class<E> beanClass;
-    private final Map<String, ReadPropertyAccessor<?>> readers = new HashMap<String, ReadPropertyAccessor<?>>();
-    private final Map<String, WritePropertyAccessor<?>> writers = new HashMap<String, WritePropertyAccessor<?>>();
-    private final Map<String, Class<?>> properties = new HashMap<String, Class<?>>();
 
+    /**
+     * The property readers for this descriptor
+     */
+    private final Map<String, ReadPropertyAccessor<?>> readers = new HashMap<String, ReadPropertyAccessor<?>>();
+
+    /**
+     * The property writers for this descriptors
+     */
+    private final Map<String, WritePropertyAccessor<?>> writers = new HashMap<String, WritePropertyAccessor<?>>();
+
+    /**
+     * Instantiates the bean descriptor while taking in the bean class
+     * @param beanClass    the class to be used
+     */
     public AbstractClassBeanDescriptor(Class<E> beanClass) {
         this.beanClass = beanClass;
         try {
@@ -32,46 +48,79 @@ public abstract class AbstractClassBeanDescriptor<E> implements BeanDescriptor<E
             this.writers.putAll(getWriters());
         } catch (Exception ignored) {
         }
-        for (Map.Entry<String, ReadPropertyAccessor<?>> entry : readers.entrySet()) {
-            properties.put(entry.getKey(), entry.getValue().getPropertyType());
-        }
-        for (Map.Entry<String, WritePropertyAccessor<?>> entry : writers.entrySet()) {
-            properties.put(entry.getKey(), entry.getValue().getPropertyType());
-        }
     }
 
+    /**
+     * @return a map of property names to property readers
+     * @throws Exception
+     */
     protected abstract Map<String, ReadPropertyAccessor<?>> getReaders() throws Exception;
 
+    /**
+     * @return a map of property names to property writers
+     * @throws Exception
+     */
     protected abstract Map<String, WritePropertyAccessor<?>> getWriters() throws Exception;
 
+    /**
+     * @return the type of the bean being described
+     */
     @Override
     public Class<E> getBeanType() {
         return beanClass;
     }
 
+    /**
+     * @return the names of the properties available to this descriptor
+     */
     @Override
     public Set<String> getPropertyNames() {
         return readers.keySet();
     }
 
+    /**
+     * Determines the type of the given property
+     * @param propertyName    the name of the property
+     * @return this property's type
+     * @throws NoSuchPropertyException
+     */
     @Override
     public Class<?> getPropertyType(String propertyName) throws NoSuchPropertyException {
         if (!hasProperty(propertyName)) {
             throw new NoSuchPropertyException(getBeanType(), propertyName);
         }
-        return properties.get(propertyName);
+        return readers.containsKey(propertyName) ? readers.get(propertyName).getPropertyType() : writers.get(propertyName).getPropertyType();
     }
 
+    /**
+     * Determines whether this bean has a property with the given name
+     * @param propertyName    the name of the property
+     * @return {@code true} if the bean has this property, and {@code false} otherwise.
+     */
     @Override
     public boolean hasProperty(String propertyName) {
-        return properties.containsKey(propertyName);
+        return readers.containsKey(propertyName) || writers.containsKey(propertyName);
     }
 
+    /**
+     * Will return the generic property reader for the property named as specified
+     * @param propertyName    the name of the property
+     * @return the property reader
+     * @throws NoSuchPropertyException
+     */
     @Override
     public ReadPropertyAccessor<?> getPropertyReader(String propertyName) throws NoSuchPropertyException {
         return getPropertyReader(propertyName, Object.class);
     }
 
+    /**
+     * Will return the property reader for a property of the given name and type
+     * @param propertyName    the name of the property
+     * @param propertyType    the type of the property
+     * @param <T>             the type parameter for the property
+     * @return the property reader
+     * @throws NoSuchPropertyException
+     */
     @Override
     public <T> ReadPropertyAccessor<T> getPropertyReader(String propertyName, Class<T> propertyType) throws NoSuchPropertyException {
         if (!hasProperty(propertyName)) {
@@ -85,11 +134,25 @@ public abstract class AbstractClassBeanDescriptor<E> implements BeanDescriptor<E
         return (ReadPropertyAccessor<T>) accessor;
     }
 
+    /**
+     * Will return a generic property writer for the given property
+     * @param propertyName    the property name
+     * @return the property writer
+     * @throws NoSuchPropertyException
+     */
     @Override
-    public Object getPropertyWriter(String propertyName) throws NoSuchPropertyException, PropertyAccessException {
+    public WritePropertyAccessor<?> getPropertyWriter(String propertyName) throws NoSuchPropertyException {
         return getPropertyWriter(propertyName, Object.class);
     }
 
+    /**
+     * Will return a property writer for a property of the given name-type
+     * @param propertyName    the name of the property
+     * @param propertyType    the type of the property
+     * @param <T>             the type parameter of the property
+     * @return the property writer
+     * @throws NoSuchPropertyException
+     */
     @Override
     public <T> WritePropertyAccessor<T> getPropertyWriter(String propertyName, Class<T> propertyType) throws NoSuchPropertyException {
         if (!hasProperty(propertyName)) {
@@ -106,6 +169,13 @@ public abstract class AbstractClassBeanDescriptor<E> implements BeanDescriptor<E
         return (WritePropertyAccessor<T>) accessor;
     }
 
+    /**
+     * Determines whether the given property can be written to or whether it is just
+     * a read-only property.
+     * @param propertyName    the name of the property
+     * @return {@code true} if the property is writable
+     * @throws NoSuchPropertyException
+     */
     public boolean isWritable(String propertyName) throws NoSuchPropertyException {
         if (!hasProperty(propertyName)) {
             throw new NoSuchPropertyException(getBeanType(), propertyName);
@@ -113,10 +183,16 @@ public abstract class AbstractClassBeanDescriptor<E> implements BeanDescriptor<E
         return writers.containsKey(propertyName);
     }
 
-
+    /**
+     * Will return the generic type of the property. If the property does not define a generic
+     * type, this method's return value will be equivalent to that of {@link #getPropertyType(String)}
+     * @param propertyName    the name of the property
+     * @return the generic type of the property
+     * @throws NoSuchPropertyException
+     */
     @Override
     public Type getGenericPropertyType(String propertyName) throws NoSuchPropertyException {
-        return getPropertyReader(propertyName).getGenericPropertyType();
+        return readers.containsKey(propertyName) ? getPropertyReader(propertyName).getGenericPropertyType() : getPropertyWriter(propertyName).getGenericPropertyType();
     }
 
 }

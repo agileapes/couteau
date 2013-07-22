@@ -5,6 +5,8 @@ import com.agileapes.couteau.basics.api.Filter;
 import java.lang.reflect.Method;
 
 /**
+ * Accepts all setter and getter methods for a given property name
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/6/13, 5:30 PM)
  */

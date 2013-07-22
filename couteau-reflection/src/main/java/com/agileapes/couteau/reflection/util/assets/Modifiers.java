@@ -6,6 +6,8 @@ import java.lang.reflect.Member;
 import java.lang.reflect.Modifier;
 
 /**
+ * Encapsulates all modifiers currently supported by Java
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/6/13, 2:23 PM)
  */

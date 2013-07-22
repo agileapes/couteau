@@ -14,15 +14,27 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * This implementation relies on non-static fields of a class to create property metadata. naturally, {@link final}
+ * fields are not included in the writable properties.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/9/13, 2:09 PM)
  */
 public class FieldBeanWrapper<E> extends AbstractBeanWrapper<E> {
 
+    /**
+     * Instantiates the bean wrapper, taking in the bean to be wrapped
+     * @param bean    the been being wrapped
+     */
     public FieldBeanWrapper(E bean) {
         super(bean);
     }
 
+    /**
+     * This method is expected to return property writers for all properties writable by this bean wrapper.
+     * @return the map of property names to property write accessors
+     * @throws Exception
+     */
     @Override
     protected Map<String, WritePropertyAccessor<?>> getWriteAccessors() throws Exception {
         final HashMap<String, WritePropertyAccessor<?>> map = new HashMap<String, WritePropertyAccessor<?>>();
@@ -30,12 +42,17 @@ public class FieldBeanWrapper<E> extends AbstractBeanWrapper<E> {
             @Override
             public void process(Field input) throws Exception {
                 //noinspection unchecked
-                map.put(input.getName(), new FieldWritePropertyAccessor(input.getName(), input.getType(), input, getBean()));
+                map.put(input.getName(), new FieldWritePropertyAccessor(input, getBean()));
             }
         });
         return map;
     }
 
+    /**
+     * This method should present property readers for all available properties in the wrapped bean
+     * @return a map of property names to property readers
+     * @throws Exception
+     */
     @Override
     protected Map<String, ReadPropertyAccessor<?>> getReadAccessors() throws Exception {
         final HashMap<String, ReadPropertyAccessor<?>> map = new HashMap<String, ReadPropertyAccessor<?>>();
@@ -43,7 +60,7 @@ public class FieldBeanWrapper<E> extends AbstractBeanWrapper<E> {
             @Override
             public void process(Field input) throws Exception {
                 //noinspection unchecked
-                map.put(input.getName(), new FieldReadPropertyAccessor(input.getName(), input.getType(), input, getBean()));
+                map.put(input.getName(), new FieldReadPropertyAccessor(input, getBean()));
             }
         });
         return map;

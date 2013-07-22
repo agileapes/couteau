@@ -14,15 +14,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * Wraps the bean, while exposing its properties through its getter and setter methods
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/9/13, 2:07 PM)
  */
 public class MethodBeanWrapper<E> extends AbstractBeanWrapper<E> {
 
+    /**
+     * Instantiates the bean wrapper, taking in the bean to be wrapped
+     * @param bean    the been being wrapped
+     */
     public MethodBeanWrapper(E bean) {
         super(bean);
     }
 
+    /**
+     * This method is expected to return property writers for all properties writable by this bean wrapper.
+     * @return the map of property names to property write accessors
+     * @throws Exception
+     */
     @Override
     protected Map<String, WritePropertyAccessor<?>> getWriteAccessors() throws Exception {
         final HashMap<String, WritePropertyAccessor<?>> map = new HashMap<String, WritePropertyAccessor<?>>();
@@ -31,12 +42,17 @@ public class MethodBeanWrapper<E> extends AbstractBeanWrapper<E> {
             public void process(Method input) throws Exception {
                 final String propertyName = ReflectionUtils.getPropertyName(input.getName());
                 //noinspection unchecked
-                map.put(propertyName, new MethodWritePropertyAccessor(propertyName, input.getParameterTypes()[0], input, getBean()));
+                map.put(propertyName, new MethodWritePropertyAccessor(input, getBean()));
             }
         });
         return map;
     }
 
+    /**
+     * This method should present property readers for all available properties in the wrapped bean
+     * @return a map of property names to property readers
+     * @throws Exception
+     */
     @Override
     protected Map<String, ReadPropertyAccessor<?>> getReadAccessors() throws Exception {
         final Map<String, ReadPropertyAccessor<?>> map = new HashMap<String, ReadPropertyAccessor<?>>();
@@ -45,7 +61,7 @@ public class MethodBeanWrapper<E> extends AbstractBeanWrapper<E> {
             public void process(Method input) throws Exception {
                 final String propertyName = ReflectionUtils.getPropertyName(input.getName());
                 //noinspection unchecked
-                map.put(propertyName, new MethodReadPropertyAccessor(propertyName, input.getReturnType(), input, getBean()));
+                map.put(propertyName, new MethodReadPropertyAccessor(input, getBean()));
             }
         });
         return map;

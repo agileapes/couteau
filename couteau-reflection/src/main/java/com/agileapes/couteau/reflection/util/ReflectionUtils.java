@@ -35,6 +35,13 @@ public abstract class ReflectionUtils {
         MAPPED_TYPES.put(boolean.class, Boolean.class);
     }
 
+    /**
+     * Wraps the declared methods of the given type in a {@link CollectionWrapper}. The methods
+     * occur in successive order by the order of precedence, meaning that methods closer to this
+     * type occur sooner. This is to preserve method overriding behavior.
+     * @param type    the type being introspected
+     * @return the collection wrapper for the type's methods
+     */
     public static CollectionWrapper<Method> withMethods(Class<?> type) {
         final ArrayList<Method> methods = new ArrayList<Method>();
         while (type != null) {
@@ -44,6 +51,13 @@ public abstract class ReflectionUtils {
         return CollectionWrapper.with(methods);
     }
 
+    /**
+     * Wraps the fields of the given type and all its super classes. This method also preserves the
+     * override precedence.
+     * @param type    the type whose fields are being introspected
+     * @return the collection wrapper for gathered fields
+     * @see #withMethods(Class)
+     */
     public static CollectionWrapper<Field> withFields(Class<?> type) {
         final ArrayList<Field> fields = new ArrayList<Field>();
         while (type != null) {
@@ -53,10 +67,10 @@ public abstract class ReflectionUtils {
         return CollectionWrapper.with(fields);
     }
 
-    public static String getGetterName(String propertyName) {
-        return "get" + propertyName.substring(0, 1).toUpperCase().concat(propertyName.substring(1));
-    }
-
+    /**
+     * This class is used for conveniently describing an object by referring to it in a singular or plural form.
+     * @see #describeType(Class)
+     */
     private static class Name {
 
         private String singular;
@@ -145,6 +159,11 @@ public abstract class ReflectionUtils {
         return value;
     }
 
+    /**
+     * Returns the name of the property based on the accessor name for the property
+     * @param methodName    the name of the accessor method
+     * @return the property name
+     */
     public static String getPropertyName(String methodName) {
         if (methodName.matches("(?:get|set)[A-Z].*")) {
             methodName = methodName.substring(3);
@@ -156,6 +175,12 @@ public abstract class ReflectionUtils {
         return methodName.substring(0, 1).toLowerCase().concat(methodName.substring(1));
     }
 
+    /**
+     * Maps types to one another. This is primarily used to map primitive types to their object-oriented
+     * equivalents.
+     * @param type    the type being mapped.
+     * @return the mapped type (or the actual type, if no mapping has been necessary).
+     */
     public static Class<?> mapType(Class<?> type) {
         if (MAPPED_TYPES.containsKey(type)) {
             return MAPPED_TYPES.get(type);
@@ -164,6 +189,13 @@ public abstract class ReflectionUtils {
         }
     }
 
+    /**
+     * Resolves type arguments for a generic type. The given length indicates how many generic
+     * types are expected.
+     * @param type      the type being evaluated.
+     * @param length    the number of expected types
+     * @return an array of generic types
+     */
     public static Class[] resolveTypeArguments(Type type, int length) {
         final Class[] classes = new Class[length];
         int i = 0;
@@ -185,6 +217,11 @@ public abstract class ReflectionUtils {
         return classes;
     }
 
+    /**
+     * Returns the array dimensions for the given class object, or {@code 0} if it is not an array
+     * @param arrayType    the array type
+     * @return the dimensions for the array
+     */
     public static int getArrayDimensions(Class<?> arrayType) {
         if (arrayType.isArray()) {
             return 1 + getArrayDimensions(arrayType.getComponentType());
@@ -193,8 +230,14 @@ public abstract class ReflectionUtils {
         }
     }
 
-    public static Class<?> getComponentType(Class<?> arrayClass) {
-        return arrayClass.isArray() ? getComponentType(arrayClass.getComponentType()) : arrayClass;
+    /**
+     * Returns the component type of a multi-dimension array or the input class itself it it is not
+     * an array type
+     * @param arrayType    the array type
+     * @return the component type of the array
+     */
+    public static Class<?> getComponentType(Class<?> arrayType) {
+        return arrayType.isArray() ? getComponentType(arrayType.getComponentType()) : arrayType;
     }
 
 }

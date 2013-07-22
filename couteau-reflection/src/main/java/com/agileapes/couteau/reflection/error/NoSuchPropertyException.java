@@ -1,10 +1,10 @@
 package com.agileapes.couteau.reflection.error;
 
 /**
+ * This exception is thrown when a non-existent property is being accessed
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0, (7/24/12, 1:10 PM)
- *
- * This exception is thrown when a non-existent property is being accessed
  */
 public class NoSuchPropertyException extends Exception {
 

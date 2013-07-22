@@ -33,6 +33,19 @@ public abstract class ClassUtils {
         primitiveTypes.put("double", double.class);
     }
 
+    /**
+     * Replacement for {@code Class.forName()} that also returns Class instances
+     * for primitives (e.g."int") and array class names (e.g. "String[]").
+     * Furthermore, it is also capable of resolving inner class names in Java source
+     * style (e.g. "java.lang.Thread.State" instead of "java.lang.Thread$State").
+     * @param name the name of the Class
+     * @param classLoader the class loader to use
+     * (may be {@code null}, which indicates the default class loader)
+     * @return Class instance for the supplied name
+     * @throws ClassNotFoundException if the class was not found
+     * @throws LinkageError if the class file could not be loaded
+     * @see Class#forName(String, boolean, ClassLoader)
+     */
     public static Class forName(String name, ClassLoader classLoader) throws ClassNotFoundException {
         if (name == null) {
             throw new NullPointerException();

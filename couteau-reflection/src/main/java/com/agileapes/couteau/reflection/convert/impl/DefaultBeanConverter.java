@@ -15,22 +15,52 @@ import com.agileapes.couteau.reflection.property.impl.SimplePropertyDescriptor;
  */
 public class DefaultBeanConverter extends AbstractCachingBeanConverter {
 
+    /**
+     * Instantiates the converter with the default strategy ({@link DefaultConversionStrategy})
+     * @see #DefaultBeanConverter(ConversionStrategy)
+     */
     public DefaultBeanConverter() {
         super();
     }
 
+    /**
+     * Instantiates the converter using the given strategy, defaulting to a method bean wrapper factory
+     * ({@link com.agileapes.couteau.reflection.beans.impl.MethodBeanWrapperFactory})
+     * @param conversionStrategy    the conversion strategy to be used throughout the conversion
+     * @see #DefaultBeanConverter(BeanWrapperFactory, ConversionStrategy)
+     */
     public DefaultBeanConverter(ConversionStrategy conversionStrategy) {
         super(conversionStrategy);
     }
 
+    /**
+     * Instantiates the converter using the given wrapper factory and the given strategy. In this case, the
+     * wrapper factory will act as the accessor factory, as well.
+     * @param wrapperFactory        the wrapper factory
+     * @param conversionStrategy    the conversion strategy to be used throughout the conversion
+     * @see #DefaultBeanConverter(BeanAccessorFactory, BeanWrapperFactory, ConversionStrategy)
+     */
     public DefaultBeanConverter(BeanWrapperFactory wrapperFactory, ConversionStrategy conversionStrategy) {
         super(wrapperFactory, conversionStrategy);
     }
 
+    /**
+     * Instantiates the converter using the given parameters.
+     * @param accessorFactory    the accessor factory for input objects
+     * @param wrapperFactory     the wrapper factory for output objects
+     * @param conversionStrategy the conversion strategy to be used throughout the conversion
+     */
     public DefaultBeanConverter(BeanAccessorFactory accessorFactory, BeanWrapperFactory wrapperFactory, ConversionStrategy conversionStrategy) {
         super(accessorFactory, wrapperFactory, conversionStrategy);
     }
 
+    /**
+     * This method is expected to carry out the task of conversion by converting values from
+     * properties read from the source object into the destination object
+     * @param source    the accessor for the input bean
+     * @param target    the wrapper for the target bean
+     * @throws BeanConversionException
+     */
     @Override
     protected void doConvert(BeanAccessor<?> source, BeanWrapper<?> target) throws BeanConversionException {
         for (String property : source.getPropertyNames()) {
@@ -82,7 +112,6 @@ public class DefaultBeanConverter extends AbstractCachingBeanConverter {
             } catch (PropertyTypeMismatchException ignored) {
             }
         }
-
     }
 
 }

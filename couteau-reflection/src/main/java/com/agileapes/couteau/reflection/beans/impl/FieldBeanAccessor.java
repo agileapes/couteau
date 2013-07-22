@@ -12,15 +12,26 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * This implementation relies on non-static fields of a bean to generate property accessor metadata.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/9/13, 1:43 PM)
  */
 public class FieldBeanAccessor<E> extends AbstractBeanAccessor<E> {
 
+    /**
+     * Instantiates the accessor, while taking the bean to be wrapped
+     * @param bean    the bean to be wrapped. This can be later accessed through {@link #getBean()}
+     */
     public FieldBeanAccessor(E bean) {
         super(bean);
     }
 
+    /**
+     * This method should present property readers for all available properties in the wrapped bean
+     * @return a map of property names to property readers
+     * @throws Exception
+     */
     @Override
     protected Map<String, ReadPropertyAccessor<?>> getReadAccessors() throws Exception {
         final HashMap<String, ReadPropertyAccessor<?>> map = new HashMap<String, ReadPropertyAccessor<?>>();
@@ -28,7 +39,7 @@ public class FieldBeanAccessor<E> extends AbstractBeanAccessor<E> {
             @Override
             public void process(Field input) throws Exception {
                 //noinspection unchecked
-                map.put(input.getName(), new FieldReadPropertyAccessor(input.getName(), input.getType(), input, getBean()));
+                map.put(input.getName(), new FieldReadPropertyAccessor(input, getBean()));
             }
         });
         return map;

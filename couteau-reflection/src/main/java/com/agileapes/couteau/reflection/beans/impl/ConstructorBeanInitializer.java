@@ -19,6 +19,19 @@ import java.util.Set;
  */
 public class ConstructorBeanInitializer implements BeanInitializer {
 
+    /**
+     * <p>This method will initialize a bean of the given type using the specified initialization
+     * arguments.</p>
+     *
+     * <p>Any errors occurring during this process will be reflected as a BeanInstantiationException
+     * to simplify handing exceptions for bean initialization.</p>
+     * @param type             the type of the bean
+     * @param argumentTypes    the types of the arguments being passed
+     * @param arguments        the arguments used for initialization of the bean
+     * @param <E>              the type of the bean
+     * @return an instance of the bean in question
+     * @throws BeanInstantiationException
+     */
     @Override
     public <E> E initialize(Class<E> type, Class[] argumentTypes, Object... arguments) throws BeanInstantiationException {
         if (argumentTypes == null) {

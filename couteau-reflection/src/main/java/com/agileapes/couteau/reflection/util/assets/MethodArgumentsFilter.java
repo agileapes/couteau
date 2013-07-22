@@ -6,6 +6,8 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 
 /**
+ * Filters methods by their arguments
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/6/13, 5:35 PM)
  */

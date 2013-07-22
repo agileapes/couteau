@@ -5,6 +5,10 @@ import com.agileapes.couteau.reflection.error.PropertyAccessException;
 import com.agileapes.couteau.reflection.error.PropertyTypeMismatchException;
 
 /**
+ * A ConfigurableBean is a bean whose properties can be manipulated from the outside.
+ * Usually, the number of properties that can be manipulated in such a way is limited and
+ * is specific to the bean implementing this interface.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/9/13, 12:47 PM)
  */
