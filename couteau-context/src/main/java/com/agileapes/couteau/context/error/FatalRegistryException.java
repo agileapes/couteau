@@ -10,11 +10,20 @@ package com.agileapes.couteau.context.error;
  */
 public class FatalRegistryException extends RegistryException {
 
+    /**
+     * Instantiates the exception
+     * @param message    the message explaining why a fatal error has occurred
+     */
     public FatalRegistryException(String message) {
         super(message);
     }
 
-    public FatalRegistryException(String msg, Throwable cause) {
-        super(msg, cause);
+    /**
+     * Instantiates the exception, specifying the root cause of the error
+     * @param message    the message explaining why a fatal error has occurred
+     * @param cause      the cause of the error
+     */
+    public FatalRegistryException(String message, Throwable cause) {
+        super(message, cause);
     }
 }

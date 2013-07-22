@@ -9,8 +9,20 @@ package com.agileapes.couteau.context.error;
  */
 public class DuplicateItemException extends RegistryException {
 
+    private static final String MESSAGE = "Another item with this name already exists: %s";
+    private final String name;
+
+    /**
+     * Instantiates the exception
+     * @param name    the name of the item being registered, for which a duplicate exists
+     */
     public DuplicateItemException(String name) {
-        super("Another item with this name already exists: " + name);
+        super(String.format(MESSAGE, name));
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
 }

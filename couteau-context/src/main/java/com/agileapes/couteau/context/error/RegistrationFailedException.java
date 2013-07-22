@@ -8,8 +8,19 @@ package com.agileapes.couteau.context.error;
  */
 public class RegistrationFailedException extends RegistryException {
 
-    public RegistrationFailedException(String name) {
-        super("Failed to register bean with name: " + name);
+    private static final String MESSAGE = "Failed to register bean with name: %s";
+    private final String beanName;
+
+    /**
+     * Instantiates the exception
+     * @param beanName    the bean name the registration for which has failed.
+     */
+    public RegistrationFailedException(String beanName) {
+        super(String.format(MESSAGE, beanName));
+        this.beanName = beanName;
     }
 
+    public String getBeanName() {
+        return beanName;
+    }
 }

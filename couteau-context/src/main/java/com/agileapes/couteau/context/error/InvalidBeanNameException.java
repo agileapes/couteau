@@ -9,8 +9,26 @@ package com.agileapes.couteau.context.error;
  */
 public class InvalidBeanNameException extends RegistryException {
 
-    public InvalidBeanNameException(String msg) {
-        super(msg);
+    private static final String MESSAGE = "Expected bean to be named <%s> but it was named <%s>";
+    private final String expected;
+    private final String actual;
+
+    /**
+     * Instantiates the exception
+     * @param expected    the name expected to be assigned to the bean
+     * @param actual      the name actually given to the bean
+     */
+    public InvalidBeanNameException(String expected, String actual) {
+        super(String.format(MESSAGE, expected, actual));
+        this.expected = expected;
+        this.actual = actual;
     }
 
+    public String getExpected() {
+        return expected;
+    }
+
+    public String getActual() {
+        return actual;
+    }
 }

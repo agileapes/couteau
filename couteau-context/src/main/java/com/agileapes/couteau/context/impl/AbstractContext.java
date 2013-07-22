@@ -40,28 +40,33 @@ public abstract class AbstractContext<E> extends AbstractRegistry<E> implements 
      * This is a list of bean processors for the beans.
      */
     private final List<BeanProcessor<E>> beanProcessors = new CopyOnWriteArrayList<BeanProcessor<E>>();
+
     /**
      * This is the list of context processors.
      */
     private final List<ContextProcessor<E>> contextProcessors = new CopyOnWriteArrayList<ContextProcessor<E>>();
-    /**
-     * The list of all listeners
-     */
-    private final List<SmartEventListener> eventListeners = new CopyOnWriteArrayList<SmartEventListener>();
+
     /**
      * The startup date. The context is considered to be not ready so long as this parameter is
      * {@code null}
      * @see #isContextReady()
      */
     private Date startupDate = null;
+
     /**
      * The time it took the system to start up since the context was instantiated.
      */
     private long startupTime = System.currentTimeMillis();
+
     /**
      * The type of items in the context
      */
     private final Class<E> contextType;
+
+    /**
+     * The event publisher that carries out the task of publishing events throughout this context.
+     */
+    private final EventPublisher eventPublisher;
 
     /**
      * This constructor instantiates the context, while adding several bean processors that will
@@ -70,6 +75,7 @@ public abstract class AbstractContext<E> extends AbstractRegistry<E> implements 
     public AbstractContext() {
         //noinspection unchecked
         contextType = (Class<E>) ClassUtils.resolveTypeArgument(getClass(), AbstractContext.class);
+        eventPublisher = new SynchronousEventPublisher();
         //This post processor will inject the context into eligible, requesting beans
         addBeanProcessor(new BeanProcessorAdapter<E>(OrderedBean.HIGHEST_PRECEDENCE) {
             @Override
@@ -137,12 +143,22 @@ public abstract class AbstractContext<E> extends AbstractRegistry<E> implements 
         startupDate = null;
     }
 
+    /**
+     * This method will add bean processors to the context. Bean processors, since the moment they
+     * are added to the system, will be able to manipulate the process with which the beans
+     * ae registered with the underlying registry.
+     * @param processor    the processor
+     * @return the context itself. This is returned for chaining purposes.
+     */
     @Override
     public Context<E> addBeanProcessor(BeanProcessor<E> processor) {
         beanProcessors.add(processor);
         return this;
     }
 
+    /**
+     * @return the time in milliseconds in which the context was set up and readied for use.
+     */
     @Override
     public long getStartupTime() {
         if (!isContextReady()) {
@@ -151,6 +167,10 @@ public abstract class AbstractContext<E> extends AbstractRegistry<E> implements 
         return startupTime;
     }
 
+    /**
+     * @return the date object representing the moment at which the context was marked as ready
+     * for use
+     */
     @Override
     public Date getStartupDate() {
         if (!isContextReady()) {
@@ -159,17 +179,33 @@ public abstract class AbstractContext<E> extends AbstractRegistry<E> implements 
         return startupDate;
     }
 
+    /**
+     * <p>This method will mark the context as being ready. This should be typically called from an extending context
+     * that holds some semantics for when and how the beans registered with the context can be used.</p>
+     *
+     * <p>Without signaling the context, the context cannot be used externally.</p>
+     */
     protected synchronized void ready() {
+        //If the context has already been marked as ready, it cannot be prepared for use again.
         if (isContextReady()) {
             throw new IllegalStateException("Context startup cannot happen more than once");
         }
+        //since the context is now ready, we can call to post processors that operate on the context itself
         for (ContextProcessor<E> contextProcessor : contextProcessors) {
             contextProcessor.postProcessContext(this);
         }
+        //setting up context startup date and time
         startupDate = new Date();
         startupTime = System.currentTimeMillis() - startupTime;
     }
 
+    /**
+     * Will register the given item with the given name. The name must be unique, and no other
+     * item with this name must be already registered.
+     * @param name    the name of the bean to be registered
+     * @param item    the instance
+     * @throws RegistryException
+     */
     @Override
     public void register(String name, E item) throws RegistryException {
         if (!contextProcessors.isEmpty() && isContextReady()) {
@@ -182,6 +218,13 @@ public abstract class AbstractContext<E> extends AbstractRegistry<E> implements 
         super.register(name, item);
     }
 
+    /**
+     * Will return the bean with the given name. If the bean is not present, an exception will
+     * be thrown.
+     * @param name    the name of the bean being queried.
+     * @return the bean instance
+     * @throws RegistryException
+     */
     @Override
     public E get(String name) throws RegistryException {
         if (!isContextReady()) {
@@ -192,10 +235,22 @@ public abstract class AbstractContext<E> extends AbstractRegistry<E> implements 
         return item;
     }
 
+    /**
+     * Will determines whether the context is now ready to be used or not.
+     * @return {@code true} if the context is ready to be used externally
+     */
     private boolean isContextReady() {
         return startupDate != null;
     }
 
+    /**
+     * This method acts as a composite that runs all post processors that access the bean before
+     * its registration sequentially and according to their order.
+     * @param name    the name of the bean
+     * @param item    the bean itself
+     * @return the (possibly modified) bean, which cannot be {@code null}
+     * @throws RegistryException
+     */
     private E postProcessBeanBeforeRegistration(String name, E item) throws RegistryException {
         final ArrayList<BeanProcessor<E>> beanProcessors = new ArrayList<BeanProcessor<E>>(this.beanProcessors);
         Collections.sort(beanProcessors, new OrderedBeanComparator());
@@ -208,6 +263,14 @@ public abstract class AbstractContext<E> extends AbstractRegistry<E> implements 
         return item;
     }
 
+    /**
+     * This method acts as a composite that sequentially  and according to their order runs all post processors
+     * that access the bean before it is being accessed externally.
+     * @param name    the name of the bean
+     * @param item    the bean itself
+     * @return the (possibly modified) bean, which cannot be {@code null}
+     * @throws RegistryException
+     */
     private E postProcessBeanBeforeAccess(String name, E item) throws RegistryException {
         final ArrayList<BeanProcessor<E>> beanProcessors = new ArrayList<BeanProcessor<E>>(this.beanProcessors);
         Collections.sort(beanProcessors, new OrderedBeanComparator());
@@ -220,6 +283,9 @@ public abstract class AbstractContext<E> extends AbstractRegistry<E> implements 
         return item;
     }
 
+    /**
+     * Refreshes the context so that changes made to the context can be taken into account
+     */
     @Override
     public void refresh() {
         markUnprepared();
@@ -227,6 +293,14 @@ public abstract class AbstractContext<E> extends AbstractRegistry<E> implements 
         publishEvent(new ContextRefreshedEvent(this));
     }
 
+    /**
+     * Will return a transform of beans with their names as keys that are the subtype of the given
+     * type
+     * @param type    the desired type for which the lookup will be performed
+     * @param <T>     the type argument
+     * @return a transform of bean names to bean instances for the given type
+     * @throws RegistryException
+     */
     @Override
     public <T extends E> Map<String, T> getBeansOfType(Class<T> type) throws RegistryException {
         final Collection<String> beanNames = getBeanNames();
@@ -241,6 +315,12 @@ public abstract class AbstractContext<E> extends AbstractRegistry<E> implements 
         return map;
     }
 
+    /**
+     * Will register a bean with the context, determining the name automatically
+     * @param item    the item to be registered
+     * @return the context itself
+     * @throws RegistryException
+     */
     @Override
     public Context<E> register(E item) throws RegistryException {
         final String canonicalName = item.getClass().getCanonicalName();
@@ -250,28 +330,36 @@ public abstract class AbstractContext<E> extends AbstractRegistry<E> implements 
         return this;
     }
 
+    /**
+     * Will add the provided event listener to this context, which also acts as an event publisher itself
+     * @param eventListener    the event listener
+     */
     @Override
     public void addEventListener(EventListener<? extends Event> eventListener) {
-        SmartEventListener smartEventListener;
-        if (eventListener instanceof SmartEventListener) {
-            smartEventListener = (SmartEventListener) eventListener;
-        } else {
-            //noinspection unchecked
-            smartEventListener = new SmartEventListener((EventListener<Event>) eventListener);
-        }
-        eventListeners.add(smartEventListener);
+        eventPublisher.addEventListener(eventListener);
     }
 
+    /**
+     * Publishes a synchronous event to the listeners. The event must inherit from {@link Event}, ensuring
+     * that it specifies its source and can be tracked back to it.
+     * @param event    the event object being fired
+     * @param <E>      the type of the event
+     * @return the (modified) event object.
+     * <p>There are cases in which it would be necessary to allow event listeners to modify the mutable properties
+     * of an event object, which can be later on used to steer the flow of work through the context from which the
+     * event was raised.</p>
+     * <p>This could be used in a variety of ways; for instance, to redirect an erroneous input to a closely
+     * matching one that holds meaning with the context.</p>
+     */
     @Override
     public <E extends Event> E publishEvent(E event) {
-        for (SmartEventListener listener : eventListeners) {
-            if (listener.supportsEvent(event)) {
-                listener.onEvent(event);
-            }
-        }
-        return event;
+        return eventPublisher.publishEvent(event);
     }
 
+    /**
+     * Determines the narrowest supertype of objects that can be registered with this registry.
+     * @return the type of objects in the registry
+     */
     @Override
     public Class<E> getRegistryType() {
         return contextType;

@@ -21,7 +21,7 @@ public abstract class AbstractTypeSpecificContext<E> extends AbstractThreadSafeC
             @Override
             public E postProcessBeforeRegistration(E bean, String name) throws RegistryException {
                 if (name == null || !name.equals(bean.getClass().getCanonicalName())) {
-                    throw new InvalidBeanNameException("Expected bean to be named " + bean.getClass().getCanonicalName() + " but was named " + name);
+                    throw new InvalidBeanNameException(bean.getClass().getCanonicalName(), name);
                 }
                 return bean;
             }
