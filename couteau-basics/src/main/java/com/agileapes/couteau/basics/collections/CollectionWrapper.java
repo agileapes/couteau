@@ -243,4 +243,7 @@ public class CollectionWrapper<I> {
         return items.get(items.size() - 1);
     }
 
+    public Set<I> set() {
+        return new HashSet<I>(items);
+    }
 }
