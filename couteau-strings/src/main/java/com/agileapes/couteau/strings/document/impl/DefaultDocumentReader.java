@@ -106,11 +106,10 @@ public class DefaultDocumentReader implements DocumentReader {
      */
     @Override
     public void skip(Pattern pattern) {
-        if (!has(pattern)) {
+        final Matcher matcher = pattern.matcher(rest());
+        if (!matcher.find() || matcher.start() != 0) {
             return;
         }
-        final Matcher matcher = pattern.matcher(rest());
-        matcher.find();
         cursor += matcher.group().length();
         processText(matcher.group());
     }
@@ -231,10 +230,12 @@ public class DefaultDocumentReader implements DocumentReader {
         if (token.getStart() < 0) {
             throw new IllegalArgumentException();
         }
-        if (token.getEnd() >= rest().length()) {
+        if (token.getEnd() > rest().length()) {
             throw new IllegalArgumentException();
         }
-        return processText(rest().substring(0, token.getEnd())).substring(token.getStart());
+        final String result = processText(rest().substring(0, token.getEnd())).substring(token.getStart());
+        cursor += token.getEnd();
+        return result;
     }
 
     /**
@@ -391,6 +392,9 @@ public class DefaultDocumentReader implements DocumentReader {
      */
     @Override
     public void rewind() {
+        if (snapshots.isEmpty()) {
+            throw new IllegalStateException();
+        }
         reposition(forget());
     }
 
