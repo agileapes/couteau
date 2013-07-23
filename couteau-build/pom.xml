@@ -33,6 +33,7 @@
         <module>../couteau-reflection</module>
         <module>../couteau-freemarker</module>
         <module>../couteau-strings</module>
+        <module>../couteau-graph</module>
     </modules>
     
 </project>
