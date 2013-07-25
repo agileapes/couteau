@@ -34,7 +34,7 @@ public class FieldTypeFilter implements Filter<Field> {
     }
 
     @Override
-    public boolean accepts(Field item) throws Exception {
+    public boolean accepts(Field item) {
         return type.isAssignableFrom(item.getType());
     }
 

@@ -29,14 +29,14 @@ public class ConstructorBeanInitializerTest {
     @Test
     public void testBeanInitialization() throws Exception {
         final ConstructorBeanInitializer initializer = new ConstructorBeanInitializer();
-        final Book book = initializer.initialize(Book.class, new Class[0], new Object[0]);
+        final Book book = initializer.initialize(Book.class, new Class[0]);
         Assert.assertNotNull(book);
     }
 
     @Test
     public void testBeanInstantiationWithConstructorArgs() throws Exception {
         final ConstructorBeanInitializer initializer = new ConstructorBeanInitializer();
-        final PublishedBook publishedBook = initializer.initialize(PublishedBook.class, new Class[]{Book.class, int.class, String.class, String.class}, new Object[]{new Book(), 2000, "Some Publisher", "123456"});
+        final PublishedBook publishedBook = initializer.initialize(PublishedBook.class, new Class[]{Book.class, int.class, String.class, String.class}, new Book(), 2000, "Some Publisher", "123456");
         Assert.assertNotNull(publishedBook);
     }
 

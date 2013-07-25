@@ -51,11 +51,11 @@ public class FieldBeanWrapper<E> extends AbstractBeanWrapper<E> {
      * @throws Exception
      */
     @Override
-    protected Map<String, WritePropertyAccessor<?>> getWriteAccessors() throws Exception {
+    protected Map<String, WritePropertyAccessor<?>> getWriteAccessors() {
         final HashMap<String, WritePropertyAccessor<?>> map = new HashMap<String, WritePropertyAccessor<?>>();
         ReflectionUtils.withFields(getBeanType()).drop(new MemberModifierFilter(Modifiers.STATIC, Modifiers.FINAL)).each(new Processor<Field>() {
             @Override
-            public void process(Field input) throws Exception {
+            public void process(Field input) {
                 //noinspection unchecked
                 map.put(input.getName(), new FieldWritePropertyAccessor(input, getBean()));
             }
@@ -69,11 +69,11 @@ public class FieldBeanWrapper<E> extends AbstractBeanWrapper<E> {
      * @throws Exception
      */
     @Override
-    protected Map<String, ReadPropertyAccessor<?>> getReadAccessors() throws Exception {
+    protected Map<String, ReadPropertyAccessor<?>> getReadAccessors() {
         final HashMap<String, ReadPropertyAccessor<?>> map = new HashMap<String, ReadPropertyAccessor<?>>();
         ReflectionUtils.withFields(getBeanType()).drop(new MemberModifierFilter(Modifiers.STATIC)).each(new Processor<Field>() {
             @Override
-            public void process(Field input) throws Exception {
+            public void process(Field input) {
                 //noinspection unchecked
                 map.put(input.getName(), new FieldReadPropertyAccessor(input, getBean()));
             }

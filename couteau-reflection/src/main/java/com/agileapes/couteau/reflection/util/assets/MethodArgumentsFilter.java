@@ -35,7 +35,7 @@ public class MethodArgumentsFilter implements Filter<Method> {
     }
 
     @Override
-    public boolean accepts(Method item) throws Exception {
+    public boolean accepts(Method item) {
         return Arrays.equals(arguments, item.getParameterTypes());
     }
 

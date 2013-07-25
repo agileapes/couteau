@@ -29,8 +29,7 @@ public interface Filter<E> {
      * Will determine whether or not an item is accepted by the keep
      * @param item    the item
      * @return {@code true} if the item is accepted
-     * @throws Exception
      */
-    boolean accepts(E item) throws Exception;
+    boolean accepts(E item);
 
 }

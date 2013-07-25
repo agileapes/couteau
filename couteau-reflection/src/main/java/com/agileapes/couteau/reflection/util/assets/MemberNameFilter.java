@@ -34,7 +34,7 @@ public class MemberNameFilter implements Filter<Member> {
     }
 
     @Override
-    public boolean accepts(Member item) throws Exception {
+    public boolean accepts(Member item) {
         for (String pattern : patterns) {
             if (item.getName().matches(pattern)) {
                 return true;

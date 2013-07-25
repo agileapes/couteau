@@ -53,18 +53,14 @@ public abstract class AbstractBeanWrapper<E> extends AbstractBeanAccessor<E> imp
      */
     public AbstractBeanWrapper(E bean) {
         super(bean);
-        try {
-            writeAccessors.putAll(getWriteAccessors());
-        } catch (Exception ignored) {
-        }
+        writeAccessors.putAll(getWriteAccessors());
     }
 
     /**
      * This method is expected to return property writers for all properties writable by this bean wrapper.
      * @return the map of property names to property write accessors
-     * @throws Exception
      */
-    protected abstract Map<String, WritePropertyAccessor<?>> getWriteAccessors() throws Exception;
+    protected abstract Map<String, WritePropertyAccessor<?>> getWriteAccessors();
 
     /**
      * Determines whether the given property can be written to or whether it is just

@@ -49,11 +49,11 @@ public class FieldClassBeanDescriptor<E> extends AbstractClassBeanDescriptor<E> 
      * @throws Exception
      */
     @Override
-    protected Map<String, ReadPropertyAccessor<?>> getReaders() throws Exception {
+    protected Map<String, ReadPropertyAccessor<?>> getReaders() {
         final HashMap<String, ReadPropertyAccessor<?>> map = new HashMap<String, ReadPropertyAccessor<?>>();
         ReflectionUtils.withFields(getBeanType()).drop(new MemberModifierFilter(Modifiers.STATIC)).each(new Processor<Field>() {
             @Override
-            public void process(Field input) throws Exception {
+            public void process(Field input) {
                 //noinspection unchecked
                 map.put(input.getName(), new FieldReadPropertyAccessor(input, null));
             }
@@ -66,11 +66,11 @@ public class FieldClassBeanDescriptor<E> extends AbstractClassBeanDescriptor<E> 
      * @throws Exception
      */
     @Override
-    protected Map<String, WritePropertyAccessor<?>> getWriters() throws Exception {
+    protected Map<String, WritePropertyAccessor<?>> getWriters() {
         final HashMap<String, WritePropertyAccessor<?>> map = new HashMap<String, WritePropertyAccessor<?>>();
         ReflectionUtils.withFields(getBeanType()).drop(new MemberModifierFilter(Modifiers.STATIC, Modifiers.FINAL)).each(new Processor<Field>() {
             @Override
-            public void process(Field input) throws Exception {
+            public void process(Field input) {
                 //noinspection unchecked
                 map.put(input.getName(), new FieldWritePropertyAccessor(input, null));
             }

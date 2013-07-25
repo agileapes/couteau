@@ -28,8 +28,7 @@ public interface Transformer<I, O> {
      * Will transform the input item to the output
      * @param input    the input
      * @return the output
-     * @throws Exception
      */
-    O map(I input) throws Exception;
+    O map(I input);
 
 }

@@ -48,11 +48,11 @@ public class MethodClassBeanDescriptor<E> extends AbstractClassBeanDescriptor<E>
      * @throws Exception
      */
     @Override
-    protected Map<String,ReadPropertyAccessor<?>> getReaders() throws Exception {
+    protected Map<String,ReadPropertyAccessor<?>> getReaders() {
         final HashMap<String, ReadPropertyAccessor<?>> map = new HashMap<String, ReadPropertyAccessor<?>>();
         ReflectionUtils.withMethods(getBeanType()).keep(new GetterMethodFilter()).each(new Processor<Method>() {
             @Override
-            public void process(Method input) throws Exception {
+            public void process(Method input) {
                 final String propertyName = ReflectionUtils.getPropertyName(input.getName());
                 //noinspection unchecked
                 map.put(propertyName, new MethodReadPropertyAccessor(input, null));
@@ -66,11 +66,11 @@ public class MethodClassBeanDescriptor<E> extends AbstractClassBeanDescriptor<E>
      * @throws Exception
      */
     @Override
-    protected Map<String, WritePropertyAccessor<?>> getWriters() throws Exception {
+    protected Map<String, WritePropertyAccessor<?>> getWriters() {
         final HashMap<String, WritePropertyAccessor<?>> map = new HashMap<String, WritePropertyAccessor<?>>();
         ReflectionUtils.withMethods(getBeanType()).keep(new GetterMethodFilter()).each(new Processor<Method>() {
             @Override
-            public void process(Method input) throws Exception {
+            public void process(Method input) {
                 final String propertyName = ReflectionUtils.getPropertyName(input.getName());
                 //noinspection unchecked
                 map.put(propertyName, new MethodWritePropertyAccessor(input, null));

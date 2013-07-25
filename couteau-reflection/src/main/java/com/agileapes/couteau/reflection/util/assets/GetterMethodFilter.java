@@ -28,7 +28,7 @@ import java.lang.reflect.Method;
 public class GetterMethodFilter implements Filter<Method> {
 
     @Override
-    public boolean accepts(Method item) throws Exception {
+    public boolean accepts(Method item) {
         return Modifiers.PUBLIC.matches(item) && !Modifiers.ABSTRACT.matches(item) && !Modifiers.STATIC.matches(item)
                 && !item.getReturnType().equals(void.class) && item.getParameterTypes().length == 0 &&
                 (item.getName().matches("get[A-Z].*") || (item.getName().matches("is[A-Z].*") && item.getReturnType().equals(boolean.class)));

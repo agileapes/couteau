@@ -47,11 +47,11 @@ public class MethodBeanAccessor<E> extends AbstractBeanAccessor<E> {
      * @throws Exception
      */
     @Override
-    protected Map<String, ReadPropertyAccessor<?>> getReadAccessors() throws Exception {
+    protected Map<String, ReadPropertyAccessor<?>> getReadAccessors() {
         final HashMap<String, ReadPropertyAccessor<?>> map = new HashMap<String, ReadPropertyAccessor<?>>();
         ReflectionUtils.withMethods(getBeanType()).keep(new GetterMethodFilter()).each(new Processor<Method>() {
             @Override
-            public void process(Method input) throws Exception {
+            public void process(Method input) {
                 final String propertyName = ReflectionUtils.getPropertyName(input.getName());
                 //noinspection unchecked
                 map.put(propertyName, new MethodReadPropertyAccessor(input, getBean()));

@@ -50,11 +50,11 @@ public class MethodBeanWrapper<E> extends AbstractBeanWrapper<E> {
      * @throws Exception
      */
     @Override
-    protected Map<String, WritePropertyAccessor<?>> getWriteAccessors() throws Exception {
+    protected Map<String, WritePropertyAccessor<?>> getWriteAccessors() {
         final HashMap<String, WritePropertyAccessor<?>> map = new HashMap<String, WritePropertyAccessor<?>>();
         ReflectionUtils.withMethods(getBeanType()).keep(new SetterMethodFilter()).each(new Processor<Method>() {
             @Override
-            public void process(Method input) throws Exception {
+            public void process(Method input) {
                 final String propertyName = ReflectionUtils.getPropertyName(input.getName());
                 //noinspection unchecked
                 map.put(propertyName, new MethodWritePropertyAccessor(input, getBean()));
@@ -69,11 +69,11 @@ public class MethodBeanWrapper<E> extends AbstractBeanWrapper<E> {
      * @throws Exception
      */
     @Override
-    protected Map<String, ReadPropertyAccessor<?>> getReadAccessors() throws Exception {
+    protected Map<String, ReadPropertyAccessor<?>> getReadAccessors() {
         final Map<String, ReadPropertyAccessor<?>> map = new HashMap<String, ReadPropertyAccessor<?>>();
         ReflectionUtils.withMethods(getBeanType()).keep(new GetterMethodFilter()).each(new Processor<Method>() {
             @Override
-            public void process(Method input) throws Exception {
+            public void process(Method input) {
                 final String propertyName = ReflectionUtils.getPropertyName(input.getName());
                 //noinspection unchecked
                 map.put(propertyName, new MethodReadPropertyAccessor(input, getBean()));

@@ -35,7 +35,7 @@ public class AnnotatedElementFilter implements Filter<AnnotatedElement> {
     }
 
     @Override
-    public boolean accepts(AnnotatedElement item) throws Exception {
+    public boolean accepts(AnnotatedElement item) {
         for (Class<? extends Annotation> annotation : annotations) {
             if (item.isAnnotationPresent(annotation)) {
                 return true;

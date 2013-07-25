@@ -19,6 +19,8 @@ import com.agileapes.couteau.reflection.test.Book;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/9/13, 3:19 PM)
@@ -33,10 +35,10 @@ public class FieldBeanAccessorTest {
         final FieldBeanAccessor<Book> accessor = new FieldBeanAccessor<Book>(book);
         Assert.assertEquals(accessor.getPropertyNames().size(), 3);
         Assert.assertTrue(accessor.hasProperty("title"));
-        Assert.assertTrue(accessor.hasProperty("author"));
+        Assert.assertTrue(accessor.hasProperty("authors"));
         Assert.assertTrue(accessor.hasProperty("yearOfWriting"));
         Assert.assertEquals(accessor.getPropertyType("title"), String.class);
-        Assert.assertEquals(accessor.getPropertyType("author"), String.class);
+        Assert.assertEquals(accessor.getPropertyType("authors"), List.class);
         Assert.assertEquals(accessor.getPropertyType("yearOfWriting"), int.class);
         Assert.assertEquals(accessor.getPropertyValue("title"), book.getTitle());
         //noinspection AssertEqualsBetweenInconvertibleTypesTestNG

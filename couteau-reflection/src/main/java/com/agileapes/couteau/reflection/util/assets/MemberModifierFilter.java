@@ -34,7 +34,7 @@ public class MemberModifierFilter implements Filter<Member> {
     }
 
     @Override
-    public boolean accepts(Member item) throws Exception {
+    public boolean accepts(Member item) {
         for (Modifiers modifier : modifiers) {
             if (modifier.matches(item.getModifiers())) {
                 return true;

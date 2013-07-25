@@ -64,18 +64,14 @@ public abstract class AbstractBeanAccessor<E> implements BeanAccessor<E>, ReadAc
         this.bean = bean;
         //noinspection unchecked
         this.beanType = (Class<E>) bean.getClass();
-        try {
-            this.accessors.putAll(getReadAccessors());
-        } catch (Exception ignored) {
-        }
+        this.accessors.putAll(getReadAccessors());
     }
 
     /**
      * This method should present property readers for all available properties in the wrapped bean
      * @return a map of property names to property readers
-     * @throws Exception
      */
-    protected abstract Map<String, ReadPropertyAccessor<?>> getReadAccessors() throws Exception;
+    protected abstract Map<String, ReadPropertyAccessor<?>> getReadAccessors();
 
     /**
      * Reads the value of the given property

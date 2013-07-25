@@ -41,7 +41,7 @@ public class PropertyAccessorFilter implements Filter<Method> {
     }
 
     @Override
-    public boolean accepts(Method item) throws Exception {
+    public boolean accepts(Method item) {
         if (item.getName().length() < 3) {
             return false;
         }

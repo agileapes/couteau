@@ -20,7 +20,6 @@ import freemarker.ext.beans.BeansWrapper;
 import freemarker.ext.beans.BooleanModel;
 import freemarker.template.*;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,16 +59,12 @@ public class SimpleClassModel implements TemplateHashModelEx {
 
     @Override
     public TemplateCollectionModel keys() throws TemplateModelException {
-        try {
-            return new SimpleCollection(with(values.keySet()).transform(new Transformer<String, SimpleScalar>() {
-                @Override
-                public SimpleScalar map(String input) throws Exception {
-                    return new SimpleScalar(input);
-                }
-            }).list());
-        } catch (Exception ignored) {
-            return new SimpleCollection(Arrays.asList());
-        }
+        return new SimpleCollection(with(values.keySet()).transform(new Transformer<String, SimpleScalar>() {
+            @Override
+            public SimpleScalar map(String input) {
+                return new SimpleScalar(input);
+            }
+        }).list());
     }
 
     @Override

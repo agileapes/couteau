@@ -186,23 +186,19 @@ public class DefaultDocumentReader implements DocumentReader {
      */
     @Override
     public Set<Token> nextToken() {
-        try {
-            //noinspection unchecked
-            return with(readers)
-                    //for each reader produces a token
-                    .transform(new Transformer<TokenReader, Token>() {
-                        @Override
-                        public Token map(TokenReader input) throws Exception {
-                            return input.read(rest());
-                        }
-                    })
-                            //drops null tokens
-                    .drop(new NullFilter<Token>())
-                            //returns the set of items remaining (accepted tokens)
-                    .set();
-        } catch (Exception e) {
-            return Collections.emptySet();
-        }
+        //noinspection unchecked
+        return with(readers)
+                //for each reader produces a token
+                .transform(new Transformer<TokenReader, Token>() {
+                    @Override
+                    public Token map(TokenReader input) {
+                        return input.read(rest());
+                    }
+                })
+                        //drops null tokens
+                .drop(new NullFilter<Token>())
+                        //returns the set of items remaining (accepted tokens)
+                .set();
     }
 
     /**

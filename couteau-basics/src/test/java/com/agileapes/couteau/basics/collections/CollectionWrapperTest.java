@@ -42,7 +42,7 @@ public class CollectionWrapperTest {
         final AtomicInteger value = new AtomicInteger(0);
         with(1, 2, 3, 4).each(new Processor<Integer>() {
             @Override
-            public void process(Integer input) throws Exception {
+            public void process(Integer input) {
                 value.set(value.get() + input);
             }
         });
@@ -51,9 +51,10 @@ public class CollectionWrapperTest {
 
     @Test
     public void testFiltering() throws Exception {
+        //noinspection unchecked
         final List<Integer> list = with(1, 2, 3, 4, 5, 6).keep(new Filter<Integer>() {
             @Override
-            public boolean accepts(Integer item) throws Exception {
+            public boolean accepts(Integer item) {
                 return item % 2 == 0;
             }
         }).list();
@@ -67,7 +68,7 @@ public class CollectionWrapperTest {
     public void testMapping() throws Exception {
         final List<Integer> list = with(1, 2, 3, 4).transform(new Transformer<Integer, Integer>() {
             @Override
-            public Integer map(Integer input) throws Exception {
+            public Integer map(Integer input) {
                 return input * 2;
             }
         }).list();
@@ -82,7 +83,7 @@ public class CollectionWrapperTest {
     public void testExpansion() throws Exception {
         final List<Collection<Integer>> list = with(1, 2, 3, 4, 5, 6).expand(new Transformer<Collection<Integer>, Collection<Collection<Integer>>>() {
             @Override
-            public Collection<Collection<Integer>> map(Collection<Integer> input) throws Exception {
+            public Collection<Collection<Integer>> map(Collection<Integer> input) {
                 final ArrayList<Collection<Integer>> collections = new ArrayList<Collection<Integer>>();
                 final HashSet<Integer> odds = new HashSet<Integer>();
                 final HashSet<Integer> evens = new HashSet<Integer>();
@@ -117,7 +118,7 @@ public class CollectionWrapperTest {
         final List<Integer> list = with(Arrays.asList(1, 2, 3), Arrays.asList(4, 5, 6), Arrays.asList(7, 8, 9))
                 .all(new Transformer<Collection<List<Integer>>, Collection<List<Integer>>>() {
                     @Override
-                    public Collection<List<Integer>> map(Collection<List<Integer>> input) throws Exception {
+                    public Collection<List<Integer>> map(Collection<List<Integer>> input) {
                         final ArrayList<List<Integer>> lists = new ArrayList<List<Integer>>();
                         for (List<Integer> list : input) {
                             int max = 0;
@@ -131,7 +132,7 @@ public class CollectionWrapperTest {
                 })
                 .transform(new Transformer<List<Integer>, Integer>() {
                     @Override
-                    public Integer map(List<Integer> input) throws Exception {
+                    public Integer map(List<Integer> input) {
                         return input.iterator().next();
                     }
                 })

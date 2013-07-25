@@ -30,73 +30,73 @@ public enum Modifiers {
 
     PUBLIC(new Filter<Integer>() {
         @Override
-        public boolean accepts(Integer item) throws Exception {
+        public boolean accepts(Integer item) {
             return Modifier.isPublic(item);
         }
     }),
     PRIVATE(new Filter<Integer>() {
         @Override
-        public boolean accepts(Integer item) throws Exception {
+        public boolean accepts(Integer item) {
             return Modifier.isPrivate(item);
         }
     }),
     PROTECTED(new Filter<Integer>() {
         @Override
-        public boolean accepts(Integer item) throws Exception {
+        public boolean accepts(Integer item) {
             return Modifier.isProtected(item);
         }
     }),
     STATIC(new Filter<Integer>() {
         @Override
-        public boolean accepts(Integer item) throws Exception {
+        public boolean accepts(Integer item) {
             return Modifier.isStatic(item);
         }
     }),
     FINAL(new Filter<Integer>() {
         @Override
-        public boolean accepts(Integer item) throws Exception {
+        public boolean accepts(Integer item) {
             return Modifier.isFinal(item);
         }
     }),
     SYNCHRONIZED(new Filter<Integer>() {
         @Override
-        public boolean accepts(Integer item) throws Exception {
+        public boolean accepts(Integer item) {
             return Modifier.isSynchronized(item);
         }
     }),
     VOLATILE(new Filter<Integer>() {
         @Override
-        public boolean accepts(Integer item) throws Exception {
+        public boolean accepts(Integer item) {
             return Modifier.isVolatile(item);
         }
     }),
     TRANSIENT(new Filter<Integer>() {
         @Override
-        public boolean accepts(Integer item) throws Exception {
+        public boolean accepts(Integer item) {
             return Modifier.isTransient(item);
         }
     }),
     NATIVE(new Filter<Integer>() {
         @Override
-        public boolean accepts(Integer item) throws Exception {
+        public boolean accepts(Integer item) {
             return Modifier.isNative(item);
         }
     }),
     INTERFACE(new Filter<Integer>() {
         @Override
-        public boolean accepts(Integer item) throws Exception {
+        public boolean accepts(Integer item) {
             return Modifier.isInterface(item);
         }
     }),
     ABSTRACT(new Filter<Integer>() {
         @Override
-        public boolean accepts(Integer item) throws Exception {
+        public boolean accepts(Integer item) {
             return Modifier.isAbstract(item);
         }
     }),
     STRICT(new Filter<Integer>() {
         @Override
-        public boolean accepts(Integer item) throws Exception {
+        public boolean accepts(Integer item) {
             return Modifier.isStrict(item);
         }
     })

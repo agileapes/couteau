@@ -278,17 +278,13 @@ public abstract class FreemarkerUtils {
         } else if (input instanceof Class) {
             model = new SimpleClassModel((Class) input);
         } else if (input instanceof Collection) {
-            try {
-                //noinspection unchecked
-                model = new SimpleCollection(with(((Collection) input)).transform(new Transformer<Object, TemplateModel>() {
-                    @Override
-                    public TemplateModel map(Object input) throws Exception {
-                        return convertItem(input);
-                    }
-                }).list());
-            } catch (Exception e) {
-                throw new IllegalArgumentException();
-            }
+            //noinspection unchecked
+            model = new SimpleCollection(with(((Collection) input)).transform(new Transformer<Object, TemplateModel>() {
+                @Override
+                public TemplateModel map(Object input) {
+                    return convertItem(input);
+                }
+            }).list());
         } else if (input instanceof Map) {
             final Map<TemplateModel, TemplateModel> map = new HashMap<TemplateModel, TemplateModel>();
             for (Map.Entry<?, ?> entry : ((Map<?, ?>) input).entrySet()) {

@@ -15,6 +15,7 @@
 
 package com.agileapes.couteau.reflection.test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,7 +26,7 @@ import java.util.UUID;
 public class Book {
 
     private String title;
-    private List<Author> authors;
+    private List<Author> authors = new ArrayList<Author>();
     private int yearOfWriting;
 
     public String getTitle() {

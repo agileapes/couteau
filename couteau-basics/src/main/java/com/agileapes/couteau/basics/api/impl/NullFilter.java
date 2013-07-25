@@ -10,7 +10,7 @@ import com.agileapes.couteau.basics.api.Filter;
  */
 public class NullFilter<E> implements Filter<E> {
     @Override
-    public boolean accepts(E item) throws Exception {
+    public boolean accepts(E item) {
         return item == null;
     }
 }

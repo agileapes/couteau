@@ -27,8 +27,7 @@ public interface Processor<E> {
     /**
      * The processor's implementation of the work to be done
      * @param input    the input item
-     * @throws Exception
      */
-    void process(E input) throws Exception;
+    void process(E input);
 
 }

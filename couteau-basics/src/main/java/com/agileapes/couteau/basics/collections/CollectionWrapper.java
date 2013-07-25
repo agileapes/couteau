@@ -89,9 +89,8 @@ public class CollectionWrapper<I> {
      * Will work the processor over each of the items in the collection
      * @param processor    the processor
      * @return the wrapper again
-     * @throws Exception
      */
-    public CollectionWrapper<I> each(Processor<? super I> processor) throws Exception {
+    public CollectionWrapper<I> each(Processor<? super I> processor) {
         for (I item : items) {
             processor.process(item);
         }
@@ -103,9 +102,8 @@ public class CollectionWrapper<I> {
      * @param filters    The filters that decide whether or not this item will be kept.
      *                   If any one filter accepts the item, the item will be kept.
      * @return the wrapper for all accepted items
-     * @throws Exception
      */
-    public CollectionWrapper<I> keep(Filter<? super I>... filters) throws Exception {
+    public CollectionWrapper<I> keep(Filter<? super I>... filters) {
         final ArrayList<I> filtered = new ArrayList<I>();
         for (I item : items) {
             boolean kept = false;
@@ -127,9 +125,8 @@ public class CollectionWrapper<I> {
      * @param filters    the filters that decide whether or not the item will be dropped.
      *                   If any single filter accepts the item, it will drop.
      * @return the wrapper for all accepted items
-     * @throws Exception
      */
-    public CollectionWrapper<I> drop(Filter<? super I>... filters) throws Exception {
+    public CollectionWrapper<I> drop(Filter<? super I>... filters) {
         final ArrayList<I> filtered = new ArrayList<I>();
         for (I item : items) {
             boolean dropped = false;
@@ -151,13 +148,12 @@ public class CollectionWrapper<I> {
      * @param transformer    the transformer
      * @param <O>       the type of output objects
      * @return the <em>newly instantiated</em> wrapper for the transformer's output
-     * @throws Exception
      */
-    public <O> CollectionWrapper<O> transform(Transformer<? super I, O> transformer) throws Exception {
+    public <O> CollectionWrapper<O> transform(Transformer<? super I, O> transformer) {
         return new CollectionWrapper<O>(map(transformer).values());
     }
 
-    public <O> Map<I, O> map(Transformer<? super I, O> transformer) throws Exception {
+    public <O> Map<I, O> map(Transformer<? super I, O> transformer) {
         final HashMap<I, O> map = new HashMap<I, O>();
         for (I item : items) {
             map.put(item, transformer.map(item));
@@ -170,9 +166,8 @@ public class CollectionWrapper<I> {
      * items in the wrapper
      * @param expander    the expander
      * @return the wrapper
-     * @throws Exception
      */
-    public CollectionWrapper<Collection<I>> expand(Transformer<Collection<I>, Collection<Collection<I>>> expander) throws Exception {
+    public CollectionWrapper<Collection<I>> expand(Transformer<Collection<I>, Collection<Collection<I>>> expander) {
         return new CollectionWrapper<Collection<I>>(expander.map(new ArrayList<I>(items)));
     }
 
@@ -181,9 +176,8 @@ public class CollectionWrapper<I> {
      * certain items in the collection
      * @param transformer    the transformer
      * @return the wrapper
-     * @throws Exception
      */
-    public CollectionWrapper<I> all(Transformer<Collection<I>, Collection<I>> transformer) throws Exception {
+    public CollectionWrapper<I> all(Transformer<Collection<I>, Collection<I>> transformer) {
         return new CollectionWrapper<I>(transformer.map(new ArrayList<I>(items)));
     }
 

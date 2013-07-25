@@ -58,24 +58,19 @@ public abstract class AbstractClassBeanDescriptor<E> implements BeanDescriptor<E
      */
     public AbstractClassBeanDescriptor(Class<E> beanClass) {
         this.beanClass = beanClass;
-        try {
-            this.readers.putAll(getReaders());
-            this.writers.putAll(getWriters());
-        } catch (Exception ignored) {
-        }
+        this.readers.putAll(getReaders());
+        this.writers.putAll(getWriters());
     }
 
     /**
      * @return a map of property names to property readers
-     * @throws Exception
      */
-    protected abstract Map<String, ReadPropertyAccessor<?>> getReaders() throws Exception;
+    protected abstract Map<String, ReadPropertyAccessor<?>> getReaders();
 
     /**
      * @return a map of property names to property writers
-     * @throws Exception
      */
-    protected abstract Map<String, WritePropertyAccessor<?>> getWriters() throws Exception;
+    protected abstract Map<String, WritePropertyAccessor<?>> getWriters();
 
     /**
      * @return the type of the bean being described
