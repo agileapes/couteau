@@ -1,18 +1,17 @@
 package com.agileapes.couteau.strings.document.impl;
 
-import com.agileapes.couteau.basics.api.Transformer;
-import com.agileapes.couteau.basics.api.impl.NullFilter;
 import com.agileapes.couteau.strings.document.DocumentReader;
 import com.agileapes.couteau.strings.document.ReaderSnapshot;
 import com.agileapes.couteau.strings.document.SnippetParser;
 import com.agileapes.couteau.strings.token.Token;
 import com.agileapes.couteau.strings.token.TokenReader;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import static com.agileapes.couteau.basics.collections.CollectionWrapper.with;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
@@ -186,19 +185,14 @@ public class DefaultDocumentReader implements DocumentReader {
      */
     @Override
     public Set<Token> nextToken() {
-        //noinspection unchecked
-        return with(readers)
-                //for each reader produces a token
-                .transform(new Transformer<TokenReader, Token>() {
-                    @Override
-                    public Token map(TokenReader input) {
-                        return input.read(rest());
-                    }
-                })
-                        //drops null tokens
-                .drop(new NullFilter<Token>())
-                        //returns the set of items remaining (accepted tokens)
-                .set();
+        final HashSet<Token> tokens = new HashSet<Token>();
+        for (TokenReader reader : readers) {
+            final Token token = reader.read(rest());
+            if (token != null) {
+                tokens.add(token);
+            }
+        }
+        return tokens;
     }
 
     /**

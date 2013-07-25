@@ -15,7 +15,6 @@
 
 package com.agileapes.couteau.reflection.property.impl;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;
 import java.lang.reflect.Member;
