@@ -51,6 +51,11 @@ public class TaggedToken implements Token {
     }
 
     @Override
+    public int getMargin() {
+        return token.getMargin();
+    }
+
+    @Override
     public int getLength() {
         return token.getLength();
     }

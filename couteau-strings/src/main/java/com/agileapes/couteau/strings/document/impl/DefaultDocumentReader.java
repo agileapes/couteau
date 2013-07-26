@@ -238,8 +238,9 @@ public class DefaultDocumentReader implements DocumentReader {
         if (token.getEnd() > rest().length()) {
             throw new IllegalArgumentException();
         }
-        final String result = processText(rest().substring(0, token.getEnd())).substring(token.getStart());
-        cursor += token.getEnd();
+        final String result = processText(rest().substring(0, token.getEnd() + token.getMargin()))
+                .substring(0, token.getEnd()).substring(token.getStart());
+        cursor += token.getEnd() + token.getMargin();
         return result;
     }
 

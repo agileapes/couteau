@@ -42,6 +42,12 @@ public interface Token {
     int getEnd();
 
     /**
+     * @return the number of characters that should be skipped as part of the semantics
+     * of the definition for this token, which hold no value for the reader.
+     */
+    int getMargin();
+
+    /**
      * @return the length of the text this token denotes
      */
     int getLength();

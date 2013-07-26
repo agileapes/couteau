@@ -26,14 +26,20 @@ public class SimpleToken implements Token {
     private final int tag;
     private final int start;
     private final int end;
+    private final int margin;
 
     public SimpleToken(int start, int end) {
         this(start, end, NO_TAG);
     }
 
     public SimpleToken(int start, int end, int tag) {
+        this(start, end, 0, tag);
+    }
+
+    public SimpleToken(int start, int end, int margin, int tag) {
         this.tag = tag;
         this.start = start;
+        this.margin = margin;
         this.end = end;
     }
 
@@ -53,6 +59,11 @@ public class SimpleToken implements Token {
     }
 
     @Override
+    public int getMargin() {
+        return margin;
+    }
+
+    @Override
     public int getLength() {
         return end - start;
     }
@@ -60,6 +71,11 @@ public class SimpleToken implements Token {
     @Override
     public boolean isTagged() {
         return tag != NO_TAG;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("(%d,%d,%d,%d)", start, end, margin, tag);
     }
 
 }
