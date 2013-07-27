@@ -13,16 +13,18 @@
  * or substantial portions of the Software.
  */
 
-package com.agileapes.couteau.graph.tree.node;
+package com.agileapes.couteau.graph.tree.walk.impl;
+
+import com.agileapes.couteau.graph.tree.node.TreeNode;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (2013/7/25, 14:00)
+ * @since 1.0 (2013/7/27, 17:58)
  */
-public interface TreeNodeProcessor<N extends TreeNode> {
+public abstract class PostOrderNodeProcessor<N extends TreeNode> extends DelegatingNodeProcessor<N> {
 
-    void processBeforeChildren(N node);
-
-    void processAfterChildren(N node);
-
+    @Override
+    public void processAfterChildren(N node) {
+        process(node);
+    }
 }

@@ -13,12 +13,13 @@
  * or substantial portions of the Software.
  */
 
-package com.agileapes.couteau.graph.tree.node.impl;
+package com.agileapes.couteau.graph.tree.walk.impl;
 
-import com.agileapes.couteau.graph.tree.node.BinaryTreeNodeProcessor;
+import com.agileapes.couteau.graph.tree.node.impl.BinaryTreeNode;
+import com.agileapes.couteau.graph.tree.walk.BinaryTreeNodeProcessor;
 import com.agileapes.couteau.graph.tree.node.TreeNode;
-import com.agileapes.couteau.graph.tree.node.TreeNodeProcessor;
-import com.agileapes.couteau.graph.tree.node.TreeProcessor;
+import com.agileapes.couteau.graph.tree.walk.TreeNodeProcessor;
+import com.agileapes.couteau.graph.tree.walk.TreeProcessor;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)

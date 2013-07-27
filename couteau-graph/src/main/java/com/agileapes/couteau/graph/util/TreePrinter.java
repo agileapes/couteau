@@ -16,9 +16,9 @@
 package com.agileapes.couteau.graph.util;
 
 import com.agileapes.couteau.graph.tree.node.TreeNode;
-import com.agileapes.couteau.graph.tree.node.TreeProcessor;
-import com.agileapes.couteau.graph.tree.node.impl.DefaultTreeProcessor;
-import com.agileapes.couteau.graph.tree.node.impl.PreOrderNodeProcessor;
+import com.agileapes.couteau.graph.tree.walk.TreeProcessor;
+import com.agileapes.couteau.graph.tree.walk.impl.DefaultTreeProcessor;
+import com.agileapes.couteau.graph.tree.walk.impl.PreOrderNodeProcessor;
 
 import java.io.PrintStream;
 

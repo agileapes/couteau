@@ -13,7 +13,7 @@
  * or substantial portions of the Software.
  */
 
-package com.agileapes.couteau.graph.tree.node.impl;
+package com.agileapes.couteau.graph.tree.walk.impl;
 
 import com.agileapes.couteau.graph.tree.node.TreeNode;
 
@@ -21,10 +21,11 @@ import com.agileapes.couteau.graph.tree.node.TreeNode;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/27, 17:58)
  */
-public abstract class PostOrderNodeProcessor<N extends TreeNode> extends DelegatingNodeProcessor<N> {
+public abstract class PreOrderNodeProcessor<N extends TreeNode> extends DelegatingNodeProcessor<N> {
 
     @Override
-    public void processAfterChildren(N node) {
+    public void processBeforeChildren(N node) {
         process(node);
     }
+
 }

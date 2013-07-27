@@ -13,24 +13,16 @@
  * or substantial portions of the Software.
  */
 
-package com.agileapes.couteau.graph.tree.node.impl;
+package com.agileapes.couteau.graph.tree.walk;
 
-import com.agileapes.couteau.basics.api.Processor;
 import com.agileapes.couteau.graph.tree.node.TreeNode;
-import com.agileapes.couteau.graph.tree.node.TreeNodeProcessor;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (2013/7/27, 17:57)
+ * @since 1.0 (2013/7/27, 17:53)
  */
-public abstract class DelegatingNodeProcessor<N extends TreeNode> implements TreeNodeProcessor<N>, Processor<N> {
+public interface TreeProcessor<N extends TreeNode> {
 
-    @Override
-    public void processBeforeChildren(N node) {
-    }
-
-    @Override
-    public void processAfterChildren(N node) {
-    }
+    void process(N origin, TreeNodeProcessor<N> processor);
 
 }

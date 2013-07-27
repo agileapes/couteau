@@ -13,14 +13,16 @@
  * or substantial portions of the Software.
  */
 
-package com.agileapes.couteau.graph.tree.node;
+package com.agileapes.couteau.graph.tree.walk;
+
+import com.agileapes.couteau.graph.tree.node.impl.BinaryTreeNode;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (2013/7/27, 17:53)
+ * @since 1.0 (2013/7/25, 14:01)
  */
-public interface TreeProcessor<N extends TreeNode> {
+public interface BinaryTreeNodeProcessor<N extends BinaryTreeNode> extends TreeNodeProcessor<N> {
 
-    void process(N origin, TreeNodeProcessor<N> processor);
+    void processBetweenChildren(N node);
 
 }

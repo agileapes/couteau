@@ -13,19 +13,18 @@
  * or substantial portions of the Software.
  */
 
-package com.agileapes.couteau.graph.tree.node.impl;
+package com.agileapes.couteau.graph.tree.walk;
 
-import com.agileapes.couteau.graph.tree.node.BinaryTreeNodeProcessor;
+import com.agileapes.couteau.graph.tree.node.TreeNode;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (2013/7/27, 17:59)
+ * @since 1.0 (2013/7/25, 14:00)
  */
-public abstract class InOrderNodeProcessor<N extends BinaryTreeNode> extends DelegatingNodeProcessor<N> implements BinaryTreeNodeProcessor<N> {
+public interface TreeNodeProcessor<N extends TreeNode> {
 
-    @Override
-    public void processBetweenChildren(N node) {
-        process(node);
-    }
+    void processBeforeChildren(N node);
+
+    void processAfterChildren(N node);
 
 }
