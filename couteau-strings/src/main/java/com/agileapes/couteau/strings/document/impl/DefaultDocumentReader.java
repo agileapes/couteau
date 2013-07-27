@@ -225,6 +225,15 @@ public class DefaultDocumentReader implements DocumentReader {
         return tokenReader.read(rest());
     }
 
+    @Override
+    public Token expectToken(TokenReader tokenReader) {
+        final Token token = nextToken(tokenReader);
+        if (token == null) {
+            throw new IllegalStateException();
+        }
+        return token;
+    }
+
     /**
      * Takes in a token definition and reads the token from the cursor position.
      * @param token    the token definition
@@ -261,6 +270,7 @@ public class DefaultDocumentReader implements DocumentReader {
         }
         final Matcher matcher = pattern.matcher(rest());
         if (matcher.find() && matcher.start() == 0) {
+            cursor += matcher.group().length();
             return processText(matcher.group());
         }
         return null;

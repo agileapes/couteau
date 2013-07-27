@@ -111,6 +111,15 @@ public interface DocumentReader {
     Token nextToken(TokenReader tokenReader);
 
     /**
+     * Works the same as {@link #nextToken(TokenReader)} with the exception that if the token cannot be read,
+     * an exception will be thrown
+     *
+     * @param tokenReader       the token designator
+     * @return next token (if any can be found)
+     */
+    Token expectToken(TokenReader tokenReader);
+
+    /**
      * Takes in a token definition and reads the token from the cursor position.
      * @param token    the token definition
      * @return the token described by the parameter. {@code null} if no such token exists

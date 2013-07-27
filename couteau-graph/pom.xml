@@ -11,4 +11,17 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>couteau-graph</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.agileapes.couteau</groupId>
+            <artifactId>couteau-basics</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.agileapes.couteau</groupId>
+            <artifactId>couteau-strings</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
+
 </project>
