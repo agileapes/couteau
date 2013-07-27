@@ -15,18 +15,13 @@
 
 package com.agileapes.couteau.graph.tree.node.impl;
 
-import com.agileapes.couteau.basics.api.Processor;
 import com.agileapes.couteau.graph.tree.node.BinaryTreeNodeProcessor;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/27, 17:59)
  */
-public class InOrderNodeProcessor<N extends BinaryTreeNode> extends DelegatingNodeProcessor<N> implements BinaryTreeNodeProcessor<N> {
-
-    public InOrderNodeProcessor(Processor<N> processor) {
-        super(processor);
-    }
+public abstract class InOrderNodeProcessor<N extends BinaryTreeNode> extends DelegatingNodeProcessor<N> implements BinaryTreeNodeProcessor<N> {
 
     @Override
     public void processBetweenChildren(N node) {
