@@ -13,17 +13,24 @@
  * or substantial portions of the Software.
  */
 
-package com.agileapes.couteau.graph.tree.traverse;
+package com.agileapes.couteau.graph.tree.node.impl;
 
 import com.agileapes.couteau.basics.api.Processor;
 import com.agileapes.couteau.graph.tree.node.TreeNode;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (2013/7/25, 10:38)
+ * @since 1.0 (2013/7/27, 17:58)
  */
-public interface TreeTraverse {
+public class PreOrderNodeProcessor<N extends TreeNode> extends DelegatingNodeProcessor<N> {
 
-    <N extends TreeNode> void traverse(N node, Processor<N> processor);
+    public PreOrderNodeProcessor(Processor<N> processor) {
+        super(processor);
+    }
+
+    @Override
+    public void processBeforeChildren(N node) {
+        process(node);
+    }
 
 }

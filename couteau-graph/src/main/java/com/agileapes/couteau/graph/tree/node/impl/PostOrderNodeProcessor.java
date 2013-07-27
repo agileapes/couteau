@@ -13,29 +13,23 @@
  * or substantial portions of the Software.
  */
 
-package com.agileapes.couteau.graph.tree.traverse.impl;
+package com.agileapes.couteau.graph.tree.node.impl;
 
 import com.agileapes.couteau.basics.api.Processor;
 import com.agileapes.couteau.graph.tree.node.TreeNode;
-import com.agileapes.couteau.graph.tree.node.impl.BinaryTreeNode;
-import com.agileapes.couteau.graph.tree.traverse.TreeTraverse;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (2013/7/25, 13:03)
+ * @since 1.0 (2013/7/27, 17:58)
  */
-public class InOrderTreeTraverse implements TreeTraverse {
+public class PostOrderNodeProcessor<N extends TreeNode> extends DelegatingNodeProcessor<N> {
 
-    @SuppressWarnings("unchecked")
-    @Override
-    public <N extends TreeNode> void traverse(N node, Processor<N> processor) {
-        if (node != null) {
-            traverse((N) ((BinaryTreeNode) node).getLeftChild(), processor);
-        }
-        processor.process(node);
-        if (node != null) {
-            traverse((N) ((BinaryTreeNode) node).getRightChild(), processor);
-        }
+    public PostOrderNodeProcessor(Processor<N> processor) {
+        super(processor);
     }
 
+    @Override
+    public void processAfterChildren(N node) {
+        process(node);
+    }
 }
