@@ -15,6 +15,7 @@
 
 package com.agileapes.couteau.graph.tree.node.impl;
 
+import com.agileapes.couteau.basics.api.Stringifiable;
 import com.agileapes.couteau.graph.node.MutableNode;
 import com.agileapes.couteau.graph.node.Node;
 import com.agileapes.couteau.graph.tree.node.TreeNode;
@@ -27,6 +28,16 @@ import com.agileapes.couteau.graph.tree.node.TreeNode;
  * @since 1.0 (2013/7/25, 10:14)
  */
 public class SimpleTreeNode extends DirectedTreeNode implements TreeNode {
+    
+    private final Stringifiable<SimpleTreeNode> stringifiable;
+
+    public SimpleTreeNode() {
+        this(null);
+    }
+
+    public SimpleTreeNode(Stringifiable<SimpleTreeNode> stringifiable) {
+        this.stringifiable = stringifiable;
+    }
 
     @Override
     public void addNeighbor(Node neighbor) {
@@ -38,6 +49,14 @@ public class SimpleTreeNode extends DirectedTreeNode implements TreeNode {
             final MutableNode node = (MutableNode) neighbor;
             node.addNeighbor(this);
         }
+    }
+
+    @Override
+    public String toString() {
+        if (stringifiable != null) {
+            return stringifiable.toString(this);
+        }
+        return super.toString();
     }
 
 }

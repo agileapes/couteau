@@ -15,6 +15,7 @@
 
 package com.agileapes.couteau.graph.tree.node.impl;
 
+import com.agileapes.couteau.basics.api.Stringifiable;
 import com.agileapes.couteau.graph.node.Node;
 import com.agileapes.couteau.graph.node.impl.DirectedNode;
 import com.agileapes.couteau.graph.tree.node.TreeNode;
@@ -31,6 +32,15 @@ public class DirectedTreeNode extends DirectedNode implements TreeNode {
 
     private final List<TreeNode> children = new ArrayList<TreeNode>();
     private TreeNode parent = null;
+    private final Stringifiable<DirectedTreeNode> stringifiable;
+
+    public DirectedTreeNode() {
+        this(null);
+    }
+
+    public DirectedTreeNode(Stringifiable<DirectedTreeNode> stringifiable) {
+        this.stringifiable = stringifiable;
+    }
 
     /**
      * Adds a child to this node
@@ -161,4 +171,11 @@ public class DirectedTreeNode extends DirectedNode implements TreeNode {
         }
     }
 
+    @Override
+    public String toString() {
+        if (stringifiable != null) {
+            return stringifiable.toString(this);
+        }
+        return super.toString();
+    }
 }

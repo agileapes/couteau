@@ -15,6 +15,7 @@
 
 package com.agileapes.couteau.graph.node.impl;
 
+import com.agileapes.couteau.basics.api.Stringifiable;
 import com.agileapes.couteau.graph.node.MutableNode;
 import com.agileapes.couteau.graph.node.Node;
 
@@ -28,6 +29,8 @@ import java.util.Set;
  */
 public class DirectedNode implements MutableNode {
 
+    private final Stringifiable<DirectedNode> stringifiable;
+    
     /**
      * This nodes neighbors and link weights
      */
@@ -37,6 +40,14 @@ public class DirectedNode implements MutableNode {
      * The map of all attribute values
      */
     private final Map<String, String> attributes = new HashMap<String, String>();
+
+    public DirectedNode() {
+        this(null);
+    }
+
+    public DirectedNode(Stringifiable<DirectedNode> stringifiable) {
+        this.stringifiable = stringifiable;
+    }
 
     /**
      * Will update the value of the given attribute. If this attribute has not been set
@@ -134,4 +145,12 @@ public class DirectedNode implements MutableNode {
         return neighbors.containsKey(neighbour) ? neighbors.get(neighbour) : 0d;
     }
 
+    @Override
+    public String toString() {
+        if (stringifiable != null) {
+            return stringifiable.toString(this);
+        }
+        return super.toString();
+    }
+    
 }

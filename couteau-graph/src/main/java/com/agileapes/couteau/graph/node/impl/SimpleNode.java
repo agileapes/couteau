@@ -15,6 +15,7 @@
 
 package com.agileapes.couteau.graph.node.impl;
 
+import com.agileapes.couteau.basics.api.Stringifiable;
 import com.agileapes.couteau.graph.node.MutableNode;
 import com.agileapes.couteau.graph.node.Node;
 
@@ -28,6 +29,16 @@ import com.agileapes.couteau.graph.node.Node;
  * @since 1.0 (2013/7/25, 10:05)
  */
 public class SimpleNode extends DirectedNode {
+    
+    private final Stringifiable<SimpleNode> stringifiable;
+
+    public SimpleNode() {
+        this(null);
+    }
+
+    public SimpleNode(Stringifiable<SimpleNode> stringifiable) {
+        this.stringifiable = stringifiable;
+    }
 
     @Override
     public void addNeighbor(Node neighbor) {
@@ -53,4 +64,11 @@ public class SimpleNode extends DirectedNode {
         super.removeNeighbor(neighbor);
     }
 
+    @Override
+    public String toString() {
+        if (stringifiable != null) {
+            return stringifiable.toString(this);
+        }
+        return super.toString();
+    }
 }

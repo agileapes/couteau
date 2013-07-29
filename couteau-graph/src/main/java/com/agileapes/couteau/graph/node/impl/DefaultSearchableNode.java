@@ -63,4 +63,8 @@ public class DefaultSearchableNode implements SearchableNode {
         return node.getLinkWeight(neighbour);
     }
 
+    @Override
+    public String toString() {
+        return "searchable[" + node + "]";
+    }
 }

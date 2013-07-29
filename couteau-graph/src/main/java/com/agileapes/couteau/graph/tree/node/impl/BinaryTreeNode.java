@@ -15,6 +15,7 @@
 
 package com.agileapes.couteau.graph.tree.node.impl;
 
+import com.agileapes.couteau.basics.api.Stringifiable;
 import com.agileapes.couteau.graph.node.Node;
 import com.agileapes.couteau.graph.tree.node.TreeNode;
 
@@ -25,6 +26,16 @@ import com.agileapes.couteau.graph.tree.node.TreeNode;
  * @since 1.0 (2013/7/25, 11:08)
  */
 public class BinaryTreeNode extends DirectedTreeNode {
+    
+    private final Stringifiable<BinaryTreeNode> stringifiable;
+
+    public BinaryTreeNode() {
+        this(null);
+    }
+
+    public BinaryTreeNode(Stringifiable<BinaryTreeNode> stringifiable) {
+        this.stringifiable = stringifiable;
+    }
 
     public void setLeftChild(BinaryTreeNode node) {
         final BinaryTreeNode rightChild = getRightChild();
@@ -94,4 +105,11 @@ public class BinaryTreeNode extends DirectedTreeNode {
         super.removeChild(child);
     }
 
+    @Override
+    public String toString() {
+        if (stringifiable != null) {
+            return stringifiable.toString(this);
+        }
+        return super.toString();
+    }
 }
