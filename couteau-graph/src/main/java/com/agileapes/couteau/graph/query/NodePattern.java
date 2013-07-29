@@ -15,7 +15,7 @@
 
 package com.agileapes.couteau.graph.query;
 
-import com.agileapes.couteau.graph.node.ConfigurableNamedNodeFilter;
+import com.agileapes.couteau.graph.node.NamedNodeFilter;
 import com.agileapes.couteau.graph.node.Node;
 import com.agileapes.couteau.graph.search.Finder;
 import com.agileapes.couteau.strings.document.DocumentReader;
@@ -34,9 +34,9 @@ import java.util.regex.Pattern;
 public class NodePattern {
 
     public static final Pattern WHITESPACE = Pattern.compile("\\w+");
-    static final Set<ConfigurableNamedNodeFilter> NODE_FILTERS = new HashSet<ConfigurableNamedNodeFilter>();
+    static final Set<NamedNodeFilter> NODE_FILTERS = new HashSet<NamedNodeFilter>();
 
-    public static void addFilter(ConfigurableNamedNodeFilter filter) {
+    public static void addFilter(NamedNodeFilter filter) {
         NODE_FILTERS.add(filter);
     }
 

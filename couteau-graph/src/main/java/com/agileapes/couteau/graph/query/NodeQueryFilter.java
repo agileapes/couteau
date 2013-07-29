@@ -16,6 +16,7 @@
 package com.agileapes.couteau.graph.query;
 
 import com.agileapes.couteau.graph.node.ConfigurableNamedNodeFilter;
+import com.agileapes.couteau.graph.node.NamedNodeFilter;
 import com.agileapes.couteau.graph.node.Node;
 import com.agileapes.couteau.graph.node.NodeFilter;
 
@@ -83,8 +84,8 @@ class NodeQueryFilter implements NodeFilter {
             }
         }
         for (Map.Entry<String, Map<String, String>> entry : functions.entrySet()) {
-            ConfigurableNamedNodeFilter filter = null;
-            for (ConfigurableNamedNodeFilter namedNodeFilter : NodePattern.NODE_FILTERS) {
+            NamedNodeFilter filter = null;
+            for (NamedNodeFilter namedNodeFilter : NodePattern.NODE_FILTERS) {
                 if (namedNodeFilter.getName().equals(entry.getKey())) {
                     filter = namedNodeFilter;
                     break;
@@ -93,8 +94,10 @@ class NodeQueryFilter implements NodeFilter {
             if (filter == null) {
                 throw new IllegalStateException();
             }
-            for (Map.Entry<String, String> argument : entry.getValue().entrySet()) {
-                filter.setAttribute(argument.getKey(), argument.getValue());
+            if (filter instanceof ConfigurableNamedNodeFilter) {
+                for (Map.Entry<String, String> argument : entry.getValue().entrySet()) {
+                    ((ConfigurableNamedNodeFilter) filter).setAttribute(argument.getKey(), argument.getValue());
+                }
             }
             if (!filter.accepts(item)) {
                 return false;
