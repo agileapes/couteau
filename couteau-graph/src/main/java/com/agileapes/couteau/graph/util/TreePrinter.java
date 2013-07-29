@@ -32,6 +32,15 @@ public class TreePrinter {
     private final NodePrinter nodePrinter;
     private final TreeProcessor<TreeNode> treeProcessor;
 
+    public TreePrinter(PrintStream output) {
+        this(output, new NodePrinter() {
+            @Override
+            public void print(TreeNode node, PrintStream output) {
+                output.print(node == null ? "null" : node.toString());
+            }
+        });
+    }
+
     public TreePrinter(PrintStream output, NodePrinter nodePrinter) {
         this.output = output;
         this.nodePrinter = nodePrinter;
