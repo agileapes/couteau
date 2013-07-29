@@ -34,6 +34,7 @@
         <module>../couteau-freemarker</module>
         <module>../couteau-strings</module>
         <module>../couteau-graph</module>
+        <module>../couteau-xml</module>
     </modules>
     
 </project>
