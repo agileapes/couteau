@@ -43,7 +43,7 @@ public class TopologicalGraphSorter implements GraphSorter<DirectedNode> {
 
         final ArrayList<N> result = new ArrayList<N>();
         while (!nodes.isEmpty()) {
-            final Set<Node> candidates = select(nodes);
+            final Set<Node> candidates = select(nodes, result);
             if (candidates.isEmpty()) {
                 return null;
             }
@@ -55,24 +55,22 @@ public class TopologicalGraphSorter implements GraphSorter<DirectedNode> {
         return result;
     }
 
-    private Set<Node> select(List<Node> nodes) {
+    private Set<Node> select(List<? extends Node> nodes, ArrayList<? extends Node> result) {
         final HashSet<Node> candidates = new HashSet<Node>();
         for (Node node : nodes) {
-            if (incoming(nodes, node).isEmpty()) {
+            boolean chosen = true;
+            for (Node neighbor : node.getNeighbors()) {
+                if (!result.contains(neighbor)) {
+                    chosen = false;
+                    break;
+                }
+            }
+            if (chosen) {
                 candidates.add(node);
             }
+
         }
         return candidates;
-    }
-
-    private Set<Node> incoming(List<Node> nodes, Node node) {
-        final HashSet<Node> incomingNodes = new HashSet<Node>();
-        for (Node neighbor : nodes) {
-            if (neighbor.getNeighbors().contains(node)) {
-                incomingNodes.add(neighbor);
-            }
-        }
-        return incomingNodes;
     }
 
 }
