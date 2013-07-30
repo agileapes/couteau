@@ -15,9 +15,9 @@
 
 package com.agileapes.couteau.graph.tree.walk.impl;
 
+import com.agileapes.couteau.graph.tree.node.TreeNode;
 import com.agileapes.couteau.graph.tree.node.impl.BinaryTreeNode;
 import com.agileapes.couteau.graph.tree.walk.BinaryTreeNodeProcessor;
-import com.agileapes.couteau.graph.tree.node.TreeNode;
 import com.agileapes.couteau.graph.tree.walk.TreeNodeProcessor;
 import com.agileapes.couteau.graph.tree.walk.TreeProcessor;
 

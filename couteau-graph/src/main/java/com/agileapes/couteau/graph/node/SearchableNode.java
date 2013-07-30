@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Searchable nodes are nodes that can be used as an originating point for a search
  * using a string query, as is explained under
- * {@link com.agileapes.couteau.graph.query.NodePattern}
+ * {@link com.agileapes.couteau.graph.query.GraphNodePattern}
  *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/27, 12:45)
@@ -29,7 +29,7 @@ public interface SearchableNode extends Node {
 
     /**
      * This method will search the graph, originating the search at this node.
-     * The search will be carried out according to {@link com.agileapes.couteau.graph.query.NodePattern}
+     * The search will be carried out according to {@link com.agileapes.couteau.graph.query.GraphNodePattern}
      * and a list of all nodes matching the pattern will be returned, sorted by the order
      * in which they were first encountered.
      * @param pattern    the pattern which will be compiled into a set of matchers

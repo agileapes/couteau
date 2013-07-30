@@ -49,7 +49,12 @@ class NodeQueryFinder implements Finder {
         for (NodeQueryFilter matcher : matchers) {
             final List<Node> unexplored = new ArrayList<Node>();
             for (Node node : agenda) {
-                unexplored.addAll(find(node, matcher));
+                final List<Node> found = find(node, matcher);
+                for (Node foundItem : found) {
+                    if (!unexplored.contains(foundItem)) {
+                        unexplored.add(foundItem);
+                    }
+                }
             }
             agenda.clear();
             agenda.addAll(unexplored);

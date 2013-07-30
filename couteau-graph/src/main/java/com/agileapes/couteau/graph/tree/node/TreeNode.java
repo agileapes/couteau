@@ -90,4 +90,30 @@ public interface TreeNode extends Node {
      */
     int getDepth();
 
+    /**
+     * @return This node's first child, or {@code null} if this is a leaf node
+     */
+    TreeNode getFirstChild();
+
+    /**
+     * @return This node's last child, or {@code null} if this is a leaf node
+     */
+    TreeNode getLastChild();
+
+    /**
+     * @return This node's previous sibling, or {@code null} if this is the root node
+     */
+    TreeNode getPreviousSibling();
+
+    /**
+     * @return This node's next sibling, or {@code null} if this is the root node
+     */
+    TreeNode getNextSibling();
+
+    /**
+     * @return This node's zero-based index among its parent's children nodes,
+     * or {@code null} if this is the root node
+     */
+    Integer getNodeIndex();
+
 }

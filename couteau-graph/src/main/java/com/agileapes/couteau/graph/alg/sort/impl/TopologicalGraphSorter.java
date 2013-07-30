@@ -45,7 +45,7 @@ public class TopologicalGraphSorter implements GraphSorter<DirectedNode> {
         while (!nodes.isEmpty()) {
             final Set<Node> candidates = select(nodes, result);
             if (candidates.isEmpty()) {
-                return null;
+                throw new IllegalStateException("Failed to sort the remaining nodes: " + nodes);
             }
             final Node chosen = candidates.iterator().next();
             //noinspection unchecked

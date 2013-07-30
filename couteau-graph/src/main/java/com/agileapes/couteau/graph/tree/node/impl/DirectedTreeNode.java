@@ -109,6 +109,31 @@ public class DirectedTreeNode extends DirectedNode implements TreeNode {
         return depth;
     }
 
+    @Override
+    public TreeNode getFirstChild() {
+        return isLeaf() ? null : getChildren().get(0);
+    }
+
+    @Override
+    public TreeNode getLastChild() {
+        return isLeaf() ? null : getChildren().get(getChildren().size() - 1);
+    }
+
+    @Override
+    public TreeNode getPreviousSibling() {
+        return isRoot() || getNodeIndex() == 0 ? null : getParent().getChildren().get(getNodeIndex() - 1);
+    }
+
+    @Override
+    public TreeNode getNextSibling() {
+        return isRoot() || getNodeIndex() == getParent().getChildren().size() - 1 ? null : getParent().getChildren().get(getNodeIndex() + 1);
+    }
+
+    @Override
+    public Integer getNodeIndex() {
+        return isRoot() ? null : getParent().getChildren().indexOf(this);
+    }
+
     /**
      * @return the parent node for this node, or {@code null} if this node is the
      * root node

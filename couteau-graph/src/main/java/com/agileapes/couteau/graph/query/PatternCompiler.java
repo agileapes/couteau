@@ -15,25 +15,14 @@
 
 package com.agileapes.couteau.graph.query;
 
-import com.agileapes.couteau.basics.api.Filter;
-import com.agileapes.couteau.basics.api.impl.FilterChain;
-import com.agileapes.couteau.graph.node.Node;
-import com.agileapes.couteau.graph.node.NodeFilter;
-import com.agileapes.couteau.graph.query.filters.OriginNodeAware;
+import java.util.List;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (2013/7/26, 11:03)
+ * @since 1.0 (2013/7/30, 5:56)
  */
-public class NodeQueryFilter extends FilterChain<Node> implements NodeFilter {
+public interface PatternCompiler {
 
-    public NodeQueryFilter forOrigin(Node origin) {
-        for (Filter<Node> filter : filters) {
-            if (filter instanceof OriginNodeAware) {
-                ((OriginNodeAware) filter).setOrigin(origin);
-            }
-        }
-        return this;
-    }
+    List<NodeQueryFilter> compile(String pattern);
 
 }

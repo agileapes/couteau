@@ -16,6 +16,7 @@
 package com.agileapes.couteau.graph.util;
 
 import com.agileapes.couteau.graph.tree.node.TreeNode;
+import com.agileapes.couteau.graph.tree.walk.TreeNodeProcessor;
 import com.agileapes.couteau.graph.tree.walk.TreeProcessor;
 import com.agileapes.couteau.graph.tree.walk.impl.DefaultTreeProcessor;
 import com.agileapes.couteau.graph.tree.walk.impl.PreOrderNodeProcessor;
@@ -28,7 +29,7 @@ import java.io.PrintStream;
  */
 public class TreePrinter {
 
-    private final PrintStream output;
+    protected final PrintStream output;
     private final NodePrinter nodePrinter;
     private final TreeProcessor<TreeNode> treeProcessor;
 
@@ -48,7 +49,11 @@ public class TreePrinter {
     }
 
     public void print(TreeNode root) {
-        treeProcessor.process(root, new PreOrderNodeProcessor<TreeNode>() {
+        treeProcessor.process(root, getProcessor());
+    }
+
+    protected TreeNodeProcessor<TreeNode> getProcessor() {
+        return new PreOrderNodeProcessor<TreeNode>() {
             @Override
             public void process(TreeNode input) {
                 if (input == null) {
@@ -62,7 +67,7 @@ public class TreePrinter {
                 nodePrinter.print(input, output);
                 output.println();
             }
-        });
+        };
     }
 
 }

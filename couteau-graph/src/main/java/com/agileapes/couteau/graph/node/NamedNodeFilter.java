@@ -19,7 +19,7 @@ package com.agileapes.couteau.graph.node;
  * This interface will allow for naming of filters, so that they can be
  * registered with the pattern compiler
  *
- * @see com.agileapes.couteau.graph.query.NodePattern#addFilter(ConfigurableNamedNodeFilter)
+ * @see com.agileapes.couteau.graph.query.GraphNodePattern#addFilter(NamedNodeFilter)
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/27, 15:56)
  */

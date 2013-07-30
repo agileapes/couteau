@@ -20,11 +20,21 @@ import com.agileapes.couteau.graph.node.Node;
 import java.util.List;
 
 /**
+ * This interface abstracts the process of taking an entry point into the graph,
+ * and then sorting all reachable nodes based on a certain criteria.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/29, 15:41)
  */
 public interface GraphSorter<T extends Node> {
 
+    /**
+     * This method sorts the given component, returning the nodes in the component
+     * in the ordering which they have received while being sorted
+     * @param origin    the node of origin
+     * @param <N>       the type of nodes
+     * @return sorted nodes
+     */
     <N extends T> List<N> sort(N origin);
 
 }

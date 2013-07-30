@@ -13,27 +13,31 @@
  * or substantial portions of the Software.
  */
 
-package com.agileapes.couteau.graph.query;
+package com.agileapes.couteau.graph.query.impl;
 
-import com.agileapes.couteau.basics.api.Filter;
-import com.agileapes.couteau.basics.api.impl.FilterChain;
-import com.agileapes.couteau.graph.node.Node;
 import com.agileapes.couteau.graph.node.NodeFilter;
-import com.agileapes.couteau.graph.query.filters.OriginNodeAware;
+import com.agileapes.couteau.graph.query.QuerySnippetParser;
+import com.agileapes.couteau.graph.query.filters.AllAcceptingFilter;
+import com.agileapes.couteau.strings.document.DocumentReader;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (2013/7/26, 11:03)
+ * @since 1.0 (2013/7/30, 13:02)
  */
-public class NodeQueryFilter extends FilterChain<Node> implements NodeFilter {
+public class WildcardSnippetParser extends QuerySnippetParser {
 
-    public NodeQueryFilter forOrigin(Node origin) {
-        for (Filter<Node> filter : filters) {
-            if (filter instanceof OriginNodeAware) {
-                ((OriginNodeAware) filter).setOrigin(origin);
-            }
+    @Override
+    public List<NodeFilter> parse(DocumentReader reader) {
+        if (!reader.hasMore() || !reader.peek(1).equals("*")) {
+            return null;
         }
-        return this;
+        reader.nextChar();
+        final ArrayList<NodeFilter> filters = new ArrayList<NodeFilter>();
+        filters.add(new AllAcceptingFilter());
+        return filters;
     }
 
 }

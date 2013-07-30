@@ -17,7 +17,6 @@ package com.agileapes.couteau.graph.node.impl;
 
 import com.agileapes.couteau.graph.node.Node;
 import com.agileapes.couteau.graph.node.SearchableNode;
-import com.agileapes.couteau.graph.query.NodePattern;
 
 import java.util.List;
 import java.util.Set;
@@ -40,7 +39,7 @@ public class DefaultSearchableNode implements SearchableNode {
 
     @Override
     public List<Node> find(String pattern) {
-        return NodePattern.compile(pattern).finder(node).find();
+        return null;// GraphNodePattern.compile(pattern).finder(node).find();
     }
 
     @Override
