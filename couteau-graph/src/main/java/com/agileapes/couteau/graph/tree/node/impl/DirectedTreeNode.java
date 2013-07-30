@@ -101,7 +101,7 @@ public class DirectedTreeNode extends DirectedNode implements TreeNode {
     @Override
     public int getDepth() {
         TreeNode node = this;
-        int depth = 0;
+        int depth = -1;
         while (node != null) {
             depth ++;
             node = node.getParent();

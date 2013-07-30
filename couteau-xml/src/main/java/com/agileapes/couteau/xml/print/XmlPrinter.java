@@ -16,80 +16,84 @@
 package com.agileapes.couteau.xml.print;
 
 import com.agileapes.couteau.graph.tree.node.TreeNode;
-import com.agileapes.couteau.graph.tree.walk.TreeNodeProcessor;
-import com.agileapes.couteau.graph.util.TreePrinter;
 import com.agileapes.couteau.xml.node.XmlNode;
+import org.w3c.dom.Node;
 
 import java.io.PrintStream;
-import java.util.Stack;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/30, 1:02)
  */
-public class XmlPrinter extends TreePrinter {
+public class XmlPrinter {
 
-    public XmlPrinter(PrintStream output) {
-        super(output);
+    private final PrintStream output;
+
+    public XmlPrinter() {
+        this(System.out);
     }
 
-    @Override
-    protected TreeNodeProcessor<TreeNode> getProcessor() {
-        return new TreeNodeProcessor<TreeNode>() {
+    public XmlPrinter(PrintStream output) {
+        this.output = output;
+    }
 
-            private final Stack<TreeNode> stack = new Stack<TreeNode>();
-
-            @Override
-            public void processBeforeChildren(TreeNode node) {
-                if (!((XmlNode) node).getNodeName().startsWith("#")) {
-                    for (TreeNode item : stack) {
-                        output.print("\t");
-                    }
-                }
-                if (((XmlNode) node).getNodeType() == org.w3c.dom.Node.TEXT_NODE) {
-                    output.print(((XmlNode) node).getNodeValue());
-                    stack.push(node);
-                    return;
-                }
-                output.print("<");
-                output.print(((XmlNode) node).getNodeName());
-                for (String name : node.getAttributeNames()) {
-                    if (name.startsWith("#")) {
-                        continue;
-                    }
-                    output.print(" " + name + "=\"" + node.getAttribute(name) + "\"");
-                }
-                if (node.isLeaf()) {
-                    output.print("/");
-                }
-                output.print(">");
-                if (node.isLeaf() || !((XmlNode) node.getFirstChild()).getNodeName().startsWith("#")) {
-                    output.println();
-                }
-                stack.push(node);
+    private static boolean printInline(XmlNode node) {
+        if (node == null) {
+            return false;
+        }
+        for (TreeNode treeNode : node.getChildren()) {
+            final XmlNode xmlNode = (XmlNode) treeNode;
+            if (xmlNode.getNodeType() == Node.TEXT_NODE) {
+                return true;
             }
+        }
+        return printInline((XmlNode) node.getParent());
+    }
 
-            @Override
-            public void processAfterChildren(TreeNode node) {
-                stack.pop();
-                if (node.isLeaf()) {
-                    return;
-                }
-                if (!((XmlNode) node.getLastChild()).getNodeName().startsWith("#")
-                        && (node.getPreviousSibling() != null && !((XmlNode) node.getPreviousSibling()).getNodeName().startsWith("#"))
-                        && !((XmlNode) node.getLastChild()).getNodeName().startsWith("#")) {
-                    for (TreeNode item : stack) {
-                        output.print("\t");
-                    }
-                }
-                output.print("</");
-                output.print(((XmlNode) node).getNodeName());
-                output.print(">");
-                if (!((XmlNode) node).getNodeName().startsWith("#")) {
-                    output.println();
+    public void print(XmlNode node) {
+        if (node == null) {
+            return;
+        }
+        if (node.getNodeType() == Node.TEXT_NODE) {
+            output.print(node.getNodeValue());
+            return;
+        }
+        final int indent = node.getDepth();
+        if (!printInline((XmlNode) node.getParent())) {
+            for (int i = 0; i < indent; i ++) {
+                output.print("\t");
+            }
+        }
+        output.print("<" + node.getNodeName());
+        for (String attribute : node.getAttributeNames()) {
+            output.print(" " + attribute + "=\"");
+            final String value = node.getAttribute(attribute);
+            if (value != null) {
+                output.print(value.replace("\"", "&quote;"));
+            }
+            output.print('"');
+        }
+        if (node.getChildren().isEmpty()) {
+            output.print(" /");
+        }
+        output.print(">");
+        if (!printInline(node)) {
+            output.println();
+        }
+        for (TreeNode treeNode : node.getChildren()) {
+            print((XmlNode) treeNode);
+        }
+        if (!node.getChildren().isEmpty()) {
+            if (!printInline(node)) {
+                for (int i = 0; i < indent; i ++) {
+                    output.print("\t");
                 }
             }
-        };
+            output.print("</" + node.getNodeName() + ">");
+            if (!printInline((XmlNode) node.getParent())) {
+                output.println();
+            }
+        }
     }
 
 }

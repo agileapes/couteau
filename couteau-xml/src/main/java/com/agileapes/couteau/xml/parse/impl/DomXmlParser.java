@@ -66,12 +66,13 @@ public class DomXmlParser implements XmlParser {
     private static XmlNode parseNode(Node node) {
         final XmlNode treeNode = new XmlNode(new Stringifiable<DirectedTreeNode>() {
             @Override
-            public String toString(DirectedTreeNode object) {
-                if (object == null) {
+            public String toString(DirectedTreeNode directedTreeNode) {
+                if (directedTreeNode == null) {
                     return "(x)";
                 }
+                final XmlNode object = (XmlNode) directedTreeNode;
                 final StringBuilder builder = new StringBuilder();
-                builder.append(object.getAttribute("#nodeName")).append("[");
+                builder.append(object.getNodeName()).append("[");
                 int i = 0;
                 for (String name : object.getAttributeNames()) {
                     if (i ++ > 0) {
