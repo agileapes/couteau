@@ -179,8 +179,9 @@ public interface DocumentReader {
     /**
      * This method will give the control momentarily to the given {@link SnippetParser} instance.
      * @param parser    the parser to give over the flow to
+     * @return the data returned by the parser
      */
-    String parse(SnippetParser parser);
+    <E> E parse(SnippetParser<E> parser);
 
     /**
      * Peeks ahead for the specified length of characters

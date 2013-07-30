@@ -339,10 +339,10 @@ public class DefaultDocumentReader implements DocumentReader {
      * @param parser    the parser to give over the flow to
      */
     @Override
-    public String parse(SnippetParser parser) {
+    public <E> E parse(SnippetParser<E> parser) {
         final ReaderSnapshot start = remember();
         int snapshotsRemembered = snapshots.size();
-        parser.parse(this);
+        final E parsed = parser.parse(this);
         //cleaning up after the parser, in case it forgot to remove snapshots it created
         while (snapshots.size() > snapshotsRemembered) {
             forget();
@@ -359,7 +359,7 @@ public class DefaultDocumentReader implements DocumentReader {
         if (cursor < start.getCursorPosition()) {
             throw new IllegalStateException();
         }
-        return document.substring(start.getCursorPosition(), cursor);
+        return parsed;
     }
 
     /**
