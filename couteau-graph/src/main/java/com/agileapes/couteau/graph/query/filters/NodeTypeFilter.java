@@ -13,19 +13,32 @@
  * or substantial portions of the Software.
  */
 
-package com.agileapes.couteau.xml.parse;
+package com.agileapes.couteau.graph.query.filters;
 
-import com.agileapes.couteau.xml.error.XmlParseError;
-import com.agileapes.couteau.xml.node.XmlNode;
-
-import java.io.InputStream;
+import com.agileapes.couteau.graph.node.ConfigurableNodeFilter;
+import com.agileapes.couteau.graph.node.Node;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (2013/7/29, 19:43)
+ * @since 1.0 (2013/7/30, 15:38)
  */
-public interface XmlParser {
+public class NodeTypeFilter implements ConfigurableNodeFilter {
 
-    XmlNode parse(InputStream source) throws XmlParseError;
+    private Class<?> from = Object.class;
 
+    @Override
+    public void setAttribute(String name, String value) {
+        if ("from".equals(name)) {
+            try {
+                from = Class.forName(value);
+            } catch (ClassNotFoundException e) {
+                from = Object.class;
+            }
+        }
+    }
+
+    @Override
+    public boolean accepts(Node item) {
+        return from.isInstance(item);
+    }
 }

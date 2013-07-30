@@ -26,7 +26,7 @@ import java.util.List;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/26, 11:01)
  */
-class NodeQueryFinder implements Finder {
+public class NodeQueryFinder implements Finder {
 
     private final Node origin;
     private final List<NodeQueryFilter> matchers;

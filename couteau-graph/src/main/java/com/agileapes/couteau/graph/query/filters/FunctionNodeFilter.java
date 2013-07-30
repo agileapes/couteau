@@ -15,13 +15,11 @@
 
 package com.agileapes.couteau.graph.query.filters;
 
-import com.agileapes.couteau.graph.node.ConfigurableNamedNodeFilter;
-import com.agileapes.couteau.graph.node.NamedNodeFilter;
+import com.agileapes.couteau.graph.node.ConfigurableNodeFilter;
 import com.agileapes.couteau.graph.node.Node;
 import com.agileapes.couteau.graph.node.NodeFilter;
 
 import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
@@ -31,13 +29,13 @@ public class FunctionNodeFilter implements NodeFilter, OriginNodeAware {
 
     private final Map<String, String> arguments;
     private Node origin;
-    private final NamedNodeFilter filter;
+    private final NodeFilter filter;
 
-    public FunctionNodeFilter(Set<NamedNodeFilter> filters, String functionName, Map<String, String> arguments) {
+    public FunctionNodeFilter(Map<String, NodeFilter> filters, String functionName, Map<String, String> arguments) {
         this.arguments = arguments;
-        for (NamedNodeFilter nodeFilter : filters) {
-            if (nodeFilter.getName().equals(functionName)) {
-                filter = nodeFilter;
+        for (Map.Entry<String, NodeFilter> nodeFilter : filters.entrySet()) {
+            if (nodeFilter.getKey().equals(functionName)) {
+                filter = nodeFilter.getValue();
                 return;
             }
         }
@@ -54,10 +52,10 @@ public class FunctionNodeFilter implements NodeFilter, OriginNodeAware {
         if (filter instanceof OriginNodeAware) {
             ((OriginNodeAware) filter).setOrigin(origin);
         }
-        if (filter instanceof ConfigurableNamedNodeFilter) {
-            ConfigurableNamedNodeFilter nodeFilter = (ConfigurableNamedNodeFilter) filter;
+        if (filter instanceof ConfigurableNodeFilter) {
+            ConfigurableNodeFilter nodeFilter = (ConfigurableNodeFilter) filter;
             for (Map.Entry<String, String> entry : arguments.entrySet()) {
-                nodeFilter.setAttribute(entry.getKey(), entry.getValue());
+                nodeFilter.setAttribute(entry.getKey().trim(), entry.getValue());
             }
         }
         return filter.accepts(item);

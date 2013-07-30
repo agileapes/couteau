@@ -13,19 +13,22 @@
  * or substantial portions of the Software.
  */
 
-package com.agileapes.couteau.xml.parse;
-
-import com.agileapes.couteau.xml.error.XmlParseError;
-import com.agileapes.couteau.xml.node.XmlNode;
-
-import java.io.InputStream;
+package com.agileapes.couteau.graph.node;
 
 /**
+ * This is an extension to the {@link NamedNodeFilter} interface which allows for
+ * arguments to be provided to the filter
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (2013/7/29, 19:43)
+ * @since 1.0 (2013/7/27, 16:35)
  */
-public interface XmlParser {
+public interface ConfigurableNodeFilter extends NodeFilter {
 
-    XmlNode parse(InputStream source) throws XmlParseError;
+    /**
+     * Sets an arbitrary attribute on the filter
+     * @param name     the name of the attribute
+     * @param value    the value of the attribute
+     */
+    void setAttribute(String name, String value);
 
 }

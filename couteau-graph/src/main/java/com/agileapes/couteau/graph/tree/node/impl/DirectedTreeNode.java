@@ -130,8 +130,8 @@ public class DirectedTreeNode extends DirectedNode implements TreeNode {
     }
 
     @Override
-    public Integer getNodeIndex() {
-        return isRoot() ? null : getParent().getChildren().indexOf(this);
+    public int getNodeIndex() {
+        return isRoot() ? 0 : getParent().getChildren().indexOf(this);
     }
 
     /**

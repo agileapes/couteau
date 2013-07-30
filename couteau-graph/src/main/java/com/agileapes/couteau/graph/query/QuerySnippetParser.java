@@ -25,4 +25,9 @@ import java.util.List;
  * @since 1.0 (2013/7/30, 6:02)
  */
 public abstract class QuerySnippetParser implements SnippetParser<List<NodeFilter>> {
+
+    public boolean endsParsing() {
+        return false;
+    }
+
 }

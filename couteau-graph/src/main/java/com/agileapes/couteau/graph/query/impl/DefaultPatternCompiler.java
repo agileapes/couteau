@@ -62,6 +62,9 @@ public class DefaultPatternCompiler implements PatternCompiler {
                     for (NodeFilter nodeFilter : nodeFilters) {
                         filter.addFilter(nodeFilter);
                     }
+                    if (parser.endsParsing()) {
+                        break;
+                    }
                 }
             }
             filters.add(filter);

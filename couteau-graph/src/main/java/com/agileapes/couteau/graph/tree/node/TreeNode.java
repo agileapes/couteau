@@ -112,8 +112,8 @@ public interface TreeNode extends Node {
 
     /**
      * @return This node's zero-based index among its parent's children nodes,
-     * or {@code null} if this is the root node
+     * or {@code 0} if this is the root node
      */
-    Integer getNodeIndex();
+    int getNodeIndex();
 
 }

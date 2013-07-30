@@ -13,22 +13,30 @@
  * or substantial portions of the Software.
  */
 
-package com.agileapes.couteau.graph.node;
+package com.agileapes.couteau.xml.query.filters;
+
+import com.agileapes.couteau.graph.node.Node;
+import com.agileapes.couteau.graph.node.NodeFilter;
+import com.agileapes.couteau.xml.node.XmlNode;
 
 /**
- * This is an extension to the {@link NamedNodeFilter} interface which allows for
- * arguments to be provided to the filter
- *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (2013/7/27, 16:35)
+ * @since 1.0 (2013/7/30, 13:47)
  */
-public interface ConfigurableNamedNodeFilter extends NamedNodeFilter {
+public class NodeNameFilter implements NodeFilter {
 
-    /**
-     * Sets an arbitrary attribute on the filter
-     * @param name     the name of the attribute
-     * @param value    the value of the attribute
-     */
-    void setAttribute(String name, String value);
+    private final String nodeName;
 
+    public NodeNameFilter(String nodeName) {
+        this.nodeName = nodeName;
+    }
+
+    @Override
+    public boolean accepts(Node item) {
+        if (item instanceof XmlNode) {
+            final XmlNode xmlNode = (XmlNode) item;
+            return xmlNode.getNodeName().matches(nodeName);
+        }
+        return false;
+    }
 }

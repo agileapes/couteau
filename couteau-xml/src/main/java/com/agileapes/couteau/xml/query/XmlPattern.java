@@ -13,38 +13,45 @@
  * or substantial portions of the Software.
  */
 
-package com.agileapes.couteau.graph.query;
+package com.agileapes.couteau.xml.query;
 
 import com.agileapes.couteau.graph.node.Node;
+import com.agileapes.couteau.graph.query.NodeFilterRepository;
+import com.agileapes.couteau.graph.query.NodePattern;
+import com.agileapes.couteau.graph.query.NodeQueryFilter;
+import com.agileapes.couteau.graph.query.NodeQueryFinder;
 import com.agileapes.couteau.graph.query.impl.*;
 import com.agileapes.couteau.graph.search.Finder;
+import com.agileapes.couteau.xml.query.impl.NodeNameSnippetParser;
 
 import java.util.List;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (2013/7/25, 14:47)
+ * @since 1.0 (2013/7/30, 13:41)
  */
-public class GraphNodePattern implements NodePattern {
+public class XmlPattern implements NodePattern {
 
     public static NodePattern compile(String pattern) {
         final DefaultPatternCompiler compiler = new DefaultPatternCompiler();
         compiler.addParser(new ImmediateSnippetParser());
         compiler.addParser(new WildcardSnippetParser());
+        compiler.addParser(new NodeNameSnippetParser());
+        compiler.addParser(new NodeIndexSnippetParser());
         compiler.addParser(new AttributesSnippetParser());
         compiler.addParser(new FunctionCallSnippetParser(NodeFilterRepository.getFilters()));
-        return new GraphNodePattern(compiler.compile(pattern));
+        return new XmlPattern(compiler.compile(pattern));
     }
 
-    private final List<NodeQueryFilter> filters;
+    private final List<NodeQueryFilter> matchers;
 
-    private GraphNodePattern(List<NodeQueryFilter> filters) {
-        this.filters = filters;
+    public XmlPattern(List<NodeQueryFilter> matchers) {
+        this.matchers = matchers;
     }
 
     @Override
     public Finder finder(Node origin) {
-        return new NodeQueryFinder(origin, filters);
+        return new NodeQueryFinder(origin, matchers);
     }
 
 }

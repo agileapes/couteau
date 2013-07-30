@@ -40,4 +40,9 @@ public class WildcardSnippetParser extends QuerySnippetParser {
         return filters;
     }
 
+    @Override
+    public boolean endsParsing() {
+        return true;
+    }
+
 }

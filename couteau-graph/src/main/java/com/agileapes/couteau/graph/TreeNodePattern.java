@@ -13,9 +13,13 @@
  * or substantial portions of the Software.
  */
 
-package com.agileapes.couteau.graph.query;
+package com.agileapes.couteau.graph;
 
 import com.agileapes.couteau.graph.node.Node;
+import com.agileapes.couteau.graph.query.NodeFilterRepository;
+import com.agileapes.couteau.graph.query.NodePattern;
+import com.agileapes.couteau.graph.query.NodeQueryFilter;
+import com.agileapes.couteau.graph.query.NodeQueryFinder;
 import com.agileapes.couteau.graph.query.impl.*;
 import com.agileapes.couteau.graph.search.Finder;
 
@@ -23,22 +27,23 @@ import java.util.List;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (2013/7/25, 14:47)
+ * @since 1.0 (2013/7/30, 13:50)
  */
-public class GraphNodePattern implements NodePattern {
+public class TreeNodePattern implements NodePattern {
 
     public static NodePattern compile(String pattern) {
         final DefaultPatternCompiler compiler = new DefaultPatternCompiler();
         compiler.addParser(new ImmediateSnippetParser());
         compiler.addParser(new WildcardSnippetParser());
+        compiler.addParser(new NodeIndexSnippetParser());
         compiler.addParser(new AttributesSnippetParser());
         compiler.addParser(new FunctionCallSnippetParser(NodeFilterRepository.getFilters()));
-        return new GraphNodePattern(compiler.compile(pattern));
+        return new TreeNodePattern(compiler.compile(pattern));
     }
 
     private final List<NodeQueryFilter> filters;
 
-    private GraphNodePattern(List<NodeQueryFilter> filters) {
+    public TreeNodePattern(List<NodeQueryFilter> filters) {
         this.filters = filters;
     }
 
@@ -46,5 +51,4 @@ public class GraphNodePattern implements NodePattern {
     public Finder finder(Node origin) {
         return new NodeQueryFinder(origin, filters);
     }
-
 }

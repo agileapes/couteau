@@ -19,8 +19,12 @@ import com.agileapes.couteau.basics.api.Stringifiable;
 import com.agileapes.couteau.graph.tree.node.TreeNode;
 import com.agileapes.couteau.graph.tree.node.impl.DirectedTreeNode;
 import com.agileapes.couteau.xml.error.XmlParseError;
+import com.agileapes.couteau.xml.node.XmlNode;
 import com.agileapes.couteau.xml.parse.XmlParser;
-import org.w3c.dom.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -45,7 +49,7 @@ public class DomXmlParser implements XmlParser {
     }
 
     @Override
-    public TreeNode parse(InputStream source) throws XmlParseError {
+    public XmlNode parse(InputStream source) throws XmlParseError {
         return parseNode(getDocument(source).getDocumentElement());
     }
 
@@ -59,38 +63,8 @@ public class DomXmlParser implements XmlParser {
         return document;
     }
 
-    private static String getNodeType(short nodeType) {
-        if (nodeType == 1) {
-            return "ELEMENT_NODE";
-        } else if (nodeType == 2) {
-            return "ATTRIBUTE_NODE";
-        } else if (nodeType == 3) {
-            return "TEXT_NODE";
-        } else if (nodeType == 4) {
-            return "CDATA_SECTION_NODE";
-        } else if (nodeType == 5) {
-            return "ENTITY_REFERENCE_NODE";
-        } else if (nodeType == 6) {
-            return "ENTITY_NODE";
-        } else if (nodeType == 7) {
-            return "PROCESSING_INSTRUCTION_NODE";
-        } else if (nodeType == 8) {
-            return "COMMENT_NODE";
-        } else if (nodeType == 9) {
-            return "DOCUMENT_NODE";
-        } else if (nodeType == 10) {
-            return "DOCUMENT_TYPE_NODE";
-        } else if (nodeType == 11) {
-            return "DOCUMENT_FRAGMENT_NODE";
-        } else if (nodeType == 12) {
-            return "NOTATION_NODE";
-        } else {
-            return null;
-        }
-    }
-
-    private static TreeNode parseNode(Node node) {
-        final DirectedTreeNode treeNode = new DirectedTreeNode(new Stringifiable<DirectedTreeNode>() {
+    private static XmlNode parseNode(Node node) {
+        final XmlNode treeNode = new XmlNode(new Stringifiable<DirectedTreeNode>() {
             @Override
             public String toString(DirectedTreeNode object) {
                 if (object == null) {
@@ -118,14 +92,11 @@ public class DomXmlParser implements XmlParser {
                 return builder.toString();
             }
         });
-        treeNode.setAttribute("#nodeName", node.getNodeName());
-        treeNode.setAttribute("#nodeValue", node.getNodeValue());
-        treeNode.setAttribute("#namespace", node.getNamespaceURI());
-        treeNode.setAttribute("#prefix", node.getPrefix());
-        try {
-            treeNode.setAttribute("#textContent", node.getTextContent());
-        } catch (Error ignored) {}
-        treeNode.setAttribute("#nodeType", getNodeType(node.getNodeType()));
+        treeNode.setNodeName(node.getNodeName());
+        treeNode.setNodeValue(node.getNodeValue());
+        treeNode.setNamespaceUri(node.getNamespaceURI());
+        treeNode.setPrefix(node.getPrefix());
+        treeNode.setNodeType(node.getNodeType());
         final NamedNodeMap attributes = node.getAttributes();
         if (attributes != null) {
             for (int i = 0; i < attributes.getLength(); i ++) {

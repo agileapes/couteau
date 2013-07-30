@@ -13,50 +13,32 @@
  * or substantial portions of the Software.
  */
 
-package com.agileapes.couteau.graph.query.impl;
+package com.agileapes.couteau.xml.query.impl;
 
 import com.agileapes.couteau.graph.node.NodeFilter;
 import com.agileapes.couteau.graph.query.QuerySnippetParser;
-import com.agileapes.couteau.graph.query.filters.FunctionNodeFilter;
 import com.agileapes.couteau.strings.document.DocumentReader;
-import com.agileapes.couteau.strings.document.impl.MapParser;
-import com.agileapes.couteau.strings.token.impl.IdentifierTokenReader;
+import com.agileapes.couteau.strings.token.impl.ContainedTokenReader;
+import com.agileapes.couteau.xml.query.filters.NodeNameFilter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.regex.Pattern;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (2013/7/30, 6:21)
+ * @since 1.0 (2013/7/30, 13:45)
  */
-public class FunctionCallSnippetParser extends QuerySnippetParser {
-
-    private final Map<String, NodeFilter> filters;
-
-    public FunctionCallSnippetParser(Map<String, NodeFilter> filters) {
-        this.filters = filters;
-    }
+public class NodeNameSnippetParser extends QuerySnippetParser {
 
     @Override
     public List<NodeFilter> parse(DocumentReader reader) {
-        if (!reader.hasMore() || !reader.peek(1).equals("{")) {
+        if (!reader.hasMore() || reader.has("[\\[#\\{]")) {
             return null;
         }
+        final String nodeName = reader.read(reader.expectToken(new ContainedTokenReader("'\"`", Pattern.compile("([\\[#\\{\\s/]|$)")))).trim();
         final ArrayList<NodeFilter> filters = new ArrayList<NodeFilter>();
-        reader.expect("\\{", false);
-        while (true) {
-            if (reader.peek(1).equals("}")) {
-                reader.nextChar();
-                break;
-            }
-            final String name = reader.read(reader.expectToken(new IdentifierTokenReader()));
-            final Map<String,String> arguments = reader.parse(new MapParser(MapParser.Container.ROUNDED));
-            reader.expect(";", true);
-            final FunctionNodeFilter filter = new FunctionNodeFilter(this.filters, name, arguments);
-            filters.add(filter);
-        }
+        filters.add(new NodeNameFilter(nodeName));
         return filters;
     }
 

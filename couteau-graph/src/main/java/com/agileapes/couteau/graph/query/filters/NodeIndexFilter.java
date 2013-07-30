@@ -13,21 +13,27 @@
  * or substantial portions of the Software.
  */
 
-package com.agileapes.couteau.graph.node;
+package com.agileapes.couteau.graph.query.filters;
+
+import com.agileapes.couteau.graph.node.Node;
+import com.agileapes.couteau.graph.node.NodeFilter;
+import com.agileapes.couteau.graph.tree.node.TreeNode;
 
 /**
- * This interface will allow for naming of filters, so that they can be
- * registered with the pattern compiler
- *
- * @see com.agileapes.couteau.graph.query.GraphNodePattern#addFilter(NamedNodeFilter)
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (2013/7/27, 15:56)
+ * @since 1.0 (2013/7/30, 13:53)
  */
-public interface NamedNodeFilter extends NodeFilter {
+public class NodeIndexFilter implements NodeFilter {
 
-    /**
-     * @return the name associated with this filter
-     */
-    String getName();
+    private final int index;
+
+    public NodeIndexFilter(int index) {
+        this.index = index;
+    }
+
+    @Override
+    public boolean accepts(Node item) {
+        return item instanceof TreeNode && ((TreeNode) item).getNodeIndex() == index;
+    }
 
 }

@@ -17,46 +17,26 @@ package com.agileapes.couteau.graph.query.impl;
 
 import com.agileapes.couteau.graph.node.NodeFilter;
 import com.agileapes.couteau.graph.query.QuerySnippetParser;
-import com.agileapes.couteau.graph.query.filters.FunctionNodeFilter;
+import com.agileapes.couteau.graph.query.filters.NodeIndexFilter;
 import com.agileapes.couteau.strings.document.DocumentReader;
-import com.agileapes.couteau.strings.document.impl.MapParser;
-import com.agileapes.couteau.strings.token.impl.IdentifierTokenReader;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (2013/7/30, 6:21)
+ * @since 1.0 (2013/7/30, 13:55)
  */
-public class FunctionCallSnippetParser extends QuerySnippetParser {
-
-    private final Map<String, NodeFilter> filters;
-
-    public FunctionCallSnippetParser(Map<String, NodeFilter> filters) {
-        this.filters = filters;
-    }
+public class NodeIndexSnippetParser extends QuerySnippetParser {
 
     @Override
     public List<NodeFilter> parse(DocumentReader reader) {
-        if (!reader.hasMore() || !reader.peek(1).equals("{")) {
+        if (!reader.hasMore() || !reader.has("#\\d+")) {
             return null;
         }
         final ArrayList<NodeFilter> filters = new ArrayList<NodeFilter>();
-        reader.expect("\\{", false);
-        while (true) {
-            if (reader.peek(1).equals("}")) {
-                reader.nextChar();
-                break;
-            }
-            final String name = reader.read(reader.expectToken(new IdentifierTokenReader()));
-            final Map<String,String> arguments = reader.parse(new MapParser(MapParser.Container.ROUNDED));
-            reader.expect(";", true);
-            final FunctionNodeFilter filter = new FunctionNodeFilter(this.filters, name, arguments);
-            filters.add(filter);
-        }
+        reader.nextChar();
+        filters.add(new NodeIndexFilter(Integer.parseInt(reader.read("\\d+", false))));
         return filters;
     }
 

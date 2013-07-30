@@ -13,19 +13,32 @@
  * or substantial portions of the Software.
  */
 
-package com.agileapes.couteau.xml.parse;
+package com.agileapes.couteau.graph.query;
 
-import com.agileapes.couteau.xml.error.XmlParseError;
-import com.agileapes.couteau.xml.node.XmlNode;
+import com.agileapes.couteau.graph.node.NodeFilter;
+import com.agileapes.couteau.graph.query.filters.NodeTypeFilter;
 
-import java.io.InputStream;
+import java.util.*;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (2013/7/29, 19:43)
+ * @since 1.0 (2013/7/30, 13:51)
  */
-public interface XmlParser {
+public abstract class NodeFilterRepository {
 
-    XmlNode parse(InputStream source) throws XmlParseError;
+    private static final Map<String, NodeFilter> NODE_FILTERS = new HashMap<String, NodeFilter>();
+
+    static {
+        addFilter("assignable", new NodeTypeFilter());
+    }
+
+    public static void addFilter(String name, NodeFilter filter) {
+        NODE_FILTERS.put(name, filter);
+    }
+
+    public static Map<String, NodeFilter> getFilters() {
+        return Collections.unmodifiableMap(NODE_FILTERS);
+    }
+
 
 }
