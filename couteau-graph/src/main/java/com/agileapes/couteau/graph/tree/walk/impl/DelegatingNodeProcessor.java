@@ -20,6 +20,9 @@ import com.agileapes.couteau.graph.tree.node.TreeNode;
 import com.agileapes.couteau.graph.tree.walk.TreeNodeProcessor;
 
 /**
+ * This is a node processor that has a single {@link #process(Object)} method that will be called
+ * whenever required
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/27, 17:57)
  */

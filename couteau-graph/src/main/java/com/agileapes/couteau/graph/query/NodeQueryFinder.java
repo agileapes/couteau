@@ -23,17 +23,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * This class provides an implementation of Finder that relies on {@link BreadthFirstFinder} for
+ * looking up nodes that are accepted by a given filter chain of {@link com.agileapes.couteau.graph.node.NodeFilter}s
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/26, 11:01)
  */
 public class NodeQueryFinder implements Finder {
 
     private final Node origin;
-    private final List<NodeQueryFilter> matchers;
+    private final List<NodeQueryFilter> filters;
 
-    public NodeQueryFinder(Node origin, List<NodeQueryFilter> matchers) {
+    public NodeQueryFinder(Node origin, List<NodeQueryFilter> filters) {
         this.origin = origin;
-        this.matchers = matchers;
+        this.filters = filters;
     }
 
     private List<Node> find(Node origin, NodeQueryFilter matcher) {
@@ -43,10 +46,10 @@ public class NodeQueryFinder implements Finder {
     @Override
     public List<Node> find() {
         final List<Node> agenda = new ArrayList<Node>();
-        if (!matchers.isEmpty()) {
+        if (!filters.isEmpty()) {
             agenda.add(origin);
         }
-        for (NodeQueryFilter matcher : matchers) {
+        for (NodeQueryFilter matcher : filters) {
             final List<Node> unexplored = new ArrayList<Node>();
             for (Node node : agenda) {
                 final List<Node> found = find(node, matcher);

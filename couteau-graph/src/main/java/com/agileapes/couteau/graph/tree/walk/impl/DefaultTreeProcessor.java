@@ -22,6 +22,8 @@ import com.agileapes.couteau.graph.tree.walk.TreeNodeProcessor;
 import com.agileapes.couteau.graph.tree.walk.TreeProcessor;
 
 /**
+ * This is an implementation of the node processor that handles all processing operations in a recursive manner
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/27, 17:53)
  */

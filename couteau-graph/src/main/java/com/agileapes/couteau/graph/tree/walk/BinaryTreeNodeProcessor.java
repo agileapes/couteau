@@ -18,11 +18,18 @@ package com.agileapes.couteau.graph.tree.walk;
 import com.agileapes.couteau.graph.tree.node.impl.BinaryTreeNode;
 
 /**
+ * This interface allows for processing of a node in a binary tree, right between its children's processing
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/25, 14:01)
  */
 public interface BinaryTreeNodeProcessor<N extends BinaryTreeNode> extends TreeNodeProcessor<N> {
 
+    /**
+     * This method will be called after the node's left child is processed and before the right
+     * child's processing begins
+     * @param node    the node to be processed
+     */
     void processBetweenChildren(N node);
 
 }

@@ -24,6 +24,8 @@ import com.agileapes.couteau.graph.tree.walk.impl.PreOrderNodeProcessor;
 import java.io.PrintStream;
 
 /**
+ * This class is a utility for printing out the nodes of a tree in a human-readable fashion
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/25, 11:15)
  */
@@ -52,7 +54,7 @@ public class TreePrinter {
         treeProcessor.process(root, getProcessor());
     }
 
-    protected TreeNodeProcessor<TreeNode> getProcessor() {
+    private TreeNodeProcessor<TreeNode> getProcessor() {
         return new PreOrderNodeProcessor<TreeNode>() {
             @Override
             public void process(TreeNode input) {

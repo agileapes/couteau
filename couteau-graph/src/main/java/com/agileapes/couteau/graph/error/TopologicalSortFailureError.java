@@ -13,34 +13,33 @@
  * or substantial portions of the Software.
  */
 
-package com.agileapes.couteau.graph.query.filters;
+package com.agileapes.couteau.graph.error;
 
-import com.agileapes.couteau.graph.node.ConfigurableNodeFilter;
 import com.agileapes.couteau.graph.node.Node;
 
+import java.util.Collection;
+
 /**
- * Filters nodes based on their super-type
+ * <p>This error indicates a problem with the nodes being sorted; namely that of having a circular dependency
+ * among the nodes of a directed graph, a problem which would prevent the nodes from presenting candidates
+ * for the sorting process.</p>
+ *
+ * <p>The problematic nodes will be contained in {@link #getNodes()}.</p>
  *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (2013/7/30, 15:38)
+ * @since 1.0 (7/31/13, 10:32 AM)
  */
-public class NodeTypeFilter implements ConfigurableNodeFilter {
+public class TopologicalSortFailureError extends Error {
 
-    private Class<?> from = Object.class;
+    private final Collection<? extends Node> nodes;
 
-    @Override
-    public void setAttribute(String name, String value) {
-        if ("from".equals(name)) {
-            try {
-                from = Class.forName(value);
-            } catch (ClassNotFoundException e) {
-                from = Object.class;
-            }
-        }
+    public TopologicalSortFailureError(Collection<? extends Node> nodes) {
+        super("Failed to sort nodes. There is a circular dependency between: " + nodes);
+        this.nodes = nodes;
     }
 
-    @Override
-    public boolean accepts(Node item) {
-        return from.isInstance(item);
+    public Collection<? extends Node> getNodes() {
+        return nodes;
     }
+
 }

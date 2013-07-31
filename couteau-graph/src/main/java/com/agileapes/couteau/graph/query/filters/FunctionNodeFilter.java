@@ -22,6 +22,8 @@ import com.agileapes.couteau.graph.node.NodeFilter;
 import java.util.Map;
 
 /**
+ * This will accept nodes that are subsequently accepted by given node filters.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/30, 5:54)
  */

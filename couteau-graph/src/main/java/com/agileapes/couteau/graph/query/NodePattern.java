@@ -19,11 +19,20 @@ import com.agileapes.couteau.graph.node.Node;
 import com.agileapes.couteau.graph.search.Finder;
 
 /**
+ * A node pattern is an object capable of dispensing finders for a specific matching process. The pattern itself
+ * holds semantic data as to what is called an <em>acceptable</em> node in a graph of nodes, and what is not.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/30, 5:56)
  */
 public interface NodePattern {
 
+    /**
+     * This method will create and return a finder object that is capable of looking up nodes in the graph
+     * component accessible from the origin node that match the internally held description.
+     * @param origin    the node of origin
+     * @return a finder which is capable of finding matching nodes
+     */
     Finder finder(Node origin);
 
 }

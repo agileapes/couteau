@@ -19,6 +19,8 @@ import com.agileapes.couteau.graph.node.Node;
 import com.agileapes.couteau.graph.node.NodeFilter;
 
 /**
+ * Accepts nodes that are immediately connected to the node of origin
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/30, 5:45)
  */

@@ -26,6 +26,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * This parser generates filters from string inputs that are maps formatted as
+ * '[a1=...,a2=...,...]'
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/30, 6:16)
  */

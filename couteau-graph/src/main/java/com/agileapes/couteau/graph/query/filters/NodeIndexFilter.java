@@ -20,6 +20,8 @@ import com.agileapes.couteau.graph.node.NodeFilter;
 import com.agileapes.couteau.graph.tree.node.TreeNode;
 
 /**
+ * Filters nodes by the their node index
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/30, 13:53)
  */

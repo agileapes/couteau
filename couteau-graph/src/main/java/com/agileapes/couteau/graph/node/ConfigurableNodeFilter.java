@@ -16,7 +16,7 @@
 package com.agileapes.couteau.graph.node;
 
 /**
- * This is an extension to the {@link NamedNodeFilter} interface which allows for
+ * This is an extension to the {@link NodeFilter} interface which allows for
  * arguments to be provided to the filter
  *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)

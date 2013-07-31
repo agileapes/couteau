@@ -22,11 +22,19 @@ import com.agileapes.couteau.graph.node.NodeFilter;
 import com.agileapes.couteau.graph.query.filters.OriginNodeAware;
 
 /**
+ * NodeQueryFilter is a filter chain that will hold all other filters applicable throughout the search
+ * process.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/26, 11:03)
  */
 public class NodeQueryFilter extends FilterChain<Node> implements NodeFilter {
 
+    /**
+     * will change the origin of the search
+     * @param origin    the new origin
+     * @return will return the current filter (for chaining purposes)
+     */
     public NodeQueryFilter forOrigin(Node origin) {
         for (Filter<Node> filter : filters) {
             if (filter instanceof OriginNodeAware) {

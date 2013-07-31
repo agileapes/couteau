@@ -21,21 +21,39 @@ import com.agileapes.couteau.graph.query.filters.NodeTypeFilter;
 import java.util.*;
 
 /**
+ * This is essentially a repository for all node filters that can be used by different pattern compilers
+ * as the central location for all registered functions
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/30, 13:51)
  */
 public abstract class NodeFilterRepository {
 
+    /**
+     * This map holds filters by name. Note that multiple names can be assigned to a single
+     * filter
+     */
     private static final Map<String, NodeFilter> NODE_FILTERS = new HashMap<String, NodeFilter>();
 
+    /**
+     * Loads the default filters
+     */
     static {
         addFilter("assignable", new NodeTypeFilter());
     }
 
+    /**
+     * Adds a new filter to the repository
+     * @param name      the name of the filter
+     * @param filter    the configured filter
+     */
     public static void addFilter(String name, NodeFilter filter) {
         NODE_FILTERS.put(name, filter);
     }
 
+    /**
+     * @return the map of filters as available to the repository
+     */
     public static Map<String, NodeFilter> getFilters() {
         return Collections.unmodifiableMap(NODE_FILTERS);
     }

@@ -13,13 +13,9 @@
  * or substantial portions of the Software.
  */
 
-package com.agileapes.couteau.graph;
+package com.agileapes.couteau.graph.query;
 
 import com.agileapes.couteau.graph.node.Node;
-import com.agileapes.couteau.graph.query.NodeFilterRepository;
-import com.agileapes.couteau.graph.query.NodePattern;
-import com.agileapes.couteau.graph.query.NodeQueryFilter;
-import com.agileapes.couteau.graph.query.NodeQueryFinder;
 import com.agileapes.couteau.graph.query.impl.*;
 import com.agileapes.couteau.graph.search.Finder;
 

@@ -21,11 +21,19 @@ import com.agileapes.couteau.strings.document.SnippetParser;
 import java.util.List;
 
 /**
+ * This class allows for specifying snippet parsers used by {@link com.agileapes.couteau.graph.query.impl.DefaultPatternCompiler}
+ * through which the pattern being compiled can be customized.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/30, 6:02)
  */
 public abstract class QuerySnippetParser implements SnippetParser<List<NodeFilter>> {
 
+    /**
+     * This method determines whether having the parser match the current input should end the
+     * current section of the input pattern or not.
+     * @return {@code true} means that this parser is basically a section delimiter
+     */
     public boolean endsParsing() {
         return false;
     }

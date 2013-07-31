@@ -16,61 +16,69 @@
 package com.agileapes.couteau.graph.alg.sort.impl;
 
 import com.agileapes.couteau.graph.alg.sort.GraphSorter;
+import com.agileapes.couteau.graph.error.TopologicalSortFailureError;
 import com.agileapes.couteau.graph.node.Node;
-import com.agileapes.couteau.graph.node.NodeFilter;
 import com.agileapes.couteau.graph.node.impl.DirectedNode;
-import com.agileapes.couteau.graph.search.impl.BreadthFirstFinder;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 /**
+ * This class implements the topological sort algorithm. See <a href='http://en.wikipedia.org/wiki/Topological_sorting'
+ * >the Wikipedia entry</a> on topological sorting for more information.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/29, 15:42)
  */
 public class TopologicalGraphSorter implements GraphSorter<DirectedNode> {
 
+    /**
+     * Attempts the topological sorting of input nodes. The nodes will be sorted in a fashion that preserves the
+     * order of dependencies defined between them.
+     * @param input    the collection of nodes being sorted
+     * @param <N>      the inferred type of the nodes
+     * @return the sorted list of nodes
+     * @throws TopologicalSortFailureError if any circular dependencies exist between the nodes, preventing them
+     * from being sorted properly.
+     */
     @Override
-    public <N extends DirectedNode> List<N> sort(N origin) {
-        final List<Node> nodes = new BreadthFirstFinder(origin, new NodeFilter() {
-            @Override
-            public boolean accepts(Node item) {
-                return true;
-            }
-        }).find();
-
+    public <N extends DirectedNode> List<N> sort(Collection<N> input) {
+        final List<N> nodes = new ArrayList<N>(input);
         final ArrayList<N> result = new ArrayList<N>();
         while (!nodes.isEmpty()) {
-            final Set<Node> candidates = select(nodes, result);
-            if (candidates.isEmpty()) {
-                throw new IllegalStateException("Failed to sort the remaining nodes: " + nodes);
+            final N candidate = select(nodes, result);
+            if (candidate == null) {
+                throw new TopologicalSortFailureError(nodes);
             }
-            final Node chosen = candidates.iterator().next();
-            //noinspection unchecked
-            result.add((N) chosen);
-            nodes.remove(chosen);
+            result.add(candidate);
+            nodes.remove(candidate);
         }
         return result;
     }
 
-    private Set<Node> select(List<? extends Node> nodes, ArrayList<? extends Node> result) {
-        final HashSet<Node> candidates = new HashSet<Node>();
-        for (Node node : nodes) {
+    /**
+     * This method will take in the nodes to be sorted, and the nodes already sorted and
+     * decide on the node to be sorted next.
+     * @param toSort     the remaining nodes
+     * @param sorted    the nodes already sorted
+     * @return a candidate node or {@link null} if no such node exists
+     */
+    private <N extends DirectedNode> N select(Collection<N> toSort, Collection<N> sorted) {
+        for (N node : toSort) {
             boolean chosen = true;
             for (Node neighbor : node.getNeighbors()) {
-                if (!result.contains(neighbor)) {
+                //noinspection SuspiciousMethodCalls
+                if (!sorted.contains(neighbor)) {
                     chosen = false;
                     break;
                 }
             }
             if (chosen) {
-                candidates.add(node);
+                return node;
             }
-
         }
-        return candidates;
+        return null;
     }
 
 }

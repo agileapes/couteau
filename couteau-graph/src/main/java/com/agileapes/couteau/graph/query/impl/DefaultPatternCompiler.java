@@ -28,6 +28,9 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
+ * This is an implementation of {@link PatternCompiler} that will take in a chain of parsers and compile the
+ * input pattern into accepting filters.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/30, 6:00)
  */

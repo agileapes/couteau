@@ -41,8 +41,17 @@ public interface MutableNode extends Node {
      */
     void addNeighbor(Node neighbor);
 
+    /**
+     * This method will remove a neighboring node from this node, essentially cutting this
+     * side of the relationship
+     * @param neighbor    the neighbor to be removed
+     */
     void removeNeighbor(Node neighbor);
 
+    /**
+     * This method removes all neighbors from this node, making it a dead-end, if not disconnecting it
+     * completely.
+     */
     void removeAllNeighbors();
 
     /**

@@ -18,6 +18,9 @@ package com.agileapes.couteau.graph.tree.walk.impl;
 import com.agileapes.couteau.graph.tree.node.TreeNode;
 
 /**
+ * This class calls its {@link #process(Object)} method after its children, essentially allowing for a post-order
+ * walk of the tree
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/27, 17:58)
  */

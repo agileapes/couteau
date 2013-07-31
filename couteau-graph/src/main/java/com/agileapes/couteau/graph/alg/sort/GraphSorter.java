@@ -17,6 +17,7 @@ package com.agileapes.couteau.graph.alg.sort;
 
 import com.agileapes.couteau.graph.node.Node;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -31,10 +32,10 @@ public interface GraphSorter<T extends Node> {
     /**
      * This method sorts the given component, returning the nodes in the component
      * in the ordering which they have received while being sorted
-     * @param origin    the node of origin
+     * @param nodes    the collection of nodes being sorted
      * @param <N>       the type of nodes
      * @return sorted nodes
      */
-    <N extends T> List<N> sort(N origin);
+    <N extends T> List<N> sort(Collection<N> nodes);
 
 }

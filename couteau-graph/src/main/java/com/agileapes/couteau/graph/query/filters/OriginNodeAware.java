@@ -18,11 +18,17 @@ package com.agileapes.couteau.graph.query.filters;
 import com.agileapes.couteau.graph.node.Node;
 
 /**
+ * This interface allows for injecting the origin node into node filters.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/30, 5:46)
  */
 public interface OriginNodeAware {
 
+    /**
+     * Sets the origin node into the filter
+     * @param origin    the node for which the query is being run
+     */
     void setOrigin(Node origin);
 
 }

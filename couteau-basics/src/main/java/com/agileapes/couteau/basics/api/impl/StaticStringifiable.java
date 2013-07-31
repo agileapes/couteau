@@ -13,25 +13,28 @@
  * or substantial portions of the Software.
  */
 
-package com.agileapes.couteau.graph.util;
+package com.agileapes.couteau.basics.api.impl;
 
-import com.agileapes.couteau.graph.tree.node.TreeNode;
-
-import java.io.PrintStream;
+import com.agileapes.couteau.basics.api.Stringifiable;
 
 /**
- * This interface allows for printing a node in a custom manner
+ * This implementation allows for compile time decision of the textual representation for an object that
+ * uses stringifiable instances
  *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (2013/7/25, 11:19)
+ * @since 1.0 (7/31/13, 10:47 AM)
  */
-public interface NodePrinter {
+public class StaticStringifiable<T> implements Stringifiable<T> {
 
-    /**
-     * This method is called whenever a node should be printed to the output
-     * @param node      the node to be printed
-     * @param output    the output used for the printing
-     */
-    void print(TreeNode node, PrintStream output);
+    private final String representation;
+
+    public StaticStringifiable(String representation) {
+        this.representation = representation;
+    }
+
+    @Override
+    public String toString(T object) {
+        return representation;
+    }
 
 }

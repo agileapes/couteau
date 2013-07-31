@@ -19,6 +19,8 @@ import com.agileapes.couteau.graph.tree.node.impl.BinaryTreeNode;
 import com.agileapes.couteau.graph.tree.walk.BinaryTreeNodeProcessor;
 
 /**
+ * This processor will call {@link #process(Object)} between the child nodes
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/27, 17:59)
  */

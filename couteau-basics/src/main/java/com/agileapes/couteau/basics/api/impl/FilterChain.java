@@ -21,6 +21,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * This class acts as an object-oriented representation of a logical AND between many
+ * given filters; i.e., should any one of these filters fail, the whole filter will fail.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/30, 5:34)
  */

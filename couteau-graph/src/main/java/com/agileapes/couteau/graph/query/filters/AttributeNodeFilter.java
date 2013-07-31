@@ -22,6 +22,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * <p>This filter will take in patterns for attribute name and value and accept matching nodes. Matching is decided
+ * thus:</p>
+ * <ul>
+ *     <li>If no attributes whose name matches the given pattern appears, the node is rejected</li>
+ *     <li>If no value pattern has been supplied, the mere appearance of a matching attribute signals
+ *     an accepted node</li>
+ *     <li>Once the node has a attribute-value pair matching the given patterns, the node will be accepted</li>
+ * </ul>
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/30, 5:48)
  */
@@ -40,14 +49,14 @@ public class AttributeNodeFilter implements NodeFilter {
         final Set<String> target = new HashSet<String>();
         for (String attributeName : item.getAttributeNames()) {
             if (attributeName.matches(attribute)) {
+                if (value == null) {
+                    return true;
+                }
                 target.add(attributeName);
             }
         }
         if (target.isEmpty()) {
             return false;
-        }
-        if (value == null) {
-            return true;
         }
         for (String attributeName : target) {
             if (item.getAttribute(attributeName) != null && item.getAttribute(attributeName).matches(value)) {
