@@ -26,7 +26,7 @@ public class XmlNode extends DirectedTreeNode {
 
     private String nodeName;
     private String nodeValue;
-    private short nodeType;
+    private NodeType nodeType;
     private String namespaceUri;
     private String prefix;
 
@@ -53,12 +53,12 @@ public class XmlNode extends DirectedTreeNode {
         this.nodeValue = nodeValue;
     }
 
-    public short getNodeType() {
+    public NodeType getNodeType() {
         return nodeType;
     }
 
     public void setNodeType(short nodeType) {
-        this.nodeType = nodeType;
+        this.nodeType = NodeType.getNodeType(nodeType);
     }
 
     public String getNamespaceUri() {
@@ -82,36 +82,6 @@ public class XmlNode extends DirectedTreeNode {
             return nodeName.substring(0, nodeName.indexOf(":"));
         }
         return null;
-    }
-
-    public String getNodeTypeName() {
-        if (nodeType == 1) {
-            return "ELEMENT_NODE";
-        } else if (nodeType == 2) {
-            return "ATTRIBUTE_NODE";
-        } else if (nodeType == 3) {
-            return "TEXT_NODE";
-        } else if (nodeType == 4) {
-            return "CDATA_SECTION_NODE";
-        } else if (nodeType == 5) {
-            return "ENTITY_REFERENCE_NODE";
-        } else if (nodeType == 6) {
-            return "ENTITY_NODE";
-        } else if (nodeType == 7) {
-            return "PROCESSING_INSTRUCTION_NODE";
-        } else if (nodeType == 8) {
-            return "COMMENT_NODE";
-        } else if (nodeType == 9) {
-            return "DOCUMENT_NODE";
-        } else if (nodeType == 10) {
-            return "DOCUMENT_TYPE_NODE";
-        } else if (nodeType == 11) {
-            return "DOCUMENT_FRAGMENT_NODE";
-        } else if (nodeType == 12) {
-            return "NOTATION_NODE";
-        } else {
-            return "UNKNOWN";
-        }
     }
 
 }

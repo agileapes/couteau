@@ -16,8 +16,8 @@
 package com.agileapes.couteau.xml.print;
 
 import com.agileapes.couteau.graph.tree.node.TreeNode;
+import com.agileapes.couteau.xml.node.NodeType;
 import com.agileapes.couteau.xml.node.XmlNode;
-import org.w3c.dom.Node;
 
 import java.io.PrintStream;
 
@@ -43,7 +43,7 @@ public class XmlPrinter {
         }
         for (TreeNode treeNode : node.getChildren()) {
             final XmlNode xmlNode = (XmlNode) treeNode;
-            if (xmlNode.getNodeType() == Node.TEXT_NODE) {
+            if (xmlNode.getNodeType().equals(NodeType.TEXT_NODE)) {
                 return true;
             }
         }
@@ -54,7 +54,7 @@ public class XmlPrinter {
         if (node == null) {
             return;
         }
-        if (node.getNodeType() == Node.TEXT_NODE) {
+        if (node.getNodeType().equals(NodeType.TEXT_NODE)) {
             output.print(node.getNodeValue());
             return;
         }

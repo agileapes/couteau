@@ -22,6 +22,7 @@ import com.agileapes.couteau.graph.query.NodeQueryFilter;
 import com.agileapes.couteau.graph.query.NodeQueryFinder;
 import com.agileapes.couteau.graph.query.impl.*;
 import com.agileapes.couteau.graph.search.Finder;
+import com.agileapes.couteau.xml.query.filters.NodeTypeFilter;
 import com.agileapes.couteau.xml.query.impl.NodeNameSnippetParser;
 
 import java.util.List;
@@ -31,6 +32,10 @@ import java.util.List;
  * @since 1.0 (2013/7/30, 13:41)
  */
 public class XmlPattern implements NodePattern {
+
+    static {
+        NodeFilterRepository.addFilter("type", new NodeTypeFilter());
+    }
 
     public static NodePattern compile(String pattern) {
         final DefaultPatternCompiler compiler = new DefaultPatternCompiler();
@@ -43,15 +48,15 @@ public class XmlPattern implements NodePattern {
         return new XmlPattern(compiler.compile(pattern));
     }
 
-    private final List<NodeQueryFilter> matchers;
+    private final List<NodeQueryFilter> filters;
 
-    public XmlPattern(List<NodeQueryFilter> matchers) {
-        this.matchers = matchers;
+    public XmlPattern(List<NodeQueryFilter> filters) {
+        this.filters = filters;
     }
 
     @Override
     public Finder finder(Node origin) {
-        return new NodeQueryFinder(origin, matchers);
+        return new NodeQueryFinder(origin, filters);
     }
 
 }

@@ -24,7 +24,7 @@ import com.agileapes.couteau.graph.node.Node;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/30, 15:38)
  */
-public class NodeTypeFilter implements ConfigurableNodeFilter {
+public class AssignableNodeFilter implements ConfigurableNodeFilter {
 
     private Class<?> from = Object.class;
 
