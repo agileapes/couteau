@@ -71,7 +71,7 @@ public class XmlPrinter {
             output.print(" " + attribute + "=\"");
             final String value = node.getAttribute(attribute);
             if (value != null) {
-                output.print(value.replace("\"", "&quote;"));
+                output.print(value.replace("\"", "&quot;"));
             }
             output.print('"');
         }
