@@ -21,11 +21,24 @@ import com.agileapes.couteau.xml.node.XmlNode;
 import java.io.InputStream;
 
 /**
+ * The XmlParser interface allows for easily parsing XML documents from an input stream into an tree representation.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/29, 19:43)
  */
 public interface XmlParser {
 
+    /**
+     * <p>This method will take in an input stream and reading the XML content it points to, will return a
+     * tree representation of the given XML document.</p>
+     *
+     * <p>Because the tree representation adds much metadata to the XML document, it might be unwise to use
+     * this facility for XML documents that are considered <em>too large</em>. Just how large this means, is
+     * up to resources and careful benchmarking of the tool on the target machine.</p>
+     * @param source    the input steam which will present the XML document
+     * @return a parsed, tree representation of the tree
+     * @throws XmlParseError
+     */
     XmlNode parse(InputStream source) throws XmlParseError;
 
 }

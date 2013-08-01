@@ -22,6 +22,8 @@ import com.agileapes.couteau.xml.node.XmlNode;
 import java.io.PrintStream;
 
 /**
+ * This class facilitates the process of printing out correctly indented XML documents to the output
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/30, 1:02)
  */

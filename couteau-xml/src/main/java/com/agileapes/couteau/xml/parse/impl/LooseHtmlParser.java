@@ -27,18 +27,36 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 /**
+ * This class relies on the JTidy library's implementation of DOM parser to parse a loosely regulated HTML document.
+ * For this class to work, you must have JTidy on your class path.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/29, 20:20)
  */
-public class LooseHtmlParser extends DomXmlParser {
+public class LooseHtmlParser extends AbstractXmlDocumentParser {
 
+    /**
+     * Instantiates the parser using the specified builder
+     * @param builder    the document builder to be used for parsing
+     * @throws ParserConfigurationException
+     */
     public LooseHtmlParser(DocumentBuilder builder) throws ParserConfigurationException {
         super(builder);
     }
 
+    /**
+     * @see AbstractXmlDocumentParser#AbstractXmlDocumentParser()
+     * @throws ParserConfigurationException
+     */
     public LooseHtmlParser() throws ParserConfigurationException {
     }
 
+    /**
+     * This is the template method which is supposed to return the document instance that contains the root element
+     * @param source    the source input stream
+     * @return the document
+     * @throws XmlParseError
+     */
     @Override
     protected Document getDocument(InputStream source) throws XmlParseError {
         final Tidy tidy = new Tidy();

@@ -16,36 +16,40 @@
 package com.agileapes.couteau.xml.node;
 
 import com.agileapes.couteau.basics.api.Filter;
+import org.w3c.dom.Node;
 
 import static com.agileapes.couteau.basics.collections.CollectionWrapper.with;
 
 /**
+ *
+ * This class adds a level of indirection between the framework and the DOM model of having constant values for node types.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/31/13, 11:52 AM)
  */
 public enum NodeType {
 
-    ELEMENT_NODE(1),
-    ATTRIBUTE_NODE(2),
-    TEXT_NODE(3),
-    CDATA_SECTION_NODE(4),
-    ENTITY_REFERENCE_NODE(5),
-    ENTITY_NODE(6),
-    PROCESSING_INSTRUCTION_NODE(7),
-    COMMENT_NODE(8),
-    DOCUMENT_NODE(9),
-    DOCUMENT_TYPE_NODE(10),
-    DOCUMENT_FRAGMENT_NODE(11),
-    NOTATION_NODE(12);
+    ELEMENT_NODE(Node.ELEMENT_NODE),
+    ATTRIBUTE_NODE(Node.ATTRIBUTE_NODE),
+    TEXT_NODE(Node.TEXT_NODE),
+    CDATA_SECTION_NODE(Node.CDATA_SECTION_NODE),
+    ENTITY_REFERENCE_NODE(Node.ENTITY_REFERENCE_NODE),
+    ENTITY_NODE(Node.ENTITY_NODE),
+    PROCESSING_INSTRUCTION_NODE(Node.PROCESSING_INSTRUCTION_NODE),
+    COMMENT_NODE(Node.COMMENT_NODE),
+    DOCUMENT_NODE(Node.DOCUMENT_NODE),
+    DOCUMENT_TYPE_NODE(Node.DOCUMENT_TYPE_NODE),
+    DOCUMENT_FRAGMENT_NODE(Node.DOCUMENT_FRAGMENT_NODE),
+    NOTATION_NODE(Node.NOTATION_NODE);
 
-    private final int numeric;
+    private final short numeric;
 
-    private NodeType(int numeric) {
+    private NodeType(short numeric) {
         this.numeric = numeric;
     }
 
     private short getNumeric() {
-        return (short) numeric;
+        return numeric;
     }
 
     public static NodeType getNodeType(final short nodeType) {
