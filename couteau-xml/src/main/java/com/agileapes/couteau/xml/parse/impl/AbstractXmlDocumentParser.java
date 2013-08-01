@@ -20,6 +20,7 @@ import com.agileapes.couteau.graph.tree.node.TreeNode;
 import com.agileapes.couteau.graph.tree.node.impl.DirectedTreeNode;
 import com.agileapes.couteau.xml.error.XmlParseError;
 import com.agileapes.couteau.xml.node.XmlNode;
+import com.agileapes.couteau.xml.node.XmlNodeStringifiable;
 import com.agileapes.couteau.xml.parse.XmlParser;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
@@ -100,35 +101,7 @@ public abstract class AbstractXmlDocumentParser implements XmlParser {
      * @return the processed tree model
      */
     private static XmlNode parseNode(Node node) {
-        final XmlNode treeNode = new XmlNode(new Stringifiable<DirectedTreeNode>() {
-            @Override
-            public String toString(DirectedTreeNode directedTreeNode) {
-                if (directedTreeNode == null) {
-                    return "(x)";
-                }
-                final XmlNode object = (XmlNode) directedTreeNode;
-                final StringBuilder builder = new StringBuilder();
-                builder.append(object.getNodeName()).append("[");
-                int i = 0;
-                for (String name : object.getAttributeNames()) {
-                    if (i ++ > 0) {
-                        builder.append(",");
-                    }
-                    builder.append("@").append(name);
-                }
-                builder.append("]{");
-                final List<TreeNode> children = object.getChildren();
-                for (i = 0; i < children.size(); i++) {
-                    final TreeNode child = children.get(i);
-                    if (i > 0) {
-                        builder.append(",");
-                    }
-                    builder.append(child == null ? "(x)" : child);
-                }
-                builder.append("}");
-                return builder.toString();
-            }
-        });
+        final XmlNode treeNode = new XmlNode(new XmlNodeStringifiable());
         treeNode.setNodeName(node.getNodeName());
         treeNode.setNodeValue(node.getNodeValue());
         treeNode.setNamespaceUri(node.getNamespaceURI());

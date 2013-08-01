@@ -57,7 +57,33 @@ public class XmlPrinter {
             return;
         }
         if (node.getNodeType().equals(NodeType.TEXT_NODE)) {
+            if (!node.getNodeValue().trim().isEmpty()) {
+                output.print(node.getNodeValue());
+            }
+            return;
+        }
+        if (node.getNodeType().equals(NodeType.COMMENT_NODE)) {
+            output.print("<!--");
+            if (node.getNodeValue().contains("\n")) {
+                output.println();
+            }
             output.print(node.getNodeValue());
+            output.print("-->");
+            if (node.getNodeValue().contains("\n")) {
+                output.println();
+            }
+            return;
+        }
+        if (node.getNodeType().equals(NodeType.CDATA_SECTION_NODE)) {
+            output.print("<![CDATA[");
+            if (node.getNodeValue().contains("\n")) {
+                output.println();
+            }
+            output.print(node.getNodeValue());
+            output.print("]]>");
+            if (node.getNodeValue().contains("\n")) {
+                output.println();
+            }
             return;
         }
         final int indent = node.getDepth();

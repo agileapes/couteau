@@ -26,6 +26,7 @@ import com.agileapes.couteau.graph.tree.node.impl.DirectedTreeNode;
  */
 public class XmlNode extends DirectedTreeNode {
 
+    private final Stringifiable<XmlNode> stringifiable;
     private String nodeName;
     private String nodeValue;
     private NodeType nodeType;
@@ -34,10 +35,11 @@ public class XmlNode extends DirectedTreeNode {
     private String namespace;
 
     public XmlNode() {
+        this(null);
     }
 
-    public XmlNode(Stringifiable<DirectedTreeNode> stringifiable) {
-        super(stringifiable);
+    public XmlNode(Stringifiable<XmlNode> stringifiable) {
+        this.stringifiable = stringifiable;
     }
 
     /**
@@ -83,7 +85,15 @@ public class XmlNode extends DirectedTreeNode {
      * @param nodeType    the type of the node
      */
     public void setNodeType(short nodeType) {
-        this.nodeType = NodeType.getNodeType(nodeType);
+        setNodeType(NodeType.getNodeType(nodeType));
+    }
+
+    /**
+     * Changes this node's node type, using the values specified in {@link org.w3c.dom.Node}.
+     * @param nodeType    the type of the node
+     */
+    public void setNodeType(NodeType nodeType) {
+        this.nodeType = nodeType;
     }
 
     /**
@@ -121,6 +131,11 @@ public class XmlNode extends DirectedTreeNode {
      */
     public String getNamespace() {
         return namespace;
+    }
+
+    @Override
+    public String toString() {
+        return stringifiable == null ? super.toString() : stringifiable.toString(this);
     }
 
 }
