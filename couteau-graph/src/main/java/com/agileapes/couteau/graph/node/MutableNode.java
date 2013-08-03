@@ -62,4 +62,11 @@ public interface MutableNode extends Node {
      */
     void setLinkWeight(Node neighbor, double weight);
 
+    /**
+     * This method will set the user data with the given key and value
+     * @param key      the key
+     * @param value    the value
+     */
+    void setUserData(String key, Object value);
+
 }

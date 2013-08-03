@@ -59,4 +59,12 @@ public interface Node {
      */
     double getLinkWeight(Node neighbour);
 
+    /**
+     * This method will query for user data associated with this node with the
+     * given key
+     * @param key    the key to the data
+     * @return the user data if it exists, or {@code null} if not
+     */
+    Object getUserData(String key);
+
 }

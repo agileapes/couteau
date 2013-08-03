@@ -64,6 +64,11 @@ public class DefaultSearchableNode implements SearchableNode {
     }
 
     @Override
+    public Object getUserData(String key) {
+        return node.getUserData(key);
+    }
+
+    @Override
     public String toString() {
         return "searchable[" + node + "]";
     }

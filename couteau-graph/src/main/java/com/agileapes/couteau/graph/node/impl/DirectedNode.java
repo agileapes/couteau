@@ -29,8 +29,17 @@ import java.util.Set;
  */
 public class DirectedNode implements MutableNode {
 
+    /**
+     * The stringifiable object associated with the node, to help facilitate
+     * writing the node as a string value
+     */
     private final Stringifiable<DirectedNode> stringifiable;
-    
+
+    /**
+     * The map containing all user data associated with the node
+     */
+    private final Map<String, Object> userData = new HashMap<String, Object>();
+
     /**
      * This nodes neighbors and link weights
      */
@@ -101,6 +110,16 @@ public class DirectedNode implements MutableNode {
     }
 
     /**
+     * This method will set the user data with the given key and value
+     * @param key      the key
+     * @param value    the value
+     */
+    @Override
+    public void setUserData(String key, Object value) {
+        userData.put(key, value);
+    }
+
+    /**
      * This method returns a set of the names of all the attributes associated
      * and assigned with this node
      * @return the set of attribute names
@@ -143,6 +162,17 @@ public class DirectedNode implements MutableNode {
     @Override
     public double getLinkWeight(Node neighbour) {
         return neighbors.containsKey(neighbour) ? neighbors.get(neighbour) : 0d;
+    }
+
+    /**
+     * This method will query for user data associated with this node with the
+     * given key
+     * @param key    the key to the data
+     * @return the user data if it exists, or {@code null} if not
+     */
+    @Override
+    public Object getUserData(String key) {
+        return userData.containsKey(key) ? userData.get(key) : null;
     }
 
     @Override
