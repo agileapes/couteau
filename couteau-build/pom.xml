@@ -36,6 +36,7 @@
         <module>../couteau-graph</module>
         <module>../couteau-xml</module>
         <module>../couteau-maven</module>
+        <module>../couteau-lang</module>
     </modules>
     
 </project>
