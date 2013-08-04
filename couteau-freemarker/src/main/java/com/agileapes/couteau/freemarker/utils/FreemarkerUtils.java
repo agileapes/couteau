@@ -16,14 +16,14 @@
 package com.agileapes.couteau.freemarker.utils;
 
 import com.agileapes.couteau.basics.api.Transformer;
-import com.agileapes.couteau.reflection.util.ClassUtils;
 import com.agileapes.couteau.freemarker.conversion.FreemarkerModelConverter;
 import com.agileapes.couteau.freemarker.model.SimpleClassModel;
+import com.agileapes.couteau.freemarker.model.SimpleMapModel;
+import com.agileapes.couteau.reflection.util.ClassUtils;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.ext.beans.BeansWrapper;
 import freemarker.ext.beans.BooleanModel;
 import freemarker.ext.beans.DateModel;
-import freemarker.ext.beans.MapModel;
 import freemarker.template.*;
 
 import java.io.File;
@@ -31,7 +31,6 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 
 import static com.agileapes.couteau.basics.collections.CollectionWrapper.with;
@@ -286,11 +285,7 @@ public abstract class FreemarkerUtils {
                 }
             }).list());
         } else if (input instanceof Map) {
-            final Map<TemplateModel, TemplateModel> map = new HashMap<TemplateModel, TemplateModel>();
-            for (Map.Entry<?, ?> entry : ((Map<?, ?>) input).entrySet()) {
-                map.put(convertItem(entry.getKey()), convertItem(entry.getValue()));
-            }
-            model = new MapModel(map, BeansWrapper.getDefaultInstance());
+            model = new SimpleMapModel((Map) input);
         } else {
             throw new IllegalArgumentException();
         }
