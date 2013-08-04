@@ -13,7 +13,7 @@
  * or substantial portions of the Software.
  */
 
-package com.agileaps.couteau.freemarker.api;
+package com.agileapes.couteau.freemarker.api;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

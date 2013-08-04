@@ -13,7 +13,7 @@
  * or substantial portions of the Software.
  */
 
-package com.agileaps.couteau.freemarker.model;
+package com.agileapes.couteau.freemarker.model;
 
 import com.agileapes.couteau.basics.api.Transformer;
 import freemarker.ext.beans.BeansWrapper;

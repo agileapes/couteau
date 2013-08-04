@@ -13,7 +13,7 @@
  * or substantial portions of the Software.
  */
 
-package com.agileaps.couteau.freemarker.conversion;
+package com.agileapes.couteau.freemarker.conversion;
 
 import com.agileapes.couteau.reflection.convert.ConversionDecision;
 import com.agileapes.couteau.reflection.convert.ConversionStrategy;

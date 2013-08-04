@@ -15,7 +15,7 @@
 
 package com.agileapes.couteau.freemarker.test.model;
 
-import com.agileaps.couteau.freemarker.api.Template;
+import com.agileapes.couteau.freemarker.api.Template;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)

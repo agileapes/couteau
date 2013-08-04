@@ -13,12 +13,12 @@
  * or substantial portions of the Software.
  */
 
-package com.agileaps.couteau.freemarker.utils;
+package com.agileapes.couteau.freemarker.utils;
 
 import com.agileapes.couteau.basics.api.Transformer;
 import com.agileapes.couteau.reflection.util.ClassUtils;
-import com.agileaps.couteau.freemarker.conversion.FreemarkerModelConverter;
-import com.agileaps.couteau.freemarker.model.SimpleClassModel;
+import com.agileapes.couteau.freemarker.conversion.FreemarkerModelConverter;
+import com.agileapes.couteau.freemarker.model.SimpleClassModel;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.ext.beans.BeansWrapper;
 import freemarker.ext.beans.BooleanModel;
@@ -166,8 +166,8 @@ public abstract class FreemarkerUtils {
      */
     public static void write(Configuration configuration, Writer writer, Object object) throws Exception {
         String templateName;
-        if (object.getClass().isAnnotationPresent(com.agileaps.couteau.freemarker.api.Template.class)) {
-            templateName = object.getClass().getAnnotation(com.agileaps.couteau.freemarker.api.Template.class).value();
+        if (object.getClass().isAnnotationPresent(com.agileapes.couteau.freemarker.api.Template.class)) {
+            templateName = object.getClass().getAnnotation(com.agileapes.couteau.freemarker.api.Template.class).value();
         } else {
             templateName = object.getClass().getName();
         }
@@ -182,8 +182,8 @@ public abstract class FreemarkerUtils {
      */
     public static void write(Writer writer, Object object) throws Exception {
         String templateName;
-        if (object.getClass().isAnnotationPresent(com.agileaps.couteau.freemarker.api.Template.class)) {
-            templateName = object.getClass().getAnnotation(com.agileaps.couteau.freemarker.api.Template.class).value();
+        if (object.getClass().isAnnotationPresent(com.agileapes.couteau.freemarker.api.Template.class)) {
+            templateName = object.getClass().getAnnotation(com.agileapes.couteau.freemarker.api.Template.class).value();
         } else {
             templateName = object.getClass().getName();
         }
