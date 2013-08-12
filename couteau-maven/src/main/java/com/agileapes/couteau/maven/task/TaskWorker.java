@@ -63,10 +63,14 @@ public class TaskWorker extends Thread implements PluginExecutorAware {
                 if (task == null) {
                     continue;
                 }
-                //noinspection unchecked
-                task.execute(pluginExecutor);
+                try {
+                    //noinspection unchecked
+                    task.execute(pluginExecutor);
+                } catch (Throwable e) {
+                    taskScheduler.fail(e);
+                }
+                taskScheduler.done(this, task);
                 task = null;
-                taskScheduler.done(this);
             }
         }
     }

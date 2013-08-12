@@ -1,6 +1,7 @@
 package com.agileapes.couteau.maven.task;
 
 import com.agileapes.couteau.maven.mojo.AbstractPluginExecutor;
+import org.apache.maven.plugin.MojoFailureException;
 import org.springframework.beans.factory.BeanNameAware;
 
 import java.util.ArrayList;
@@ -102,6 +103,6 @@ public abstract class PluginTask<E extends AbstractPluginExecutor> implements Be
         return name;
     }
 
-    public abstract void execute(E executor);
+    public abstract void execute(E executor) throws MojoFailureException;
 
 }

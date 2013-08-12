@@ -36,6 +36,7 @@ public class TaskScheduler extends Thread implements PluginExecutorAware {
 
     public static final int DEFAULT_WORKERS = 10;
     private final List<PluginTask<?>> tasks = new CopyOnWriteArrayList<PluginTask<?>>();
+    private final List<PluginTask<?>> done = new CopyOnWriteArrayList<PluginTask<?>>();
     private boolean started;
     private final Set<TaskWorker> idle = new CopyOnWriteArraySet<TaskWorker>();
     private final Set<TaskWorker> working = new CopyOnWriteArraySet<TaskWorker>();
@@ -92,7 +93,7 @@ public class TaskScheduler extends Thread implements PluginExecutorAware {
         for (PluginTask<?> task : tasks) {
             boolean selected = true;
             for (PluginTask dependency : task.getDependencies()) {
-                if (tasks.contains(dependency)) {
+                if (!done.contains(dependency)) {
                     selected = false;
                     break;
                 }
@@ -104,9 +105,10 @@ public class TaskScheduler extends Thread implements PluginExecutorAware {
         return null;
     }
 
-    synchronized void done(TaskWorker worker) {
+    synchronized void done(TaskWorker worker, PluginTask<?> task) {
         working.remove(worker);
         idle.add(worker);
+        done.add(task);
     }
 
     @Override
@@ -166,7 +168,7 @@ public class TaskScheduler extends Thread implements PluginExecutorAware {
         }
     }
 
-    private void fail(Throwable e) {
+    synchronized void fail(Throwable e) {
         shutdown();
         while (!working.isEmpty()) {
             try {

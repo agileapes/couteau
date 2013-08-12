@@ -5,6 +5,7 @@ import com.agileapes.couteau.basics.api.Processor;
 import com.agileapes.couteau.basics.api.Transformer;
 import com.agileapes.couteau.maven.resource.ClassPathScanningClassProvider;
 import com.agileapes.couteau.maven.resource.ClassPathScope;
+import com.agileapes.couteau.maven.resource.ConfigurableClassLoader;
 import com.agileapes.couteau.maven.resource.ProjectResource;
 import com.agileapes.couteau.maven.resource.impl.ClassPathScopeArtifactFilter;
 import com.agileapes.couteau.maven.task.PluginTask;
@@ -17,6 +18,7 @@ import org.apache.maven.project.MavenProject;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.type.filter.AssignableTypeFilter;
+import org.springframework.util.ClassUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -56,6 +58,7 @@ public abstract class AbstractPluginExecutor extends AbstractMojo {
         if (projectClassLoader != null) {
             return projectClassLoader;
         }
+        ClassLoader projectClassLoader;
         try {
             List<String> classpathElements = new ArrayList<String>();
             final Set dependencyArtifacts = getProject().getDependencyArtifacts();
@@ -81,10 +84,10 @@ public abstract class AbstractPluginExecutor extends AbstractMojo {
             }
             projectClassLoader = new URLClassLoader(urls, this.getClass().getClassLoader());
         } catch (Exception e) {
-            getLog().debug("Couldn't get the ClassLoader.");
+            getLog().warn("Failed to setup project class loader");
             projectClassLoader = this.getClass().getClassLoader();
         }
-        return projectClassLoader;
+        return this.projectClassLoader = new ConfigurableClassLoader(projectClassLoader);
     }
 
     /**
@@ -168,6 +171,7 @@ public abstract class AbstractPluginExecutor extends AbstractMojo {
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
+        ClassUtils.overrideThreadContextClassLoader(getProjectClassLoader());
         final TaskScheduler taskScheduler = getTaskScheduler();
         with(getTasks()).each(new Processor<PluginTask<?>>() {
             @Override

@@ -55,8 +55,6 @@ public abstract class AbstractSpringPluginExecutor extends AbstractPluginExecuto
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         setApplicationContext(loadApplicationContext());
-        //We override the class loader after Spring has found the application context files and relevant beans
-        ClassUtils.overrideThreadContextClassLoader(getProjectClassLoader());
         super.execute();
     }
 }
