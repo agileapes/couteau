@@ -72,8 +72,13 @@ public class SynchronousEventPublisher implements EventPublisher {
             //noinspection unchecked
             smartEventListener = new SmartEventListener((EventListener<Event>) eventListener);
         }
-        eventListeners.add(smartEventListener);
-        Collections.sort(eventListeners, new OrderedBeanComparator());
+        synchronized (this) {
+            eventListeners.add(smartEventListener);
+            final CopyOnWriteArrayList<SmartEventListener> listeners = new CopyOnWriteArrayList<SmartEventListener>(eventListeners);
+            Collections.sort(listeners, new OrderedBeanComparator());
+            eventListeners.clear();
+            eventListeners.addAll(listeners);
+        }
     }
 
 }
