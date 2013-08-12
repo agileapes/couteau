@@ -26,6 +26,11 @@ import java.util.*;
 @Template("ftl/pojo.ftl")
 public class JavaPojoModel {
 
+    private static final Set<String> KEYWORDS = new HashSet<String>(Arrays.asList(new String[]{"public", "private", "protected",
+            "package", "final", "char", "class", "int", "boolean", "long", "short", "import", "if",
+            "else", "do", "while", "for", "this", "return", "interface", "volatile", "transient",
+            "new", "super"}));
+
     protected final String qualifiedName;
     protected final String packageName;
     protected final String simpleName;
@@ -41,19 +46,6 @@ public class JavaPojoModel {
             packageName = "";
             simpleName = qualifiedName;
         }
-    }
-
-    private static String capitalize(String string) {
-        if (string == null) {
-            throw new NullPointerException();
-        }
-        if (string.isEmpty()) {
-            return string;
-        }
-        if (string.length() == 1) {
-            return string.toUpperCase();
-        }
-        return string.substring(0, 1).toUpperCase() + string.substring(1);
     }
 
     public String getQualifiedName() {
@@ -83,7 +75,7 @@ public class JavaPojoModel {
         }
         //types under the same package as this class are ignored
         if (type.matches(getPackageName().replace(".", "\\.") + "\\.[^\\.]+")) {
-            return;
+//            return;
         }
         imports.add(type);
     }
@@ -94,6 +86,9 @@ public class JavaPojoModel {
 
     public void addProperty(String property, String type) {
         addImport(type);
+        while (KEYWORDS.contains(property)) {
+            property = "_" + property;
+        }
         properties.put(property, !type.contains(".") ? type : type.substring(type.lastIndexOf('.') + 1));
     }
 

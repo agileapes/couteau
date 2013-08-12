@@ -38,7 +38,7 @@ public class DefaultDynamicClassCompiler implements DynamicClassCompiler {
     }
 
     public DefaultDynamicClassCompiler(ClassLoader parent) {
-        classLoader = parent == null ? new MappedClassLoader(parent) : new MappedClassLoader();
+        classLoader = parent != null ? new MappedClassLoader(parent) : new MappedClassLoader();
         compiler = new SimpleJavaSourceCompiler();
     }
 
