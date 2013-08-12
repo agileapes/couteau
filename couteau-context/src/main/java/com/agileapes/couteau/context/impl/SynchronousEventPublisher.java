@@ -19,6 +19,7 @@ import com.agileapes.couteau.context.contract.Event;
 import com.agileapes.couteau.context.contract.EventListener;
 import com.agileapes.couteau.context.contract.EventPublisher;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -74,7 +75,7 @@ public class SynchronousEventPublisher implements EventPublisher {
         }
         synchronized (this) {
             eventListeners.add(smartEventListener);
-            final CopyOnWriteArrayList<SmartEventListener> listeners = new CopyOnWriteArrayList<SmartEventListener>(eventListeners);
+            final List<SmartEventListener> listeners = new ArrayList<SmartEventListener>(eventListeners);
             Collections.sort(listeners, new OrderedBeanComparator());
             eventListeners.clear();
             eventListeners.addAll(listeners);
