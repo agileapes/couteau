@@ -42,7 +42,7 @@ public class CallbackMatcher {
             tokens.add(new MatchToken(matcher.toMatchResult()));
             pos = matcher.end();
         }
-        if (pos < text.length() - 1) {
+        if (pos < text.length()) {
             tokens.add(new MatchToken(text.substring(pos)));
         }
         final StringBuilder builder = new StringBuilder();
