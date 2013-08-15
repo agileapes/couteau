@@ -18,7 +18,13 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!--<bean class="com.agileapes.couteau.maven.sample.task.ListClassesTask"/>-->
+    <bean class="com.agileapes.couteau.maven.sample.task.ListClassesTask">
+        <property name="dependencies">
+            <set>
+                <ref bean="com.agileapes.couteau.maven.sample.task.CodeGenerationTask"/>
+            </set>
+        </property>
+    </bean>
     <bean class="com.agileapes.couteau.maven.sample.task.CodeGenerationTask">
         <constructor-arg ref="com.agileapes.couteau.maven.sample.code.GeneratedCodeRepository"/>
     </bean>
@@ -27,6 +33,7 @@
         <property name="dependencies">
             <set>
                 <ref bean="com.agileapes.couteau.maven.sample.task.CodeGenerationTask"/>
+                <ref bean="com.agileapes.couteau.maven.sample.task.ListClassesTask"/>
             </set>
         </property>
     </bean>

@@ -35,9 +35,9 @@
         <module>../couteau-strings</module>
         <module>../couteau-graph</module>
         <module>../couteau-xml</module>
+        <module>../couteau-concurrency</module>
         <module>../couteau-maven</module>
         <module>../couteau-lang</module>
-        <module>../couteau-concurrency</module>
     </modules>
     
 </project>

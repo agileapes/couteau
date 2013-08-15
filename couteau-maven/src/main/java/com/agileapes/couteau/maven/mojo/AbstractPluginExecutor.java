@@ -3,13 +3,16 @@ package com.agileapes.couteau.maven.mojo;
 import com.agileapes.couteau.basics.api.Filter;
 import com.agileapes.couteau.basics.api.Processor;
 import com.agileapes.couteau.basics.api.Transformer;
+import com.agileapes.couteau.basics.api.impl.StaticStringifiable;
+import com.agileapes.couteau.concurrency.manager.impl.ThreadPoolTaskManager;
+import com.agileapes.couteau.graph.alg.sort.impl.TopologicalGraphSorter;
+import com.agileapes.couteau.graph.node.impl.DirectedNode;
 import com.agileapes.couteau.maven.resource.ClassPathScanningClassProvider;
 import com.agileapes.couteau.maven.resource.ClassPathScope;
 import com.agileapes.couteau.maven.resource.ConfigurableClassLoader;
 import com.agileapes.couteau.maven.resource.ProjectResource;
 import com.agileapes.couteau.maven.resource.impl.ClassPathScopeArtifactFilter;
 import com.agileapes.couteau.maven.task.PluginTask;
-import com.agileapes.couteau.maven.task.TaskScheduler;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -35,6 +38,10 @@ import static com.agileapes.couteau.basics.collections.CollectionWrapper.with;
  */
 public abstract class AbstractPluginExecutor extends AbstractMojo {
 
+    /**
+     * This field will act as a cache for project resources, once they have been
+     * loaded through the plugin
+     */
     private Collection<ProjectResource> projectResources = null;
 
     /**
@@ -43,8 +50,16 @@ public abstract class AbstractPluginExecutor extends AbstractMojo {
      */
     private ClassLoader projectClassLoader = null;
 
+    /**
+     * These are the filters that will determine which artifacts should be scanned for
+     * project resources
+     */
     private final List<Filter<Artifact>> artifactFilters = new ArrayList<Filter<Artifact>>();
 
+    /**
+     * Adds a new artifact filter
+     * @param filter    the filter to be added
+     */
     protected void addArtifactFilter(Filter<Artifact> filter) {
         artifactFilters.add(filter);
     }
@@ -105,6 +120,9 @@ public abstract class AbstractPluginExecutor extends AbstractMojo {
         return resources;
     }
 
+    /**
+     * This method will fetch project resource objects
+     */
     private void fetchProjectResources() {
         final Set<Class> classes = getClasses();
         final Set<Resource> resources = getResources();
@@ -142,6 +160,11 @@ public abstract class AbstractPluginExecutor extends AbstractMojo {
         return candidateClasses;
     }
 
+    /**
+     * This method will fetch project resources, or if they have already been fetched, will
+     * simply return them from the cache
+     * @return a collection of all project resources
+     */
     public synchronized Collection<ProjectResource> getProjectResources() {
         if (projectResources == null) {
             fetchProjectResources();
@@ -149,42 +172,80 @@ public abstract class AbstractPluginExecutor extends AbstractMojo {
         return projectResources;
     }
 
-    protected abstract Collection<PluginTask<?>> getTasks();
-
-    public TaskScheduler getTaskScheduler() {
-        final TaskScheduler scheduler = new TaskScheduler(getWorkers());
-        scheduler.setPluginExecutor(this);
-        return scheduler;
-    }
-
+    /**
+     * @return the number of worker threads spawned by the plugin to manage concurrent
+     * execution of tasks. This method is simply here so that this value might be parameterized
+     * in extending subclasses. The default value is {@link Runtime#availableProcessors()}
+     */
     protected int getWorkers() {
-        return 10;
+        return Runtime.getRuntime().availableProcessors();
     }
 
+    /**
+     * Instantiates the plugin by including all compile scope artifacts
+     */
     protected AbstractPluginExecutor() {
         addArtifactFilter(new ClassPathScopeArtifactFilter(ClassPathScope.COMPILE));
     }
 
-    public abstract MavenProject getProject();
-
-    public abstract Set<String> getScanPackages();
+    /**
+     * Topologically sorts the given tasks based on their dependencies
+     * @param tasks    unsorted tasks
+     * @return a list of tasks, sorted by their dependencies
+     */
+    private List<PluginTask<?>> sortTasks(Collection<PluginTask<?>> tasks) {
+        final Map<PluginTask<?>, DirectedNode> nodes = new HashMap<PluginTask<?>, DirectedNode>();
+        for (PluginTask<?> task : tasks) {
+            final DirectedNode node = new DirectedNode(new StaticStringifiable<DirectedNode>(task.getName()));
+            nodes.put(task, node);
+            node.setUserData("task", task);
+        }
+        for (PluginTask<?> task : tasks) {
+            final DirectedNode node = nodes.get(task);
+            for (PluginTask pluginTask : task.getDependencies()) {
+                node.addNeighbor(nodes.get(pluginTask));
+            }
+        }
+        final List<DirectedNode> directedNodes = new TopologicalGraphSorter().sort(nodes.values());
+        final ArrayList<PluginTask<?>> result = new ArrayList<PluginTask<?>>();
+        for (DirectedNode node : directedNodes) {
+            result.add((PluginTask<?>) node.getUserData("task"));
+        }
+        return result;
+    }
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         ClassUtils.overrideThreadContextClassLoader(getProjectClassLoader());
-        final TaskScheduler taskScheduler = getTaskScheduler();
-        with(getTasks()).each(new Processor<PluginTask<?>>() {
-            @Override
-            public void process(PluginTask<?> input) {
-                taskScheduler.schedule(input);
-            }
-        });
-        taskScheduler.start();
+        final List<PluginTask<?>> tasks = sortTasks(getTasks());
+        final ThreadPoolTaskManager taskManager = new ThreadPoolTaskManager("TaskManager", getWorkers(), true);
+        for (PluginTask task : tasks) {
+            //noinspection unchecked
+            task.setPluginExecutor(this);
+            taskManager.schedule(task);
+        }
+        final Thread taskManagerThread = new Thread(taskManager);
+        taskManagerThread.start();
         try {
-            taskScheduler.join();
+            taskManagerThread.join();
         } catch (InterruptedException e) {
             throw new MojoExecutionException("Failed to carry out tasks properly", e);
         }
     }
+
+    /**
+     * @return the Maven project being processed
+     */
+    public abstract MavenProject getProject();
+
+    /**
+     * @return package prefixes to scan for classes
+     */
+    public abstract Set<String> getScanPackages();
+
+    /**
+     * @return the tasks the plugin is supposed to execute
+     */
+    protected abstract Collection<PluginTask<?>> getTasks();
 
 }
