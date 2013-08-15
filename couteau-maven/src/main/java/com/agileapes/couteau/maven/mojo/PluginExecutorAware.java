@@ -16,11 +16,18 @@
 package com.agileapes.couteau.maven.mojo;
 
 /**
+ * This interface is used to inject the plugin executor into beans that require access to the
+ * object.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (8/3/13, 3:15 PM)
  */
 public interface PluginExecutorAware<E extends AbstractPluginExecutor> {
 
+    /**
+     * Injects the plugin executor into the implementing bean
+     * @param pluginExecutor    the plugin executor
+     */
     void setPluginExecutor(E pluginExecutor);
 
 }

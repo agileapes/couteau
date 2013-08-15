@@ -33,6 +33,23 @@ import java.util.concurrent.CopyOnWriteArraySet;
 import static com.agileapes.couteau.basics.collections.CollectionWrapper.with;
 
 /**
+ * <p>This class is the base class for all plugin execution's specified through this framework.
+ * The starting point through which you will be able to write your own plugins is exactly here.</p>
+ * <p>To start writing a plugin, simply extend this class, and implement the abstract methods:</p>
+ * <ul>
+ *     <li>{@link #getProject()}; which should return a reference to the project being processed by
+ *     your plugin. This is achievable by using the <code>${project}</code> Maven parameter expression.
+ *     It wouldn't hurt to mark this parameter as read-only and required, too.</li>
+ *     <li>{@link #getTasks()}; which must return a collection of tasks that need to be executed
+ *     by this plugin. This is to facilitate the separation of task logic from Maven's plugin
+ *     API. These tasks will be then sorted topologically ({@link TopologicalGraphSorter}) to prevent
+ *     execution of tasks whose dependencies have not yet been resovled.</li>
+ *     <li>{@link #getScanPackages()}; this should return a set of package prefixes which you desire
+ *     to be scanned for classes, when you call {@link #getProjectResources()}. If your plugin is to
+ *     be executed over unknown project's, it might be a good idea to make this a required parameter
+ *     for your plugin.</li>
+ * </ul>
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (8/2/13, 10:55 AM)
  */
