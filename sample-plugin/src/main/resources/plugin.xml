@@ -40,4 +40,6 @@
 
     <bean class="com.agileapes.couteau.maven.sample.code.GeneratedCodeRepository"/>
 
+    <bean class="com.agileapes.couteau.maven.mojo.SpringPluginConfigurator"/>
+
 </beans>

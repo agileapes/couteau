@@ -118,11 +118,6 @@ public class CompileCodeTask extends PluginTask<SampleExecutor> {
                 ((ConfigurableClassLoader) executor.getProjectClassLoader()).addClass(compiledClass);
             }
         });
-        try {
-            final Class<?> aClass = executor.getProjectClassLoader().loadClass("com.agileapes.couteau.graph.node.impl.DefaultSearchableNodeAccessor");
-            System.out.println("aClass = " + aClass);
-        } catch (ClassNotFoundException e) {
-        }
     }
 
 }
