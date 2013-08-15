@@ -37,6 +37,7 @@
         <module>../couteau-xml</module>
         <module>../couteau-maven</module>
         <module>../couteau-lang</module>
+        <module>../couteau-concurrency</module>
     </modules>
     
 </project>
