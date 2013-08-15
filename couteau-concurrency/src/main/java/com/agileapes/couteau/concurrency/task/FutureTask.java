@@ -16,11 +16,19 @@
 package com.agileapes.couteau.concurrency.task;
 
 /**
+ * This interface extends the {@link Task} interface to allow the task to
+ * specify whether or not it is now ready to be performed.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/8/15, 5:55)
  */
 public interface FutureTask extends Task {
 
+    /**
+     * Should determine whether or not the given task is now to be executed.
+     * @return {@code true} will mean that the task can now be performed, i.e. all
+     * of its prerequisites have been met.
+     */
     boolean isReady();
 
 }

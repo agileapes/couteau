@@ -13,25 +13,20 @@
  * or substantial portions of the Software.
  */
 
-package com.agileapes.couteau.concurrency.task;
-
-import com.agileapes.couteau.concurrency.error.TaskFailureException;
+package com.agileapes.couteau.concurrency.error;
 
 /**
- * This interface encapsulates a single task that is to be performed
- * concurrently.
+ * This exception denotes a situation in which a task is being assigned to a
+ * {@link com.agileapes.couteau.concurrency.worker.TaskWorker} who is already
+ * assigned a task.
  *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (2013/8/15, 5:53)
+ * @since 1.0 (2013/8/15, 7:41)
  */
-public interface Task {
+public class TaskCompletionFailedException extends TaskFailureException {
 
-    /**
-     * This method should embody the operations whose completion will be regarded
-     * the same as that of the whole task
-     * @throws TaskFailureException in case any errors should prevent the task from
-     * being successfully completed.
-     */
-    void perform() throws TaskFailureException;
+    public TaskCompletionFailedException(String message) {
+        super(message);
+    }
 
 }

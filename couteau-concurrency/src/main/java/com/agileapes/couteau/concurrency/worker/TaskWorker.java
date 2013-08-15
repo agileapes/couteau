@@ -15,29 +15,65 @@
 
 package com.agileapes.couteau.concurrency.worker;
 
+import com.agileapes.couteau.concurrency.error.TaskCompletionFailedException;
+import com.agileapes.couteau.concurrency.error.TaskContextException;
 import com.agileapes.couteau.concurrency.error.TaskFailureException;
 import com.agileapes.couteau.concurrency.manager.TaskManager;
 import com.agileapes.couteau.concurrency.task.Task;
 
 /**
+ * This class extends the {@link Thread} class to allow for easy assignment of tasks. The TaskWorker will take a task from
+ * the owning task manager and will try to carry it out successfully.
+ *
+ * @see #assign(Task)
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/8/15, 5:58)
  */
 public class TaskWorker extends Thread {
 
+    /**
+     * The task assigned to the worker, or {@code null} if no task has been assigned to the worker, yet
+     */
     private Task task = null;
+
+    /**
+     * Flag determining whether the worker has been dismissed
+     */
     private boolean dismissed = false;
+
+    /**
+     * The task manager within which this worker is being executed
+     */
     private final TaskManager taskManager;
 
+    /**
+     * Instantiates the worker by assigning the task manager and giving it a name
+     * @param taskManager    the task manager spawning this worker thread
+     * @param name           the name of this worker
+     */
     public TaskWorker(TaskManager taskManager, String name) {
         super(name);
         this.taskManager = taskManager;
     }
 
+    /**
+     * Assigns a new task to the worker thread
+     * @param task    the task to be carried out
+     */
     public void assign(Task task) {
+        if (this.task != null) {
+            try {
+                taskManager.fail(this.task, new TaskCompletionFailedException("The worker was assigned a new task before it could finish its previous task"));
+            } catch (TaskContextException e) {
+                throw new IllegalStateException();
+            }
+        }
         this.task = task;
     }
 
+    /**
+     * Dismisses the worker by asking it to finish execution
+     */
     public void dismiss() {
         dismissed = true;
     }
@@ -55,7 +91,12 @@ public class TaskWorker extends Thread {
                 if (task != null) {
                     //if it is interrupted while waiting, and if it has been assigned
                     //a task, the task manager must be notified of this failure
-                    taskManager.fail(task, e);
+                    try {
+                        taskManager.fail(task, e);
+                    } catch (TaskContextException contextException) {
+                        //context exceptions are not tolerated at this level
+                        break;
+                    }
                     continue;
                 }
             }
@@ -76,12 +117,22 @@ public class TaskWorker extends Thread {
                 task.perform();
             } catch (TaskFailureException e) {
                 //if it failed to complete, we notify the task manager
-                taskManager.fail(task, e);
+                try {
+                    taskManager.fail(task, e);
+                } catch (TaskContextException contextException) {
+                    //context exceptions are not tolerated at this level
+                    break;
+                }
                 task = null;
                 continue;
             }
             //if the task completed successfully, we tell the task manager as such
-            taskManager.done(task);
+            try {
+                //context exceptions are not tolerated at this level
+                taskManager.done(task);
+            } catch (TaskContextException contextException) {
+                break;
+            }
             //we nullify the task to relieve the worker of the burden
             task = null;
         }

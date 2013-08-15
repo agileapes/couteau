@@ -15,20 +15,42 @@
 
 package com.agileapes.couteau.concurrency.manager;
 
+import com.agileapes.couteau.concurrency.error.TaskContextException;
 import com.agileapes.couteau.concurrency.task.Task;
 
 /**
+ * This interface encapsulates all that a task manager needs to perform. This includes
+ * operations that will facilitate scheduling tasks and canceling them.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/8/15, 5:54)
  */
 public interface TaskManager extends Runnable {
 
+    /**
+     * Schedules the given task to be executed
+     * @param task    the task that is to be executed
+     */
     void schedule(Task task);
 
-    void done(Task task);
+    /**
+     * Marks the given task as done within this task manager
+     * @param task    the task that was completed
+     * @throws TaskContextException if the task has not been scheduled with this task manager
+     */
+    void done(Task task) throws TaskContextException;
 
-    void fail(Task task, Exception exception);
+    /**
+     * Signals a failure in carrying out the task
+     * @param task         the task that has failed
+     * @param exception    the error leading to this failure
+     * @throws TaskContextException if the task has not been scheduled with this task manager
+     */
+    void fail(Task task, Exception exception) throws TaskContextException;
 
+    /**
+     * Shuts down the task manager gracefully
+     */
     void shutdown();
 
 }

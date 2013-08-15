@@ -13,25 +13,27 @@
  * or substantial portions of the Software.
  */
 
-package com.agileapes.couteau.concurrency.task;
+package com.agileapes.couteau.concurrency.error;
 
-import com.agileapes.couteau.concurrency.error.TaskFailureException;
+import com.agileapes.couteau.concurrency.manager.TaskManager;
+import com.agileapes.couteau.concurrency.task.Task;
 
 /**
- * This interface encapsulates a single task that is to be performed
- * concurrently.
+ * This exception denotes that the task being marked as done or failed, does not belong
+ * to the task manager through which the marking is taking place
  *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (2013/8/15, 5:53)
+ * @since 1.0 (2013/8/15, 7:01)
  */
-public interface Task {
+public class TaskContextException extends Exception {
 
     /**
-     * This method should embody the operations whose completion will be regarded
-     * the same as that of the whole task
-     * @throws TaskFailureException in case any errors should prevent the task from
-     * being successfully completed.
+     * Instantiates the exception
+     * @param taskManager    the task manager which is doing the marking
+     * @param task           the task being marked
      */
-    void perform() throws TaskFailureException;
+    public TaskContextException(TaskManager taskManager, Task task) {
+        super("Task does not belong to specified context: task=" + task + ",context=" + taskManager);
+    }
 
 }
