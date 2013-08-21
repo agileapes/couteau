@@ -49,7 +49,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (6/27/13, 4:19 PM)
  */
-public abstract class AbstractContext<E> extends AbstractRegistry<E> implements ReconfigurableContext<E> {
+public abstract class AbstractContext<E> extends AbstractMapRegistry<E> implements ReconfigurableContext<E> {
 
     /**
      * This is a list of bean processors for the beans.

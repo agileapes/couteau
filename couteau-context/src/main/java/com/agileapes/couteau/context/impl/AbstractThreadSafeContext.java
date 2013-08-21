@@ -32,29 +32,8 @@ public abstract class AbstractThreadSafeContext<E> extends AbstractContext<E> {
     private final Map<String, E> map = new ConcurrentHashMap<String, E>();
 
     @Override
-    protected boolean write(String name, E item) {
-        map.put(name, item);
-        return contains(name);
-    }
-
-    @Override
-    protected E read(String name) {
-        return map.get(name);
-    }
-
-    @Override
-    public boolean contains(String name) {
-        return map.containsKey(name);
-    }
-
-    @Override
-    public Collection<E> getBeans() {
-        return Collections.unmodifiableCollection(map.values());
-    }
-
-    @Override
-    public Collection<String> getBeanNames() {
-        return Collections.unmodifiableCollection(map.keySet());
+    protected Map<String, E> getMap() {
+        return map;
     }
 
 }
