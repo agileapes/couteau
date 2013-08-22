@@ -15,6 +15,7 @@
 
 package com.agileapes.couteau.reflection.beans.impl;
 
+import com.agileapes.couteau.basics.api.Processor;
 import com.agileapes.couteau.reflection.beans.BeanDescriptor;
 import com.agileapes.couteau.reflection.beans.ReadAccessorAware;
 import com.agileapes.couteau.reflection.beans.WriteAccessorAware;
@@ -57,6 +58,17 @@ public abstract class AbstractClassBeanDescriptor<E> implements BeanDescriptor<E
      * @param beanClass    the class to be used
      */
     public AbstractClassBeanDescriptor(Class<E> beanClass) {
+        this(beanClass, null);
+    }
+
+    /**
+     * Instantiates the bean descriptor while taking in the bean class
+     * @param beanClass    the class to be used
+     */
+    protected AbstractClassBeanDescriptor(Class<E> beanClass, Processor<AbstractClassBeanDescriptor<E>> processor) {
+        if (processor != null) {
+            processor.process(this);
+        }
         this.beanClass = beanClass;
         this.readers.putAll(getReaders());
         this.writers.putAll(getWriters());
