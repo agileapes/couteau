@@ -1,5 +1,7 @@
 package com.agileapes.couteau.basics.assets;
 
+import java.util.Collection;
+
 /**
  * A simple assertion utility that helps with verification of input values
  *
@@ -89,6 +91,25 @@ public class Assert {
         assertTrue(value == null || type.isInstance(value), message);
     }
 
+    /**
+     * Checks whether the given collection's size is between the boundaries. The boundaries are inclusive.
+ * @param collection    the collection
+     * @param minSize       minimum allowed size
+ * @param maxSize       maximum allowed size
+     */
+    public static void assertCollectionSize(Collection<?> collection, int minSize, int maxSize) {
+        assertCollectionSize(collection, minSize, maxSize, "Collection size must be in [" + minSize + "," + maxSize + "] but it was " + collection.size());
+    }
 
+    /**
+     * Checks whether the given collection's size is between the boundaries. The boundaries are inclusive.
+     * @param collection    the collection
+     * @param minSize       minimum allowed size
+     * @param maxSize       maximum allowed size
+     * @param message       the message
+     */
+    public static void assertCollectionSize(Collection<?> collection, int minSize, int maxSize, String message) {
+        assertTrue(collection.size() >= minSize && collection.size() <= maxSize, message);
+    }
 
 }
