@@ -44,7 +44,7 @@ public abstract class AbstractMapRegistry<E> extends AbstractRegistry<E> {
      * @return {@code true} if the item exists in the registry
      */
     @Override
-    public final boolean contains(String name) {
+    public boolean contains(String name) {
         return getMap().containsKey(name);
     }
 
@@ -53,7 +53,7 @@ public abstract class AbstractMapRegistry<E> extends AbstractRegistry<E> {
      * collection should have no effects on the registry.
      */
     @Override
-    public final Collection<E> getBeans() {
+    public Collection<E> getBeans() {
         return Collections.unmodifiableCollection(getMap().values());
     }
 
@@ -62,7 +62,7 @@ public abstract class AbstractMapRegistry<E> extends AbstractRegistry<E> {
      * collection should have no effects on the registry.
      */
     @Override
-    public final Collection<String> getBeanNames() {
+    public Collection<String> getBeanNames() {
         return Collections.unmodifiableCollection(getMap().keySet());
     }
 
