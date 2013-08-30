@@ -75,9 +75,11 @@ public abstract class FreemarkerUtils {
      */
     public static void write(Configuration configuration, Writer writer, String templateName, Object object) throws Exception {
         final Template template = configuration.getTemplate(templateName);
-        TemplateModel model;
+        Object model;
         if (object instanceof TemplateModel) {
             model = (TemplateModel) object;
+        } else if (object instanceof Map) {
+            model = object;
         } else {
             model = new FreemarkerModelConverter().convert(object);
         }
