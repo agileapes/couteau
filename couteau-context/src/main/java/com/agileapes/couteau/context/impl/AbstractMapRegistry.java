@@ -1,5 +1,7 @@
 package com.agileapes.couteau.context.impl;
 
+import com.agileapes.couteau.reflection.util.ClassUtils;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
@@ -13,6 +15,16 @@ import java.util.Map;
  */
 public abstract class AbstractMapRegistry<E> extends AbstractRegistry<E> {
 
+    private final Class<E> registryType;
+
+    public AbstractMapRegistry() {
+        //noinspection unchecked
+        registryType = (Class<E>) ClassUtils.resolveTypeArgument(getClass(), AbstractMapRegistry.class);
+    }
+
+    /**
+     * @return the map that will be used for the store of the registry
+     */
     protected abstract Map<String, E> getMap();
 
     /**
@@ -64,6 +76,15 @@ public abstract class AbstractMapRegistry<E> extends AbstractRegistry<E> {
     @Override
     public Collection<String> getBeanNames() {
         return Collections.unmodifiableCollection(getMap().keySet());
+    }
+
+    /**
+     * Determines the super-type of objects that can be registered with this registry.
+     * @return the type of objects in the registry
+     */
+    @Override
+    public Class<E> getRegistryType() {
+        return registryType;
     }
 
 }
