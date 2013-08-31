@@ -67,6 +67,7 @@ public class TypedMethodModel extends NativeMethodModel {
             throw new Error("More than one candidate for execution of method with these arguments");
         }
         final Method method = candidates.get(0);
+        method.setAccessible(true);
         final Object result;
         try {
             result = method.invoke(this, arguments.toArray());
