@@ -48,6 +48,7 @@ public abstract class AbstractMethodPropertyAccessor<E> extends AbstractProperty
     public AbstractMethodPropertyAccessor(Method method, Object target) {
         this.method = method;
         this.target = target;
+        this.method.setAccessible(true);
     }
 
     /**
