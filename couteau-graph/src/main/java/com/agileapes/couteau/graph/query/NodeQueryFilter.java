@@ -36,7 +36,7 @@ public class NodeQueryFilter extends FilterChain<Node> implements NodeFilter {
      * @return will return the current filter (for chaining purposes)
      */
     public NodeQueryFilter forOrigin(Node origin) {
-        for (Filter<Node> filter : filters) {
+        for (Filter<? super Node> filter : filters) {
             if (filter instanceof OriginNodeAware) {
                 ((OriginNodeAware) filter).setOrigin(origin);
             }
