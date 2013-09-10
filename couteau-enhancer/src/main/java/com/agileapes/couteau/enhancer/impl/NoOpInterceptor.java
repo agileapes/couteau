@@ -19,8 +19,6 @@ import com.agileapes.couteau.enhancer.api.MethodDescriptor;
 import com.agileapes.couteau.enhancer.api.MethodInterceptor;
 import com.agileapes.couteau.enhancer.api.MethodProxy;
 
-import java.lang.reflect.Method;
-
 /**
  * This is a method interceptor that does not do anything other than relaying method
  * calls to the super class.

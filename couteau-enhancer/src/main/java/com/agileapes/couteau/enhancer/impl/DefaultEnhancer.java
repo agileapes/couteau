@@ -40,7 +40,7 @@ public class DefaultEnhancer<E> implements Enhancer<E> {
     private Class[] interfaces;
 
     public DefaultEnhancer() {
-        this(new GeneratingClassEnhancer<E>());
+        this(new GeneratingClassEnhancer<E>(null));
     }
 
     public DefaultEnhancer(ClassEnhancer<E> classEnhancer) {
