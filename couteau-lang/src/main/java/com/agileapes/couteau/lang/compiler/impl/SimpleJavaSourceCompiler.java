@@ -36,6 +36,12 @@ import java.util.*;
 public class SimpleJavaSourceCompiler implements SimpleSourceCompiler<Java> {
 
     private static final String NEW_LINE_FEED = "\n";
+    private final ClassLoader classLoader;
+
+    public SimpleJavaSourceCompiler(ClassLoader classLoader) {
+
+        this.classLoader = classLoader;
+    }
 
     @SuppressWarnings("UnusedDeclaration")
     public static enum Option {
@@ -111,6 +117,9 @@ public class SimpleJavaSourceCompiler implements SimpleSourceCompiler<Java> {
         }
         if (!compiled) {
             throw new CompileException("Compilation failed: " + identifier);
+        }
+        for (Map.Entry<String, JavaClassObject> entry : fileManager.getObjectMap().entrySet()) {
+            ((MappedClassLoader) classLoader).register(entry.getKey(), entry.getValue().getBytes());
         }
         final JavaClassObject classObject;
         try {

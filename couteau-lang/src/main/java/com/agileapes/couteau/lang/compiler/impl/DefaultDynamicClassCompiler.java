@@ -39,7 +39,7 @@ public class DefaultDynamicClassCompiler implements DynamicClassCompiler {
 
     public DefaultDynamicClassCompiler(ClassLoader parent) {
         classLoader = parent != null ? new MappedClassLoader(parent) : new MappedClassLoader();
-        compiler = new SimpleJavaSourceCompiler();
+        compiler = new SimpleJavaSourceCompiler(classLoader);
     }
 
     @Override
@@ -66,7 +66,6 @@ public class DefaultDynamicClassCompiler implements DynamicClassCompiler {
         } catch (IOException e) {
             throw new CompileException("Failed to close the output written by the compiler", e);
         }
-        classLoader.register(className, outputStream.toByteArray());
         try {
             return classLoader.findClass(className);
         } catch (ClassNotFoundException ignored) {

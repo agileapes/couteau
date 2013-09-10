@@ -38,6 +38,7 @@
         <module>../couteau-concurrency</module>
         <module>../couteau-maven</module>
         <module>../couteau-lang</module>
+        <module>../couteau-enhancer</module>
     </modules>
     
 </project>

@@ -29,11 +29,11 @@ import java.util.List;
  */
 public class FilterChain<E> implements Filter<E> {
 
-    protected final List<Filter<E>> filters = new ArrayList<Filter<E>>();
+    protected final List<Filter<? super E>> filters = new ArrayList<Filter<? super E>>();
 
     @Override
     public boolean accepts(E item) {
-        for (Filter<E> filter : filters) {
+        for (Filter<? super E> filter : filters) {
             if (!filter.accepts(item)) {
                 return false;
             }
@@ -41,7 +41,7 @@ public class FilterChain<E> implements Filter<E> {
         return true;
     }
 
-    public void addFilter(Filter<E> filter) {
+    public void addFilter(Filter<? super E> filter) {
         filters.add(filter);
     }
 

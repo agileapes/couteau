@@ -1,0 +1,38 @@
+/*
+ * Copyright (c) 2013. AgileApes (http://www.agileapes.scom/), and
+ * associated organization.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this
+ * software and associated documentation files (the "Software"), to deal in the Software
+ * without restriction, including without limitation the rights to use, copy, modify,
+ * merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ * permit persons to whom the Software is furnished to do so, subject to the following
+ * conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies
+ * or substantial portions of the Software.
+ */
+
+package com.agileapes.couteau.enhancer.impl;
+
+import com.agileapes.couteau.enhancer.api.MethodDescriptor;
+import com.agileapes.couteau.enhancer.api.MethodInterceptor;
+import com.agileapes.couteau.enhancer.api.MethodProxy;
+
+import java.lang.reflect.Method;
+
+/**
+ * This is a method interceptor that does not do anything other than relaying method
+ * calls to the super class.
+ *
+ * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @since 1.0 (2013/9/10, 15:08)
+ */
+public class NoOpInterceptor implements MethodInterceptor {
+
+    @Override
+    public Object intercept(MethodDescriptor methodDescriptor, Object target, Object[] arguments, MethodProxy methodProxy) throws Throwable {
+        return methodProxy.callSuper(target, arguments);
+    }
+
+}

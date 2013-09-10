@@ -35,7 +35,7 @@ public class Java extends Language {
      * @return the candidate compiler
      */
     public static SimpleCompiler<Java, Java> getCandidateCompiler() {
-        return new SimpleJavaSourceCompiler();
+        return new SimpleJavaSourceCompiler(ClassLoader.getSystemClassLoader());
     }
 
 }

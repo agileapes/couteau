@@ -76,6 +76,7 @@ public class SingleLocationClassFileManager<M extends JavaFileManager> extends F
         return object;
     }
 
-
-
+    public Map<String, JavaClassObject> getObjectMap() {
+        return objectMap;
+    }
 }
