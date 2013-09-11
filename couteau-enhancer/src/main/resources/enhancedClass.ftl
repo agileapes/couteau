@@ -15,11 +15,12 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Arrays;
 
+@SuppressWarnings("unchecked")
 public class ${simpleName} extends ${superClass.canonicalName} implements Interceptible<#if interfaces?size &gt; 0>, </#if><#list interfaces as interface>${interface.canonicalName}<#if interface_has_next>, </#if></#list> {
 
     private static final Map<Integer, MethodDescriptor> methodDescriptors = new HashMap<Integer, MethodDescriptor>();
     static {
-        <#list notDeclared(notFinal(public(superClass.methods))) as method>
+        <#list notDeclared(notFinal(public(notStatic(superClass.methods)))) as method>
         methodDescriptors.put(${methodIndex(method)}, new ImmutableMethodDescriptor(${superClass.canonicalName}.class, ${method.returnType.canonicalName}.class, "${method.name}", new Class[]{<#list method.parameterTypes as parameterType>${parameterType.canonicalName}.class<#if parameterType_has_next>, </#if></#list>}, Arrays.<Annotation>asList(<#list method.annotations as annotation>
         new ${annotation.annotationType().canonicalName}() {
             @Override
@@ -75,7 +76,7 @@ public class ${simpleName} extends ${superClass.canonicalName} implements Interc
         }
     }
 
-<#list notImplemented(notFinal(public(superClass.methods))) as method><#--public(notFinal())-->
+<#list notImplemented(notFinal(public(notStatic(superClass.methods)))) as method>
     @Override
     public ${method.returnType.canonicalName} ${method.name}(<#list method.parameterTypes as parameterType>final ${parameterType.canonicalName} param${parameterType_index}<#if parameterType_has_next>, </#if></#list>)<#if method.exceptionTypes?size &gt; 0> throws <#list method.exceptionTypes as exceptionType>${exceptionType.canonicalName}<#if exceptionType_has_next>, </#if></#list></#if> {
         final MethodDescriptor method = methodDescriptors.get(${methodIndex(method)});

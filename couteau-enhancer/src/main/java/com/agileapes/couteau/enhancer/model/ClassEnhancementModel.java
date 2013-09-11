@@ -34,6 +34,7 @@ public class ClassEnhancementModel {
     private TemplateMethodModelEx valueOf = new AnnotationFieldGetterMethod();
     private TemplateMethodModelEx isNotImplemented = new NotImplementedMethod();
     private TemplateMethodModelEx isNotDeclared = new NotImplementedMethod();
+    private TemplateMethodModelEx isNotStatic = new NonStaticMethodFilter();
     private TemplateMethodModelEx methodIndex = new MethodIndexMethod();
 
     public Class<?> getSuperClass() {
@@ -86,5 +87,9 @@ public class ClassEnhancementModel {
 
     public TemplateMethodModelEx getNotDeclared() {
         return isNotDeclared;
+    }
+
+    public TemplateMethodModelEx getNotStatic() {
+        return isNotStatic;
     }
 }

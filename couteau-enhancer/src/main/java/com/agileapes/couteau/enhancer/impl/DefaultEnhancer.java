@@ -43,6 +43,10 @@ public class DefaultEnhancer<E> implements Enhancer<E> {
         this(new GeneratingClassEnhancer<E>(null));
     }
 
+    public DefaultEnhancer(ClassLoader classLoader) {
+        this(new GeneratingClassEnhancer<E>(classLoader));
+    }
+
     public DefaultEnhancer(ClassEnhancer<E> classEnhancer) {
         this.classEnhancer = classEnhancer;
         setNamingPolicy(new DefaultNamingPolicy());

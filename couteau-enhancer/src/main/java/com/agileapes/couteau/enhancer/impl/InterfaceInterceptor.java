@@ -45,8 +45,8 @@ public abstract class InterfaceInterceptor implements MethodInterceptor {
     private final BeanInitializer beanInitializer = new ConstructorBeanInitializer();
 
     public InterfaceInterceptor() {
-        for (Class superType : getInterfaces()) {
-            interfaces.put(superType, null);
+        for (Class superType : getClass().getInterfaces()) {
+            interfaces.put(superType, this);
         }
     }
 
@@ -61,8 +61,7 @@ public abstract class InterfaceInterceptor implements MethodInterceptor {
         if (interfaces.containsKey(methodDescriptor.getDeclaringClass())) {
             Object targetObject = interfaces.get(methodDescriptor.getDeclaringClass());
             final Class<?> searchTarget;
-            if (targetObject == null) {
-                targetObject = target;
+            if (targetObject.equals(this)) {
                 searchTarget = getClass();
             } else {
                 searchTarget = targetObject.getClass();
@@ -76,11 +75,11 @@ public abstract class InterfaceInterceptor implements MethodInterceptor {
                 return method.invoke(targetObject, arguments);
             }
         }
-        return methodProxy.callSuper(target, arguments);
+        return call(methodDescriptor, target, arguments, methodProxy);
     }
 
-    public <E> void addInterface(Class<E> contract, Class<? extends E> implementation) {
-        final E concrete;
+    public void addInterface(Class<?> contract, Class<?> implementation) {
+        final Object concrete;
         try {
             concrete = beanInitializer.initialize(implementation, new Class[0]);
         } catch (BeanInstantiationException e) {
