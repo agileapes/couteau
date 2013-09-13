@@ -114,4 +114,9 @@ public class ImmutableMethodDescriptor implements MethodDescriptor {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return returnType.getCanonicalName() + " " + declaringClass.getCanonicalName() + "." + name + "(" + Arrays.toString(parameterTypes) + ")";
+    }
+
 }
