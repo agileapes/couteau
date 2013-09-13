@@ -85,7 +85,6 @@ public class GeneratingClassEnhancer<E> implements ClassEnhancer<E> {
         } catch (Exception e) {
             throw new EnhancementError("Failed to process template", e);
         }
-        System.out.println(out);
         final DynamicClassCompiler compiler = new DefaultDynamicClassCompiler(classLoader == null ? classLoader : superClass.getClassLoader());
         final Class<?> compiled;
         try {
