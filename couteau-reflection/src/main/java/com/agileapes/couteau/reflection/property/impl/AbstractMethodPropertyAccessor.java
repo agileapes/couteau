@@ -64,7 +64,7 @@ public abstract class AbstractMethodPropertyAccessor<E> extends AbstractProperty
     /**
      * @return the method wrapped by the accessor
      */
-    protected Method getMethod() {
+    public Method getMethod() {
         return method;
     }
 

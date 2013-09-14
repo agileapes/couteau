@@ -58,7 +58,7 @@ public abstract class AbstractFieldPropertyAccessor<E> extends AbstractPropertyA
     /**
      * @return the invocation target
      */
-    protected Object getTarget() {
+    public Object getTarget() {
         return target;
     }
 
