@@ -15,6 +15,8 @@
 
 package com.agileapes.couteau.lang.compiler.impl;
 
+import com.agileapes.couteau.reflection.cp.MappedClassLoader;
+
 import javax.tools.FileObject;
 import javax.tools.ForwardingJavaFileManager;
 import javax.tools.JavaFileManager;
@@ -30,7 +32,7 @@ import java.util.Map;
  *
  * The class loader is used by the compiler to register a file inside this file
  * manager with that class loader. The class loader internally used here is the
- * {@link MappedClassLoader} which can be later used to <em>read</em> the byte
+ * {@link com.agileapes.couteau.reflection.cp.MappedClassLoader} which can be later used to <em>read</em> the byte
  * code information as it was produced by the JIT compiler.
  *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)

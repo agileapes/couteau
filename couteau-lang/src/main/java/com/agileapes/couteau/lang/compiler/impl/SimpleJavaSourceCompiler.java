@@ -21,6 +21,7 @@ import com.agileapes.couteau.lang.support.IdentifiedLanguageInput;
 import com.agileapes.couteau.lang.support.LanguageInput;
 import com.agileapes.couteau.lang.support.LanguageOutput;
 import com.agileapes.couteau.lang.support.impl.Java;
+import com.agileapes.couteau.reflection.cp.MappedClassLoader;
 
 import javax.tools.JavaCompiler;
 import javax.tools.StandardJavaFileManager;

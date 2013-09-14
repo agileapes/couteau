@@ -19,6 +19,7 @@ import com.agileapes.couteau.lang.compiler.DynamicClassCompiler;
 import com.agileapes.couteau.lang.error.CompileException;
 import com.agileapes.couteau.lang.support.impl.JavaLanguageInput;
 import com.agileapes.couteau.lang.support.impl.JavaLanguageOutput;
+import com.agileapes.couteau.reflection.cp.MappedClassLoader;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

@@ -13,7 +13,7 @@
  * or substantial portions of the Software.
  */
 
-package com.agileapes.couteau.lang.compiler.impl;
+package com.agileapes.couteau.reflection.cp;
 
 import javax.tools.JavaFileObject;
 import java.io.ByteArrayInputStream;
@@ -64,7 +64,7 @@ public class MappedClassLoader extends SecureClassLoader {
     }
 
     @Override
-    protected Class<?> findClass(String name) throws ClassNotFoundException {
+    public Class<?> findClass(String name) throws ClassNotFoundException {
         if (!classes.containsKey(name)) {
             throw new ClassNotFoundException("Class not found: " + name);
         }

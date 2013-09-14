@@ -13,7 +13,7 @@
  * or substantial portions of the Software.
  */
 
-package com.agileapes.couteau.maven.resource;
+package com.agileapes.couteau.reflection.cp;
 
 import java.net.URL;
 import java.net.URLClassLoader;

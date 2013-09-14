@@ -9,7 +9,7 @@ import com.agileapes.couteau.graph.alg.sort.impl.TopologicalGraphSorter;
 import com.agileapes.couteau.graph.node.impl.DirectedNode;
 import com.agileapes.couteau.maven.resource.ClassPathScanningClassProvider;
 import com.agileapes.couteau.maven.resource.ClassPathScope;
-import com.agileapes.couteau.maven.resource.ConfigurableClassLoader;
+import com.agileapes.couteau.reflection.cp.ConfigurableClassLoader;
 import com.agileapes.couteau.maven.resource.ProjectResource;
 import com.agileapes.couteau.maven.resource.impl.ClassPathScopeArtifactFilter;
 import com.agileapes.couteau.maven.task.PluginTask;
