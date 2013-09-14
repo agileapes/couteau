@@ -22,6 +22,7 @@ import com.agileapes.couteau.reflection.property.impl.MethodReadPropertyAccessor
 import com.agileapes.couteau.reflection.property.impl.MethodWritePropertyAccessor;
 import com.agileapes.couteau.reflection.util.ReflectionUtils;
 import com.agileapes.couteau.reflection.util.assets.GetterMethodFilter;
+import com.agileapes.couteau.reflection.util.assets.SetterMethodFilter;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -45,12 +46,11 @@ public class MethodClassBeanDescriptor<E> extends AbstractClassBeanDescriptor<E>
 
     /**
      * @return a map of property names to property readers
-     * @throws Exception
      */
     @Override
     protected Map<String,ReadPropertyAccessor<?>> getReaders() {
         final HashMap<String, ReadPropertyAccessor<?>> map = new HashMap<String, ReadPropertyAccessor<?>>();
-        ReflectionUtils.withMethods(getBeanType()).keep(new GetterMethodFilter()).each(new Processor<Method>() {
+        ReflectionUtils.withMethods(getBeanType()).keep(new GetterMethodFilter(isAbstract())).each(new Processor<Method>() {
             @Override
             public void process(Method input) {
                 final String propertyName = ReflectionUtils.getPropertyName(input.getName());
@@ -63,12 +63,11 @@ public class MethodClassBeanDescriptor<E> extends AbstractClassBeanDescriptor<E>
 
     /**
      * @return a map of property names to property writers
-     * @throws Exception
      */
     @Override
     protected Map<String, WritePropertyAccessor<?>> getWriters() {
         final HashMap<String, WritePropertyAccessor<?>> map = new HashMap<String, WritePropertyAccessor<?>>();
-        ReflectionUtils.withMethods(getBeanType()).keep(new GetterMethodFilter()).each(new Processor<Method>() {
+        ReflectionUtils.withMethods(getBeanType()).keep(new SetterMethodFilter(isAbstract())).each(new Processor<Method>() {
             @Override
             public void process(Method input) {
                 final String propertyName = ReflectionUtils.getPropertyName(input.getName());

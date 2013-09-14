@@ -27,9 +27,19 @@ import java.lang.reflect.Method;
  */
 public class SetterMethodFilter implements Filter<Method> {
 
+    private final boolean keepAbstracts;
+
+    public SetterMethodFilter() {
+        this(false);
+    }
+
+    public SetterMethodFilter(boolean keepAbstracts) {
+        this.keepAbstracts = keepAbstracts;
+    }
+
     @Override
     public boolean accepts(Method item) {
-        return Modifiers.PUBLIC.matches(item) && !Modifiers.ABSTRACT.matches(item) && !Modifiers.STATIC.matches(item)
+        return Modifiers.PUBLIC.matches(item) && (keepAbstracts || !Modifiers.ABSTRACT.matches(item)) && !Modifiers.STATIC.matches(item)
                 && item.getReturnType().equals(void.class) && item.getParameterTypes().length == 1 && item.getName().matches("set[A-Z].*");
     }
 

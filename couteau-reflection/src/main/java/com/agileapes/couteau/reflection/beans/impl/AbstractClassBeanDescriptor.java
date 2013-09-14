@@ -24,6 +24,7 @@ import com.agileapes.couteau.reflection.property.ReadPropertyAccessor;
 import com.agileapes.couteau.reflection.property.WritePropertyAccessor;
 import com.agileapes.couteau.reflection.util.ReflectionUtils;
 
+import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
@@ -215,6 +216,14 @@ public abstract class AbstractClassBeanDescriptor<E> implements BeanDescriptor<E
     @Override
     public Type getGenericPropertyType(String propertyName) throws NoSuchPropertyException {
         return readers.containsKey(propertyName) ? getPropertyReader(propertyName).getGenericPropertyType() : getPropertyWriter(propertyName).getGenericPropertyType();
+    }
+
+    /**
+     * Determines whether the wrapped class is abstract or not
+     * @return {@code true} if the wrapped class is abstract or if it is an interface
+     */
+    public boolean isAbstract() {
+        return Modifier.isAbstract(beanClass.getModifiers()) || beanClass.isInterface();
     }
 
 }
