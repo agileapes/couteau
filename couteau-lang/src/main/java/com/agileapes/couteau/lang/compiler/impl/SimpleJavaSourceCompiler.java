@@ -36,21 +36,12 @@ import java.util.*;
  */
 public class SimpleJavaSourceCompiler implements SimpleSourceCompiler<Java> {
 
-    private static final String NEW_LINE_FEED = "\n";
-    private final ClassLoader classLoader;
-
-    public SimpleJavaSourceCompiler(ClassLoader classLoader) {
-
-        this.classLoader = classLoader;
-    }
-
     @SuppressWarnings("UnusedDeclaration")
     public static enum Option {
         CLASSPATH("-classpath", false),
         NO_WARNINGS("-nowarn", true),
         VERBOSE("-verbose", true),
-        DEPRECATION_WARNING("-deprecation", true),
-        ;
+        DEPRECATION_WARNING("-deprecation", true);
 
         private String directive;
         private boolean isBoolean;
@@ -62,7 +53,13 @@ public class SimpleJavaSourceCompiler implements SimpleSourceCompiler<Java> {
 
     }
 
+    private static final String NEW_LINE_FEED = "\n";
+    private final MappedClassLoader classLoader;
     private final Map<Option, String> options = new HashMap<Option, String>();
+
+    public SimpleJavaSourceCompiler(ClassLoader classLoader) {
+        this.classLoader = new MappedClassLoader(classLoader);
+    }
 
     public void setOption(Option option, String value) {
         if (!option.isBoolean) {
@@ -108,7 +105,7 @@ public class SimpleJavaSourceCompiler implements SimpleSourceCompiler<Java> {
             throw new CompileException("Failed to read input from the input provider", e);
         }
         final JavaCompiler systemCompiler = ToolProvider.getSystemJavaCompiler();
-        final SingleLocationClassFileManager<StandardJavaFileManager> fileManager = new SingleLocationClassFileManager<StandardJavaFileManager>(systemCompiler.getStandardFileManager(null, null, null));
+        final SingleLocationClassFileManager<StandardJavaFileManager> fileManager = new SingleLocationClassFileManager<StandardJavaFileManager>(classLoader, systemCompiler.getStandardFileManager(null, null, null));
         final List<String> options = getOptions();
         final Boolean compiled;
         try {
@@ -120,7 +117,7 @@ public class SimpleJavaSourceCompiler implements SimpleSourceCompiler<Java> {
             throw new CompileException("Compilation failed: " + identifier);
         }
         for (Map.Entry<String, JavaClassObject> entry : fileManager.getObjectMap().entrySet()) {
-            ((MappedClassLoader) classLoader).register(entry.getKey(), entry.getValue().getBytes());
+            classLoader.register(entry.getKey(), entry.getValue().getBytes());
         }
         final JavaClassObject classObject;
         try {
@@ -148,4 +145,7 @@ public class SimpleJavaSourceCompiler implements SimpleSourceCompiler<Java> {
         return options;
     }
 
+    public MappedClassLoader getClassLoader() {
+        return classLoader;
+    }
 }

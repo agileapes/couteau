@@ -31,7 +31,6 @@ import java.io.Reader;
  */
 public class DefaultDynamicClassCompiler implements DynamicClassCompiler {
 
-    private final MappedClassLoader classLoader;
     private final SimpleJavaSourceCompiler compiler;
 
     public DefaultDynamicClassCompiler() {
@@ -39,7 +38,7 @@ public class DefaultDynamicClassCompiler implements DynamicClassCompiler {
     }
 
     public DefaultDynamicClassCompiler(ClassLoader parent) {
-        classLoader = parent != null ? new MappedClassLoader(parent) : new MappedClassLoader();
+        ClassLoader classLoader = parent != null ? new MappedClassLoader(parent) : new MappedClassLoader();
         compiler = new SimpleJavaSourceCompiler(classLoader);
     }
 
@@ -68,7 +67,7 @@ public class DefaultDynamicClassCompiler implements DynamicClassCompiler {
             throw new CompileException("Failed to close the output written by the compiler", e);
         }
         try {
-            return classLoader.findClass(className);
+            return compiler.getClassLoader().findClass(className);
         } catch (ClassNotFoundException ignored) {
             return null; //This case will never occur
         }
@@ -76,7 +75,7 @@ public class DefaultDynamicClassCompiler implements DynamicClassCompiler {
 
     @Override
     public MappedClassLoader getClassLoader() {
-        return classLoader;
+        return compiler.getClassLoader();
     }
 
 }

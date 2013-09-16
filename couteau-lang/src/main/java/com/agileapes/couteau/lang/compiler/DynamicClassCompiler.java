@@ -17,6 +17,7 @@ package com.agileapes.couteau.lang.compiler;
 
 import com.agileapes.couteau.lang.compiler.impl.SimpleJavaSourceCompiler;
 import com.agileapes.couteau.lang.error.CompileException;
+import com.agileapes.couteau.reflection.cp.MappedClassLoader;
 
 import java.io.Reader;
 
@@ -41,7 +42,7 @@ public interface DynamicClassCompiler {
      * This method exposes the class loader that is being used by the current instance of the compiler
      * @return the class loader
      */
-    ClassLoader getClassLoader();
+    MappedClassLoader getClassLoader();
 
     /**
      * This sets the option values for the underlying Java compiler

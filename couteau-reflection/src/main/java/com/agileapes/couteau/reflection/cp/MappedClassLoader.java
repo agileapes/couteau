@@ -66,6 +66,9 @@ public class MappedClassLoader extends SecureClassLoader {
     @Override
     public Class<?> findClass(String name) throws ClassNotFoundException {
         if (!classes.containsKey(name)) {
+            if (getParent() != null) {
+                return getParent().loadClass(name);
+            }
             throw new ClassNotFoundException("Class not found: " + name);
         }
         return classes.get(name);

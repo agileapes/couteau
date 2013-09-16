@@ -41,16 +41,18 @@ import java.util.Map;
 public class SingleLocationClassFileManager<M extends JavaFileManager> extends ForwardingJavaFileManager<M> {
 
 
-    private final MappedClassLoader mappedClassLoader = new MappedClassLoader();
+    private final MappedClassLoader mappedClassLoader;
     private final Map<String, JavaClassObject> objectMap = new HashMap<String, JavaClassObject>();
 
     /**
      * Creates a new instance of ForwardingJavaFileManager.
      *
+     * @param classLoader the class loader for the compilation
      * @param fileManager delegate to this file manager
      */
-    public SingleLocationClassFileManager(M fileManager) {
+    public SingleLocationClassFileManager(ClassLoader classLoader, M fileManager) {
         super(fileManager);
+        mappedClassLoader = new MappedClassLoader(classLoader);
     }
 
     @Override
