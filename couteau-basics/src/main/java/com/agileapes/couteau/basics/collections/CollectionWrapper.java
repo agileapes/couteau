@@ -237,7 +237,23 @@ public class CollectionWrapper<I> {
         return items.get(items.size() - 1);
     }
 
+    /**
+     * @return the set representing all items in the wrapper, minus duplicates
+     */
     public Set<I> set() {
         return new HashSet<I>(items);
     }
+
+    /**
+     * Returns a wrapper for the collection items in this wrapper plus the
+     * newly added item
+     * @param item    the item to be added
+     * @return the new wrapper
+     */
+    public CollectionWrapper<I> add(I item) {
+        final ArrayList<I> list = new ArrayList<I>(items);
+        list.add(item);
+        return new CollectionWrapper<I>(list);
+    }
+
 }
