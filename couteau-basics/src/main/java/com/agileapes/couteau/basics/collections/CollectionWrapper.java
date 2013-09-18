@@ -196,14 +196,6 @@ public class CollectionWrapper<I> {
     }
 
     /**
-     * @return an array of all the items in the wrapper
-     */
-    @SuppressWarnings("unchecked")
-    public I[] array() {
-        return (I[]) items.toArray();
-    }
-
-    /**
      * @return the number of items currently wrapped
      */
     public int count() {
