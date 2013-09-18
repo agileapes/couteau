@@ -2,6 +2,7 @@ package com.agileapes.couteau.maven.mojo;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.stereotype.Component;
 
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
@@ -12,6 +13,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (8/15/13, 1:23 PM)
  */
+@Component
 public class SpringPluginConfigurator implements BeanPostProcessor {
 
     private AbstractSpringPluginExecutor pluginExecutor;

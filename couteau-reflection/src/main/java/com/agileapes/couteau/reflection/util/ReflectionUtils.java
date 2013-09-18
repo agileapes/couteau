@@ -16,18 +16,15 @@
 package com.agileapes.couteau.reflection.util;
 
 import com.agileapes.couteau.basics.collections.CollectionWrapper;
+import com.agileapes.couteau.reflection.util.assets.FieldTypeFilter;
+import com.agileapes.couteau.reflection.util.assets.MemberNameFilter;
+import com.agileapes.couteau.reflection.util.assets.MethodArgumentsFilter;
 
 import java.io.File;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
+import java.lang.reflect.*;
 import java.net.URI;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * This is basically a collection of utility methods (functions) designed to help
@@ -253,6 +250,33 @@ public abstract class ReflectionUtils {
      */
     public static Class<?> getComponentType(Class<?> arrayType) {
         return arrayType.isArray() ? getComponentType(arrayType.getComponentType()) : arrayType;
+    }
+
+    public static Class<?> getDeclaringClass(Member member) {
+        final Class<?> declaringClass = member.getDeclaringClass();
+        final List<Class<?>> superTypes = CollectionWrapper.with(declaringClass.getInterfaces()).add(declaringClass.getSuperclass()).list();
+        for (Class<?> superType : superTypes) {
+            final Member declaration = getDeclaration(member, superType);
+            if (declaration != null) {
+                return declaration.getDeclaringClass();
+            }
+        }
+        return declaringClass;
+    }
+
+    public static Member getDeclaration(Member member, Class<?> superType) {
+        if (member instanceof Method) {
+            return CollectionWrapper.with(superType.getDeclaredMethods())
+                    .keep(new MemberNameFilter(member.getName()))
+                    .keep(new MethodArgumentsFilter(((Method) member).getParameterTypes()))
+                    .first();
+        } else if (member instanceof Field) {
+            return CollectionWrapper.with(superType.getDeclaredFields())
+                    .keep(new MemberNameFilter(member.getName()))
+                    .keep(new FieldTypeFilter(((Field) member).getType()))
+                    .first();
+        }
+        return null;
     }
 
 }

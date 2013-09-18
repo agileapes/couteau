@@ -94,7 +94,7 @@ public abstract class PluginTask<E extends AbstractPluginExecutor> implements Fu
      * Updates this task's dependencies by overriding them with the new set of dependencies
      * @param dependencies    the new set of dependencies for this task
      */
-    public final void setDependencies(Collection<PluginTask<E>> dependencies) {
+    public void setDependencies(Collection<PluginTask<E>> dependencies) {
         for (PluginTask<E> dependency : dependencies) {
             addDependency(dependency);
         }
@@ -207,8 +207,16 @@ public abstract class PluginTask<E extends AbstractPluginExecutor> implements Fu
      */
     @Override
     public final void perform() throws TaskFailureException {
+        final String intro = getIntro();
+        final String outro = getOutro();
         try {
+            if (intro != null && !intro.isEmpty()) {
+                pluginExecutor.getLog().info(intro);
+            }
             execute(pluginExecutor);
+            if (outro != null && !outro.isEmpty()) {
+                pluginExecutor.getLog().info(outro);
+            }
         } catch (MojoFailureException e) {
             throw new TaskFailureException("Failed to execute task", e);
         }
@@ -228,5 +236,13 @@ public abstract class PluginTask<E extends AbstractPluginExecutor> implements Fu
      * @throws MojoFailureException if anything prevents the plugin task from completing successfullly
      */
     public abstract void execute(E executor) throws MojoFailureException;
+
+    protected String getIntro() {
+        return null;
+    }
+
+    protected String getOutro() {
+        return null;
+    }
 
 }

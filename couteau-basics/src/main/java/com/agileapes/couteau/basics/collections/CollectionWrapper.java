@@ -246,14 +246,268 @@ public class CollectionWrapper<I> {
 
     /**
      * Returns a wrapper for the collection items in this wrapper plus the
-     * newly added item
-     * @param item    the item to be added
+     * newly added items
+     * @param items    the items to be added
      * @return the new wrapper
      */
-    public CollectionWrapper<I> add(I item) {
-        final ArrayList<I> list = new ArrayList<I>(items);
-        list.add(item);
+    public CollectionWrapper<I> add(I... items) {
+        return add(Arrays.asList(items));
+    }
+
+    /**
+     * Returns a wrapper for the collection items in this wrapper plus the
+     * newly added items
+     * @param items    the items to be added
+     * @return the new wrapper
+     */
+    public CollectionWrapper<I> add(Collection<I> items) {
+        final ArrayList<I> list = new ArrayList<I>(this.items);
+        list.addAll(items);
         return new CollectionWrapper<I>(list);
+    }
+
+    /**
+     * Checks whether the given item exists in the wrapped
+     * collection
+     * @param filter    the picking filter
+     * @return {@code true} if anb item is chosen by the filter
+     */
+    public boolean exists(Filter<? super I> filter) {
+        for (I item : items) {
+            if (filter.accepts(item)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Checks if a condition would hold over the entire collection
+     * @param filter    the filter encapsulating the predicate
+     * @return {@code true} or {@code false} based on the examination performed
+     */
+    public boolean forAll(Filter<? super I> filter) {
+        for (I item : items) {
+            if (!filter.accepts(item)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Partitions the collection into two sub-collections, the first being those accepted
+     * by the filter and the second being those that were rejected.
+     * @param filter    the filter performing the partitioning
+     * @return the partitioned collection
+     */
+    public CollectionWrapper<Collection<I>> partition(Filter<? super I> filter) {
+        final List<I> accepted = new ArrayList<I>();
+        final List<I> rejected = new ArrayList<I>();
+        for (I item : items) {
+            if (filter.accepts(item)) {
+                accepted.add(item);
+            } else {
+                rejected.add(item);
+            }
+        }
+        final ArrayList<Collection<I>> list = new ArrayList<Collection<I>>();
+        list.add(accepted);
+        list.add(rejected);
+        return new CollectionWrapper<Collection<I>>(list);
+    }
+
+    /**
+     * Keeps all items prior to the first item failing the criteria
+     * @param filter    the filter
+     * @return the matching items
+     */
+    public CollectionWrapper<I> keepWhile(Filter<? super I> filter) {
+        final ArrayList<I> list = new ArrayList<I>();
+        for (I item : items) {
+            if (!filter.accepts(item)) {
+                break;
+            }
+            list.add(item);
+        }
+        return new CollectionWrapper<I>(list);
+    }
+
+    /**
+     * Drops all the items in the beginning of the list that match the criteria
+     * without any gaps
+     * @param filter    the criteria
+     * @return the matching items
+     */
+    public CollectionWrapper<I> dropWhile(Filter<? super I> filter) {
+        final ArrayList<I> list = new ArrayList<I>();
+        boolean found = false;
+        for (I item : items) {
+            if (!found && filter.accepts(item)) {
+                continue;
+            }
+            found = true;
+            list.add(item);
+        }
+        return new CollectionWrapper<I>(list);
+    }
+
+    /**
+     * Takes the indicates sublist of the underlying collection. Negative indexing means the number of items from
+     * the end of the list
+     * @param from    the index from which the items should be included.
+     * @param to      the index to which the items should be included (inclusive).
+     * @return the matching sublist
+     */
+    public CollectionWrapper<I> take(int from, int to) {
+        if (from < 0) {
+            from = count() + from;
+        }
+        if (to < 0) {
+            to = count() + to;
+        }
+        final ArrayList<I> list = new ArrayList<I>();
+        if (from <= to && from < count() && to < count()) {
+            for (int i = from; i <= to; i ++) {
+                list.add(items.get(i));
+            }
+        }
+        return new CollectionWrapper<I>(list);
+    }
+
+    /**
+     * Takes the indicated items from the beginning or the end of the list, depending on whether or not
+     * the offset is non-negative.
+     * @param offset    the offset.
+     * @return the selected sublist
+     */
+    public CollectionWrapper<I> take(int offset) {
+        final ArrayList<I> list = new ArrayList<I>();
+        if (offset > 0) {
+            if (offset < count()) {
+                for (int i = 0; i <= offset; i ++) {
+                    list.add(items.get(i));
+                }
+            }
+        } else {
+            offset = count() + offset;
+            for (int i = offset; i < count(); i ++) {
+                list.add(items.get(i));
+            }
+        }
+        return new CollectionWrapper<I>(list);
+    }
+
+    /**
+     * Counts the number of items matching the given criteria
+     * @param filter    the filter picking matches
+     * @return number of matching items
+     */
+    public int count(Filter<I> filter) {
+        int count = 0;
+        for (I item : items) {
+            count += filter.accepts(item) ? 1 : 0;
+        }
+        return count;
+    }
+
+    /**
+     * Finds the item matched by the filter
+     * @param filter    the filter
+     * @return the matched item or {@code null} if none are found
+     */
+    public I find(Filter<I> filter) {
+        for (I item : items) {
+            if (filter.accepts(item)) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns the index for the given item
+     * @param item    the item to look for
+     * @return the index
+     */
+    public int indexOf(I item) {
+        for (int i = 0; i < items.size(); i++) {
+            if (item.equals(items.get(i))) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Returns the index of the last item in the least matching the given item
+     * @param item    the item to look for
+     * @return the index
+     */
+    public int lastIndexOf(I item) {
+        for (int i = items.size() - 1; i >= 0; i--) {
+            if (item.equals(items.get(i))) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Returns index wherein the item matching the criteria can be found
+     * @param filter    the criteria
+     * @return the index
+     */
+    public int indexWhere(Filter<I> filter) {
+        for (int i = 0; i < items.size(); i++) {
+            if (filter.accepts(items.get(i))) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Returns the last index wherein the item matching the criteria can be found
+     * @param filter    the criteria
+     * @return the index
+     */
+    public int lastIndexWhere(Filter<I> filter) {
+        for (int i = items.size() - 1; i >= 0; i--) {
+            if (filter.accepts(items.get(i))) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Returns the sum of all items in the list if they are all numeric
+     * @return the sum total
+     */
+    public double sum() {
+        double sum = 0;
+        for (I item : items) {
+            if (item instanceof Number) {
+                Number number = (Number) item;
+                sum += Double.valueOf(number.toString());
+            } else {
+                throw new UnsupportedOperationException();
+            }
+        }
+        return sum;
+    }
+
+    /**
+     * Returns the item residing at the specified position. Negative index counts from the end of the list.
+     * @param index    the index leading to the item
+     * @return the actual item
+     */
+    public I get(int index) {
+        if (index < 0) {
+            index = count() + index;
+        }
+        return items.get(index);
     }
 
 }

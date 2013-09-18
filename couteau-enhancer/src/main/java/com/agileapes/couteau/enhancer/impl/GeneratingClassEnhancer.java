@@ -38,17 +38,17 @@ import java.io.StringWriter;
  */
 public class GeneratingClassEnhancer<E> implements ClassEnhancer<E> {
 
+    private final DynamicClassCompiler compiler;
     private NamingPolicy namingPolicy;
     private Class[] interfaces;
     private Class<? extends E> superClass;
-    private final ClassLoader classLoader;
 
     public GeneratingClassEnhancer() {
         this(null);
     }
 
     public GeneratingClassEnhancer(ClassLoader classLoader) {
-        this.classLoader = classLoader;
+        this.compiler = new DefaultDynamicClassCompiler(classLoader != null ? classLoader : superClass.getClassLoader());
     }
 
     @Override
@@ -85,7 +85,6 @@ public class GeneratingClassEnhancer<E> implements ClassEnhancer<E> {
         } catch (Exception e) {
             throw new EnhancementError("Failed to process template", e);
         }
-        final DynamicClassCompiler compiler = new DefaultDynamicClassCompiler(classLoader != null ? classLoader : superClass.getClassLoader());
         final Class<?> compiled;
         try {
             compiled = compiler.compile(model.getEnhancedName(), new StringReader(out.toString()));
@@ -94,6 +93,10 @@ public class GeneratingClassEnhancer<E> implements ClassEnhancer<E> {
         }
         //noinspection unchecked
         return (Class<? extends E>) compiled;
+    }
+
+    public DynamicClassCompiler getCompiler() {
+        return compiler;
     }
 
 }
