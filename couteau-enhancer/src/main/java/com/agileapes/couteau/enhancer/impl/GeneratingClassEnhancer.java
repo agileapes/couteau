@@ -38,17 +38,18 @@ import java.io.StringWriter;
  */
 public class GeneratingClassEnhancer<E> implements ClassEnhancer<E> {
 
-    private final DynamicClassCompiler compiler;
+    private DynamicClassCompiler compiler;
     private NamingPolicy namingPolicy;
     private Class[] interfaces;
     private Class<? extends E> superClass;
+    private final ClassLoader classLoader;
 
     public GeneratingClassEnhancer() {
         this(null);
     }
 
     public GeneratingClassEnhancer(ClassLoader classLoader) {
-        this.compiler = new DefaultDynamicClassCompiler(classLoader != null ? classLoader : superClass.getClassLoader());
+        this.classLoader = classLoader;
     }
 
     @Override
@@ -68,6 +69,7 @@ public class GeneratingClassEnhancer<E> implements ClassEnhancer<E> {
 
     @Override
     public Class<? extends E> enhance() {
+        this.compiler = new DefaultDynamicClassCompiler(classLoader != null ? classLoader : superClass.getClassLoader());
         final Configuration configuration = FreemarkerUtils.getConfiguration(getClass(), "/");
         final Template template;
         try {

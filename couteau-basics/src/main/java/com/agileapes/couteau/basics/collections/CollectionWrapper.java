@@ -502,4 +502,22 @@ public class CollectionWrapper<I> {
         return items.get(index);
     }
 
+    /**
+     * Runs the processor over the items matching the filter
+     * @param filter       the selector
+     * @param processor    the processor
+     * @return the items in the wrapper
+     */
+    public CollectionWrapper<I> forThose(final Filter<I> filter, final Processor<I> processor) {
+        return each(new Processor<I>() {
+            @Override
+            public void process(I input) {
+                if (!filter.accepts(input)) {
+                    return;
+                }
+                processor.process(input);
+            }
+        });
+    }
+
 }
