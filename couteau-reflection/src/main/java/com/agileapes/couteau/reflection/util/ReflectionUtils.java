@@ -25,6 +25,7 @@ import java.lang.reflect.*;
 import java.net.URI;
 import java.net.URL;
 import java.util.*;
+import java.util.concurrent.*;
 
 /**
  * This is basically a collection of utility methods (functions) designed to help
@@ -279,4 +280,45 @@ public abstract class ReflectionUtils {
         return null;
     }
 
+    public static Collection<Object> getCollection(Class<?> propertyType) {
+        if (!Collection.class.isAssignableFrom(propertyType)) {
+            throw new Error("Expected property to be a collection while it was " + propertyType.getCanonicalName());
+        }
+        if (Set.class.isAssignableFrom(propertyType)) {
+            if (TreeSet.class.isAssignableFrom(propertyType)) {
+                return new TreeSet<Object>();
+            } else if (ConcurrentSkipListSet.class.isAssignableFrom(propertyType)) {
+                return new ConcurrentSkipListSet<Object>();
+            } else if (CopyOnWriteArraySet.class.isAssignableFrom(propertyType)) {
+                return new CopyOnWriteArraySet<Object>();
+            }
+            return new HashSet<Object>();
+        } else if (List.class.isAssignableFrom(propertyType)) {
+            if (LinkedList.class.isAssignableFrom(propertyType)) {
+                return new LinkedList<Object>();
+            } else if (CopyOnWriteArrayList.class.isAssignableFrom(propertyType)) {
+                return new CopyOnWriteArrayList<Object>();
+            }
+            return new ArrayList<Object>();
+        } else if (Queue.class.isAssignableFrom(propertyType)) {
+            if (ConcurrentLinkedQueue.class.isAssignableFrom(propertyType)) {
+                return new ConcurrentLinkedQueue<Object>();
+            } else if (PriorityQueue.class.isAssignableFrom(propertyType)) {
+                return new PriorityQueue<Object>();
+            } else if (ConcurrentLinkedQueue.class.isAssignableFrom(propertyType)) {
+                return new ConcurrentLinkedQueue<Object>();
+            } else if (LinkedBlockingQueue.class.isAssignableFrom(propertyType)) {
+                return new LinkedBlockingQueue<Object>();
+            } else if (SynchronousQueue.class.isAssignableFrom(propertyType)) {
+                return new SynchronousQueue<Object>();
+            } else if (PriorityBlockingQueue.class.isAssignableFrom(propertyType)) {
+                return new PriorityBlockingQueue<Object>();
+            }
+            return new PriorityQueue<Object>();
+        } else if (Collection.class.equals(propertyType)) {
+            return new ArrayList<Object>();
+        } else {
+            throw new UnsupportedOperationException("Cannot instantiate a collection of type " + propertyType.getCanonicalName());
+        }
+    }
 }

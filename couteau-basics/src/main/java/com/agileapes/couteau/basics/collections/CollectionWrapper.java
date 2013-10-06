@@ -220,6 +220,13 @@ public class CollectionWrapper<I> {
     }
 
     /**
+     * @return a wrapped version of the collection, save the very first item
+     */
+    public CollectionWrapper<I> rest() {
+        return new CollectionWrapper<I>(items.subList(1, items.size()));
+    }
+
+    /**
      * @return the last item in the wrapper or {@code null} if it is empty
      */
     public I last() {
@@ -395,7 +402,7 @@ public class CollectionWrapper<I> {
      * @param filter    the filter picking matches
      * @return number of matching items
      */
-    public int count(Filter<I> filter) {
+    public int count(Filter<? super I> filter) {
         int count = 0;
         for (I item : items) {
             count += filter.accepts(item) ? 1 : 0;
@@ -408,7 +415,7 @@ public class CollectionWrapper<I> {
      * @param filter    the filter
      * @return the matched item or {@code null} if none are found
      */
-    public I find(Filter<I> filter) {
+    public I find(Filter<? super I> filter) {
         for (I item : items) {
             if (filter.accepts(item)) {
                 return item;
@@ -450,7 +457,7 @@ public class CollectionWrapper<I> {
      * @param filter    the criteria
      * @return the index
      */
-    public int indexWhere(Filter<I> filter) {
+    public int indexWhere(Filter<? super I> filter) {
         for (int i = 0; i < items.size(); i++) {
             if (filter.accepts(items.get(i))) {
                 return i;
@@ -464,7 +471,7 @@ public class CollectionWrapper<I> {
      * @param filter    the criteria
      * @return the index
      */
-    public int lastIndexWhere(Filter<I> filter) {
+    public int lastIndexWhere(Filter<? super I> filter) {
         for (int i = items.size() - 1; i >= 0; i--) {
             if (filter.accepts(items.get(i))) {
                 return i;
@@ -508,7 +515,7 @@ public class CollectionWrapper<I> {
      * @param processor    the processor
      * @return the items in the wrapper
      */
-    public CollectionWrapper<I> forThose(final Filter<I> filter, final Processor<I> processor) {
+    public CollectionWrapper<I> forThose(final Filter<? super I> filter, final Processor<? super I> processor) {
         return each(new Processor<I>() {
             @Override
             public void process(I input) {
@@ -518,6 +525,22 @@ public class CollectionWrapper<I> {
                 processor.process(input);
             }
         });
+    }
+
+    /**
+     * Joins the elements in the underlying collection using the given delimiter
+     * @return the joined array of items as a string
+     */
+    public String join(String delimiter) {
+        final StringBuilder builder = new StringBuilder();
+        for (int i = 0; i < items.size(); i++) {
+            I item = items.get(i);
+            if (i > 0) {
+                builder.append(delimiter);
+            }
+            builder.append(item);
+        }
+        return builder.toString();
     }
 
 }
