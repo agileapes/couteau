@@ -31,6 +31,17 @@ public class SimpleCache<K, V> extends AbstractCache<K, V> {
 
     private final Map<K,CacheData<V>> store = new HashMap<K, CacheData<V>>();
 
+    public SimpleCache() {
+    }
+
+    public SimpleCache(int capacity) {
+        super(capacity);
+    }
+
+    public SimpleCache(int capacity, RemovePolicy removePolicy) {
+        super(capacity, removePolicy);
+    }
+
     @Override
     protected Map<K, AbstractCache.CacheData<V>> getStore() {
         return store;

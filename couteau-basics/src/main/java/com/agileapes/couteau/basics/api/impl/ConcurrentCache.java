@@ -31,6 +31,17 @@ public class ConcurrentCache<K, V> extends AbstractCache<K, V> {
 
     private final Map<K,CacheData<V>> store = new ConcurrentHashMap<K, CacheData<V>>();
 
+    public ConcurrentCache() {
+    }
+
+    public ConcurrentCache(int capacity) {
+        super(capacity);
+    }
+
+    public ConcurrentCache(int capacity, RemovePolicy removePolicy) {
+        super(capacity, removePolicy);
+    }
+
     @Override
     protected Map<K, CacheData<V>> getStore() {
         return store;
