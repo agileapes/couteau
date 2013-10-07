@@ -150,7 +150,11 @@ public class CollectionWrapper<I> {
      * @return the <em>newly instantiated</em> wrapper for the transformer's output
      */
     public <O> CollectionWrapper<O> transform(Transformer<? super I, O> transformer) {
-        return new CollectionWrapper<O>(map(transformer).values());
+        final List<O> result = new ArrayList<O>();
+        for (I item : items) {
+            result.add(transformer.map(item));
+        }
+        return new CollectionWrapper<O>(result);
     }
 
     public <O> Map<I, O> map(Transformer<? super I, O> transformer) {
