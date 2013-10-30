@@ -56,7 +56,7 @@ public class AnnotationFieldGetterMethod extends TypedMethodModel {
         } else if (value instanceof Float) {
             return Float.toString((Float) value) + "F";
         } else if (value.getClass().isEnum()) {
-            return value.getClass().getCanonicalName() + "." + value;
+            return value.getClass().getCanonicalName() + "." + ((Enum<?>) value).name();
         } else if (value instanceof Class) {
             return ((Class) value).getCanonicalName() + ".class";
         } else if (value.getClass().isArray()) {
