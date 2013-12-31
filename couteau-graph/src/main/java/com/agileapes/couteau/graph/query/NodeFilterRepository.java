@@ -18,7 +18,9 @@ package com.agileapes.couteau.graph.query;
 import com.agileapes.couteau.graph.node.NodeFilter;
 import com.agileapes.couteau.graph.query.filters.AssignableNodeFilter;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This is essentially a repository for all node filters that can be used by different pattern compilers

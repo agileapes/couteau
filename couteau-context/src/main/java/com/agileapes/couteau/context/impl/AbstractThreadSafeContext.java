@@ -15,8 +15,6 @@
 
 package com.agileapes.couteau.context.impl;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 

@@ -15,6 +15,8 @@
 
 package com.agileapes.couteau.freemarker.conversion;
 
+import com.agileapes.couteau.freemarker.model.GenericFreemarkerModel;
+import com.agileapes.couteau.freemarker.utils.FreemarkerUtils;
 import com.agileapes.couteau.reflection.beans.BeanWrapper;
 import com.agileapes.couteau.reflection.beans.BeanWrapperFactory;
 import com.agileapes.couteau.reflection.beans.impl.MethodBeanWrapper;
@@ -22,8 +24,6 @@ import com.agileapes.couteau.reflection.convert.BeanConverter;
 import com.agileapes.couteau.reflection.convert.GenericBeanConverter;
 import com.agileapes.couteau.reflection.convert.impl.DefaultBeanConverter;
 import com.agileapes.couteau.reflection.error.BeanConversionException;
-import com.agileapes.couteau.freemarker.model.GenericFreemarkerModel;
-import com.agileapes.couteau.freemarker.utils.FreemarkerUtils;
 import freemarker.ext.beans.BeansWrapper;
 import freemarker.ext.beans.MapModel;
 import freemarker.template.SimpleCollection;

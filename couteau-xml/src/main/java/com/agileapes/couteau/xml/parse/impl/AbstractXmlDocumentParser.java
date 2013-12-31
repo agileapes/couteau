@@ -15,9 +15,6 @@
 
 package com.agileapes.couteau.xml.parse.impl;
 
-import com.agileapes.couteau.basics.api.Stringifiable;
-import com.agileapes.couteau.graph.tree.node.TreeNode;
-import com.agileapes.couteau.graph.tree.node.impl.DirectedTreeNode;
 import com.agileapes.couteau.xml.error.XmlParseError;
 import com.agileapes.couteau.xml.node.XmlNode;
 import com.agileapes.couteau.xml.node.XmlNodeStringifiable;
@@ -31,7 +28,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.InputStream;
-import java.util.List;
 
 /**
  * <p>This parser uses a standard W3C document builder to generate a dom model of the given XML instance.</p>

@@ -17,7 +17,10 @@ package com.agileapes.couteau.lang.model;
 
 import com.agileapes.couteau.freemarker.api.Template;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)

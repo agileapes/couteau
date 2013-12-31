@@ -25,7 +25,6 @@ import com.agileapes.couteau.strings.token.impl.IdentifierTokenReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * This parser will parse snippets denoting a chain of function calls

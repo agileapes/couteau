@@ -15,6 +15,8 @@
 
 package com.agileapes.couteau.freemarker.model;
 
+import com.agileapes.couteau.freemarker.conversion.FreemarkerConversionStrategy;
+import com.agileapes.couteau.freemarker.utils.FreemarkerUtils;
 import com.agileapes.couteau.reflection.beans.BeanWrapper;
 import com.agileapes.couteau.reflection.beans.impl.MethodBeanWrapper;
 import com.agileapes.couteau.reflection.convert.ConversionDecision;
@@ -25,8 +27,6 @@ import com.agileapes.couteau.reflection.error.PropertyTypeMismatchException;
 import com.agileapes.couteau.reflection.property.impl.SimplePropertyDescriptor;
 import com.agileapes.couteau.reflection.util.ReflectionUtils;
 import com.agileapes.couteau.reflection.util.assets.SimpleParameterizedType;
-import com.agileapes.couteau.freemarker.conversion.FreemarkerConversionStrategy;
-import com.agileapes.couteau.freemarker.utils.FreemarkerUtils;
 import freemarker.template.*;
 
 import java.lang.reflect.ParameterizedType;

@@ -19,7 +19,6 @@ import com.agileapes.couteau.xml.error.XmlParseError;
 import com.agileapes.couteau.xml.node.XmlNode;
 import com.agileapes.couteau.xml.parse.XmlParser;
 import org.xml.sax.SAXException;
-import org.xml.sax.helpers.DefaultHandler;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
