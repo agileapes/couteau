@@ -52,6 +52,14 @@ public interface Registry<E> {
     void register(String name, E item) throws RegistryException;
 
     /**
+     * Removes the bean with the given name from the registry, if it exists. Elicits an exception
+     * if no such bean exists or if there is a problem with removing the named bean.
+     * @param name    the name of the bean being queried.
+     * @throws RegistryException
+     */
+    void unregister(String name) throws RegistryException;
+
+    /**
      * Will return the bean with the given name. If the bean is not present, an exception will
      * be thrown.
      * @param name    the name of the bean being queried.

@@ -40,12 +40,20 @@ public abstract class AbstractRegistry<E> implements Registry<E> {
     protected abstract boolean write(String name, E item);
 
     /**
-     * This method will read an item (that is ensured to have been previously written to the regsitry(
+     * This method will read an item (that is ensured to have been previously written to the registry)
      * from the internal storage.
      * @param name    the name of the item to be retrieved.
      * @return the item instance.
      */
     protected abstract E read(String name);
+
+    /**
+     * This method will remove the given bean from the registry. If the bean cannot be removed, then
+     * it should return false
+     * @param name    the name of the bean being queried.
+     * @return <code>true</code> if the bean exists and has been removed from the underlying storage.
+     */
+    protected abstract boolean remove(String name);
 
     /**
      * Will register the given item with the given name. The name must be unique, and no other
@@ -63,6 +71,19 @@ public abstract class AbstractRegistry<E> implements Registry<E> {
             throw new DuplicateItemException(name);
         }
         if (!write(name, item)) {
+            throw new RegistrationFailedException(name);
+        }
+    }
+
+    @Override
+    public void unregister(String name) throws RegistryException {
+        if (name == null) {
+            throw new NullPointerException("Item cannot be null");
+        }
+        if (contains(name)) {
+            throw new DuplicateItemException(name);
+        }
+        if (!remove(name)) {
             throw new RegistrationFailedException(name);
         }
     }

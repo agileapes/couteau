@@ -50,6 +50,12 @@ public abstract class AbstractMapRegistry<E> extends AbstractRegistry<E> {
         return getMap().get(name);
     }
 
+    @Override
+    protected boolean remove(String name) {
+        getMap().remove(name);
+        return !contains(name);
+    }
+
     /**
      * Checks whether or not the map exposed to the registry contains the given item
      * @param name    the name of the object
