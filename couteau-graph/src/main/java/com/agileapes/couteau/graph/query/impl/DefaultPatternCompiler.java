@@ -62,14 +62,7 @@ public class DefaultPatternCompiler implements PatternCompiler {
             final NodeQueryFilter<?> filter = new NodeQueryFilter<Node>();
             for (QuerySnippetParser parser : parsers) {
                 final List<NodeFilter> nodeFilters;
-                try {
-                    nodeFilters = reader.parse(parser);
-                } catch (Throwable e) {
-                    System.err.println(reader.taken());
-                    System.err.println(parser);
-                    e.printStackTrace();
-                    throw new Error();
-                }
+                nodeFilters = reader.parse(parser);
                 if (nodeFilters != null) {
                     for (NodeFilter nodeFilter : nodeFilters) {
                         //noinspection unchecked

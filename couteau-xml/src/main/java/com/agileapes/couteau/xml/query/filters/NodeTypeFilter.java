@@ -20,22 +20,26 @@ import com.agileapes.couteau.graph.node.Node;
 import com.agileapes.couteau.xml.node.NodeType;
 import com.agileapes.couteau.xml.node.XmlNode;
 
+import static com.agileapes.couteau.basics.collections.CollectionWrapper.with;
+
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/31/13, 11:43 AM)
  */
 public class NodeTypeFilter<N extends Node> implements ConfigurableNodeFilter<N> {
 
-    private NodeType nodeType;
+    private NodeType nodeType = null;
 
     @Override
     public void setAttribute(String name, String value) {
-        nodeType = Enum.valueOf(NodeType.class, name.toUpperCase());
+        if (with("type", "0").has(name)) {
+            nodeType = Enum.valueOf(NodeType.class, value.toUpperCase());
+        }
     }
 
     @Override
     public boolean accepts(N item) {
-        return item instanceof XmlNode && ((XmlNode) item).getNodeType().equals(nodeType);
+        return nodeType == null || item instanceof XmlNode && ((XmlNode) item).getNodeType().equals(nodeType);
     }
 
 }
