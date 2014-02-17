@@ -30,7 +30,7 @@ import java.util.Set;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/27, 12:50)
  */
-public class DefaultSearchableNode implements SearchableNode {
+public class DefaultSearchableNode implements SearchableNode<DefaultSearchableNode> {
 
     private final Node node;
 
@@ -39,8 +39,8 @@ public class DefaultSearchableNode implements SearchableNode {
     }
 
     @Override
-    public List<SearchableNode> find(String pattern) {
-        return GraphNodePattern.compile(pattern).finder(((SearchableNode) this)).find();
+    public List<DefaultSearchableNode> find(String pattern) {
+        return GraphNodePattern.compile(pattern).finder((this)).find();
     }
 
     @Override

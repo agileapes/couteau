@@ -16,7 +16,11 @@
 package com.agileapes.couteau.xml.node;
 
 import com.agileapes.couteau.basics.api.Stringifiable;
+import com.agileapes.couteau.graph.node.SearchableNode;
 import com.agileapes.couteau.graph.tree.node.impl.DirectedTreeNode;
+import com.agileapes.couteau.xml.query.XmlPattern;
+
+import java.util.List;
 
 /**
  * This class extends {@link DirectedTreeNode} to add properties peculiar to XML nodes.
@@ -24,7 +28,7 @@ import com.agileapes.couteau.graph.tree.node.impl.DirectedTreeNode;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/30, 1:51)
  */
-public class XmlNode extends DirectedTreeNode {
+public class XmlNode extends DirectedTreeNode implements SearchableNode<XmlNode> {
 
     private final Stringifiable<XmlNode> stringifiable;
     private String nodeName;
@@ -136,6 +140,11 @@ public class XmlNode extends DirectedTreeNode {
     @Override
     public String toString() {
         return stringifiable == null ? super.toString() : stringifiable.toString(this);
+    }
+
+    @Override
+    public List<XmlNode> find(String pattern) {
+        return XmlPattern.compile(pattern).finder(this).find();
     }
 
 }
