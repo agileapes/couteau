@@ -24,7 +24,7 @@ import com.agileapes.couteau.graph.node.Node;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/30, 15:38)
  */
-public class AssignableNodeFilter implements ConfigurableNodeFilter {
+public class AssignableNodeFilter<N extends Node> implements ConfigurableNodeFilter<N> {
 
     private Class<?> from = Object.class;
 
@@ -32,6 +32,9 @@ public class AssignableNodeFilter implements ConfigurableNodeFilter {
     public void setAttribute(String name, String value) {
         if ("from".equals(name)) {
             try {
+                if (!value.matches("[^\\.]*\\..*?")) {
+                    value = "java.lang." + value;
+                }
                 from = Class.forName(value);
             } catch (ClassNotFoundException e) {
                 from = Object.class;
@@ -40,7 +43,7 @@ public class AssignableNodeFilter implements ConfigurableNodeFilter {
     }
 
     @Override
-    public boolean accepts(Node item) {
+    public boolean accepts(N item) {
         return from.isInstance(item);
     }
 }

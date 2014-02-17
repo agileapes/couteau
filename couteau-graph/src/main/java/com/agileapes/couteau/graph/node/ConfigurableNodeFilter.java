@@ -22,7 +22,7 @@ package com.agileapes.couteau.graph.node;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/27, 16:35)
  */
-public interface ConfigurableNodeFilter extends NodeFilter {
+public interface ConfigurableNodeFilter<N extends Node> extends NodeFilter<N> {
 
     /**
      * Sets an arbitrary attribute on the filter

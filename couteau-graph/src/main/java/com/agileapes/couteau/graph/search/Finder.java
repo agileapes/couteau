@@ -29,7 +29,7 @@ import java.util.List;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/24, 15:10)
  */
-public interface Finder {
+public interface Finder<N extends Node> {
 
     /**
      * This method will take a node and start searching from that node for all nodes
@@ -37,6 +37,6 @@ public interface Finder {
      * @return the list of all nodes matching the given description. This list is sorted
      * according to the order with which the nodes were first encountered by the finder.
      */
-    List<Node> find();
+    List<N> find();
 
 }

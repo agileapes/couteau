@@ -28,16 +28,18 @@ import com.agileapes.couteau.graph.query.filters.OriginNodeAware;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/26, 11:03)
  */
-public class NodeQueryFilter extends FilterChain<Node> implements NodeFilter {
+public class NodeQueryFilter<N extends Node> extends FilterChain<N> implements NodeFilter<N> {
 
     /**
      * will change the origin of the search
+     *
      * @param origin    the new origin
      * @return will return the current filter (for chaining purposes)
      */
-    public NodeQueryFilter forOrigin(Node origin) {
-        for (Filter<? super Node> filter : filters) {
+    public NodeQueryFilter<?> forOrigin(Node origin) {
+        for (Filter<? super N> filter : filters) {
             if (filter instanceof OriginNodeAware) {
+                //noinspection unchecked
                 ((OriginNodeAware) filter).setOrigin(origin);
             }
         }

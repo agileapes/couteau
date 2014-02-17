@@ -16,6 +16,7 @@
 package com.agileapes.couteau.graph.query;
 
 import com.agileapes.couteau.graph.node.Node;
+import com.agileapes.couteau.graph.node.NodeFilter;
 import com.agileapes.couteau.graph.search.Finder;
 import com.agileapes.couteau.graph.search.impl.BreadthFirstFinder;
 
@@ -29,31 +30,32 @@ import java.util.List;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/26, 11:01)
  */
-public class NodeQueryFinder implements Finder {
+public class NodeQueryFinder<N extends Node> implements Finder<N> {
 
-    private final Node origin;
-    private final List<NodeQueryFilter> filters;
+    private final N origin;
+    private final List<NodeQueryFilter<?>> filters;
 
-    public NodeQueryFinder(Node origin, List<NodeQueryFilter> filters) {
+    public NodeQueryFinder(N origin, List<NodeQueryFilter<?>> filters) {
         this.origin = origin;
         this.filters = filters;
     }
 
-    private List<Node> find(Node origin, NodeQueryFilter matcher) {
-        return new BreadthFirstFinder(origin, matcher.forOrigin(origin)).find();
+    private List<N> find(N origin, NodeQueryFilter<?> matcher) {
+        //noinspection unchecked
+        return new BreadthFirstFinder<N>(origin, (NodeFilter<N>) matcher.forOrigin(origin)).find();
     }
 
     @Override
-    public List<Node> find() {
-        final List<Node> agenda = new ArrayList<Node>();
+    public List<N> find() {
+        final List<N> agenda = new ArrayList<N>();
         if (!filters.isEmpty()) {
             agenda.add(origin);
         }
-        for (NodeQueryFilter matcher : filters) {
-            final List<Node> unexplored = new ArrayList<Node>();
-            for (Node node : agenda) {
-                final List<Node> found = find(node, matcher);
-                for (Node foundItem : found) {
+        for (NodeQueryFilter<?> matcher : filters) {
+            final List<N> unexplored = new ArrayList<N>();
+            for (N node : agenda) {
+                final List<N> found = find(node, matcher);
+                for (N foundItem : found) {
                     if (!unexplored.contains(foundItem)) {
                         unexplored.add(foundItem);
                     }

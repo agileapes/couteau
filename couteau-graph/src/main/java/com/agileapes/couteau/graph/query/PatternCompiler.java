@@ -31,6 +31,6 @@ public interface PatternCompiler {
      * @param pattern    the pattern to be compiled
      * @return the list of filters that are equivalent with the pattern
      */
-    List<NodeQueryFilter> compile(String pattern);
+    List<NodeQueryFilter<?>> compile(String pattern);
 
 }

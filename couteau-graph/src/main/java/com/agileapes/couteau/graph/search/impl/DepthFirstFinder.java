@@ -30,17 +30,17 @@ import java.util.*;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/24, 16:00)
  */
-public class DepthFirstFinder implements Finder {
+public class DepthFirstFinder<N extends Node> implements Finder<N> {
 
-    private final Node origin;
-    private final NodeFilter filter;
+    private final N origin;
+    private final NodeFilter<N> filter;
 
     /**
      * @param origin     the node from which the search will originate
      * @param filter    the filter which will decide whether or not a given node
      *                   is a match
      */
-    public DepthFirstFinder(Node origin, NodeFilter filter) {
+    public DepthFirstFinder(N origin, NodeFilter<N> filter) {
         this.origin = origin;
         this.filter = filter;
     }
@@ -53,18 +53,18 @@ public class DepthFirstFinder implements Finder {
      * @return the set of all nodes matching the given description
      */
     @Override
-    public List<Node> find() {
+    public List<N> find() {
         //this is the list of nodes accepted by the filter
-        final ArrayList<Node> result = new ArrayList<Node>();
+        final ArrayList<N> result = new ArrayList<N>();
         //this is a stack of all nodes currently being explored
-        final Stack<Node> exploring = new Stack<Node>();
+        final Stack<N> exploring = new Stack<N>();
         //this holds the set of all nodes whose depths has been examined and explored
-        final Set<Node> explored = new HashSet<Node>();
+        final Set<N> explored = new HashSet<N>();
         exploring.push(origin);
         //we continue until no more exploration is in progress
         while (!exploring.isEmpty()) {
             //we peek ahead to see what we are going to explore
-            final Node node = exploring.peek();
+            final N node = exploring.peek();
             //if this node is acceptable, we save it
             if (filter.accepts(node) && !result.contains(node)) {
                 result.add(node);
@@ -74,12 +74,14 @@ public class DepthFirstFinder implements Finder {
             for (Node neighbor : node.getNeighbors()) {
                 //if a node's neighbor has already been explored or is being explored
                 //we do not consider it.
+                //noinspection SuspiciousMethodCalls
                 if (explored.contains(neighbor) || exploring.contains(neighbor)) {
                     continue;
                 }
                 //if even one node adjacent to the current node has not been explored
                 //it breaks this node's chance at being considered fully examined.
-                exploring.push(neighbor);
+                //noinspection unchecked
+                exploring.push((N) neighbor);
                 done = false;
                 break;
             }

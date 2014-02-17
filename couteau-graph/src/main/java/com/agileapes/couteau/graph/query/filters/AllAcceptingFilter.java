@@ -24,9 +24,11 @@ import com.agileapes.couteau.graph.node.NodeFilter;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/30, 13:03)
  */
-public class AllAcceptingFilter implements NodeFilter {
+public class AllAcceptingFilter<N extends Node> implements NodeFilter<N> {
+
     @Override
-    public boolean accepts(Node item) {
+    public boolean accepts(N item) {
         return true;
     }
+
 }

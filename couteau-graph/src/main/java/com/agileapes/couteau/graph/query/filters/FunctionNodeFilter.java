@@ -27,15 +27,15 @@ import java.util.Map;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/30, 5:54)
  */
-public class FunctionNodeFilter implements NodeFilter, OriginNodeAware {
+public class FunctionNodeFilter<N extends Node> implements NodeFilter<N>, OriginNodeAware<N> {
 
     private final Map<String, String> arguments;
-    private Node origin;
-    private final NodeFilter filter;
+    private N origin;
+    private final NodeFilter<N> filter;
 
-    public FunctionNodeFilter(Map<String, NodeFilter> filters, String functionName, Map<String, String> arguments) {
+    public FunctionNodeFilter(Map<String, NodeFilter<N>> filters, String functionName, Map<String, String> arguments) {
         this.arguments = arguments;
-        for (Map.Entry<String, NodeFilter> nodeFilter : filters.entrySet()) {
+        for (Map.Entry<String, NodeFilter<N>> nodeFilter : filters.entrySet()) {
             if (nodeFilter.getKey().equals(functionName)) {
                 filter = nodeFilter.getValue();
                 return;
@@ -45,19 +45,28 @@ public class FunctionNodeFilter implements NodeFilter, OriginNodeAware {
     }
 
     @Override
-    public void setOrigin(Node origin) {
+    public void setOrigin(N origin) {
         this.origin = origin;
     }
 
     @Override
-    public boolean accepts(Node item) {
-        if (filter instanceof OriginNodeAware) {
-            ((OriginNodeAware) filter).setOrigin(origin);
+    public boolean accepts(N item) {
+        if (filter instanceof OriginNodeAware<?>) {
+            //noinspection unchecked
+            ((OriginNodeAware<N>) filter).setOrigin(origin);
         }
+        int index = 0;
         if (filter instanceof ConfigurableNodeFilter) {
-            ConfigurableNodeFilter nodeFilter = (ConfigurableNodeFilter) filter;
-            for (Map.Entry<String, String> entry : arguments.entrySet()) {
-                nodeFilter.setAttribute(entry.getKey().trim(), entry.getValue());
+            final ConfigurableNodeFilter nodeFilter = (ConfigurableNodeFilter) filter;
+            for (Map.Entry<String, String> argument : arguments.entrySet()) {
+                String key = argument.getKey().trim();
+                String value = argument.getValue();
+                if (value == null) {
+                    value = key;
+                    key = Integer.toString(index);
+                }
+                nodeFilter.setAttribute(key, value);
+                index ++;
             }
         }
         return filter.accepts(item);

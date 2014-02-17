@@ -33,10 +33,10 @@ public class NodeNameSnippetParser extends QuerySnippetParser {
 
     @Override
     public List<NodeFilter> parse(DocumentReader reader) {
-        if (!reader.hasMore() || reader.has("[\\[#\\{]")) {
+        if (!reader.hasMore() || reader.has("([\\[\\{]|#\\d)")) {
             return null;
         }
-        final String nodeName = reader.read(reader.expectToken(new ContainedTokenReader("'\"`", Pattern.compile("([\\[#\\{\\s/]|$)")))).trim();
+        final String nodeName = reader.read(reader.expectToken(new ContainedTokenReader("'\"`", Pattern.compile("([\\[\\{\\s/]|#\\d|$)")))).trim();
         final ArrayList<NodeFilter> filters = new ArrayList<NodeFilter>();
         filters.add(new NodeNameFilter(nodeName));
         return filters;

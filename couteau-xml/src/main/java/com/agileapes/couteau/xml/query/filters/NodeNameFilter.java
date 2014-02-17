@@ -23,7 +23,7 @@ import com.agileapes.couteau.xml.node.XmlNode;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/30, 13:47)
  */
-public class NodeNameFilter implements NodeFilter {
+public class NodeNameFilter<N extends Node> implements NodeFilter<N> {
 
     private final String nodeName;
 
@@ -32,7 +32,7 @@ public class NodeNameFilter implements NodeFilter {
     }
 
     @Override
-    public boolean accepts(Node item) {
+    public boolean accepts(N item) {
         if (item instanceof XmlNode) {
             final XmlNode xmlNode = (XmlNode) item;
             return xmlNode.getNodeName().matches(nodeName);

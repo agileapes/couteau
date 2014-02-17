@@ -18,6 +18,7 @@ package com.agileapes.couteau.basics.collections;
 import com.agileapes.couteau.basics.api.Filter;
 import com.agileapes.couteau.basics.api.Processor;
 import com.agileapes.couteau.basics.api.Transformer;
+import com.agileapes.couteau.basics.api.impl.EqualityFilter;
 
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -545,6 +546,15 @@ public class CollectionWrapper<I> {
             builder.append(item);
         }
         return builder.toString();
+    }
+
+    /**
+     * Looks through the collection to see if the given item can be found
+     * @param item    the item to look for
+     * @return <code>true</code> if at least one such item exists.
+     */
+    public boolean has(I item) {
+        return exists(new EqualityFilter<I>(item));
     }
 
 }

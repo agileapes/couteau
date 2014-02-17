@@ -15,6 +15,7 @@
 
 package com.agileapes.couteau.graph.query.impl;
 
+import com.agileapes.couteau.graph.node.Node;
 import com.agileapes.couteau.graph.node.NodeFilter;
 import com.agileapes.couteau.graph.query.QuerySnippetParser;
 import com.agileapes.couteau.graph.query.filters.FunctionNodeFilter;
@@ -55,7 +56,8 @@ public class FunctionCallSnippetParser extends QuerySnippetParser {
             final String name = reader.read(reader.expectToken(new IdentifierTokenReader()));
             final Map<String,String> arguments = reader.parse(new MapParser(MapParser.Container.ROUNDED));
             reader.expect(";", true);
-            final FunctionNodeFilter filter = new FunctionNodeFilter(this.filters, name, arguments);
+            //noinspection unchecked
+            final FunctionNodeFilter<?> filter = new FunctionNodeFilter(this.filters, name, arguments);
             filters.add(filter);
         }
         return filters;

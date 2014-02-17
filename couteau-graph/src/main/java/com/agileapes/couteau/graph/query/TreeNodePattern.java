@@ -37,14 +37,14 @@ public class TreeNodePattern implements NodePattern {
         return new TreeNodePattern(compiler.compile(pattern));
     }
 
-    private final List<NodeQueryFilter> filters;
+    private final List<NodeQueryFilter<?>> filters;
 
-    public TreeNodePattern(List<NodeQueryFilter> filters) {
+    public TreeNodePattern(List<NodeQueryFilter<?>> filters) {
         this.filters = filters;
     }
 
     @Override
-    public Finder finder(Node origin) {
-        return new NodeQueryFinder(origin, filters);
+    public <N extends Node> Finder<N> finder(N origin) {
+        return new NodeQueryFinder<N>(origin, filters);
     }
 }

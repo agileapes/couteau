@@ -20,6 +20,8 @@ import com.agileapes.couteau.graph.tree.node.TreeNode;
 
 import java.util.List;
 
+import static com.agileapes.couteau.basics.collections.CollectionWrapper.with;
+
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (8/1/13, 2:19 PM)
@@ -35,6 +37,7 @@ public class XmlNodeStringifiable implements Stringifiable<XmlNode> {
                 builder.append(",");
             }
             builder.append("@").append(name);
+            builder.append("=").append(node.getAttribute(name));
         }
         builder.append("]{");
         final List<TreeNode> children = node.getChildren();
@@ -46,6 +49,9 @@ public class XmlNodeStringifiable implements Stringifiable<XmlNode> {
             builder.append(child == null ? "(x)" : child);
         }
         builder.append("}");
+        if (with(NodeType.TEXT_NODE, NodeType.COMMENT_NODE, NodeType.CDATA_SECTION_NODE).has(node.getNodeType())) {
+            builder.append("{").append(node.getNodeValue()).append("}");
+        }
         return builder.toString();
     }
 

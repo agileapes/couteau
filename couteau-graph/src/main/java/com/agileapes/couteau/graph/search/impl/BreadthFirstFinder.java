@@ -31,17 +31,17 @@ import java.util.*;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/24, 15:29)
  */
-public class BreadthFirstFinder implements Finder {
+public class BreadthFirstFinder<N extends Node> implements Finder<N> {
 
-    private final Node origin;
-    private final NodeFilter filter;
+    private final N origin;
+    private final NodeFilter<N> filter;
 
     /**
      * @param origin     the node from which the search will originate
      * @param filter    the filter which will decide whether or not a given node
      *                   is a match
      */
-    public BreadthFirstFinder(Node origin, NodeFilter filter) {
+    public BreadthFirstFinder(N origin, NodeFilter<N> filter) {
         this.filter = filter;
         this.origin = origin;
     }
@@ -54,27 +54,29 @@ public class BreadthFirstFinder implements Finder {
      * @return the set of all nodes matching the given description
      */
     @Override
-    public List<Node> find() {
+    public List<N> find() {
         //this is to maintain the status of each node as seen or new.
-        final Set<Node> markedNodes = new HashSet<Node>();
+        final Set<N> markedNodes = new HashSet<N>();
         markedNodes.add(origin);
         //this queue holds all nodes that are to be seen, and have not been examined yet
-        final Queue<Node> unseen = new ArrayDeque<Node>();
+        final Queue<N> unseen = new ArrayDeque<N>();
         //we start by examining the origin node
         unseen.add(origin);
         //this list holds all nodes accepted by the filter
-        final ArrayList<Node> result = new ArrayList<Node>();
+        final ArrayList<N> result = new ArrayList<N>();
         //we carry on until all node accessible from the originating node have been seen
         while (!unseen.isEmpty()) {
-            final Node node = unseen.remove();
+            final N node = unseen.remove();
             if (filter.accepts(node)) {
                 result.add(node);
             }
             //we mark all unmarked nodes adjacent to this node as unseen
             for (Node neighbor : node.getNeighbors()) {
+                //noinspection SuspiciousMethodCalls
                 if (!markedNodes.contains(neighbor)) {
                     markedNodes.add(node);
-                    unseen.add(neighbor);
+                    //noinspection unchecked
+                    unseen.add((N) neighbor);
                 }
             }
         }

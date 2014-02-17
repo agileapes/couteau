@@ -39,8 +39,8 @@ public class DefaultSearchableNode implements SearchableNode {
     }
 
     @Override
-    public List<Node> find(String pattern) {
-        return GraphNodePattern.compile(pattern).finder(this).find();
+    public List<SearchableNode> find(String pattern) {
+        return GraphNodePattern.compile(pattern).finder(((SearchableNode) this)).find();
     }
 
     @Override

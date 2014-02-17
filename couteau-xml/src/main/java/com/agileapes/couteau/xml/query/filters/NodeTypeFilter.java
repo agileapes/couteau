@@ -24,17 +24,17 @@ import com.agileapes.couteau.xml.node.XmlNode;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/31/13, 11:43 AM)
  */
-public class NodeTypeFilter implements ConfigurableNodeFilter {
+public class NodeTypeFilter<N extends Node> implements ConfigurableNodeFilter<N> {
 
     private NodeType nodeType;
 
     @Override
     public void setAttribute(String name, String value) {
-        nodeType = NodeType.valueOf(NodeType.class, name.toUpperCase());
+        nodeType = Enum.valueOf(NodeType.class, name.toUpperCase());
     }
 
     @Override
-    public boolean accepts(Node item) {
+    public boolean accepts(N item) {
         return item instanceof XmlNode && ((XmlNode) item).getNodeType().equals(nodeType);
     }
 

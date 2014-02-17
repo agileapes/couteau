@@ -24,6 +24,6 @@ import com.agileapes.couteau.basics.api.Filter;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/24, 15:17)
  */
-public interface NodeFilter extends Filter<Node> {
+public interface NodeFilter<N extends Node> extends Filter<N> {
 
 }

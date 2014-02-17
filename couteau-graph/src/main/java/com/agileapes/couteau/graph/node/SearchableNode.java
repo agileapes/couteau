@@ -35,6 +35,6 @@ public interface SearchableNode extends Node {
      * @param pattern    the pattern which will be compiled into a set of matchers
      * @return the list of matching nodes accessible from this node
      */
-    List<Node> find(String pattern);
+    List<SearchableNode> find(String pattern);
 
 }

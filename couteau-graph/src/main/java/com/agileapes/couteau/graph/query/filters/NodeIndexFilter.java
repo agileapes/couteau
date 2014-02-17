@@ -25,7 +25,7 @@ import com.agileapes.couteau.graph.tree.node.TreeNode;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/30, 13:53)
  */
-public class NodeIndexFilter implements NodeFilter {
+public class NodeIndexFilter<N extends Node> implements NodeFilter<N> {
 
     private final int index;
 
@@ -34,7 +34,7 @@ public class NodeIndexFilter implements NodeFilter {
     }
 
     @Override
-    public boolean accepts(Node item) {
+    public boolean accepts(N item) {
         return item instanceof TreeNode && ((TreeNode) item).getNodeIndex() == index;
     }
 

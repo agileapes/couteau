@@ -34,7 +34,7 @@ import java.util.Set;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/30, 5:48)
  */
-public class AttributeNodeFilter implements NodeFilter {
+public class AttributeNodeFilter<N extends Node> implements NodeFilter<N> {
 
     private final String attribute;
     private final String value;
@@ -45,7 +45,7 @@ public class AttributeNodeFilter implements NodeFilter {
     }
 
     @Override
-    public boolean accepts(Node item) {
+    public boolean accepts(N item) {
         final Set<String> target = new HashSet<String>();
         for (String attributeName : item.getAttributeNames()) {
             if (attributeName.matches(attribute)) {

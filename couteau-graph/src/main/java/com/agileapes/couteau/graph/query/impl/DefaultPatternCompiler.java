@@ -15,6 +15,7 @@
 
 package com.agileapes.couteau.graph.query.impl;
 
+import com.agileapes.couteau.graph.node.Node;
 import com.agileapes.couteau.graph.node.NodeFilter;
 import com.agileapes.couteau.graph.query.NodeQueryFilter;
 import com.agileapes.couteau.graph.query.PatternCompiler;
@@ -53,16 +54,25 @@ public class DefaultPatternCompiler implements PatternCompiler {
     }
 
     @Override
-    public List<NodeQueryFilter> compile(String pattern) {
+    public List<NodeQueryFilter<?>> compile(String pattern) {
         final DocumentReader reader = new DefaultDocumentReader(pattern);
         reader.skip(WHITESPACE);
-        final ArrayList<NodeQueryFilter> filters = new ArrayList<NodeQueryFilter>();
+        final ArrayList<NodeQueryFilter<?>> filters = new ArrayList<NodeQueryFilter<?>>();
         while (reader.hasMore()) {
-            final NodeQueryFilter filter = new NodeQueryFilter();
+            final NodeQueryFilter<?> filter = new NodeQueryFilter<Node>();
             for (QuerySnippetParser parser : parsers) {
-                final List<NodeFilter> nodeFilters = reader.parse(parser);
+                final List<NodeFilter> nodeFilters;
+                try {
+                    nodeFilters = reader.parse(parser);
+                } catch (Throwable e) {
+                    System.err.println(reader.taken());
+                    System.err.println(parser);
+                    e.printStackTrace();
+                    throw new Error();
+                }
                 if (nodeFilters != null) {
                     for (NodeFilter nodeFilter : nodeFilters) {
+                        //noinspection unchecked
                         filter.addFilter(nodeFilter);
                     }
                     if (parser.endsParsing()) {

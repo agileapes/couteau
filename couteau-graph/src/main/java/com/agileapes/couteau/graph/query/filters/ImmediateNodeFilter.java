@@ -24,17 +24,17 @@ import com.agileapes.couteau.graph.node.NodeFilter;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/30, 5:45)
  */
-public class ImmediateNodeFilter implements NodeFilter, OriginNodeAware {
+public class ImmediateNodeFilter<N extends Node> implements NodeFilter<N>, OriginNodeAware<N> {
 
-    private Node origin;
+    private N origin;
 
     @Override
-    public void setOrigin(Node origin) {
+    public void setOrigin(N origin) {
         this.origin = origin;
     }
 
     @Override
-    public boolean accepts(Node item) {
+    public boolean accepts(N item) {
         return origin.getNeighbors().contains(item);
     }
 
