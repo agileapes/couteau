@@ -22,9 +22,9 @@ import com.agileapes.couteau.graph.query.NodeQueryFilter;
 import com.agileapes.couteau.graph.query.NodeQueryFinder;
 import com.agileapes.couteau.graph.query.impl.*;
 import com.agileapes.couteau.graph.search.Finder;
-import com.agileapes.couteau.xml.query.filters.NodeNamespaceFilter;
-import com.agileapes.couteau.xml.query.filters.NodeTypeFilter;
-import com.agileapes.couteau.xml.query.filters.NodeValueFilter;
+import com.agileapes.couteau.xml.query.filters.NamespaceNodeFilter;
+import com.agileapes.couteau.xml.query.filters.TypeNodeFilter;
+import com.agileapes.couteau.xml.query.filters.ValueNodeFilter;
 import com.agileapes.couteau.xml.query.impl.NodeNameSnippetParser;
 
 import java.util.List;
@@ -36,9 +36,9 @@ import java.util.List;
 public class XmlPattern implements NodePattern {
 
     static {
-        NodeFilterRepository.addFilter("type", new NodeTypeFilter());
-        NodeFilterRepository.addFilter("value", new NodeValueFilter());
-        NodeFilterRepository.addFilter("namespace", new NodeNamespaceFilter());
+        NodeFilterRepository.addFilter("type", new TypeNodeFilter());
+        NodeFilterRepository.addFilter("value", new ValueNodeFilter());
+        NodeFilterRepository.addFilter("namespace", new NamespaceNodeFilter());
     }
 
     public static NodePattern compile(String pattern) {

@@ -23,11 +23,11 @@ import com.agileapes.couteau.xml.node.XmlNode;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/30, 13:47)
  */
-public class NodeNameFilter<N extends Node> implements NodeFilter<N> {
+public class NameNodeFilter<N extends Node> implements NodeFilter<N> {
 
     private final String nodeName;
 
-    public NodeNameFilter(String nodeName) {
+    public NameNodeFilter(String nodeName) {
         this.nodeName = nodeName;
     }
 

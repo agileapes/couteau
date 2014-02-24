@@ -19,7 +19,7 @@ import com.agileapes.couteau.graph.node.NodeFilter;
 import com.agileapes.couteau.graph.query.QuerySnippetParser;
 import com.agileapes.couteau.strings.document.DocumentReader;
 import com.agileapes.couteau.strings.token.impl.ContainedTokenReader;
-import com.agileapes.couteau.xml.query.filters.NodeNameFilter;
+import com.agileapes.couteau.xml.query.filters.NameNodeFilter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +38,7 @@ public class NodeNameSnippetParser extends QuerySnippetParser {
         }
         final String nodeName = reader.read(reader.expectToken(new ContainedTokenReader("'\"`", Pattern.compile("([\\[\\{\\s/]|#\\d|$)")))).trim();
         final ArrayList<NodeFilter> filters = new ArrayList<NodeFilter>();
-        filters.add(new NodeNameFilter(nodeName));
+        filters.add(new NameNodeFilter(nodeName));
         return filters;
     }
 

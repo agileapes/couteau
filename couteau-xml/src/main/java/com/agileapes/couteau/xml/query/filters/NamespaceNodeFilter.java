@@ -9,7 +9,7 @@ import static com.agileapes.couteau.basics.collections.CollectionWrapper.with;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (14/2/24 AD, 19:27)
  */
-public class NodeNamespaceFilter<N extends XmlNode> implements ConfigurableNodeFilter<N> {
+public class NamespaceNodeFilter<N extends XmlNode> implements ConfigurableNodeFilter<N> {
 
     private String namespace;
 

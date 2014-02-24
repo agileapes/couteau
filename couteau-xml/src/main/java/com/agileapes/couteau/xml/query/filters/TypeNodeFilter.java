@@ -26,7 +26,7 @@ import static com.agileapes.couteau.basics.collections.CollectionWrapper.with;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (7/31/13, 11:43 AM)
  */
-public class NodeTypeFilter<N extends Node> implements ConfigurableNodeFilter<N> {
+public class TypeNodeFilter<N extends Node> implements ConfigurableNodeFilter<N> {
 
     private NodeType nodeType = null;
 
