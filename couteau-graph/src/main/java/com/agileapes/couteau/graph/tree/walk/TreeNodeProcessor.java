@@ -23,7 +23,7 @@ import com.agileapes.couteau.graph.tree.node.TreeNode;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/25, 14:00)
  */
-public interface TreeNodeProcessor<N extends TreeNode> {
+public interface TreeNodeProcessor<N extends TreeNode<N>> {
 
     /**
      * Will be called before each node's children are processed

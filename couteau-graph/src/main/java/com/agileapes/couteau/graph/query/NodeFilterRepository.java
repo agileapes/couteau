@@ -17,6 +17,7 @@ package com.agileapes.couteau.graph.query;
 
 import com.agileapes.couteau.graph.node.NodeFilter;
 import com.agileapes.couteau.graph.query.filters.AssignableNodeFilter;
+import com.agileapes.couteau.graph.query.filters.OriginNodeFilter;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -42,6 +43,7 @@ public abstract class NodeFilterRepository {
      */
     static {
         addFilter("assignable", new AssignableNodeFilter());
+        addFilter("origin", new OriginNodeFilter());
     }
 
     /**

@@ -27,15 +27,14 @@ import java.util.List;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/29, 15:41)
  */
-public interface GraphSorter<T extends Node> {
+public interface GraphSorter<T extends Node<T>> {
 
     /**
      * This method sorts the given component, returning the nodes in the component
      * in the ordering which they have received while being sorted
      * @param nodes    the collection of nodes being sorted
-     * @param <N>       the type of nodes
      * @return sorted nodes
      */
-    <N extends T> List<N> sort(Collection<N> nodes);
+    List<T> sort(Collection<T> nodes);
 
 }

@@ -40,7 +40,7 @@ public class XmlNodeStringifiable implements Stringifiable<XmlNode> {
             builder.append("=").append(node.getAttribute(name));
         }
         builder.append("]{");
-        final List<TreeNode> children = node.getChildren();
+        final List<XmlNode> children = node.getChildren();
         for (i = 0; i < children.size(); i++) {
             final TreeNode child = children.get(i);
             if (i > 0) {

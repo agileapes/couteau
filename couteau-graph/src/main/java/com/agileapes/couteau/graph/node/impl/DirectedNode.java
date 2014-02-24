@@ -17,7 +17,6 @@ package com.agileapes.couteau.graph.node.impl;
 
 import com.agileapes.couteau.basics.api.Stringifiable;
 import com.agileapes.couteau.graph.node.MutableNode;
-import com.agileapes.couteau.graph.node.Node;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,13 +26,13 @@ import java.util.Set;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/24, 15:04)
  */
-public class DirectedNode implements MutableNode {
+public class DirectedNode<N extends DirectedNode<N>> implements MutableNode<N> {
 
     /**
      * The stringifiable object associated with the node, to help facilitate
      * writing the node as a string value
      */
-    private final Stringifiable<DirectedNode> stringifiable;
+    private final Stringifiable<DirectedNode<N>> stringifiable;
 
     /**
      * The map containing all user data associated with the node
@@ -43,7 +42,7 @@ public class DirectedNode implements MutableNode {
     /**
      * This nodes neighbors and link weights
      */
-    private final Map<Node, Double> neighbors = new HashMap<Node, Double>();
+    private final Map<N, Double> neighbors = new HashMap<N, Double>();
 
     /**
      * The map of all attribute values
@@ -54,7 +53,7 @@ public class DirectedNode implements MutableNode {
         this(null);
     }
 
-    public DirectedNode(Stringifiable<DirectedNode> stringifiable) {
+    public DirectedNode(Stringifiable<DirectedNode<N>> stringifiable) {
         this.stringifiable = stringifiable;
     }
 
@@ -76,7 +75,7 @@ public class DirectedNode implements MutableNode {
      * @param neighbor    the node be added as a neighbor
      */
     @Override
-    public void addNeighbor(Node neighbor) {
+    public void addNeighbor(N neighbor) {
         if (neighbors.containsKey(neighbor)) {
             neighbors.remove(neighbor);
         }
@@ -84,13 +83,13 @@ public class DirectedNode implements MutableNode {
     }
 
     @Override
-    public void removeNeighbor(Node neighbor) {
+    public void removeNeighbor(N neighbor) {
         neighbors.remove(neighbor);
     }
 
     @Override
     public void removeAllNeighbors() {
-        for (Node node : neighbors.keySet()) {
+        for (N node : neighbors.keySet()) {
             removeNeighbor(node);
         }
     }
@@ -102,7 +101,7 @@ public class DirectedNode implements MutableNode {
      * @param weight      the new weight of the link
      */
     @Override
-    public void setLinkWeight(Node neighbor, double weight) {
+    public void setLinkWeight(N neighbor, double weight) {
         if (neighbors.containsKey(neighbor)) {
             neighbors.remove(neighbor);
             neighbors.put(neighbor, weight);
@@ -147,7 +146,7 @@ public class DirectedNode implements MutableNode {
      * @return the set of nodes adjacent to this node.
      */
     @Override
-    public Set<Node> getNeighbors() {
+    public Set<N> getNeighbors() {
         return neighbors.keySet();
     }
 
@@ -160,7 +159,7 @@ public class DirectedNode implements MutableNode {
      * neighboring node. If no such link exists, the value returned is {@code 0}.
      */
     @Override
-    public double getLinkWeight(Node neighbour) {
+    public double getLinkWeight(N neighbour) {
         return neighbors.containsKey(neighbour) ? neighbors.get(neighbour) : 0d;
     }
 

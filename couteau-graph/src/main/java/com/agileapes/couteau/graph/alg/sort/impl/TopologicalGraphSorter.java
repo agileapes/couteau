@@ -31,21 +31,20 @@ import java.util.List;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/29, 15:42)
  */
-public class TopologicalGraphSorter implements GraphSorter<DirectedNode> {
+public class TopologicalGraphSorter<N extends DirectedNode<N>> implements GraphSorter<N> {
 
     /**
      * Attempts the topological sorting of input nodes. The nodes will be sorted in a fashion that preserves the
      * order of dependencies defined between them.
      * @param input    the collection of nodes being sorted
-     * @param <N>      the inferred type of the nodes
      * @return the sorted list of nodes
      * @throws TopologicalSortFailureError if any circular dependencies exist between the nodes, preventing them
      * from being sorted properly.
      */
     @Override
-    public <N extends DirectedNode> List<N> sort(Collection<N> input) {
+    public List<N> sort(Collection<N> input) {
         final List<N> nodes = new ArrayList<N>(input);
-        final ArrayList<N> result = new ArrayList<N>();
+        final List<N> result = new ArrayList<N>();
         while (!nodes.isEmpty()) {
             final N candidate = select(nodes, result);
             if (candidate == null) {
@@ -64,7 +63,7 @@ public class TopologicalGraphSorter implements GraphSorter<DirectedNode> {
      * @param sorted    the nodes already sorted
      * @return a candidate node or {@link null} if no such node exists
      */
-    private <N extends DirectedNode> N select(Collection<N> toSort, Collection<N> sorted) {
+    private <N extends DirectedNode<N>> N select(Collection<N> toSort, Collection<N> sorted) {
         for (N node : toSort) {
             boolean chosen = true;
             for (Node neighbor : node.getNeighbors()) {

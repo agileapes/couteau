@@ -23,7 +23,7 @@ import com.agileapes.couteau.graph.tree.node.impl.BinaryTreeNode;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/25, 14:01)
  */
-public interface BinaryTreeNodeProcessor<N extends BinaryTreeNode> extends TreeNodeProcessor<N> {
+public interface BinaryTreeNodeProcessor<N extends BinaryTreeNode<N>> extends TreeNodeProcessor<N> {
 
     /**
      * This method will be called after the node's left child is processed and before the right

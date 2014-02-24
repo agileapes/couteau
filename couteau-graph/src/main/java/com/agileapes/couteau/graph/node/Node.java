@@ -24,7 +24,7 @@ import java.util.Set;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/24, 14:42)
  */
-public interface Node {
+public interface Node<N extends Node<N>> {
 
     /**
      * This method returns a set of the names of all the attributes associated
@@ -47,7 +47,7 @@ public interface Node {
      * to allow for modeling of directed graphs.
      * @return the set of nodes adjacent to this node.
      */
-    Set<Node> getNeighbors();
+    Set<N> getNeighbors();
 
     /**
      * Returns the weight associated with the originating from this node to the
@@ -57,7 +57,7 @@ public interface Node {
      * @return the weight of the link originating from this node and ending in the
      * neighboring node. If no such link exists, the value returned is {@code 0}.
      */
-    double getLinkWeight(Node neighbour);
+    double getLinkWeight(N neighbour);
 
     /**
      * This method will query for user data associated with this node with the

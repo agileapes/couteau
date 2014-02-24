@@ -16,8 +16,6 @@
 package com.agileapes.couteau.graph.tree.node.impl;
 
 import com.agileapes.couteau.basics.api.Stringifiable;
-import com.agileapes.couteau.graph.node.Node;
-import com.agileapes.couteau.graph.tree.node.TreeNode;
 
 /**
  * This class implements the properties expected of a binary tree.
@@ -25,59 +23,56 @@ import com.agileapes.couteau.graph.tree.node.TreeNode;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/25, 11:08)
  */
-public class BinaryTreeNode extends DirectedTreeNode {
+public class BinaryTreeNode<N extends BinaryTreeNode<N>> extends DirectedTreeNode<N> {
     
-    private final Stringifiable<BinaryTreeNode> stringifiable;
+    private final Stringifiable<BinaryTreeNode<N>> stringifiable;
 
     public BinaryTreeNode() {
         this(null);
     }
 
-    public BinaryTreeNode(Stringifiable<BinaryTreeNode> stringifiable) {
+    public BinaryTreeNode(Stringifiable<BinaryTreeNode<N>> stringifiable) {
         this.stringifiable = stringifiable;
     }
 
-    public void setLeftChild(BinaryTreeNode node) {
-        final BinaryTreeNode rightChild = getRightChild();
+    public void setLeftChild(N node) {
+        final N rightChild = getRightChild();
         removeAllChildren();
         addChild(node);
         addChild(rightChild);
     }
 
-    public void setRightChild(BinaryTreeNode node) {
-        final BinaryTreeNode leftChild = getLeftChild();
+    public void setRightChild(N node) {
+        final N leftChild = getLeftChild();
         removeAllChildren();
         addChild(leftChild);
         addChild(node);
     }
 
-    public BinaryTreeNode getLeftChild() {
+    public N getLeftChild() {
         if (getChildren().isEmpty()) {
             return null;
         }
-        return (BinaryTreeNode) getChildren().get(0);
+        return getChildren().get(0);
     }
 
-    public BinaryTreeNode getRightChild() {
+    public N getRightChild() {
         if (getChildren().size() < 2) {
             return null;
         }
-        return (BinaryTreeNode) getChildren().get(1);
+        return getChildren().get(1);
     }
 
     @Override
-    public void addNeighbor(Node neighbor) {
-        if (!(neighbor instanceof BinaryTreeNode)) {
+    public void addNeighbor(N neighbor) {
+        if (neighbor == null) {
             throw new IllegalArgumentException();
         }
         super.addNeighbor(neighbor);
     }
 
     @Override
-    public void addChild(TreeNode child) {
-        if (child != null && !(child instanceof BinaryTreeNode)) {
-            throw new IllegalArgumentException();
-        }
+    public void addChild(N child) {
         if (getChildren().size() >= 2) {
             throw new IllegalStateException();
         }
@@ -85,23 +80,20 @@ public class BinaryTreeNode extends DirectedTreeNode {
     }
 
     @Override
-    public void setParent(TreeNode parent) {
-        if (!(parent instanceof BinaryTreeNode)) {
+    public void setParent(N parent) {
+        if (parent == null) {
             throw new IllegalArgumentException();
         }
         super.setParent(parent);
     }
 
     @Override
-    public BinaryTreeNode getParent() {
-        return super.getParent() == null ? null : (BinaryTreeNode) super.getParent();
+    public N getParent() {
+        return super.getParent() == null ? null : super.getParent();
     }
 
     @Override
-    public void removeChild(TreeNode child) {
-        if (child != null && !(child instanceof BinaryTreeNode)) {
-            throw new IllegalArgumentException();
-        }
+    public void removeChild(N child) {
         super.removeChild(child);
     }
 

@@ -34,7 +34,7 @@ import java.util.Set;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/30, 5:48)
  */
-public class AttributeNodeFilter<N extends Node> implements NodeFilter<N> {
+public class AttributeNodeFilter<N extends Node<N>> implements NodeFilter<N> {
 
     private final String attribute;
     private final String value;

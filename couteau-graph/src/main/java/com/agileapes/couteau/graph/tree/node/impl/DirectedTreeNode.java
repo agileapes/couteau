@@ -16,7 +16,6 @@
 package com.agileapes.couteau.graph.tree.node.impl;
 
 import com.agileapes.couteau.basics.api.Stringifiable;
-import com.agileapes.couteau.graph.node.Node;
 import com.agileapes.couteau.graph.node.impl.DirectedNode;
 import com.agileapes.couteau.graph.tree.node.TreeNode;
 
@@ -28,10 +27,10 @@ import java.util.List;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/25, 10:30)
  */
-public class DirectedTreeNode extends DirectedNode implements TreeNode {
+public class DirectedTreeNode<N extends DirectedTreeNode<N>> extends DirectedNode<N> implements TreeNode<N> {
 
-    private final List<TreeNode> children = new ArrayList<TreeNode>();
-    private TreeNode parent = null;
+    private final List<N> children = new ArrayList<N>();
+    private N parent = null;
     private final Stringifiable<DirectedTreeNode> stringifiable;
 
     public DirectedTreeNode() {
@@ -47,7 +46,7 @@ public class DirectedTreeNode extends DirectedNode implements TreeNode {
      * @param child    the child to be added
      */
     @Override
-    public void addChild(TreeNode child) {
+    public void addChild(N child) {
         if (child == null) {
             children.add(null);
             return;
@@ -57,7 +56,8 @@ public class DirectedTreeNode extends DirectedNode implements TreeNode {
         }
         if (!children.contains(child)) {
             children.add(child);
-            child.setParent(this);
+            //noinspection unchecked
+            child.setParent((N) this);
             addNeighbor(child);
         }
     }
@@ -67,7 +67,7 @@ public class DirectedTreeNode extends DirectedNode implements TreeNode {
      * @param child    the child to be removed
      */
     @Override
-    public void removeChild(TreeNode child) {
+    public void removeChild(N child) {
         if (child == null) {
             return;
         }
@@ -80,7 +80,7 @@ public class DirectedTreeNode extends DirectedNode implements TreeNode {
      * @param parent    the new parent
      */
     @Override
-    public void setParent(TreeNode parent) {
+    public void setParent(N parent) {
         this.parent = parent;
     }
 
@@ -110,28 +110,35 @@ public class DirectedTreeNode extends DirectedNode implements TreeNode {
     }
 
     @Override
-    public TreeNode getFirstChild() {
+    public N getFirstChild() {
         return isLeaf() ? null : getChildren().get(0);
     }
 
     @Override
-    public TreeNode getLastChild() {
+    public N getLastChild() {
         return isLeaf() ? null : getChildren().get(getChildren().size() - 1);
     }
 
     @Override
-    public TreeNode getPreviousSibling() {
+    public N getPreviousSibling() {
         return isRoot() || getNodeIndex() == 0 ? null : getParent().getChildren().get(getNodeIndex() - 1);
     }
 
     @Override
-    public TreeNode getNextSibling() {
+    public N getNextSibling() {
         return isRoot() || getNodeIndex() == getParent().getChildren().size() - 1 ? null : getParent().getChildren().get(getNodeIndex() + 1);
     }
 
     @Override
     public int getNodeIndex() {
+        //noinspection SuspiciousMethodCalls
         return isRoot() ? 0 : getParent().getChildren().indexOf(this);
+    }
+
+    @Override
+    public N getRoot() {
+        //noinspection unchecked
+        return isRoot() ? (N) this : getParent().getRoot();
     }
 
     /**
@@ -139,7 +146,7 @@ public class DirectedTreeNode extends DirectedNode implements TreeNode {
      * root node
      */
     @Override
-    public TreeNode getParent() {
+    public N getParent() {
         return parent;
     }
 
@@ -148,7 +155,7 @@ public class DirectedTreeNode extends DirectedNode implements TreeNode {
      * is a leaf node in the tree.
      */
     @Override
-    public List<TreeNode> getChildren() {
+    public List<N> getChildren() {
         return Collections.unmodifiableList(children);
     }
 
@@ -189,7 +196,7 @@ public class DirectedTreeNode extends DirectedNode implements TreeNode {
      * @param neighbor    the node be added as a neighbor
      */
     @Override
-    public void addNeighbor(Node neighbor) {
+    public void addNeighbor(N neighbor) {
         //noinspection SuspiciousMethodCalls
         if (getChildren().contains(neighbor) || (getParent() != null && getParent().equals(neighbor))) {
             super.addNeighbor(neighbor);

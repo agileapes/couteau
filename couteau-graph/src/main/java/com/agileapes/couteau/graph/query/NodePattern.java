@@ -33,6 +33,6 @@ public interface NodePattern {
      * @param origin    the node of origin
      * @return a finder which is capable of finding matching nodes
      */
-    <N extends Node> Finder<N> finder(N origin);
+    <N extends Node<N>> Finder<N> finder(N origin);
 
 }

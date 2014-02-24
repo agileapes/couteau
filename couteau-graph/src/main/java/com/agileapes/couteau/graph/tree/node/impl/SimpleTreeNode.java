@@ -16,8 +16,6 @@
 package com.agileapes.couteau.graph.tree.node.impl;
 
 import com.agileapes.couteau.basics.api.Stringifiable;
-import com.agileapes.couteau.graph.node.MutableNode;
-import com.agileapes.couteau.graph.node.Node;
 import com.agileapes.couteau.graph.tree.node.TreeNode;
 
 /**
@@ -27,28 +25,26 @@ import com.agileapes.couteau.graph.tree.node.TreeNode;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/25, 10:14)
  */
-public class SimpleTreeNode extends DirectedTreeNode implements TreeNode {
+public class SimpleTreeNode<N extends SimpleTreeNode<N>> extends DirectedTreeNode<N> implements TreeNode<N> {
     
-    private final Stringifiable<SimpleTreeNode> stringifiable;
+    private final Stringifiable<SimpleTreeNode<N>> stringifiable;
 
     public SimpleTreeNode() {
         this(null);
     }
 
-    public SimpleTreeNode(Stringifiable<SimpleTreeNode> stringifiable) {
+    public SimpleTreeNode(Stringifiable<SimpleTreeNode<N>> stringifiable) {
         this.stringifiable = stringifiable;
     }
 
     @Override
-    public void addNeighbor(Node neighbor) {
+    public void addNeighbor(N neighbor) {
         if (getNeighbors().contains(neighbor)) {
             return;
         }
         super.addNeighbor(neighbor);
-        if (neighbor instanceof MutableNode) {
-            final MutableNode node = (MutableNode) neighbor;
-            node.addNeighbor(this);
-        }
+        //noinspection unchecked
+        neighbor.addNeighbor((N) this);
     }
 
     @Override

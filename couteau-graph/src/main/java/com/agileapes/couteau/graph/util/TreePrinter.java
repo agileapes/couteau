@@ -15,6 +15,7 @@
 
 package com.agileapes.couteau.graph.util;
 
+import com.agileapes.couteau.graph.node.Node;
 import com.agileapes.couteau.graph.tree.node.TreeNode;
 import com.agileapes.couteau.graph.tree.walk.TreeNodeProcessor;
 import com.agileapes.couteau.graph.tree.walk.TreeProcessor;
@@ -33,7 +34,7 @@ public class TreePrinter {
 
     protected final PrintStream output;
     private final NodePrinter nodePrinter;
-    private final TreeProcessor<TreeNode> treeProcessor;
+    private final TreeProcessor treeProcessor;
 
     public TreePrinter(PrintStream output) {
         this(output, new NodePrinter() {
@@ -47,26 +48,32 @@ public class TreePrinter {
     public TreePrinter(PrintStream output, NodePrinter nodePrinter) {
         this.output = output;
         this.nodePrinter = nodePrinter;
-        this.treeProcessor = new DefaultTreeProcessor<TreeNode>();
+        this.treeProcessor = new DefaultTreeProcessor();
     }
 
     public void print(TreeNode root) {
+        //noinspection unchecked
         treeProcessor.process(root, getProcessor());
     }
 
-    private TreeNodeProcessor<TreeNode> getProcessor() {
-        return new PreOrderNodeProcessor<TreeNode>() {
+    private TreeNodeProcessor getProcessor() {
+        return new PreOrderNodeProcessor() {
+
             @Override
-            public void process(TreeNode input) {
+            public void process(Object input) {
                 if (input == null) {
                     output.println();
                     return;
                 }
-                final int indent = input.getDepth();
+                if (!(input instanceof TreeNode)) {
+                    return;
+                }
+                final TreeNode node = (TreeNode) input;
+                final int indent = node.getDepth();
                 for (int i = 0; i < indent; i ++) {
                     output.print("\t");
                 }
-                nodePrinter.print(input, output);
+                nodePrinter.print(node, output);
                 output.println();
             }
         };

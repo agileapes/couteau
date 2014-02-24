@@ -25,7 +25,7 @@ import java.util.List;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/27, 12:45)
  */
-public interface SearchableNode<N extends SearchableNode<N>> extends Node {
+public interface SearchableNode<N extends SearchableNode<N>> extends Node<N> {
 
     /**
      * This method will search the graph, originating the search at this node.
@@ -36,5 +36,7 @@ public interface SearchableNode<N extends SearchableNode<N>> extends Node {
      * @return the list of matching nodes accessible from this node
      */
     List<N> find(String pattern);
+
+    String getPath();
 
 }

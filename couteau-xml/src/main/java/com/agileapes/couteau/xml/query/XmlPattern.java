@@ -22,6 +22,7 @@ import com.agileapes.couteau.graph.query.NodeQueryFilter;
 import com.agileapes.couteau.graph.query.NodeQueryFinder;
 import com.agileapes.couteau.graph.query.impl.*;
 import com.agileapes.couteau.graph.search.Finder;
+import com.agileapes.couteau.xml.query.filters.NodeNamespaceFilter;
 import com.agileapes.couteau.xml.query.filters.NodeTypeFilter;
 import com.agileapes.couteau.xml.query.filters.NodeValueFilter;
 import com.agileapes.couteau.xml.query.impl.NodeNameSnippetParser;
@@ -37,6 +38,7 @@ public class XmlPattern implements NodePattern {
     static {
         NodeFilterRepository.addFilter("type", new NodeTypeFilter());
         NodeFilterRepository.addFilter("value", new NodeValueFilter());
+        NodeFilterRepository.addFilter("namespace", new NodeNamespaceFilter());
     }
 
     public static NodePattern compile(String pattern) {
@@ -57,7 +59,7 @@ public class XmlPattern implements NodePattern {
     }
 
     @Override
-    public <N extends Node> Finder<N> finder(N origin) {
+    public <N extends Node<N>> Finder<N> finder(N origin) {
         return new NodeQueryFinder<N>(origin, filters);
     }
 

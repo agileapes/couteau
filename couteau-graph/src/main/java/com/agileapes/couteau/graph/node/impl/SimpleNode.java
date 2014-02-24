@@ -16,7 +16,6 @@
 package com.agileapes.couteau.graph.node.impl;
 
 import com.agileapes.couteau.basics.api.Stringifiable;
-import com.agileapes.couteau.graph.node.MutableNode;
 import com.agileapes.couteau.graph.node.Node;
 
 /**
@@ -28,39 +27,35 @@ import com.agileapes.couteau.graph.node.Node;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/25, 10:05)
  */
-public class SimpleNode extends DirectedNode {
+public class SimpleNode<N extends SimpleNode<N>> extends DirectedNode<N> {
     
-    private final Stringifiable<SimpleNode> stringifiable;
+    private final Stringifiable<SimpleNode<N>> stringifiable;
 
     public SimpleNode() {
         this(null);
     }
 
-    public SimpleNode(Stringifiable<SimpleNode> stringifiable) {
+    public SimpleNode(Stringifiable<SimpleNode<N>> stringifiable) {
         this.stringifiable = stringifiable;
     }
 
     @Override
-    public void addNeighbor(Node neighbor) {
+    public void addNeighbor(N neighbor) {
         if (getNeighbors().contains(neighbor)) {
             return;
         }
         super.addNeighbor(neighbor);
-        if (neighbor instanceof MutableNode) {
-            final MutableNode node = (MutableNode) neighbor;
-            node.addNeighbor(this);
-        }
+        //noinspection unchecked
+        neighbor.addNeighbor((N) this);
     }
 
     @Override
-    public void removeNeighbor(Node neighbor) {
+    public void removeNeighbor(N neighbor) {
         if (!getNeighbors().contains(neighbor)) {
             return;
         }
-        if (neighbor instanceof MutableNode) {
-            MutableNode node = (MutableNode) neighbor;
-            node.removeNeighbor(this);
-        }
+        //noinspection unchecked
+        neighbor.removeNeighbor((N) this);
         super.removeNeighbor(neighbor);
     }
 

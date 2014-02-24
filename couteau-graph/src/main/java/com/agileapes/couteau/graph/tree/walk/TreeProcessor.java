@@ -23,7 +23,7 @@ import com.agileapes.couteau.graph.tree.node.TreeNode;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/27, 17:53)
  */
-public interface TreeProcessor<N extends TreeNode> {
+public interface TreeProcessor<N extends TreeNode<N>> {
 
     /**
      * Will start the processing at the originating node

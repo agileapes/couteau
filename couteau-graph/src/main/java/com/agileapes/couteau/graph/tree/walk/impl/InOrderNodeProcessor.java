@@ -24,7 +24,7 @@ import com.agileapes.couteau.graph.tree.walk.BinaryTreeNodeProcessor;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/27, 17:59)
  */
-public abstract class InOrderNodeProcessor<N extends BinaryTreeNode> extends DelegatingNodeProcessor<N> implements BinaryTreeNodeProcessor<N> {
+public abstract class InOrderNodeProcessor<N extends BinaryTreeNode<N>> extends DelegatingNodeProcessor<N> implements BinaryTreeNodeProcessor<N> {
 
     @Override
     public void processBetweenChildren(N node) {

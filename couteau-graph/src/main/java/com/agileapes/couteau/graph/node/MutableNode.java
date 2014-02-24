@@ -23,7 +23,7 @@ package com.agileapes.couteau.graph.node;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/24, 14:51)
  */
-public interface MutableNode extends Node {
+public interface MutableNode<N extends MutableNode<N>> extends Node<N> {
 
     /**
      * Will update the value of the given attribute. If this attribute has not been set
@@ -39,14 +39,14 @@ public interface MutableNode extends Node {
      * the two will be set to zero.
      * @param neighbor    the node be added as a neighbor
      */
-    void addNeighbor(Node neighbor);
+    void addNeighbor(N neighbor);
 
     /**
      * This method will remove a neighboring node from this node, essentially cutting this
      * side of the relationship
      * @param neighbor    the neighbor to be removed
      */
-    void removeNeighbor(Node neighbor);
+    void removeNeighbor(N neighbor);
 
     /**
      * This method removes all neighbors from this node, making it a dead-end, if not disconnecting it
@@ -60,7 +60,7 @@ public interface MutableNode extends Node {
      * @param neighbor    the neighboring node
      * @param weight      the new weight of the link
      */
-    void setLinkWeight(Node neighbor, double weight);
+    void setLinkWeight(N neighbor, double weight);
 
     /**
      * This method will set the user data with the given key and value

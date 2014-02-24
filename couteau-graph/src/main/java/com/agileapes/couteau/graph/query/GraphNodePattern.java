@@ -43,7 +43,7 @@ public class GraphNodePattern implements NodePattern {
     }
 
     @Override
-    public <N extends Node> Finder<N> finder(N origin) {
+    public <N extends Node<N>> Finder<N> finder(N origin) {
         return new NodeQueryFinder<N>(origin, filters);
     }
 

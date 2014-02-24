@@ -30,7 +30,7 @@ import java.util.List;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/26, 11:01)
  */
-public class NodeQueryFinder<N extends Node> implements Finder<N> {
+public class NodeQueryFinder<N extends Node<N>> implements Finder<N> {
 
     private final N origin;
     private final List<NodeQueryFilter<?>> filters;

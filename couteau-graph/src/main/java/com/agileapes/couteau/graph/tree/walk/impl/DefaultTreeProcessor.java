@@ -27,15 +27,15 @@ import com.agileapes.couteau.graph.tree.walk.TreeProcessor;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/27, 17:53)
  */
-public class DefaultTreeProcessor<N extends TreeNode> implements TreeProcessor<N> {
+public class DefaultTreeProcessor<N extends TreeNode<N>> implements TreeProcessor<N> {
 
     @SuppressWarnings("unchecked")
     @Override
     public void process(N origin, TreeNodeProcessor<N> processor) {
         processor.processBeforeChildren(origin);
-        if (origin instanceof BinaryTreeNode && processor instanceof BinaryTreeNodeProcessor<?>) {
+        if (origin instanceof BinaryTreeNode<?> && processor instanceof BinaryTreeNodeProcessor<?>) {
             BinaryTreeNode binaryTreeNode = (BinaryTreeNode) origin;
-            final BinaryTreeNodeProcessor<BinaryTreeNode> nodeProcessor = (BinaryTreeNodeProcessor<BinaryTreeNode>) processor;
+            final BinaryTreeNodeProcessor nodeProcessor = (BinaryTreeNodeProcessor) processor;
             process((N) binaryTreeNode.getLeftChild(), processor);
             nodeProcessor.processBetweenChildren(binaryTreeNode);
             process((N) binaryTreeNode.getRightChild(), processor);

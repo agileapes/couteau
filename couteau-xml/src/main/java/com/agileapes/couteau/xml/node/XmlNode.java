@@ -28,7 +28,7 @@ import java.util.List;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/30, 1:51)
  */
-public class XmlNode extends DirectedTreeNode implements SearchableNode<XmlNode> {
+public class XmlNode extends DirectedTreeNode<XmlNode> implements SearchableNode<XmlNode> {
 
     private final Stringifiable<XmlNode> stringifiable;
     private String nodeName;
@@ -145,6 +145,11 @@ public class XmlNode extends DirectedTreeNode implements SearchableNode<XmlNode>
     @Override
     public List<XmlNode> find(String pattern) {
         return XmlPattern.compile(pattern).finder(this).find();
+    }
+
+    @Override
+    public String getPath() {
+        return isRoot() ? "{origin();}" : getParent().getPath() + "//#" + getNodeIndex();
     }
 
 }

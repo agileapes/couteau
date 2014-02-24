@@ -27,19 +27,19 @@ import java.util.List;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/25, 10:27)
  */
-public interface TreeNode extends Node {
+public interface TreeNode<N extends TreeNode<N>> extends Node<N> {
 
     /**
      * @return the parent node for this node, or {@code null} if this node is the
      * root node
      */
-    TreeNode getParent();
+    N getParent();
 
     /**
      * @return this node's children. If this list is empty, it means that this node
      * is a leaf node in the tree.
      */
-    List<TreeNode> getChildren();
+    List<N> getChildren();
 
     /**
      * @return Determines whether or not this node is the root of the tree. In a single
@@ -64,19 +64,19 @@ public interface TreeNode extends Node {
      * Adds a child to this node
      * @param child    the child to be added
      */
-    void addChild(TreeNode child);
+    void addChild(N child);
 
     /**
      * Removes the given child from this node's list of children
      * @param child    the child to be removed
      */
-    void removeChild(TreeNode child);
+    void removeChild(N child);
 
     /**
      * Changes the parent node of this node
      * @param parent    the new parent
      */
-    void setParent(TreeNode parent);
+    void setParent(N parent);
 
     /**
      * Removes all this nodes children
@@ -93,27 +93,29 @@ public interface TreeNode extends Node {
     /**
      * @return This node's first child, or {@code null} if this is a leaf node
      */
-    TreeNode getFirstChild();
+    N getFirstChild();
 
     /**
      * @return This node's last child, or {@code null} if this is a leaf node
      */
-    TreeNode getLastChild();
+    N getLastChild();
 
     /**
      * @return This node's previous sibling, or {@code null} if this is the root node
      */
-    TreeNode getPreviousSibling();
+    N getPreviousSibling();
 
     /**
      * @return This node's next sibling, or {@code null} if this is the root node
      */
-    TreeNode getNextSibling();
+    N getNextSibling();
 
     /**
      * @return This node's zero-based index among its parent's children nodes,
      * or {@code 0} if this is the root node
      */
     int getNodeIndex();
+
+    N getRoot();
 
 }

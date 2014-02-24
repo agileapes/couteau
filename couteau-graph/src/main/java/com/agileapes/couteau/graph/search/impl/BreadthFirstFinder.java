@@ -31,7 +31,7 @@ import java.util.*;
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/7/24, 15:29)
  */
-public class BreadthFirstFinder<N extends Node> implements Finder<N> {
+public class BreadthFirstFinder<N extends Node<N>> implements Finder<N> {
 
     private final N origin;
     private final NodeFilter<N> filter;

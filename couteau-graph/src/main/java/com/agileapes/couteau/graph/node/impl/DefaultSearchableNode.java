@@ -15,12 +15,16 @@
 
 package com.agileapes.couteau.graph.node.impl;
 
+import com.agileapes.couteau.basics.api.Transformer;
 import com.agileapes.couteau.graph.node.Node;
 import com.agileapes.couteau.graph.node.SearchableNode;
 import com.agileapes.couteau.graph.query.GraphNodePattern;
+import com.agileapes.couteau.graph.tree.node.TreeNode;
 
 import java.util.List;
 import java.util.Set;
+
+import static com.agileapes.couteau.basics.collections.CollectionWrapper.with;
 
 /**
  * This is essentially a wrapper class that allows for normal nodes to be
@@ -38,13 +42,40 @@ public class DefaultSearchableNode implements SearchableNode<DefaultSearchableNo
         this.node = node;
     }
 
+    public Node<?> getNode() {
+        return node;
+    }
+
     @Override
     public List<DefaultSearchableNode> find(String pattern) {
         return GraphNodePattern.compile(pattern).finder((this)).find();
     }
 
     @Override
+    public String getPath() {
+        if (node instanceof TreeNode) {
+            TreeNode treeNode = (TreeNode) node;
+            final StringBuilder builder = new StringBuilder();
+            if (treeNode.isRoot()) {
+                return "{origin();}";
+            }
+            final SearchableNode<?> parent;
+            if (treeNode.getParent() instanceof SearchableNode<?>) {
+                parent = (SearchableNode) treeNode.getParent();
+            } else {
+                parent = new DefaultSearchableNode(treeNode.getParent());
+            }
+            builder.append(parent.getPath());
+            builder.append("//");
+            builder.append("#").append(treeNode.getNodeIndex());
+            return builder.toString();
+        }
+        throw new UnsupportedOperationException("Path generation is only supported for tree nodes");
+    }
+
+    @Override
     public Set<String> getAttributeNames() {
+        //noinspection unchecked
         return node.getAttributeNames();
     }
 
@@ -54,13 +85,22 @@ public class DefaultSearchableNode implements SearchableNode<DefaultSearchableNo
     }
 
     @Override
-    public Set<Node> getNeighbors() {
-        return node.getNeighbors();
+    public Set<DefaultSearchableNode> getNeighbors() {
+        //noinspection unchecked
+        return with(node.getNeighbors())
+                .transform(new Transformer<Node, DefaultSearchableNode>() {
+                    @Override
+                    public DefaultSearchableNode map(Node input) {
+                        //noinspection unchecked
+                        return new DefaultSearchableNode(input);
+                    }
+                }).set();
     }
 
     @Override
-    public double getLinkWeight(Node neighbour) {
-        return node.getLinkWeight(neighbour);
+    public double getLinkWeight(DefaultSearchableNode neighbour) {
+        //noinspection unchecked
+        return node.getLinkWeight(neighbour.getNode());
     }
 
     @Override
