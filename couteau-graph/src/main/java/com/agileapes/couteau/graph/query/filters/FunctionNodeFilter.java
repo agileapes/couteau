@@ -71,4 +71,5 @@ public class FunctionNodeFilter<N extends Node> implements NodeFilter<N>, Origin
         }
         return filter.accepts(item);
     }
+
 }

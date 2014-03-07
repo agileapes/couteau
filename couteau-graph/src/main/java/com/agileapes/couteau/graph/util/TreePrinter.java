@@ -15,7 +15,6 @@
 
 package com.agileapes.couteau.graph.util;
 
-import com.agileapes.couteau.graph.node.Node;
 import com.agileapes.couteau.graph.tree.node.TreeNode;
 import com.agileapes.couteau.graph.tree.walk.TreeNodeProcessor;
 import com.agileapes.couteau.graph.tree.walk.TreeProcessor;
