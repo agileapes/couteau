@@ -1,5 +1,6 @@
 package com.agileapes.couteau.graph.binding;
 
+import com.agileapes.couteau.graph.error.GraphBindingError;
 import com.agileapes.couteau.graph.node.Node;
 
 /**
@@ -8,6 +9,6 @@ import com.agileapes.couteau.graph.node.Node;
  */
 public interface ObjectReader<N extends Node> {
 
-    <E> E read(Class<E> type, N node);
+    <E> E read(Class<E> type, N node) throws GraphBindingError;
 
 }
