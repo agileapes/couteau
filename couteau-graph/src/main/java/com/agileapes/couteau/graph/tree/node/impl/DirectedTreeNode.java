@@ -85,10 +85,22 @@ public class DirectedTreeNode<N extends DirectedTreeNode<N>> extends DirectedNod
     }
 
     /**
+     * Detaches this node from its parent
+     */
+    public void detachParent() {
+        parent = null;
+    }
+
+    /**
      * Removes all this nodes children
      */
     @Override
     public void removeAllChildren() {
+        for (N child : children) {
+            if (child != null) {
+                child.detachParent();
+            }
+        }
         children.clear();
         removeAllNeighbors();
     }
