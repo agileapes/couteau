@@ -52,11 +52,11 @@ public class DateValueReader implements ValueReader {
             final Matcher matcher = Pattern.compile("(\\d+)/(\\d+)/(\\d+)(?:\\s+(\\d+):(\\d+)(?::(\\d+))?)?").matcher(text);
             if (matcher.find()) {
                 int year = Integer.parseInt(matcher.group(1));
-                int month = Integer.parseInt(matcher.group(2));
+                int month = Integer.parseInt(matcher.group(2)) - 1;
                 int day = Integer.parseInt(matcher.group(3));
-                int hour = matcher.groupCount() > 3 ? Integer.parseInt(matcher.group(4)) : 0;
-                int minute = matcher.groupCount() > 3 ? Integer.parseInt(matcher.group(5)) : 0;
-                int second = matcher.groupCount() > 5 ? Integer.parseInt(matcher.group(6)) : 0;
+                int hour = matcher.group(4) != null ? Integer.parseInt(matcher.group(4)) : 0;
+                int minute = matcher.group(5) != null ? Integer.parseInt(matcher.group(5)) : 0;
+                int second = matcher.group(6) != null ? Integer.parseInt(matcher.group(6)) : 0;
                 final GregorianCalendar calendar = new GregorianCalendar(year, month, day, hour, minute, second);
                 return (E) calendar.getTime();
             } else {
