@@ -58,6 +58,12 @@ public interface Cache<K, V> {
     boolean remove(K key);
 
     /**
+     * Removes any items accepted by the filter from the cache. This allows for invalidating entire
+     * regions of cache en mass.
+     */
+    void remove(Filter<K> keyFilter);
+
+    /**
      * Invalidates the cache, so that all items are removed. This is essentially the same
      * as removing all items from the cache one by one, but it is semantically faster.
      */

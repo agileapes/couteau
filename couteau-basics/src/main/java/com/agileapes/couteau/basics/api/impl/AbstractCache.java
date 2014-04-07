@@ -16,9 +16,13 @@
 package com.agileapes.couteau.basics.api.impl;
 
 import com.agileapes.couteau.basics.api.Cache;
+import com.agileapes.couteau.basics.api.Filter;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
+
+import static com.agileapes.couteau.basics.collections.CollectionWrapper.with;
 
 /**
  * This implementation allows for the cache to follow the contract as specified in
@@ -201,6 +205,15 @@ public abstract class AbstractCache<K, V> implements Cache<K, V> {
         }
         getStore().remove(key);
         return !contains(key);
+    }
+
+    @Override
+    public synchronized void remove(Filter<K> keyFilter) {
+        //noinspection unchecked
+        final List<K> removed = with(getStore().keySet()).keep(keyFilter).list();
+        for (K key : removed) {
+            remove(key);
+        }
     }
 
     /**
