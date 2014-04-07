@@ -1,6 +1,7 @@
 package com.agileapes.couteau.basics.api.impl;
 
 import com.agileapes.couteau.basics.api.Cache;
+import com.agileapes.couteau.basics.api.Filter;
 
 /**
  * This class denotes a data dispenser that is capable of caching results in case of a miss
@@ -41,6 +42,11 @@ public abstract class CachingDataDispenser<K, V> implements Cache<K, V> {
     @Override
     public boolean remove(K key) {
         return getCache().remove(key);
+    }
+
+    @Override
+    public int remove(Filter<K> keyFilter) {
+        return getCache().remove(keyFilter);
     }
 
     @Override

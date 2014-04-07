@@ -60,8 +60,10 @@ public interface Cache<K, V> {
     /**
      * Removes any items accepted by the filter from the cache. This allows for invalidating entire
      * regions of cache en mass.
+     * @param keyFilter    the filter selecting keys
+     * @return the number of items removed
      */
-    void remove(Filter<K> keyFilter);
+    int remove(Filter<K> keyFilter);
 
     /**
      * Invalidates the cache, so that all items are removed. This is essentially the same

@@ -208,12 +208,13 @@ public abstract class AbstractCache<K, V> implements Cache<K, V> {
     }
 
     @Override
-    public synchronized void remove(Filter<K> keyFilter) {
+    public synchronized int remove(Filter<K> keyFilter) {
         //noinspection unchecked
         final List<K> removed = with(getStore().keySet()).keep(keyFilter).list();
         for (K key : removed) {
             remove(key);
         }
+        return removed.size();
     }
 
     /**
