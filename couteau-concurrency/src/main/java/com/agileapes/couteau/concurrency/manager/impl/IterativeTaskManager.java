@@ -1,23 +1,36 @@
 /*
- * Copyright (c) 2013. AgileApes (http://www.agileapes.scom/), and
- * associated organization.
+ * The MIT License (MIT)
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this
- * software and associated documentation files (the "Software"), to deal in the Software
- * without restriction, including without limitation the rights to use, copy, modify,
- * merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
- * permit persons to whom the Software is furnished to do so, subject to the following
- * conditions:
+ * Copyright (c) 2013 AgileApes, Ltd.
  *
- * The above copyright notice and this permission notice shall be included in all copies
- * or substantial portions of the Software.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in
+ * the Software without restriction, including without limitation the rights to
+ * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * the Software, and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+ * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+ * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 package com.agileapes.couteau.concurrency.manager.impl;
 
+import com.agileapes.couteau.concurrency.deferred.Deferred;
+import com.agileapes.couteau.concurrency.deferred.Promise;
+import com.agileapes.couteau.concurrency.deferred.impl.DefaultDeferred;
 import com.agileapes.couteau.concurrency.error.TaskContextException;
 import com.agileapes.couteau.concurrency.error.TaskFailureException;
 import com.agileapes.couteau.concurrency.manager.TaskManager;
+import com.agileapes.couteau.concurrency.manager.TaskManagerStatus;
+import com.agileapes.couteau.concurrency.task.DeferredCallable;
 import com.agileapes.couteau.concurrency.task.FutureTask;
 import com.agileapes.couteau.concurrency.task.RetryingTask;
 import com.agileapes.couteau.concurrency.task.Task;
@@ -36,6 +49,8 @@ import java.util.List;
 public class IterativeTaskManager implements TaskManager {
 
     private final List<FutureTask> tasks = new ArrayList<FutureTask>();
+    private int scheduled = 0;
+    private int done = 0;
 
     /**
      * Schedules the given task to be executed
@@ -43,7 +58,29 @@ public class IterativeTaskManager implements TaskManager {
      */
     @Override
     public synchronized void schedule(Task task) {
+        scheduled ++;
         tasks.add(new DelegatedTask(task));
+    }
+
+    @Override
+    public <E> Promise<E> defer(final DeferredCallable<E> task) {
+        final Deferred<E> deferred = new DefaultDeferred<E>();
+        schedule(new Task() {
+            @Override
+            public void perform() throws TaskFailureException {
+                try {
+                    deferred.resolve(task.execute());
+                } catch (Throwable e) {
+                    deferred.reject(e);
+                }
+            }
+        });
+        return deferred.getPromise();
+    }
+
+    @Override
+    public <E> Promise<E> defer(Promise<E> task) {
+        return task;
     }
 
     /**
@@ -56,6 +93,7 @@ public class IterativeTaskManager implements TaskManager {
         if (!(task instanceof FutureTask) || !tasks.contains(task)) {
             throw new TaskContextException(this, task);
         }
+        done ++;
         tasks.remove(task);
     }
 
@@ -80,6 +118,31 @@ public class IterativeTaskManager implements TaskManager {
     @Override
     public synchronized void shutdown() {
         throw new UnsupportedOperationException("This task manager does not support shutdown");
+    }
+
+    @Override
+    public TaskManagerStatus getStatus() {
+        return new TaskManagerStatus() {
+            @Override
+            public int getTasks() {
+                return scheduled;
+            }
+
+            @Override
+            public int getDone() {
+                return done;
+            }
+
+            @Override
+            public int getRemaining() {
+                return scheduled - done;
+            }
+        };
+    }
+
+    @Override
+    public String getName() {
+        return "Iterative Task Manager";
     }
 
     @Override

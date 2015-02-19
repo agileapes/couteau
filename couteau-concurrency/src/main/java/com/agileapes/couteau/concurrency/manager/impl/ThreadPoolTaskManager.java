@@ -1,29 +1,47 @@
 /*
- * Copyright (c) 2013. AgileApes (http://www.agileapes.scom/), and
- * associated organization.
+ * The MIT License (MIT)
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this
- * software and associated documentation files (the "Software"), to deal in the Software
- * without restriction, including without limitation the rights to use, copy, modify,
- * merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
- * permit persons to whom the Software is furnished to do so, subject to the following
- * conditions:
+ * Copyright (c) 2013 AgileApes, Ltd.
  *
- * The above copyright notice and this permission notice shall be included in all copies
- * or substantial portions of the Software.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in
+ * the Software without restriction, including without limitation the rights to
+ * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * the Software, and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+ * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+ * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 package com.agileapes.couteau.concurrency.manager.impl;
 
+import com.agileapes.couteau.basics.api.Processor;
+import com.agileapes.couteau.concurrency.deferred.Deferred;
+import com.agileapes.couteau.concurrency.deferred.Failure;
+import com.agileapes.couteau.concurrency.deferred.Promise;
+import com.agileapes.couteau.concurrency.deferred.impl.DefaultDeferred;
 import com.agileapes.couteau.concurrency.error.TaskContextException;
+import com.agileapes.couteau.concurrency.error.TaskFailureException;
 import com.agileapes.couteau.concurrency.manager.TaskManager;
-import com.agileapes.couteau.concurrency.task.FutureTask;
-import com.agileapes.couteau.concurrency.task.RetryingTask;
-import com.agileapes.couteau.concurrency.task.Task;
+import com.agileapes.couteau.concurrency.manager.TaskManagerStatus;
+import com.agileapes.couteau.concurrency.task.*;
 import com.agileapes.couteau.concurrency.task.impl.DelegatedTask;
 import com.agileapes.couteau.concurrency.worker.TaskWorker;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>This task manager will allow for concurrent execution of tasks through the
@@ -38,6 +56,8 @@ import java.util.*;
  * <p>It is expected that the task manager be used by wrapping it in a {@link Thread}
  * instance, and joining with that thread before the application quits.</p>
  *
+ * <p><strong>Example:</strong></p>
+ *
  * <code><pre>
  *     public static void main(String[] args) throws Exception {
  *         final ThreadPoolTaskManager taskManager = new ThreadPoolTaskManager();
@@ -51,17 +71,55 @@ import java.util.*;
  *         taskManagerThread.join();
  *     }
  * </pre></code>
- * 
+ *
+ * <p>To control that the task manager quits properly we can easily monitor the number of remaining tasks
+ * and deduce if we should shutdown the task manager once it has no more tasks to perform. This should be
+ * done <em>before</em> <code>join</code>ing the task manager's thread with its parent thread.</p>
+ *
+ * <p>See {@link #getStatus() status} for more details.</p>
+ *
+ * <p><strong>Example:</strong></p>
+ *
+ * <code><pre>
+ *     //:
+ *     taskManagerThread.start();
+ *     boolean shutdown = false;
+ *     while (!shutdown) {
+ *          while (taskManager.getStatus().getRemaining() > 0) {
+ *             Thread.sleep(200);
+ *          }
+ *          if (weShouldShutdown(taskManager)) {
+ *              taskManager.shutdown();
+ *              shutdown = true;
+ *          }
+ *     }
+ *     //:
+ * </pre></code>
+ *
+ * <p>In the above example, the <code>weShouldShutdown(...)</code> method determines whether or not the fact that
+ * the task manager currently has no more scheduled tasks to perform should be taken as a hint that the task manager
+ * should be shut gracefully down and thus barring the possibility of it accepting any more tasks.</p>
+ *
+ * <p>It is worthy of note that in a large application, at times the fact that a task manager has no more tasks to
+ * perform does not <em>necessarily</em> indicate that it will not, at some point of time in the future, receive
+ * more tasks to perform, and as such should not be shutdown just yet.</p>
+ *
+ * <p>The {@link #autoShutdown} flag also relies heavily on the same mechanics and as such for non-trivial cases
+ * wherein the task manager might be forced to wait upon an entry channel for tasks to arrive you are advised
+ * against using the convenience flag and rather writing your own monitoring and shutdown mechanism.</p>
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
  * @since 1.0 (2013/8/15, 6:07)
  */
 public class ThreadPoolTaskManager implements TaskManager {
 
+    private final static Log LOG = LogFactory.getLog(TaskManager.class);
+
     public static final String TASK_MANAGER_DEFAULT_NAME = "TaskManager";
     /**
      * Idle worker threads
      */
-    private final Set<TaskWorker> idle = new HashSet<TaskWorker>();
+    private final List<TaskWorker> idle = new ArrayList<TaskWorker>();
 
     /**
      * Worker threads actively assigned a task
@@ -90,6 +148,9 @@ public class ThreadPoolTaskManager implements TaskManager {
      * you want done prior to starting the task manager.</p>
      */
     private final boolean autoShutdown;
+
+    private int scheduled = 0;
+    private int done = 0;
 
     /**
      * Instantiates the task manager by setting the number of worker threads to the
@@ -140,6 +201,10 @@ public class ThreadPoolTaskManager implements TaskManager {
     public ThreadPoolTaskManager(String name, int workers, boolean autoShutdown) {
         this.name = name;
         this.autoShutdown = autoShutdown;
+        LOG.info("Initializing task manager " + name + " with " + workers + " worker(s)");
+        if (autoShutdown) {
+            LOG.trace("Auto-shutdown is set to true");
+        }
         for (int i = 0; i < workers; i ++) {
             final TaskWorker worker = new TaskWorker(this, getName() + ".worker." + i);
             idle.add(worker);
@@ -153,9 +218,68 @@ public class ThreadPoolTaskManager implements TaskManager {
      */
     @Override
     public void schedule(Task task) {
+        LOG.info("Scheduling a new task");
         synchronized (tasks) {
-            tasks.add(new DelegatedTask(task));
+            if (task instanceof Prioritized) {
+                tasks.add(0, new DelegatedTask(task));
+            } else {
+                tasks.add(new DelegatedTask(task));
+            }
+            scheduled ++;
         }
+    }
+
+    @Override
+    public <E> Promise<E> defer(final DeferredCallable<E> task) {
+        LOG.info("Deferring a task to be executed at a later time");
+        final Deferred<E> deferred = new DefaultDeferred<E>();
+        final Task callable = new Task() {
+            @Override
+            public void perform() throws TaskFailureException {
+                try {
+                    LOG.trace("Executing deferred task");
+                    deferred.resolve(task.execute());
+                } catch (Throwable e) {
+                    LOG.error("Deferred task failed");
+                    LOG.error(e);
+                    deferred.reject(e);
+                }
+            }
+        };
+        if (task instanceof Prioritized) {
+            schedule(new PrioritizedTask() {
+                @Override
+                public void perform() throws TaskFailureException {
+                    callable.perform();
+                }
+            });
+        } else {
+            schedule(callable);
+        }
+        return deferred.getPromise();
+    }
+
+    @Override
+    public <E> Promise<E> defer(final Promise<E> task) {
+        final DefaultDeferred<E> deferred = new DefaultDeferred<E>();
+        LOG.info("Deferring a promised task for a later time");
+        schedule(new Task() {
+            @Override
+            public void perform() throws TaskFailureException {
+                task.then(new Processor<E>() {
+                    @Override
+                    public void process(E result) {
+                        deferred.resolve(result);
+                    }
+                }, new Processor<Failure>() {
+                    @Override
+                    public void process(Failure failure) {
+                        deferred.reject(failure);
+                    }
+                });
+            }
+        });
+        return deferred.getPromise();
     }
 
     /**
@@ -165,12 +289,14 @@ public class ThreadPoolTaskManager implements TaskManager {
      */
     @Override
     public synchronized void done(Task task) throws TaskContextException {
+        LOG.info("Task finished. Removing task from queue.");
         if (!working.containsKey(task)) {
             throw new TaskContextException(this, task);
         }
         final TaskWorker worker = working.get(task);
         working.remove(task);
         idle.add(worker);
+        done ++;
     }
 
     /**
@@ -181,6 +307,8 @@ public class ThreadPoolTaskManager implements TaskManager {
      */
     @Override
     public void fail(Task task, Exception exception) throws TaskContextException {
+        LOG.warn("Failed to carry out task properly.");
+        LOG.debug(exception);
         done(task);
         if (running && ((RetryingTask) task).shouldRetry(exception)) {
             schedule(task);
@@ -192,11 +320,38 @@ public class ThreadPoolTaskManager implements TaskManager {
      */
     @Override
     public synchronized void shutdown() {
+        LOG.info("Requesting shutdown for task manager: " + getName());
         running = false;
     }
 
     @Override
+    public TaskManagerStatus getStatus() {
+        return new TaskManagerStatus() {
+
+            @Override
+            public int getTasks() {
+                return scheduled;
+            }
+
+            @Override
+            public int getDone() {
+                return done;
+            }
+
+            @Override
+            public int getRemaining() {
+                return scheduled - done;
+            }
+
+        };
+    }
+
+    @Override
     public void run() {
+        LOG.info("Starting to process task incoming queue");
+        if (tasks.isEmpty() && autoShutdown) {
+            LOG.warn("Task manager is in auto-shutdown mode and no tasks have been scheduled.");
+        }
         while (running) {
             synchronized (tasks) {
                 if (autoShutdown && tasks.isEmpty()) {
@@ -212,19 +367,24 @@ public class ThreadPoolTaskManager implements TaskManager {
                     //if no task or no free worker is available sleep for some time
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
+                    LOG.error("Task manager was interrupted externally. Shutting down.");
+                    LOG.debug(e);
                     //if we are interrupted, we should shut down the task manager
                     shutdown();
                 }
                 continue;
             }
             //a task is available for performing
+            LOG.info("Assigning the task to worker " + worker.getName());
             worker.assign(task);
             //noinspection SynchronizationOnLocalVariableOrMethodParameter
             synchronized (worker) {
+                LOG.debug("Notifying the worker to perform the task");
                 //we tell the worker to wake up
                 worker.notify();
             }
         }
+        LOG.info("Waiting for all works in progress to finish gracefully ...");
         //we have been told to shut the manager down
         //we first wait for active workers to gracefully finish
         while (!working.isEmpty()) {
@@ -233,14 +393,17 @@ public class ThreadPoolTaskManager implements TaskManager {
             } catch (InterruptedException ignored) {
             }
         }
+        LOG.info("Dismissing idle workers ...");
         //we then dismiss all idle workers
         for (TaskWorker worker : idle) {
+            LOG.trace("Dismissing worker " + worker.getName());
             worker.dismiss();
             //noinspection SynchronizationOnLocalVariableOrMethodParameter
             synchronized (worker) {
                 worker.notify();
             }
         }
+        LOG.info("Waiting for all worker threads to gather together");
         for (TaskWorker worker : idle) {
             try {
                 worker.join();
@@ -252,32 +415,31 @@ public class ThreadPoolTaskManager implements TaskManager {
     private FutureTask nextTask() {
         for (FutureTask task : tasks) {
             if (task.isReady()) {
+                LOG.trace("Picking a task to be executed.");
                 return task;
             }
         }
+        LOG.trace("No tasks are ready to be executed yet.");
         return null;
     }
 
-    private TaskWorker nextWorker(FutureTask task) {
-        synchronized (idle) {
-            if (!idle.isEmpty()) {
-                final TaskWorker worker = idle.iterator().next();
-                idle.remove(worker);
-                synchronized (tasks) {
-                    tasks.remove(task);
-                }
-                synchronized (working) {
-                    working.put(task, worker);
-                }
-                return worker;
-            }
-            return null;
+    private synchronized TaskWorker nextWorker(FutureTask task) {
+        if (!idle.isEmpty()) {
+            final TaskWorker worker = idle.get(0);
+            idle.remove(worker);
+            working.put(task, worker);
+            tasks.remove(task);
+            LOG.trace("Found a worker to perform the task");
+            return worker;
         }
+        LOG.trace("No idle workers to perform the task were found");
+        return null;
     }
 
     /**
      * @return the name associated with this task manager
      */
+    @Override
     public String getName() {
         return name;
     }

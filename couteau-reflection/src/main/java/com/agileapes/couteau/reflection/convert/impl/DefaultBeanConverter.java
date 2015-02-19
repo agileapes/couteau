@@ -1,24 +1,32 @@
 /*
- * Copyright (c) 2013. AgileApes (http://www.agileapes.scom/), and
- * associated organization.
+ * The MIT License (MIT)
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this
- * software and associated documentation files (the "Software"), to deal in the Software
- * without restriction, including without limitation the rights to use, copy, modify,
- * merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
- * permit persons to whom the Software is furnished to do so, subject to the following
- * conditions:
+ * Copyright (c) 2013 AgileApes, Ltd.
  *
- * The above copyright notice and this permission notice shall be included in all copies
- * or substantial portions of the Software.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in
+ * the Software without restriction, including without limitation the rights to
+ * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * the Software, and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+ * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+ * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 package com.agileapes.couteau.reflection.convert.impl;
 
-import com.agileapes.couteau.reflection.beans.BeanAccessor;
-import com.agileapes.couteau.reflection.beans.BeanAccessorFactory;
-import com.agileapes.couteau.reflection.beans.BeanWrapper;
-import com.agileapes.couteau.reflection.beans.BeanWrapperFactory;
+import com.agileapes.couteau.reflection.beans.*;
+import com.agileapes.couteau.reflection.beans.impl.BeanAccessorFactoryAdapter;
+import com.agileapes.couteau.reflection.beans.impl.InitializerBeanFactory;
+import com.agileapes.couteau.reflection.beans.impl.MethodBeanWrapperFactory;
 import com.agileapes.couteau.reflection.convert.ConversionDecision;
 import com.agileapes.couteau.reflection.convert.ConversionStrategy;
 import com.agileapes.couteau.reflection.error.*;
@@ -32,41 +40,76 @@ public class DefaultBeanConverter extends AbstractCachingBeanConverter {
 
     /**
      * Instantiates the converter with the default strategy ({@link DefaultConversionStrategy})
+     *
      * @see #DefaultBeanConverter(ConversionStrategy)
      */
     public DefaultBeanConverter() {
-        super();
+        this(new DefaultConversionStrategy());
     }
 
     /**
      * Instantiates the converter using the given strategy, defaulting to a method bean wrapper factory
      * ({@link com.agileapes.couteau.reflection.beans.impl.MethodBeanWrapperFactory})
-     * @param conversionStrategy    the conversion strategy to be used throughout the conversion
+     *
+     * @param conversionStrategy the conversion strategy to be used throughout the conversion
      * @see #DefaultBeanConverter(BeanWrapperFactory, ConversionStrategy)
      */
     public DefaultBeanConverter(ConversionStrategy conversionStrategy) {
-        super(conversionStrategy);
+        this(new MethodBeanWrapperFactory(), conversionStrategy);
     }
 
     /**
      * Instantiates the converter using the given wrapper factory and the given strategy. In this case, the
      * wrapper factory will act as the accessor factory, as well.
-     * @param wrapperFactory        the wrapper factory
-     * @param conversionStrategy    the conversion strategy to be used throughout the conversion
-     * @see #DefaultBeanConverter(BeanAccessorFactory, BeanWrapperFactory, ConversionStrategy)
+     *
+     * @param wrapperFactory     the wrapper factory
+     * @param conversionStrategy the conversion strategy to be used throughout the conversion
+     * @see #DefaultBeanConverter(BeanFactory, BeanAccessorFactory, BeanWrapperFactory, ConversionStrategy)
      */
     public DefaultBeanConverter(BeanWrapperFactory wrapperFactory, ConversionStrategy conversionStrategy) {
-        super(wrapperFactory, conversionStrategy);
+        this(new InitializerBeanFactory(), new BeanAccessorFactoryAdapter(wrapperFactory), wrapperFactory, conversionStrategy);
     }
 
     /**
      * Instantiates the converter using the given parameters.
+     *
+     * @param beanFactory the factory through which new bean instances will be created when needed
+     */
+    public DefaultBeanConverter(BeanFactory beanFactory) {
+        this(beanFactory, new DefaultConversionStrategy());
+    }
+
+    /**
+     * Instantiates the converter using the given parameters.
+     *
+     * @param beanFactory        the factory through which new bean instances will be created when needed
+     * @param conversionStrategy the conversion strategy to be used throughout the conversion
+     */
+    public DefaultBeanConverter(BeanFactory beanFactory, ConversionStrategy conversionStrategy) {
+        this(beanFactory, new MethodBeanWrapperFactory(), conversionStrategy);
+    }
+
+    /**
+     * Instantiates the converter using the given parameters.
+     *
+     * @param beanFactory        the factory through which new bean instances will be created when needed
+     * @param wrapperFactory     the wrapper factory for output objects
+     * @param conversionStrategy the conversion strategy to be used throughout the conversion
+     */
+    public DefaultBeanConverter(BeanFactory beanFactory, BeanWrapperFactory wrapperFactory, ConversionStrategy conversionStrategy) {
+        this(beanFactory, new BeanAccessorFactoryAdapter(wrapperFactory), wrapperFactory, conversionStrategy);
+    }
+
+    /**
+     * Instantiates the converter using the given parameters.
+     *
+     * @param beanFactory        the factory through which new bean instances will be created when needed
      * @param accessorFactory    the accessor factory for input objects
      * @param wrapperFactory     the wrapper factory for output objects
      * @param conversionStrategy the conversion strategy to be used throughout the conversion
      */
-    public DefaultBeanConverter(BeanAccessorFactory accessorFactory, BeanWrapperFactory wrapperFactory, ConversionStrategy conversionStrategy) {
-        super(accessorFactory, wrapperFactory, conversionStrategy);
+    public DefaultBeanConverter(BeanFactory beanFactory, BeanAccessorFactory accessorFactory, BeanWrapperFactory wrapperFactory, ConversionStrategy conversionStrategy) {
+        super(beanFactory, accessorFactory, wrapperFactory, conversionStrategy);
     }
 
     /**
@@ -81,6 +124,9 @@ public class DefaultBeanConverter extends AbstractCachingBeanConverter {
         for (String property : source.getPropertyNames()) {
             final Object propertyValue;
             try {
+                if (!source.hasProperty(property)) {
+                    continue;
+                }
                 propertyValue = source.getPropertyValue(property);
             } catch (Exception e) {
                 throw new FatalBeanConversionException("Failed to read property value: " + source.getBeanType().getCanonicalName().concat(".").concat(property), e);

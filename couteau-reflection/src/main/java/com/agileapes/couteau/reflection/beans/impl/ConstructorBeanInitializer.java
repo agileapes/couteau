@@ -1,16 +1,24 @@
 /*
- * Copyright (c) 2013. AgileApes (http://www.agileapes.scom/), and
- * associated organization.
+ * The MIT License (MIT)
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this
- * software and associated documentation files (the "Software"), to deal in the Software
- * without restriction, including without limitation the rights to use, copy, modify,
- * merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
- * permit persons to whom the Software is furnished to do so, subject to the following
- * conditions:
+ * Copyright (c) 2013 AgileApes, Ltd.
  *
- * The above copyright notice and this permission notice shall be included in all copies
- * or substantial portions of the Software.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in
+ * the Software without restriction, including without limitation the rights to
+ * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * the Software, and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+ * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+ * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 package com.agileapes.couteau.reflection.beans.impl;
@@ -33,6 +41,16 @@ import java.util.Set;
  * @since 1.0 (7/4/13, 6:55 PM)
  */
 public class ConstructorBeanInitializer implements BeanInitializer {
+
+    private final boolean allowAccessible;
+
+    public ConstructorBeanInitializer() {
+        this(false);
+    }
+
+    public ConstructorBeanInitializer(boolean allowAccessible) {
+        this.allowAccessible = allowAccessible;
+    }
 
     /**
      * <p>This method will initialize a bean of the given type using the specified initialization
@@ -72,12 +90,14 @@ public class ConstructorBeanInitializer implements BeanInitializer {
             throw new BeanInstantiationException("Cannot instantiate interface: " + type.getCanonicalName());
         }
         if (!Modifier.isPublic(type.getModifiers())) {
-            throw new BeanInstantiationException("Cannot instantiate a class unless it is public: " + type.getCanonicalName());
+            if (!allowAccessible) {
+                throw new BeanInstantiationException("Cannot instantiate a class unless it is public: " + type.getCanonicalName());
+            }
         }
         final Constructor<?>[] constructors = type.getDeclaredConstructors();
         final Set<Constructor<?>> candidates = new HashSet<Constructor<?>>();
         for (Constructor<?> constructor : constructors) {
-            if (Modifier.isPublic(constructor.getModifiers()) && constructor.getParameterTypes().length == arguments.length) {
+            if ((allowAccessible || Modifier.isPublic(constructor.getModifiers())) && constructor.getParameterTypes().length == arguments.length) {
                 boolean matches = true;
                 for (int i = 0; i < arguments.length; i ++) {
                     if (!constructor.getParameterTypes()[i].isAssignableFrom(argumentTypes[i])) {
@@ -97,6 +117,7 @@ public class ConstructorBeanInitializer implements BeanInitializer {
             throw new BeanInstantiationException("Ambiguous call to constructors for " + type.getCanonicalName());
         }
         final Constructor<?> constructor = candidates.iterator().next();
+        constructor.setAccessible(true);
         final Object instance;
         try {
             instance = constructor.newInstance(arguments);

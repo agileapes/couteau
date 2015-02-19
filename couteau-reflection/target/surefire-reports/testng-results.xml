@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="6" passed="6">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Command line suite" duration-ms="52" started-at="2015-02-19T23:47:05Z" finished-at="2015-02-19T23:47:05Z">
+    <groups>
+    </groups>
+    <test name="Command line test" duration-ms="52" started-at="2015-02-19T23:47:05Z" finished-at="2015-02-19T23:47:05Z">
+      <class name="com.agileapes.couteau.reflection.beans.impl.ConstructorBeanInitializerTest">
+        <test-method status="PASS" signature="testBeanInitialization()[pri:0, instance:com.agileapes.couteau.reflection.beans.impl.ConstructorBeanInitializerTest@d7b1517]" name="testBeanInitialization" duration-ms="8" started-at="2015-02-19T15:47:05Z" finished-at="2015-02-19T15:47:05Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testBeanInitialization -->
+        <test-method status="PASS" signature="testBeanInstantiationWithConstructorArgs()[pri:0, instance:com.agileapes.couteau.reflection.beans.impl.ConstructorBeanInitializerTest@d7b1517]" name="testBeanInstantiationWithConstructorArgs" duration-ms="1" started-at="2015-02-19T15:47:05Z" finished-at="2015-02-19T15:47:05Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testBeanInstantiationWithConstructorArgs -->
+      </class> <!-- com.agileapes.couteau.reflection.beans.impl.ConstructorBeanInitializerTest -->
+      <class name="com.agileapes.couteau.reflection.convert.impl.DefaultBeanConverterTest">
+        <test-method status="PASS" signature="testConversionOfSameType()[pri:0, instance:com.agileapes.couteau.reflection.convert.impl.DefaultBeanConverterTest@7e0babb1]" name="testConversionOfSameType" duration-ms="27" started-at="2015-02-19T15:47:05Z" finished-at="2015-02-19T15:47:05Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testConversionOfSameType -->
+      </class> <!-- com.agileapes.couteau.reflection.convert.impl.DefaultBeanConverterTest -->
+      <class name="com.agileapes.couteau.reflection.beans.impl.MethodInvocationTest">
+        <test-method status="PASS" signature="testHashCodeEquality()[pri:0, instance:com.agileapes.couteau.reflection.beans.impl.MethodInvocationTest@5ba23b66]" name="testHashCodeEquality" duration-ms="2" started-at="2015-02-19T15:47:05Z" finished-at="2015-02-19T15:47:05Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testHashCodeEquality -->
+        <test-method status="PASS" signature="testMethodInvocation()[pri:0, instance:com.agileapes.couteau.reflection.beans.impl.MethodInvocationTest@5ba23b66]" name="testMethodInvocation" duration-ms="1" started-at="2015-02-19T15:47:05Z" finished-at="2015-02-19T15:47:05Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testMethodInvocation -->
+      </class> <!-- com.agileapes.couteau.reflection.beans.impl.MethodInvocationTest -->
+      <class name="com.agileapes.couteau.reflection.beans.impl.FieldBeanAccessorTest">
+        <test-method status="PASS" signature="testFields()[pri:0, instance:com.agileapes.couteau.reflection.beans.impl.FieldBeanAccessorTest@6debcae2]" name="testFields" duration-ms="2" started-at="2015-02-19T15:47:05Z" finished-at="2015-02-19T15:47:05Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testFields -->
+      </class> <!-- com.agileapes.couteau.reflection.beans.impl.FieldBeanAccessorTest -->
+    </test> <!-- Command line test -->
+  </suite> <!-- Command line suite -->
+</testng-results>

@@ -1,16 +1,24 @@
 /*
- * Copyright (c) 2013. AgileApes (http://www.agileapes.scom/), and
- * associated organization.
+ * The MIT License (MIT)
  *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this
- * software and associated documentation files (the "Software"), to deal in the Software
- * without restriction, including without limitation the rights to use, copy, modify,
- * merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
- * permit persons to whom the Software is furnished to do so, subject to the following
- * conditions:
+ * Copyright (c) 2013 AgileApes, Ltd.
  *
- * The above copyright notice and this permission notice shall be included in all copies
- * or substantial portions of the Software.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in
+ * the Software without restriction, including without limitation the rights to
+ * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+ * the Software, and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+ * FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+ * COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+ * IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+ * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
 package com.agileapes.couteau.reflection.util;
@@ -194,9 +202,10 @@ public abstract class ReflectionUtils {
      * @param type    the type being mapped.
      * @return the mapped type (or the actual type, if no mapping has been necessary).
      */
-    public static Class<?> mapType(Class<?> type) {
+    public static <E> Class<? extends E> mapType(Class<? extends E> type) {
         if (MAPPED_TYPES.containsKey(type)) {
-            return MAPPED_TYPES.get(type);
+            //noinspection unchecked
+            return (Class<? extends E>) MAPPED_TYPES.get(type);
         } else {
             return type;
         }
@@ -215,19 +224,25 @@ public abstract class ReflectionUtils {
         if (type instanceof ParameterizedType) {
             ParameterizedType parameterizedType = (ParameterizedType) type;
             for (Type argument : parameterizedType.getActualTypeArguments()) {
-                final Class resolved;
-                if (argument instanceof Class) {
-                    resolved = (Class) argument;
-                } else {
-                    resolved = Object.class;
-                }
-                classes[i ++] = resolved;
+                classes[i ++] = getClassOf(argument);
             }
         }
         for (int j = i; j < length; j ++) {
             classes[j] = Object.class;
         }
         return classes;
+    }
+
+    private static Class<?> getClassOf(Type type) {
+        final Class<?> resolved;
+        if (type instanceof Class) {
+            resolved = (Class) type;
+        } else if (type instanceof WildcardType && ((WildcardType) type).getUpperBounds().length > 0) {
+            resolved = getClassOf(((WildcardType) type).getUpperBounds()[0]);
+        } else {
+            resolved = Object.class;
+        }
+        return resolved;
     }
 
     /**
