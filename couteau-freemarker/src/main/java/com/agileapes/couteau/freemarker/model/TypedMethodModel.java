@@ -31,9 +31,7 @@ import com.agileapes.couteau.reflection.util.assets.AnnotatedElementFilter;
 import com.agileapes.couteau.reflection.util.assets.MethodReturnTypeFilter;
 
 import java.lang.reflect.Method;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 import static com.agileapes.couteau.basics.collections.CollectionWrapper.with;
 import static com.agileapes.couteau.reflection.util.ReflectionUtils.withMethods;
@@ -48,7 +46,7 @@ import static com.agileapes.couteau.reflection.util.ReflectionUtils.withMethods;
  */
 public class TypedMethodModel extends NativeMethodModel {
 
-    private final Collection<Method> methods = new HashSet<Method>();
+    private final Map<Integer, Method> methods = new HashMap<Integer, Method>();
 
     public TypedMethodModel() {
         //noinspection unchecked
@@ -58,7 +56,9 @@ public class TypedMethodModel extends NativeMethodModel {
         .each(new Processor<Method>() {
             @Override
             public void process(Method method) {
-                methods.add(method);
+                if (!methods.containsKey(method.hashCode())) {
+                    methods.put(method.hashCode(), method);
+                }
             }
         });
     }
@@ -66,7 +66,7 @@ public class TypedMethodModel extends NativeMethodModel {
     @Override
     protected Object execute(final List<?> arguments) {
         //noinspection unchecked
-        final List<Method> candidates = with(methods).keep(new Filter<Method>() {
+        final List<Method> candidates = with(methods.values()).keep(new Filter<Method>() {
             @Override
             public boolean accepts(Method item) {
                 return item.getParameterTypes().length == arguments.size();
