@@ -21,37 +21,24 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.agileapes.couteau.freemarker.model;
+package com.mmnaseri.couteau.freemarker.api;
 
-import freemarker.template.TemplateHashModel;
-import freemarker.template.TemplateModel;
-import freemarker.template.TemplateModelException;
+import com.mmnaseri.couteau.freemarker.model.TypedMethodModel;
+
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
- * Unresolved map model that allows dynamic expressions to be written more freely inside
- * a Freemarker template. This extension allows for statements such as <code>${x[y].z}</code>
- * to be automatically translated into <code>${x.y.z}</code> whenever this model is used
- * with the prefix <code>x</code>.
+ * This annotation, when used on methods of a class extending the method model available
+ * through {@link TypedMethodModel} will enable the
+ * typed method to list all invokable methods for type-matching.
  *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (2013/8/30, 16:36)
+ * @since 1.0 (2013/8/31, 16:51)
  */
-public class UnresolvedMapModel implements TemplateHashModel {
-
-    private final String prefix;
-
-    public UnresolvedMapModel(String prefix) {
-        this.prefix = prefix;
-    }
-
-    @Override
-    public TemplateModel get(String key) throws TemplateModelException {
-        return new ParameterModel(prefix + "." + key);
-    }
-
-    @Override
-    public boolean isEmpty() throws TemplateModelException {
-        return false;
-    }
-
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface Invokable {
 }

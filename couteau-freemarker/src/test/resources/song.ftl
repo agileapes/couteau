@@ -1,4 +1,4 @@
-<#-- @ftlvariable name="" type="com.agileapes.couteau.freemarker.test.model.Song" -->
+<#-- @ftlvariable name="" type="com.mmnaseri.couteau.freemarker.test.model.Song" -->
 Song title: ${title}
 Year: ${year?int}
 Genre: ${artist.genre}

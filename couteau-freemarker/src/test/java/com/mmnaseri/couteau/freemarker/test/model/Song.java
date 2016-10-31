@@ -21,9 +21,9 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.agileapes.couteau.freemarker.test.model;
+package com.mmnaseri.couteau.freemarker.test.model;
 
-import com.agileapes.couteau.freemarker.api.Template;
+import com.mmnaseri.couteau.freemarker.api.Template;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)

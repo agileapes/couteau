@@ -23,8 +23,8 @@
 
 package com.mmnaseri.couteau.enhancer.model;
 
-import com.agileapes.couteau.freemarker.api.Invokable;
-import com.agileapes.couteau.freemarker.model.TypedMethodModel;
+import com.mmnaseri.couteau.freemarker.api.Invokable;
+import com.mmnaseri.couteau.freemarker.model.TypedMethodModel;
 import com.agileapes.couteau.reflection.util.ReflectionUtils;
 
 /**

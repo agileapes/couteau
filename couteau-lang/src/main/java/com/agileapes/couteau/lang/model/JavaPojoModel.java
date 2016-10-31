@@ -23,7 +23,7 @@
 
 package com.agileapes.couteau.lang.model;
 
-import com.agileapes.couteau.freemarker.api.Template;
+import com.mmnaseri.couteau.freemarker.api.Template;
 
 import java.util.*;
 

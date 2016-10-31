@@ -21,7 +21,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.agileapes.couteau.freemarker.model;
+package com.mmnaseri.couteau.freemarker.model;
 
 import com.mmnaseri.couteau.basics.api.Transformer;
 import freemarker.ext.beans.BeansWrapper;

@@ -21,42 +21,30 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.agileapes.couteau.freemarker.model;
-
-import freemarker.template.TemplateHashModel;
-import freemarker.template.TemplateModel;
-import freemarker.template.TemplateModelException;
-import freemarker.template.TemplateScalarModel;
+package com.mmnaseri.couteau.freemarker.test.model;
 
 /**
- * This is a model that allows statements inside a prefix such as <code>xyz</code> to be modeled into string values that
- * represent the parameter themselves. For instance, <code>${xyz.a.b}</code> will result into <code>${xyz.a.b}</code>. In
- * essence, this will allow for template processing for a certain namespace to be disabled.
- *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (2013/8/30, 15:57)
+ * @since 1.0 (7/15/13, 8:24 PM)
  */
-public class ParameterModel implements TemplateHashModel, TemplateScalarModel {
+public class Artist {
 
-    private final String prefix;
+    private String name;
+    private String genre;
 
-    public ParameterModel(String prefix) {
-        this.prefix = prefix;
+    public String getName() {
+        return name;
     }
 
-    @Override
-    public TemplateModel get(String key) throws TemplateModelException {
-        return new ParameterModel(prefix + "." + key);
+    public void setName(String name) {
+        this.name = name;
     }
 
-    @Override
-    public boolean isEmpty() throws TemplateModelException {
-        return false;
+    public String getGenre() {
+        return genre;
     }
 
-    @Override
-    public String getAsString() throws TemplateModelException {
-        return "${" + prefix + "}";
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
-
 }

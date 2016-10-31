@@ -23,8 +23,8 @@
 
 package com.mmnaseri.couteau.enhancer.model;
 
-import com.agileapes.couteau.freemarker.api.Invokable;
-import com.agileapes.couteau.freemarker.model.FilteringMethodModel;
+import com.mmnaseri.couteau.freemarker.api.Invokable;
+import com.mmnaseri.couteau.freemarker.model.FilteringMethodModel;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;

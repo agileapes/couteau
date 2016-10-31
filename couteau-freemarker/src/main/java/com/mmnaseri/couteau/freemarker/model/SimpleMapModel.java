@@ -21,56 +21,62 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.agileapes.couteau.lang.model;
+package com.mmnaseri.couteau.freemarker.model;
 
-import com.mmnaseri.couteau.freemarker.api.Template;
+import com.mmnaseri.couteau.freemarker.utils.FreemarkerUtils;
+import freemarker.template.*;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (5/22/13, 2:21 PM)
+ * @since 1.0 (8/4/13, 4:49 PM)
  */
-@Template("ftl/javaClass.ftl")
-public class JavaClassModel extends JavaPojoModel {
+public class SimpleMapModel implements TemplateHashModelEx {
 
-    private final Set<MethodModel> methods = new HashSet<MethodModel>();
-    private final Map<String, Boolean> immutables = new HashMap<String, Boolean>();
+    private final Map<String, TemplateModel> map = new HashMap<String, TemplateModel>();
 
-    public JavaClassModel(String qualifiedName) {
-        super(qualifiedName);
+    public SimpleMapModel(Map<?,?> map) {
+        putAll(map);
     }
 
-    public MethodModel addMethod(String name, String returnType, ParameterModel ... parameters) {
-        final MethodModel model = new MethodModel(name, returnType, parameters);
-        methods.add(model);
-        return model;
-    }
-
-    public MethodModel addVoidMethod(String name, ParameterModel ... parameters) {
-        return addMethod(name, null, parameters);
-    }
-
-    public Set<MethodModel> getMethods() {
-        return methods;
-    }
-
-    public Map<String, Boolean> getImmutables() {
-        return immutables;
+    public SimpleMapModel() {
     }
 
     @Override
-    public void addProperty(String property, String type) {
-        super.addProperty(property, type);
-        immutables.put(property, false);
+    public int size() throws TemplateModelException {
+        return map.size();
     }
 
-    public void addImmutableProperty(String type, String property) {
-        super.addProperty(property, type);
-        immutables.put(property, true);
+    @Override
+    public TemplateCollectionModel keys() throws TemplateModelException {
+        return new SimpleCollection(map.keySet());
+    }
+
+    @Override
+    public TemplateCollectionModel values() throws TemplateModelException {
+        return new SimpleCollection(map.values());
+    }
+
+    @Override
+    public TemplateModel get(String key) throws TemplateModelException {
+        return map.get(key);
+    }
+
+    @Override
+    public boolean isEmpty() throws TemplateModelException {
+        return map.isEmpty();
+    }
+
+    public void put(String key, TemplateModel model) {
+        map.put(key, model);
+    }
+
+    public void putAll(Map<?, ?> map) {
+        for (Map.Entry<?, ?> entry : map.entrySet()) {
+            put(entry.getKey().toString(), FreemarkerUtils.convertItem(entry.getValue()));
+        }
     }
 
 }

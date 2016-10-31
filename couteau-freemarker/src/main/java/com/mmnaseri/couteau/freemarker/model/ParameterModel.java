@@ -21,62 +21,42 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.agileapes.couteau.freemarker.model;
+package com.mmnaseri.couteau.freemarker.model;
 
-import com.agileapes.couteau.freemarker.utils.FreemarkerUtils;
-import freemarker.template.*;
-
-import java.util.HashMap;
-import java.util.Map;
+import freemarker.template.TemplateHashModel;
+import freemarker.template.TemplateModel;
+import freemarker.template.TemplateModelException;
+import freemarker.template.TemplateScalarModel;
 
 /**
+ * This is a model that allows statements inside a prefix such as <code>xyz</code> to be modeled into string values that
+ * represent the parameter themselves. For instance, <code>${xyz.a.b}</code> will result into <code>${xyz.a.b}</code>. In
+ * essence, this will allow for template processing for a certain namespace to be disabled.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (8/4/13, 4:49 PM)
+ * @since 1.0 (2013/8/30, 15:57)
  */
-public class SimpleMapModel implements TemplateHashModelEx {
+public class ParameterModel implements TemplateHashModel, TemplateScalarModel {
 
-    private final Map<String, TemplateModel> map = new HashMap<String, TemplateModel>();
+    private final String prefix;
 
-    public SimpleMapModel(Map<?,?> map) {
-        putAll(map);
-    }
-
-    public SimpleMapModel() {
-    }
-
-    @Override
-    public int size() throws TemplateModelException {
-        return map.size();
-    }
-
-    @Override
-    public TemplateCollectionModel keys() throws TemplateModelException {
-        return new SimpleCollection(map.keySet());
-    }
-
-    @Override
-    public TemplateCollectionModel values() throws TemplateModelException {
-        return new SimpleCollection(map.values());
+    public ParameterModel(String prefix) {
+        this.prefix = prefix;
     }
 
     @Override
     public TemplateModel get(String key) throws TemplateModelException {
-        return map.get(key);
+        return new ParameterModel(prefix + "." + key);
     }
 
     @Override
     public boolean isEmpty() throws TemplateModelException {
-        return map.isEmpty();
+        return false;
     }
 
-    public void put(String key, TemplateModel model) {
-        map.put(key, model);
-    }
-
-    public void putAll(Map<?, ?> map) {
-        for (Map.Entry<?, ?> entry : map.entrySet()) {
-            put(entry.getKey().toString(), FreemarkerUtils.convertItem(entry.getValue()));
-        }
+    @Override
+    public String getAsString() throws TemplateModelException {
+        return "${" + prefix + "}";
     }
 
 }

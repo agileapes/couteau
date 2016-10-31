@@ -21,24 +21,35 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.agileapes.couteau.freemarker.api;
+package com.mmnaseri.couteau.freemarker.model;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import com.mmnaseri.couteau.basics.api.Filter;
+import com.mmnaseri.couteau.freemarker.api.Invokable;
+
+import java.util.Collection;
+
+import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
 
 /**
- * <p>This annotation is designed to assign and associate a single template with a given model at
- * compile time.</p>
+ * This method model is designed to help with both checking if single items match a
+ * given criteria and to filter out an entire collection based on that criteria.
  *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (7/15/13, 7:52 PM)
+ * @since 1.0 (2013/8/31, 17:08)
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE, ElementType.METHOD})
-public @interface Template {
+public abstract class FilteringMethodModel<E> extends TypedMethodModel {
 
-    String value();
+    @Invokable
+    public Collection<E> filter(Collection<E> collection) {
+        //noinspection unchecked
+        return with(collection).keep(new Filter<E>() {
+            @Override
+            public boolean accepts(E item) {
+                return filter(item);
+            }
+        }).list();
+    }
+
+    protected abstract boolean filter(E item);
 
 }

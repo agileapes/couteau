@@ -25,8 +25,8 @@ package com.mmnaseri.couteau.enhancer.model;
 
 import com.mmnaseri.couteau.enhancer.api.MethodDescriptor;
 import com.mmnaseri.couteau.enhancer.impl.ImmutableMethodDescriptor;
-import com.agileapes.couteau.freemarker.api.Invokable;
-import com.agileapes.couteau.freemarker.model.TypedMethodModel;
+import com.mmnaseri.couteau.freemarker.api.Invokable;
+import com.mmnaseri.couteau.freemarker.model.TypedMethodModel;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;

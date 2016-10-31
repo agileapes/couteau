@@ -21,11 +21,11 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.agileapes.couteau.freemarker.template;
+package com.mmnaseri.couteau.freemarker.template;
 
-import com.agileapes.couteau.freemarker.test.model.Artist;
-import com.agileapes.couteau.freemarker.test.model.Song;
-import com.agileapes.couteau.freemarker.utils.FreemarkerUtils;
+import com.mmnaseri.couteau.freemarker.test.model.Artist;
+import com.mmnaseri.couteau.freemarker.test.model.Song;
+import com.mmnaseri.couteau.freemarker.utils.FreemarkerUtils;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

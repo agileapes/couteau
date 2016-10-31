@@ -21,10 +21,10 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.agileapes.couteau.freemarker.model;
+package com.mmnaseri.couteau.freemarker.model;
 
-import com.agileapes.couteau.freemarker.conversion.FreemarkerConversionStrategy;
-import com.agileapes.couteau.freemarker.utils.FreemarkerUtils;
+import com.mmnaseri.couteau.freemarker.conversion.FreemarkerConversionStrategy;
+import com.mmnaseri.couteau.freemarker.utils.FreemarkerUtils;
 import com.agileapes.couteau.reflection.beans.BeanWrapper;
 import com.agileapes.couteau.reflection.beans.impl.MethodBeanWrapper;
 import com.agileapes.couteau.reflection.convert.ConversionDecision;

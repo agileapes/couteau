@@ -21,18 +21,19 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.agileapes.couteau.freemarker.utils;
+package com.mmnaseri.couteau.freemarker.utils;
 
 import com.mmnaseri.couteau.basics.api.Transformer;
-import com.agileapes.couteau.freemarker.conversion.FreemarkerModelConverter;
-import com.agileapes.couteau.freemarker.model.SimpleClassModel;
-import com.agileapes.couteau.freemarker.model.SimpleMapModel;
+import com.mmnaseri.couteau.freemarker.conversion.FreemarkerModelConverter;
+import com.mmnaseri.couteau.freemarker.model.SimpleClassModel;
+import com.mmnaseri.couteau.freemarker.model.SimpleMapModel;
 import com.agileapes.couteau.reflection.util.ClassUtils;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.ext.beans.BeansWrapper;
 import freemarker.ext.beans.BooleanModel;
 import freemarker.ext.beans.DateModel;
 import freemarker.template.*;
+import freemarker.template.Template;
 
 import java.io.File;
 import java.io.StringWriter;
@@ -175,8 +176,8 @@ public abstract class FreemarkerUtils {
      */
     public static void write(Configuration configuration, Writer writer, Object object) throws Exception {
         String templateName;
-        if (object.getClass().isAnnotationPresent(com.agileapes.couteau.freemarker.api.Template.class)) {
-            templateName = object.getClass().getAnnotation(com.agileapes.couteau.freemarker.api.Template.class).value();
+        if (object.getClass().isAnnotationPresent(com.mmnaseri.couteau.freemarker.api.Template.class)) {
+            templateName = object.getClass().getAnnotation(com.mmnaseri.couteau.freemarker.api.Template.class).value();
         } else {
             templateName = object.getClass().getName();
         }
@@ -191,8 +192,8 @@ public abstract class FreemarkerUtils {
      */
     public static void write(Writer writer, Object object) throws Exception {
         String templateName;
-        if (object.getClass().isAnnotationPresent(com.agileapes.couteau.freemarker.api.Template.class)) {
-            templateName = object.getClass().getAnnotation(com.agileapes.couteau.freemarker.api.Template.class).value();
+        if (object.getClass().isAnnotationPresent(com.mmnaseri.couteau.freemarker.api.Template.class)) {
+            templateName = object.getClass().getAnnotation(com.mmnaseri.couteau.freemarker.api.Template.class).value();
         } else {
             templateName = object.getClass().getName();
         }

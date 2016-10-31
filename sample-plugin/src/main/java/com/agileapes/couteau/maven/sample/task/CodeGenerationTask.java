@@ -27,7 +27,7 @@ import com.mmnaseri.couteau.basics.api.Filter;
 import com.mmnaseri.couteau.basics.api.Processor;
 import com.mmnaseri.couteau.basics.api.Transformer;
 import com.mmnaseri.couteau.basics.api.impl.NullFilter;
-import com.agileapes.couteau.freemarker.utils.FreemarkerUtils;
+import com.mmnaseri.couteau.freemarker.utils.FreemarkerUtils;
 import com.agileapes.couteau.lang.model.ImmutablePojoModel;
 import com.agileapes.couteau.maven.resource.ProjectResource;
 import com.agileapes.couteau.maven.resource.ProjectResourceType;

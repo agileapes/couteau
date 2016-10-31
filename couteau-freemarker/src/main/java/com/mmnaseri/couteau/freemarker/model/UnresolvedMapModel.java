@@ -21,30 +21,37 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.agileapes.couteau.freemarker.test.model;
+package com.mmnaseri.couteau.freemarker.model;
+
+import freemarker.template.TemplateHashModel;
+import freemarker.template.TemplateModel;
+import freemarker.template.TemplateModelException;
 
 /**
+ * Unresolved map model that allows dynamic expressions to be written more freely inside
+ * a Freemarker template. This extension allows for statements such as <code>${x[y].z}</code>
+ * to be automatically translated into <code>${x.y.z}</code> whenever this model is used
+ * with the prefix <code>x</code>.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (7/15/13, 8:24 PM)
+ * @since 1.0 (2013/8/30, 16:36)
  */
-public class Artist {
+public class UnresolvedMapModel implements TemplateHashModel {
 
-    private String name;
-    private String genre;
+    private final String prefix;
 
-    public String getName() {
-        return name;
+    public UnresolvedMapModel(String prefix) {
+        this.prefix = prefix;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    @Override
+    public TemplateModel get(String key) throws TemplateModelException {
+        return new ParameterModel(prefix + "." + key);
     }
 
-    public String getGenre() {
-        return genre;
+    @Override
+    public boolean isEmpty() throws TemplateModelException {
+        return false;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
 }
