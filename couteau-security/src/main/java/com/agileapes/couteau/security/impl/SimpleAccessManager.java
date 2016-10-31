@@ -24,7 +24,7 @@
 package com.agileapes.couteau.security.impl;
 
 import com.mmnaseri.couteau.basics.api.Filter;
-import com.agileapes.couteau.context.impl.OrderedBeanComparator;
+import com.mmnaseri.couteau.context.impl.OrderedBeanComparator;
 import com.agileapes.couteau.security.*;
 
 import java.util.ArrayList;

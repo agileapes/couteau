@@ -24,8 +24,8 @@
 package com.agileapes.couteau.graph.binding.impl;
 
 import com.mmnaseri.couteau.basics.api.Processor;
-import com.agileapes.couteau.context.value.ValueReaderContext;
-import com.agileapes.couteau.context.value.impl.DefaultValueReaderContext;
+import com.mmnaseri.couteau.context.value.ValueReaderContext;
+import com.mmnaseri.couteau.context.value.impl.DefaultValueReaderContext;
 import com.agileapes.couteau.graph.binding.BindingType;
 import com.agileapes.couteau.graph.binding.ObjectReader;
 import com.agileapes.couteau.graph.binding.impl.api.Query;
