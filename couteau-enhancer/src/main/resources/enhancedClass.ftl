@@ -2,14 +2,14 @@
 package ${superClass.canonicalName?substring(0, superClass.canonicalName?last_index_of('.'))};
 <#assign simpleName = enhancedName?substring(enhancedName?last_index_of(".") + 1)/>
 
-import MethodInterceptor;
-import Interceptible;
-import NoOpInterceptor;
-import InvocationTargetError;
-import MethodProxy;
-import NoImplementationFoundForMethodError;
-import ImmutableMethodDescriptor;
-import MethodDescriptor;
+import com.mmnaseri.couteau.enhancer.api.MethodInterceptor;
+import com.mmnaseri.couteau.enhancer.api.Interceptible;
+import com.mmnaseri.couteau.enhancer.impl.NoOpInterceptor;
+import com.mmnaseri.couteau.enhancer.error.InvocationTargetError;
+import com.mmnaseri.couteau.enhancer.api.MethodProxy;
+import com.mmnaseri.couteau.enhancer.error.NoImplementationFoundForMethodError;
+import com.mmnaseri.couteau.enhancer.impl.ImmutableMethodDescriptor;
+import com.mmnaseri.couteau.enhancer.api.MethodDescriptor;
 import java.lang.annotation.Annotation;
 import java.util.Map;
 import java.util.HashMap;
