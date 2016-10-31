@@ -29,7 +29,7 @@ import java.lang.reflect.Type;
  * This interface will help describe a property. All of its signature features will be included in this
  * interface.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/13/13, 7:32 AM)
  */
 public interface PropertyDescriptor {

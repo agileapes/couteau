@@ -24,7 +24,7 @@
 package com.mmnaseri.couteau.reflection.error;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/18 AD, 14:32)
  */
 public class BeanFactoryException extends Exception {

@@ -32,7 +32,7 @@ import java.util.Comparator;
  * {@link OrderedBean} are assigned a {@link OrderedBean#NEUTRAL_PRECEDENCE}. Beans that do are
  * taken to have the precedence they declare.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (6/27/13, 4:21 PM)
  */
 public class OrderedBeanComparator implements Comparator<Object> {

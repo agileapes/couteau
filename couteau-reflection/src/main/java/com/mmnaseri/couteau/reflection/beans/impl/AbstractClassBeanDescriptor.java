@@ -42,7 +42,7 @@ import java.util.Set;
  * This is a bean descriptor that will take in a bean class and then project all its properties through the use of
  * read/write accessors.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/9/13, 2:10 PM)
  */
 public abstract class AbstractClassBeanDescriptor<E> implements BeanDescriptor<E>, ReadAccessorAware, WriteAccessorAware {

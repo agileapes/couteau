@@ -59,7 +59,7 @@ import java.util.concurrent.LinkedBlockingDeque;
  * that cyclic references will not cause any problems, and moreover, no conversion will be carried out more
  * than once.</p>
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/13/13, 6:49 AM)
  */
 public abstract class AbstractCachingBeanConverter implements BeanConverter {

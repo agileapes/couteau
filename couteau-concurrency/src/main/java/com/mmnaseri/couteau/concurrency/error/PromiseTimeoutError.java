@@ -24,7 +24,7 @@
 package com.mmnaseri.couteau.concurrency.error;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/17 AD, 9:21)
  */
 public class PromiseTimeoutError extends Error {

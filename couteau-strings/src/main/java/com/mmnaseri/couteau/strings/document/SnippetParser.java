@@ -27,7 +27,7 @@ package com.mmnaseri.couteau.strings.document;
  * The snippet parser will allow for specific parsing rules to be put together in a reusable fashion
  * as a single unit of work
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/23/13, 11:25 AM)
  */
 public interface SnippetParser<E> {

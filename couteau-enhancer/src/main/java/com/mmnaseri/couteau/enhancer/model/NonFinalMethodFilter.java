@@ -32,7 +32,7 @@ import java.lang.reflect.Modifier;
 /**
  * This filter will leave out any method that's final, and thus cannot be overridden
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/9/10, 15:43)
  */
 public class NonFinalMethodFilter extends FilteringMethodModel<Method> {

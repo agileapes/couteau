@@ -43,7 +43,7 @@ import java.util.List;
  * of events going through Couteau contexts into events that can be listened to by Spring
  * ApplicationListener instances.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (6/29/13, 4:15 PM)
  */
 public class SpringEventTranslator implements EventListener<Event>, ApplicationContextAware {

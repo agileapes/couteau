@@ -29,7 +29,7 @@ import java.lang.reflect.Type;
 /**
  * This is a simple implementation for use when a parameterized type is required.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/15/13, 6:38 PM)
  */
 public class SimpleParameterizedType implements ParameterizedType {

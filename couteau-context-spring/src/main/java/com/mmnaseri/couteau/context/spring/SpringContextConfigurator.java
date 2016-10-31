@@ -42,7 +42,7 @@ import java.util.Set;
  * instance and ask the configurator to configure the context for you by calling to {@link #configure(Context)}</p>
  *
  * @see SpringConfigurableContext
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (6/29/13, 3:54 PM)
  */
 public class SpringContextConfigurator implements BeanFactoryPostProcessor {

@@ -39,7 +39,7 @@ import java.util.Set;
  *     <li>Once the node has a attribute-value pair matching the given patterns, the node will be accepted</li>
  * </ul>
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/30, 5:48)
  */
 public class AttributeNodeFilter<N extends Node<N>> implements NodeFilter<N> {

@@ -36,7 +36,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * This is the default implementation for the {@link EventPublisher} interface, which will synchronously
  * publish events according to listener ordering and return the results to the triggering entity.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/22/13, 7:43 AM)
  */
 public class SynchronousEventPublisher implements EventPublisher {

@@ -36,7 +36,7 @@ import java.util.Map;
 /**
  * Exposes properties for wrapped bean using all getter methods.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/9/13, 1:15 PM)
  */
 public class MethodBeanAccessor<E> extends AbstractBeanAccessor<E> {

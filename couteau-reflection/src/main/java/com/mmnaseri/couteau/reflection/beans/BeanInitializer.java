@@ -29,7 +29,7 @@ import com.mmnaseri.couteau.reflection.error.BeanInstantiationException;
  * The bean initializer interfaces the process of initializing a bean from a specific type
  * using a given constructor signature.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/4/13, 6:54 PM)
  */
 public interface BeanInitializer {

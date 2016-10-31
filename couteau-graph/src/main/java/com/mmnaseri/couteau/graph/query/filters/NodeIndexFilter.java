@@ -30,7 +30,7 @@ import com.mmnaseri.couteau.graph.tree.node.TreeNode;
 /**
  * Filters nodes by the their node index
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/30, 13:53)
  */
 public class NodeIndexFilter<N extends Node> implements NodeFilter<N> {

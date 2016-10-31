@@ -26,7 +26,7 @@ package com.mmnaseri.couteau.graph.node;
 import com.mmnaseri.couteau.graph.query.PatternCompiler;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/2/17 AD, 19:06)
  */
 public interface PatternCompilingNodeFilter {

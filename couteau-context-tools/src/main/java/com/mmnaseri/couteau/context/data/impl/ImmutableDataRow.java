@@ -33,7 +33,7 @@ import java.lang.reflect.Type;
 import java.util.*;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/21 AD, 17:11)
  */
 public class ImmutableDataRow<P> implements DataRow<P> {

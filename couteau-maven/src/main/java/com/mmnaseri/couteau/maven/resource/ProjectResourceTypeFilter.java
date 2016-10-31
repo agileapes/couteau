@@ -28,7 +28,7 @@ import com.mmnaseri.couteau.basics.api.Filter;
 /**
  * Filters resources based on their type
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/9/17, 14:27)
  */
 public class ProjectResourceTypeFilter implements Filter<ProjectResource> {

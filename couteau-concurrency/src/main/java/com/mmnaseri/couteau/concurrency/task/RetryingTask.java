@@ -28,7 +28,7 @@ package com.mmnaseri.couteau.concurrency.task;
  * handle failures by telling the {@link com.mmnaseri.couteau.concurrency.manager.TaskManager}
  * whether or not it should retry performing the task by rescheduling it.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/8/15, 6:16)
  */
 public interface RetryingTask extends Task {

@@ -30,7 +30,7 @@ import java.io.PrintStream;
 /**
  * This interface allows for printing a node in a custom manner
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/25, 11:19)
  */
 public interface NodePrinter {

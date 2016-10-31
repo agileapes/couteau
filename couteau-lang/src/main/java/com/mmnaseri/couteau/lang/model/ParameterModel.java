@@ -24,7 +24,7 @@
 package com.mmnaseri.couteau.lang.model;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (5/22/13, 2:46 PM)
  */
 public class ParameterModel {

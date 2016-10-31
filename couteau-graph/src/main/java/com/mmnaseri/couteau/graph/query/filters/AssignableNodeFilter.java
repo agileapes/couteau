@@ -29,7 +29,7 @@ import com.mmnaseri.couteau.graph.node.Node;
 /**
  * Filters nodes based on their super-type
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/30, 15:38)
  */
 public class AssignableNodeFilter<N extends Node> implements ConfigurableNodeFilter<N> {

@@ -31,7 +31,7 @@ import java.util.List;
 import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/1/13, 2:19 PM)
  */
 public class XmlNodeStringifiable implements Stringifiable<XmlNode> {

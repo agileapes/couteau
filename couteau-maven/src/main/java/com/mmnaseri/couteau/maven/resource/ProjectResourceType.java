@@ -24,7 +24,7 @@
 package com.mmnaseri.couteau.maven.resource;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (5/12/13, 12:08 PM)
  */
 public enum ProjectResourceType {

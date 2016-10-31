@@ -28,7 +28,7 @@ import com.mmnaseri.couteau.basics.api.Filter;
 /**
  * Accepts {@code null} items
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/23/13, 12:00 PM)
  */
 public class NullFilter<E> implements Filter<E> {

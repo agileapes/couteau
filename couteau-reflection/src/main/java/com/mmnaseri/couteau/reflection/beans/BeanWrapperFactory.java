@@ -26,7 +26,7 @@ package com.mmnaseri.couteau.reflection.beans;
 /**
  * This factory takes in a bean and dispenses identifiable bean wrappers for it.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/13/13, 7:08 AM)
  */
 public interface BeanWrapperFactory {

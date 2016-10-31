@@ -34,7 +34,7 @@ import java.util.List;
  * component are not strongly connected, the node of origin might not yield the desired
  * nodes.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/24, 15:10)
  */
 public interface Finder<N extends Node> {

@@ -30,7 +30,7 @@ import java.util.*;
  * This is a port of Spring 3.2's ClassUtils class. This is mainly here for the {@link #forName(String, ClassLoader)}
  * utility method.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/6/10, 19:32)
  */
 public abstract class ClassUtils {

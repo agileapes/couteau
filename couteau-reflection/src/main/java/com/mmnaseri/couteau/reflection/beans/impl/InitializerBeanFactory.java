@@ -29,7 +29,7 @@ import com.mmnaseri.couteau.reflection.error.BeanFactoryException;
 import com.mmnaseri.couteau.reflection.error.BeanInstantiationException;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/18 AD, 14:31)
  */
 public class InitializerBeanFactory implements BeanFactory {

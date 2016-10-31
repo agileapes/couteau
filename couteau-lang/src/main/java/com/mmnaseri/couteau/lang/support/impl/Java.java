@@ -32,7 +32,7 @@ import com.mmnaseri.couteau.lang.support.Language;
  * to get access to various compilation and other language facilities available through
  * this framework
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (5/20/13, 7:59 PM)
  */
 public class Java extends Language {

@@ -32,7 +32,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/25, 10:30)
  */
 public class DirectedTreeNode<N extends DirectedTreeNode<N>> extends DirectedNode<N> implements TreeNode<N> {

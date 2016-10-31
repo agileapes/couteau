@@ -32,7 +32,7 @@ import java.util.regex.Pattern;
  * Helps with replacing the text in a given string using a callback, allowing for dynamic modification of
  * matched values.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/14/13, 4:59 PM)
  */
 public class CallbackMatcher {

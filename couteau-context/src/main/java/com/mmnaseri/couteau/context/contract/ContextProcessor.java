@@ -27,7 +27,7 @@ package com.mmnaseri.couteau.context.contract;
  * The context processor will be allowed access to the context to which it belongs with
  * a single call. The context processor might be called more than once, if the context is refreshed.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (6/27/13, 4:12 PM)
  */
 public interface ContextProcessor<E> {

@@ -24,7 +24,7 @@
 package com.mmnaseri.couteau.lang.error;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (5/21/13, 3:12 PM)
  */
 public class CompileException extends Exception {

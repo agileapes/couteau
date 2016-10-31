@@ -73,7 +73,7 @@ import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
  *     for your plugin.</li>
  * </ul>
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/2/13, 10:55 AM)
  */
 public abstract class AbstractPluginExecutor extends AbstractMojo {

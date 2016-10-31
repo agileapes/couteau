@@ -36,7 +36,7 @@ import java.util.List;
  * in Java.
  *
  * @see #CLASSES See the types this reader understand
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/6/30, 13:57)
  */
 public class PrimitiveValueReader implements ValueReader {

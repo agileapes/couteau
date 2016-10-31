@@ -32,7 +32,7 @@ import com.mmnaseri.couteau.concurrency.task.Task;
  * This is a wrapper for any task that allows for using a singular external
  * interface for objects implementing different aspects of a task.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/8/15, 5:55)
  */
 public class DelegatedTask implements FutureTask, RetryingTask {

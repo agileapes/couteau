@@ -28,7 +28,7 @@ import com.mmnaseri.couteau.graph.tree.node.TreeNode;
 /**
  * This interface will allow for an event-driven style of processing of nodes.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/25, 14:00)
  */
 public interface TreeNodeProcessor<N extends TreeNode<N>> {

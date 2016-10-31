@@ -27,7 +27,7 @@ package com.mmnaseri.couteau.strings.document;
  * This class represents a single snapshot of the readers status.
  * This will help with remembering the position of the cursor in the document.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/23/13, 12:45 PM)
  */
 public class ReaderSnapshot {

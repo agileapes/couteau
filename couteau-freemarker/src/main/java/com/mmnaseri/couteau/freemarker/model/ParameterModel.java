@@ -33,7 +33,7 @@ import freemarker.template.TemplateScalarModel;
  * represent the parameter themselves. For instance, <code>${xyz.a.b}</code> will result into <code>${xyz.a.b}</code>. In
  * essence, this will allow for template processing for a certain namespace to be disabled.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/8/30, 15:57)
  */
 public class ParameterModel implements TemplateHashModel, TemplateScalarModel {

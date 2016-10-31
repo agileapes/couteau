@@ -37,7 +37,7 @@ import com.mmnaseri.couteau.context.error.ValueReaderError;
  * representation at hand and the right one will eventually come up and translate the text into its
  * object value.</p>
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/6/30, 13:50)
  */
 public interface ValueReader {

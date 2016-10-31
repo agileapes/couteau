@@ -33,7 +33,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * This extension to SecureClassLoader allows for run-time modification of classpath elements, in such a way that new
  * ways to find classes can be introduced during the execution of the plugin
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/4/13, 6:37 PM)
  */
 public class ConfigurableClassLoader extends SecureClassLoader {

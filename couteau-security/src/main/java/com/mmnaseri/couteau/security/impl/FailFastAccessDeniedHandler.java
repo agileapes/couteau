@@ -29,7 +29,7 @@ import com.mmnaseri.couteau.security.Actor;
 import com.mmnaseri.couteau.security.Subject;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/8/30 AD, 10:20)
  */
 public class FailFastAccessDeniedHandler implements AccessDeniedHandler {

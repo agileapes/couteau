@@ -28,7 +28,7 @@ import com.mmnaseri.couteau.reflection.error.PropertyAccessException;
 /**
  * This interface enables you to read property values through the accessor underlying the implementation
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/9/13, 12:27 PM)
  */
 public interface ReadPropertyAccessor<E> extends PropertyAccessor<E> {

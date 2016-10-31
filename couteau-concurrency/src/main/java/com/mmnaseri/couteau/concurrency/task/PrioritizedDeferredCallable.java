@@ -24,7 +24,7 @@
 package com.mmnaseri.couteau.concurrency.task;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/23 AD, 17:51)
  */
 public interface PrioritizedDeferredCallable<E> extends DeferredCallable<E>, Prioritized {

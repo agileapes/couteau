@@ -32,7 +32,7 @@ import java.util.Map;
 /**
  * This will accept nodes that are subsequently accepted by given node filters.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/30, 5:54)
  */
 public class FunctionNodeFilter<N extends Node> implements NodeFilter<N>, OriginNodeAware<N> {

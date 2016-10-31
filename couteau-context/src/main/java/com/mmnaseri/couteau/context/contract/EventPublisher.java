@@ -30,7 +30,7 @@ package com.mmnaseri.couteau.context.contract;
  * <p>While this interface denotes the publisher, the subscribers can subscribe to this event publisher using
  * {@link #addEventListener(EventListener)}</p>
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/6/29, 13:56)
  */
 public interface EventPublisher {

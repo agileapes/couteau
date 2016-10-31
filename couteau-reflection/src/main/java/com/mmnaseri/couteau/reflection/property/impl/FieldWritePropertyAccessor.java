@@ -31,7 +31,7 @@ import java.lang.reflect.Field;
 /**
  * This class allows for updating the value of a property through its associated field
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/9/13, 12:42 PM)
  */
 public class FieldWritePropertyAccessor<E> extends AbstractFieldPropertyAccessor<E> implements WritePropertyAccessor<E> {

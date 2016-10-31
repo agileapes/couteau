@@ -33,7 +33,7 @@ import com.mmnaseri.couteau.graph.query.filters.OriginNodeAware;
  * NodeQueryFilter is a filter chain that will hold all other filters applicable throughout the search
  * process.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/26, 11:03)
  */
 public class NodeQueryFilter<N extends Node> extends FilterChain<N> implements NodeFilter<N> {

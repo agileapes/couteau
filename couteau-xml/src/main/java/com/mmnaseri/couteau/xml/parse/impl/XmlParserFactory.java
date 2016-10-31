@@ -26,7 +26,7 @@ package com.mmnaseri.couteau.xml.parse.impl;
 import com.mmnaseri.couteau.xml.parse.XmlParser;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/1/13, 4:53 PM)
  */
 public class XmlParserFactory {

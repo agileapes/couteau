@@ -31,7 +31,7 @@ import java.lang.reflect.Method;
 /**
  * This accessor will update the value of the property through its associated setter method
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/9/13, 12:36 PM)
  */
 public class MethodWritePropertyAccessor<E> extends AbstractMethodPropertyAccessor<E> implements WritePropertyAccessor<E> {

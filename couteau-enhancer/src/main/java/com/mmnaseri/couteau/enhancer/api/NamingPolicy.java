@@ -26,7 +26,7 @@ package com.mmnaseri.couteau.enhancer.api;
 /**
  * This interface allows for deciding how the name of an enhanced class will be decided
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/9/10, 15:18)
  */
 public interface NamingPolicy {

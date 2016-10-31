@@ -32,7 +32,7 @@ import com.mmnaseri.couteau.graph.tree.walk.TreeProcessor;
 /**
  * This is an implementation of the node processor that handles all processing operations in a recursive manner
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/27, 17:53)
  */
 public class DefaultTreeProcessor<N extends TreeNode<N>> implements TreeProcessor<N> {

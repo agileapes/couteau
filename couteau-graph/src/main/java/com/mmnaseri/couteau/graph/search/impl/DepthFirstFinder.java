@@ -35,7 +35,7 @@ import java.util.*;
  *
  * <p><strong>See</strong> the <a href='http://en.wikipedia.org/wiki/Depth-first_search'
  * >Wikipedia entry</a> on Depth-first search in a graph</p>
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/24, 16:00)
  */
 public class DepthFirstFinder<N extends Node<N>> implements Finder<N> {

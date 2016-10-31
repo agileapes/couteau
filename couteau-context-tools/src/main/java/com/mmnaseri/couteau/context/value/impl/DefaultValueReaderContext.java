@@ -58,7 +58,7 @@ import java.util.regex.Pattern;
  * For each type there may be more than one value reader, in which case they will be tried
  * -- without any particular ordering -- one by one until one of them reads the value properly.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/6/30, 14:06)
  */
 public class DefaultValueReaderContext extends AbstractTypeSpecificContext<ValueReader> implements ValueReaderContext {

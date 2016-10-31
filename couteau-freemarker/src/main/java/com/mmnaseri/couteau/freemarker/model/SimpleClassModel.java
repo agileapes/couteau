@@ -36,7 +36,7 @@ import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
 /**
  * This class will model a class data model.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/15/13, 6:46 PM)
  */
 public class SimpleClassModel implements TemplateHashModelEx {

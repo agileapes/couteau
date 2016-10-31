@@ -37,7 +37,7 @@ import com.mmnaseri.couteau.lang.support.Language;
  *     to Java binary compilers.</li>
  * </ol>
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (5/21/13, 2:20 PM)
  */
 public interface SimpleSourceCompiler<L extends Language> extends SimpleCompiler<L, L> {

@@ -45,7 +45,7 @@ import java.util.Set;
  * having to introduce the code necessary for extracting read/write accessor determination from the bean
  * being wrapped.</p>
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/9/13, 1:47 PM)
  */
 public abstract class AbstractBeanWrapper<E> extends AbstractBeanAccessor<E> implements BeanWrapper<E>, WriteAccessorAware {

@@ -29,7 +29,7 @@ import com.mmnaseri.couteau.reflection.property.PropertyDescriptor;
 import com.mmnaseri.couteau.reflection.util.ReflectionUtils;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/13/13, 7:36 AM)
  */
 public class DefaultConversionStrategy implements ConversionStrategy {

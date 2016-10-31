@@ -33,7 +33,7 @@ import java.util.Map;
  * This extension to the abstract registry class allows for the expected hash operations to be
  * performed on a map accessible through {@link #getMap()} method.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/21/13, 4:28 PM)
  */
 public abstract class AbstractMapRegistry<E> extends AbstractRegistry<E> {

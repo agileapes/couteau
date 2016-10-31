@@ -27,7 +27,7 @@ package com.mmnaseri.couteau.concurrency.deferred;
  * This interface will represent a deferred task that needs to be performed and whose results will become
  * available at some point in the future.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/15 AD, 12:09)
  */
 public interface Deferred<E> {

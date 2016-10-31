@@ -27,7 +27,7 @@ package com.mmnaseri.couteau.context.contract;
  * This interface allows beans registered with a context to be aware of the context to which
  * they belong
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/6/29, 13:38)
  */
 public interface ContextAware<E> {

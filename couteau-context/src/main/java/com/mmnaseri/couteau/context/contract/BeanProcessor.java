@@ -33,7 +33,7 @@ import com.mmnaseri.couteau.context.error.RegistryException;
  * by some registries.
  *
  * @see Context#addBeanProcessor(BeanProcessor)
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (6/27/13, 4:11 PM)
  */
 public interface BeanProcessor<E> {

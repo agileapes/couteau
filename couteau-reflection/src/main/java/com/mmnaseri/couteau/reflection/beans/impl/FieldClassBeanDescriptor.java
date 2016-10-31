@@ -39,7 +39,7 @@ import java.util.Map;
 /**
  * Describes the properties of a given class using its fields.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/9/13, 2:45 PM)
  */
 public class FieldClassBeanDescriptor<E> extends AbstractClassBeanDescriptor<E> {

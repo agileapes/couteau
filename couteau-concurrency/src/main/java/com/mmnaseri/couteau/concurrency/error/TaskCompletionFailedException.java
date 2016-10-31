@@ -28,7 +28,7 @@ package com.mmnaseri.couteau.concurrency.error;
  * {@link com.mmnaseri.couteau.concurrency.worker.TaskWorker} who is already
  * assigned a task.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/8/15, 7:41)
  */
 public class TaskCompletionFailedException extends TaskFailureException {

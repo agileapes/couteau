@@ -32,7 +32,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * This implementation relies on {@link AbstractCache} to provide the details of how the cache
  * should behave.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/4/13, 3:32 PM)
  */
 public class ConcurrentCache<K, V> extends AbstractCache<K, V> {

@@ -29,7 +29,7 @@ package com.mmnaseri.couteau.maven.resource;
  * For more information see <a href="http://docs.codehaus.org/display/MAVENUSER/Dependency+Scopes">Maven's
  * documentation at Codehaus</a>
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0, (7/11/12, 3:03 PM)
  */
 @SuppressWarnings("UnusedDeclaration")

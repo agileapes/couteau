@@ -26,7 +26,7 @@ package com.mmnaseri.couteau.reflection.error;
 /**
  * This indicates an illegal access request to a bean's properties
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/24/12)
  */
 public class PropertyAccessException extends Exception {

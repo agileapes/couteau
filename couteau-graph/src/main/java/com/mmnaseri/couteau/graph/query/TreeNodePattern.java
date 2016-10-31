@@ -30,7 +30,7 @@ import com.mmnaseri.couteau.graph.search.Finder;
 import java.util.List;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/30, 13:50)
  */
 public class TreeNodePattern implements NodePattern {

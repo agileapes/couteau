@@ -35,7 +35,7 @@ import java.util.Map;
 /**
  * This method model will associate a single, unique number to each method
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/9/10, 18:40)
  */
 public class MethodIndexMethod extends TypedMethodModel {

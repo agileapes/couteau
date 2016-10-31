@@ -26,7 +26,7 @@ package com.mmnaseri.couteau.http.io;
 import org.apache.http.client.methods.*;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/15 AD, 16:51)
  */
 public enum HttpRequestMethod {

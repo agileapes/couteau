@@ -30,7 +30,7 @@ import com.mmnaseri.couteau.reflection.cp.MappedClassLoader;
 import java.io.Reader;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (5/20/13, 8:20 PM)
  */
 public interface DynamicClassCompiler {

@@ -34,7 +34,7 @@ import java.io.IOException;
 import java.io.Reader;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (5/20/13, 8:21 PM)
  */
 public class DefaultDynamicClassCompiler implements DynamicClassCompiler {

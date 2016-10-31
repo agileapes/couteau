@@ -45,7 +45,7 @@ import java.util.Map;
 import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/4/13, 1:15 PM)
  */
 public class CodeGenerationTask extends PluginTask<SampleExecutor> {

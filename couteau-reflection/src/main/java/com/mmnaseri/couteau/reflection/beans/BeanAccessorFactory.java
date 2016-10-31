@@ -26,7 +26,7 @@ package com.mmnaseri.couteau.reflection.beans;
 /**
  * This is a factory that will dispense accessors for given beans
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/13/13, 6:52 AM)
  */
 public interface BeanAccessorFactory {

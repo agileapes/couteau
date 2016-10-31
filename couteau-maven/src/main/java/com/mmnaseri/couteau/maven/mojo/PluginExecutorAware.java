@@ -27,7 +27,7 @@ package com.mmnaseri.couteau.maven.mojo;
  * This interface is used to inject the plugin executor into beans that require access to the
  * object.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/3/13, 3:15 PM)
  */
 public interface PluginExecutorAware<E extends AbstractPluginExecutor> {

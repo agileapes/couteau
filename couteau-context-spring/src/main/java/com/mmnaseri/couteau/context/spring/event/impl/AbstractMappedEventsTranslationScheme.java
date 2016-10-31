@@ -49,7 +49,7 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  * Mapped classes are expected to be have a constructor with one argument of type {@link Object}
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (6/29/13, 4:51 PM)
  */
 public abstract class AbstractMappedEventsTranslationScheme implements TranslationScheme, ApplicationContextAware {

@@ -39,7 +39,7 @@ import java.io.InputStream;
  * {@link DomXmlParser} since it does not parse the entire XML document first, before converting it to a tree-representation
  * of the document.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/1/13, 1:48 PM)
  */
 public class SaxXmlParser implements XmlParser {

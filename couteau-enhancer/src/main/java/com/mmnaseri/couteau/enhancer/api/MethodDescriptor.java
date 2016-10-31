@@ -30,7 +30,7 @@ import java.lang.reflect.Method;
  * This is a replacement for using {@link Method} descriptors, since this way, the framework
  * can avoid making reflective calls every time the methods are being called
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/9/10, 17:13)
  */
 public interface MethodDescriptor {

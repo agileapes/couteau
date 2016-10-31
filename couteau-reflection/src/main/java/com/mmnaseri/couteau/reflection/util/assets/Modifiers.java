@@ -31,7 +31,7 @@ import java.lang.reflect.Modifier;
 /**
  * Encapsulates all modifiers currently supported by Java
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/6/13, 2:23 PM)
  */
 public enum Modifiers {

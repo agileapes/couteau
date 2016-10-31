@@ -24,7 +24,7 @@
 package com.mmnaseri.couteau.context.exp;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/7/6 AD, 2:55)
  */
 public interface ExpressionParser {

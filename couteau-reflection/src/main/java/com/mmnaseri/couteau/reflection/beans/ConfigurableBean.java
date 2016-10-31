@@ -32,7 +32,7 @@ import com.mmnaseri.couteau.reflection.error.PropertyTypeMismatchException;
  * Usually, the number of properties that can be manipulated in such a way is limited and
  * is specific to the bean implementing this interface.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/9/13, 12:47 PM)
  */
 public interface ConfigurableBean {

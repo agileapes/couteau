@@ -28,7 +28,7 @@ import com.mmnaseri.couteau.basics.api.Transformer;
 import java.io.PrintStream;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/15 AD, 19:34)
  */
 public class StringPrinterTransformer implements Transformer<String, String> {

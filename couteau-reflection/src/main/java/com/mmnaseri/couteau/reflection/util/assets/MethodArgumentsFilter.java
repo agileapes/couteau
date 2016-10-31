@@ -31,7 +31,7 @@ import java.util.Arrays;
 /**
  * Filters methods by their arguments
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/6/13, 5:35 PM)
  */
 public class MethodArgumentsFilter implements Filter<Method> {

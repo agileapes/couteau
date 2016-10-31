@@ -28,7 +28,7 @@ package com.mmnaseri.couteau.basics.api;
  * The result of the filtering should be deterministic, i.e., the accept method's return value should not defer
  * for the same input item.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (6/27/13, 2:54 PM)
  */
 public interface Filter<E> {

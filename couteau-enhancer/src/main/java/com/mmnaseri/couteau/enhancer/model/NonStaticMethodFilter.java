@@ -30,7 +30,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/9/11, 0:03)
  */
 public class NonStaticMethodFilter extends FilteringMethodModel<Method> {

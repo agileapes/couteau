@@ -39,7 +39,7 @@ import java.util.Map;
 /**
  * Describes the properties of the given class object using its getter and setter methods.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/9/13, 2:15 PM)
  */
 public class MethodClassBeanDescriptor<E> extends AbstractClassBeanDescriptor<E> {

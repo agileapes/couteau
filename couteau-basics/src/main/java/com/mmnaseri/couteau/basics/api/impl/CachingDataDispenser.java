@@ -30,7 +30,7 @@ import com.mmnaseri.couteau.basics.api.Filter;
  * This class denotes a data dispenser that is capable of caching results in case of a miss
  * and returning those cached values for the future.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/22/13, 12:40 PM)
  */
 public abstract class CachingDataDispenser<K, V> implements Cache<K, V> {

@@ -31,7 +31,7 @@ import com.mmnaseri.couteau.graph.tree.walk.TreeNodeProcessor;
  * This is a node processor that has a single {@link #process(Object)} method that will be called
  * whenever required
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/27, 17:57)
  */
 public abstract class DelegatingNodeProcessor<N extends TreeNode<N>> implements TreeNodeProcessor<N>, Processor<N> {

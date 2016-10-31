@@ -29,7 +29,7 @@ import com.mmnaseri.couteau.basics.api.Cache;
  * This is an extension to {@link CachingDataDispenser} that designates a simple (non-thread-safe)
  * cache as the data store for items.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/22/13, 12:45 PM)
  */
 public abstract class SimpleDataDispenser<K, V> extends CachingDataDispenser<K, V> {

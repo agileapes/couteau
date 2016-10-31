@@ -30,7 +30,7 @@ import java.lang.reflect.Member;
 /**
  * Filters elements by their modifiers
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/6/13, 2:23 PM)
  */
 public class MemberModifierFilter implements Filter<Member> {

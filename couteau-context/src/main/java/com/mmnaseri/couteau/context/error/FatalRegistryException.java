@@ -28,7 +28,7 @@ package com.mmnaseri.couteau.context.error;
  * registry. Such errors must be handled by either shutting the application down, or reviving the
  * registry anew.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/6/29, 1:15)
  */
 public class FatalRegistryException extends RegistryException {

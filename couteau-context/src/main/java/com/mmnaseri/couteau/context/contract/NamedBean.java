@@ -26,7 +26,7 @@ package com.mmnaseri.couteau.context.contract;
 /**
  * Named beans are aware of the name they have been given in any given context
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/3/13, 1:38 PM)
  */
 public interface NamedBean {

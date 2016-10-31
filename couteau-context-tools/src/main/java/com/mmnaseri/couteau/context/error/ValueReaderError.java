@@ -27,7 +27,7 @@ package com.mmnaseri.couteau.context.error;
  * This is the general basis for any errors inside the value reader that are actually related to
  * the process of reading a value.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/4/13, 11:33 AM)
  */
 public class ValueReaderError extends RuntimeException {

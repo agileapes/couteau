@@ -27,7 +27,7 @@ import com.mmnaseri.couteau.concurrency.deferred.Failure;
 import com.mmnaseri.couteau.concurrency.deferred.Notification;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/15 AD, 14:14)
  */
 public class TaskPerformedNotification implements Notification {

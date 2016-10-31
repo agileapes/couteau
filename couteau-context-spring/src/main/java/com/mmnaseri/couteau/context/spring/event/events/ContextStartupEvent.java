@@ -29,7 +29,7 @@ import com.mmnaseri.couteau.context.spring.event.TranslatedEvent;
 /**
  * Translation for {@link com.mmnaseri.couteau.context.event.ContextStartupEvent}
  * 
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (6/29/13, 4:45 PM)
  */
 public class ContextStartupEvent extends TranslatedEvent {

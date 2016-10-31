@@ -27,7 +27,7 @@ package com.mmnaseri.couteau.context.contract;
  * Ordered beans allow you to prioritize over beans. The lowest order means highest priority. Thus, by assigning
  * an order of {@link #HIGHEST_PRECEDENCE} you will get the lowest order and highest priority.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (6/27/13, 4:09 PM)
  */
 public interface OrderedBean {

@@ -28,7 +28,7 @@ import java.util.regex.MatchResult;
 /**
  * This class denotes the token that was resulted from a matching process
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/14/13, 5:18 PM)
  */
 class MatchToken {

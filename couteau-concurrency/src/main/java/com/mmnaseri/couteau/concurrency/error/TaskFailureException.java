@@ -27,7 +27,7 @@ package com.mmnaseri.couteau.concurrency.error;
  * This exception is raised whenever the task's completion has met some
  * unexpected error.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/8/15, 5:53)
  */
 public class TaskFailureException extends Exception {

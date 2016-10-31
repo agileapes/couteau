@@ -33,7 +33,7 @@ import com.mmnaseri.couteau.reflection.error.*;
 import com.mmnaseri.couteau.reflection.property.impl.SimplePropertyDescriptor;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/13/13, 7:02 AM)
  */
 public class DefaultBeanConverter extends AbstractCachingBeanConverter {

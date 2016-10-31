@@ -33,7 +33,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/3/7 AD, 19:26)
  */
 public class DefaultObjectReaderTest {

@@ -30,7 +30,7 @@ import com.mmnaseri.couteau.graph.search.Finder;
  * A node pattern is an object capable of dispensing finders for a specific matching process. The pattern itself
  * holds semantic data as to what is called an <em>acceptable</em> node in a graph of nodes, and what is not.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/30, 5:56)
  */
 public interface NodePattern {

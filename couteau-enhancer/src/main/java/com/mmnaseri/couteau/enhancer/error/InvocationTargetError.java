@@ -28,7 +28,7 @@ import com.mmnaseri.couteau.enhancer.api.MethodDescriptor;
 /**
  * Indicates an error in the execution of an enhanced method
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/9/10, 15:05)
  */
 public class InvocationTargetError extends Error {

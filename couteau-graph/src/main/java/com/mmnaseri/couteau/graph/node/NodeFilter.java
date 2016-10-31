@@ -29,7 +29,7 @@ import com.mmnaseri.couteau.basics.api.Filter;
  * This is essentially the filter interface, extended to make sure that later on
  * changes to filters can be propagated efficiently throughout the API.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/24, 15:17)
  */
 public interface NodeFilter<N extends Node> extends Filter<N> {

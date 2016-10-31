@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/22 AD, 9:53)
  */
 public class ListParser implements SnippetParser<List<String>> {

@@ -31,7 +31,7 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
  * This way, the contexts will be easily picked up by the configurator and added to Spring's
  * context the correct way.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/3/13, 6:39 PM)
  */
 public interface SpringConfigurableContext<E> extends Context<E> {

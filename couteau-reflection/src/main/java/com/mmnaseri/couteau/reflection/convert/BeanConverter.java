@@ -29,7 +29,7 @@ import com.mmnaseri.couteau.reflection.error.BeanConversionException;
  * This interface defines the contract for a bean converter that supports conversion of beans from
  * an arbitrary type to an arbitrary target type
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/13/13, 6:47 AM)
  */
 public interface BeanConverter {

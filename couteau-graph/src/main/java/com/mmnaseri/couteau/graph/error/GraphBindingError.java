@@ -24,7 +24,7 @@
 package com.mmnaseri.couteau.graph.error;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/3/7 AD, 19:20)
  */
 public class GraphBindingError extends Error {

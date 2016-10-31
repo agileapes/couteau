@@ -27,7 +27,7 @@ package com.mmnaseri.couteau.strings.token;
  * Token readers are abstract representations of the process of reading a single token from a given text.
  * It is assumed that each token reader will be capable of distinguishing a single type of token from the input text.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/23/13, 11:12 AM)
  */
 public interface TokenReader {

@@ -26,7 +26,7 @@ package com.mmnaseri.couteau.context.data;
 /**
  * Represents a single property in a data sheet
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/21 AD, 17:02)
  */
 public interface DataProperty<P> {

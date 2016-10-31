@@ -32,7 +32,7 @@ import java.util.Arrays;
  * arguments. This is to store invocation information for a later time so that we could reproduce
  * the process of invoking a given method with a given state input readily.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/7/13, 6:00 PM)
  */
 public class MethodInvocation {

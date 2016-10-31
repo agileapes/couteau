@@ -32,7 +32,7 @@ import java.util.regex.Pattern;
 /**
  * The DocumentReader will expose tools for parsing and reading through a document.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/23/13, 11:18 AM)
  */
 public interface DocumentReader {

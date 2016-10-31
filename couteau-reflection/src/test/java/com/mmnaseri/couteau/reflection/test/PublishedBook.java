@@ -26,7 +26,7 @@ package com.mmnaseri.couteau.reflection.test;
 import java.util.ArrayList;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/9/13, 3:05 PM)
  */
 public class PublishedBook extends Book {

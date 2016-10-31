@@ -32,7 +32,7 @@ import java.lang.annotation.Target;
  * <p>This annotation is designed to assign and associate a single template with a given model at
  * compile time.</p>
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/15/13, 7:52 PM)
  */
 @Retention(RetentionPolicy.RUNTIME)

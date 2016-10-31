@@ -30,7 +30,7 @@ import java.util.Set;
 /**
  * This class marks an attempt to enhance a class with a number of interfaces.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/9/10, 18:02)
  */
 public class Enhancement {

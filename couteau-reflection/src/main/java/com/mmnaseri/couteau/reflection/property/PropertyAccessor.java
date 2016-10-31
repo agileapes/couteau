@@ -32,7 +32,7 @@ import java.lang.reflect.Type;
  * it can be accessed. This will allow a multitude of implementations to be developed, hiding the differences
  * and readily exposing only the functionality that does matter.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/9/13, 12:24 PM)
  */
 public interface PropertyAccessor<E> extends AnnotatedElement, Member {

@@ -29,7 +29,7 @@ import com.mmnaseri.couteau.context.contract.Event;
 /**
  * This event is fired whenever the context is refreshed.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (6/29/13, 4:27 PM)
  */
 public class ContextRefreshedEvent extends Event {

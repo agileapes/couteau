@@ -42,7 +42,7 @@ import java.io.InputStream;
  *
  * <p>The actual process of using the document builder to parse the document is left to the extending classes.</p>
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/1/13, 1:19 PM)
  */
 public abstract class AbstractXmlDocumentParser implements XmlParser {

@@ -26,7 +26,7 @@ package com.mmnaseri.couteau.reflection.error;
 /**
  * The root of all errors occurring during the conversion of beans
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/13/13, 6:48 AM)
  */
 public abstract class BeanConversionException extends Exception {

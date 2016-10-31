@@ -27,7 +27,7 @@ package com.mmnaseri.couteau.context.error;
  * This error indicates that we have asked a reader to read values of a type it should not be
  * able to read.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/4/13, 11:33 AM)
  */
 public class InvalidValueTypeError extends ValueReaderError {

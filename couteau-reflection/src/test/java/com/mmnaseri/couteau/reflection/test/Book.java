@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/9/13, 3:04 PM)
  */
 public class Book {

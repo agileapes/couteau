@@ -34,7 +34,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/8/30 AD, 10:19)
  */
 public class SimpleAccessManager implements AccessManager {

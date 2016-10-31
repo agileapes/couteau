@@ -32,7 +32,7 @@ import org.apache.maven.plugin.MojoFailureException;
 import java.util.Collection;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/4/13, 1:07 PM)
  */
 public class ListClassesTask extends PluginTask<SampleExecutor> {

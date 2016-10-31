@@ -29,7 +29,7 @@ import com.mmnaseri.couteau.graph.tree.node.TreeNode;
  * This class calls its {@link #process(Object)} method before its children, essentially allowing for a pre-order
  * walk of the tree
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/27, 17:58)
  */
 public abstract class PreOrderNodeProcessor<N extends TreeNode<N>> extends DelegatingNodeProcessor<N> {

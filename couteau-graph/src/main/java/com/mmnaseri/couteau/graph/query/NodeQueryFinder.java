@@ -35,7 +35,7 @@ import java.util.List;
  * This class provides an implementation of Finder that relies on {@link BreadthFirstFinder} for
  * looking up nodes that are accepted by a given filter chain of {@link NodeFilter}s
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/26, 11:01)
  */
 public class NodeQueryFinder<N extends Node<N>> implements Finder<N> {

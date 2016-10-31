@@ -32,7 +32,7 @@ import java.util.Arrays;
 /**
  * This is an immutable method descriptor
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/9/10, 17:16)
  */
 public class ImmutableMethodDescriptor implements MethodDescriptor {

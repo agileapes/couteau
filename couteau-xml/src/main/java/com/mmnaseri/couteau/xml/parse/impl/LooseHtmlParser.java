@@ -38,7 +38,7 @@ import java.io.StringWriter;
  * This class relies on the JTidy library's implementation of DOM parser to parse a loosely regulated HTML document.
  * For this class to work, you must have JTidy on your class path.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/29, 20:20)
  */
 public class LooseHtmlParser extends AbstractXmlDocumentParser {

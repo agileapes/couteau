@@ -30,7 +30,7 @@ import com.mmnaseri.couteau.reflection.property.ReadPropertyAccessor;
  * Classes implementing this interface are able to expose the read accessors that can be used
  * to read property values from a given object.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/9/13, 12:52 PM)
  */
 public interface ReadAccessorAware {

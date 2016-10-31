@@ -33,7 +33,7 @@ package com.mmnaseri.couteau.enhancer.api;
  *
  * <p>You can specify interfaces through {@link #setInterfaces(Class[])}</p>
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/9/10, 15:09)
  */
 public interface ClassEnhancer<E> {

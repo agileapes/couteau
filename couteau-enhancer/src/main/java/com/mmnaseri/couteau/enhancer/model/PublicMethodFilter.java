@@ -32,7 +32,7 @@ import java.lang.reflect.Modifier;
 /**
  * This method model will accept only the public methods
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/9/10, 15:39)
  */
 public class PublicMethodFilter extends FilteringMethodModel<Method> {

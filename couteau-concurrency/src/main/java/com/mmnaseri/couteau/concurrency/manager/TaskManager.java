@@ -32,7 +32,7 @@ import com.mmnaseri.couteau.concurrency.task.Task;
  * This interface encapsulates all that a task manager needs to perform. This includes
  * operations that will facilitate scheduling tasks and canceling them.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/8/15, 5:54)
  */
 public interface TaskManager extends Runnable {

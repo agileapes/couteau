@@ -28,7 +28,7 @@ import java.util.Arrays;
 /**
  * Indicates that specified constant did not match any of the enum constants we expected.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/4/13, 11:38 AM)
  */
 public class InvalidEnumValueError extends InvalidInputValueError {

@@ -35,7 +35,7 @@ import java.util.Map;
  *
  * It also extends {@link EventPublisher} to allow multi-casting events inside the context.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (6/27/13, 4:09 PM)
  */
 public interface Context<E> extends Registry<E>, EventPublisher {

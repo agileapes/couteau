@@ -31,7 +31,7 @@ import java.lang.reflect.Type;
 /**
  * This implementation allows for easily extending the framework to add field-based property accessors.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/9/13, 12:38 PM)
  */
 public abstract class AbstractFieldPropertyAccessor<E> extends AbstractPropertyAccessor<E> {

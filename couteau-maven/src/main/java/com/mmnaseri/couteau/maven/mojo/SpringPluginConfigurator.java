@@ -33,7 +33,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
 /**
  * This bean should be used to enable the injection of the plugin executor into the requesting beans
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/15/13, 1:23 PM)
  */
 @Component

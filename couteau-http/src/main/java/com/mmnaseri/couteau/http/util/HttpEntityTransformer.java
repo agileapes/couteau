@@ -28,7 +28,7 @@ import com.mmnaseri.couteau.http.io.HttpResponse;
 import org.apache.http.HttpEntity;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/15 AD, 19:29)
  */
 public class HttpEntityTransformer implements Transformer<HttpResponse, HttpEntity> {

@@ -30,7 +30,7 @@ import com.mmnaseri.couteau.concurrency.task.Task;
  * This exception denotes that the task being marked as done or failed, does not belong
  * to the task manager through which the marking is taking place
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/8/15, 7:01)
  */
 public class TaskContextException extends Exception {

@@ -28,7 +28,7 @@ import org.xml.sax.ext.LexicalHandler;
 import org.xml.sax.helpers.DefaultHandler;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/1/13, 4:43 PM)
  */
 public class SaxEventHandlerAdapter extends DefaultHandler implements LexicalHandler {

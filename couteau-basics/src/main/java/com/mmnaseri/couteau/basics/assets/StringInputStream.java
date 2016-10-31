@@ -32,7 +32,7 @@ import java.io.InputStream;
  *
  * The point of operation is very simple, as it calls to {@link String#getBytes()}.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/30, 0:03)
  */
 public class StringInputStream extends InputStream {

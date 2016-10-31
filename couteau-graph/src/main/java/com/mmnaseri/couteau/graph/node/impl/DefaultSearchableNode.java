@@ -39,7 +39,7 @@ import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
  * made searchable through {@link #find(String)}. All other methods are
  * delegates to the original node's methods.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/27, 12:50)
  */
 public class DefaultSearchableNode implements SearchableNode<DefaultSearchableNode> {

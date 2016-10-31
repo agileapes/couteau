@@ -43,7 +43,7 @@ import java.util.Map;
  * {@link MappedClassLoader} which can be later used to <em>read</em> the byte
  * code information as it was produced by the JIT compiler.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/16/12)
  */
 public class SingleLocationClassFileManager<M extends JavaFileManager> extends ForwardingJavaFileManager<M> {

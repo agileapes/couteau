@@ -44,7 +44,7 @@ import java.util.Map;
  * <p>If you have beans other than your tasks which require access to the plugin executor, it is advisable
  * that you should add a bean definition for {@link SpringPluginConfigurator} to your application context.</p>
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/3/13, 5:45 PM)
  */
 public abstract class AbstractSpringPluginExecutor extends AbstractPluginExecutor implements ApplicationContextAware {

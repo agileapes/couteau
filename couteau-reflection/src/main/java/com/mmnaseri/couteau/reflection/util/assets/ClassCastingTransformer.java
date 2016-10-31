@@ -26,7 +26,7 @@ package com.mmnaseri.couteau.reflection.util.assets;
 import com.mmnaseri.couteau.basics.api.Transformer;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/9/17, 18:43)
  */
 public class ClassCastingTransformer<T> implements Transformer<Class<?>, Class<? extends T>> {

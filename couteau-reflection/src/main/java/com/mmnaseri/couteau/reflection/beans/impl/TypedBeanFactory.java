@@ -72,7 +72,7 @@ import java.util.Map;
  * are instantiated through their default constructor, while instances of {@code MyClass} are created through the
  * mapping specified manually.</p>
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/18 AD, 14:46)
  */
 public class TypedBeanFactory implements BeanFactory {

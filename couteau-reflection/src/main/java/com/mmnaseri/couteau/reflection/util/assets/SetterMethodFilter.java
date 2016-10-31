@@ -30,7 +30,7 @@ import java.lang.reflect.Method;
 /**
  * Accepts all setter methods
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/6/13, 3:53 PM)
  */
 public class SetterMethodFilter implements Filter<Method> {

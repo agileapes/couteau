@@ -34,7 +34,7 @@ import org.testng.annotations.Test;
 import java.util.Arrays;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/9/13, 2:58 PM)
  */
 public class MethodInvocationTest {

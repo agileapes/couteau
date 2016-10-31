@@ -35,7 +35,7 @@ import java.lang.reflect.Field;
 import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/21 AD, 15:02)
  */
 public class HttpStatusLine {

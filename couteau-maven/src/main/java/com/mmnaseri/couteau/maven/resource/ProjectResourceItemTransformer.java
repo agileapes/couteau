@@ -27,7 +27,7 @@ import com.mmnaseri.couteau.basics.api.Transformer;
 import org.springframework.core.io.Resource;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/9/17, 14:29)
  */
 public class ProjectResourceItemTransformer implements Transformer<ProjectResource, Resource> {

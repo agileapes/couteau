@@ -29,7 +29,7 @@ import com.mmnaseri.couteau.basics.api.Stringifiable;
  * This implementation allows for compile time decision of the textual representation for an object that
  * uses stringifiable instances
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/31/13, 10:47 AM)
  */
 public class StaticStringifiable<T> implements Stringifiable<T> {

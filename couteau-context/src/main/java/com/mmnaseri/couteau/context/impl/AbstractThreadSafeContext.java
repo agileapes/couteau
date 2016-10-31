@@ -30,7 +30,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * This class implements all the functionalities expected of a context in a manner that is
  * guaranteed to be thread-safe.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (6/27/13, 4:33 PM)
  */
 public abstract class AbstractThreadSafeContext<E> extends AbstractContext<E> {

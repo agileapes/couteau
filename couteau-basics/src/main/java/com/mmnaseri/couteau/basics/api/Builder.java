@@ -26,7 +26,7 @@ package com.mmnaseri.couteau.basics.api;
 /**
  * This interface abstract the stereotype widely associated with the builder pattern
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/18 AD, 14:58)
  */
 public interface Builder<T> {

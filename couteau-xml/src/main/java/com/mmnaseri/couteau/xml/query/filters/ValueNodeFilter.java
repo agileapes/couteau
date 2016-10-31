@@ -29,7 +29,7 @@ import com.mmnaseri.couteau.xml.node.XmlNode;
 import java.util.regex.Pattern;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/2/17 AD, 17:38)
  */
 public class ValueNodeFilter implements ConfigurableNodeFilter<XmlNode> {

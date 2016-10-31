@@ -33,7 +33,7 @@ import java.lang.reflect.Type;
 /**
  * This implementation allows for easily writing read and write accessor through methods.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/9/13, 12:31 PM)
  */
 public abstract class AbstractMethodPropertyAccessor<E> extends AbstractPropertyAccessor<E> {

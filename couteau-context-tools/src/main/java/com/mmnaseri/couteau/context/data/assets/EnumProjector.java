@@ -33,7 +33,7 @@ import com.mmnaseri.couteau.context.data.impl.ImmutableDataRow;
 import com.mmnaseri.couteau.context.value.ValueReader;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/21 AD, 18:06)
  */
 public class EnumProjector<E extends Enum> {

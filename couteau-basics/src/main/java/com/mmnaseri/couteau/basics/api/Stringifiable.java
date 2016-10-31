@@ -27,7 +27,7 @@ package com.mmnaseri.couteau.basics.api;
  * This interface will allow objects to delegate the process of converting values into
  * string representations to external users.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/29, 15:27)
  */
 public interface Stringifiable<E> {

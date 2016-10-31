@@ -29,7 +29,7 @@ import com.mmnaseri.couteau.reflection.error.BeanConversionException;
  * This interface allows for the definition of converters with a single purpose, which know how to convert items
  * from one specific type to items of a predesignated type.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/13/13, 2:08 PM)
  */
 public interface GenericBeanConverter<I, O> {

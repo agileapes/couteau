@@ -28,7 +28,7 @@ import com.mmnaseri.couteau.reflection.error.BeanFactoryException;
 /**
  * This interface allows for creating beans of a given type, given their original type.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/18 AD, 14:29)
  */
 public interface BeanFactory {

@@ -27,7 +27,7 @@ import com.mmnaseri.couteau.graph.node.Node;
 import com.mmnaseri.couteau.graph.node.NodeFilter;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/2/24 AD, 19:50)
  */
 public class OriginNodeFilter<N extends Node> implements OriginNodeAware<N>, NodeFilter<N> {

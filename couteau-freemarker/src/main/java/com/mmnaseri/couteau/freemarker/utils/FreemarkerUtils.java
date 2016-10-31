@@ -45,7 +45,7 @@ import java.util.Map;
 import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/15/13, 8:20 PM)
  */
 public abstract class FreemarkerUtils {

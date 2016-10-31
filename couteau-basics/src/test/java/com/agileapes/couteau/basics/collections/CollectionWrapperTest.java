@@ -35,7 +35,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (6/27/13, 3:16 PM)
  */
 public class CollectionWrapperTest {

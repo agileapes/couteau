@@ -36,7 +36,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/15 AD, 19:27)
  */
 public class FileDownloadingTransformer extends DownloadingTransformer {

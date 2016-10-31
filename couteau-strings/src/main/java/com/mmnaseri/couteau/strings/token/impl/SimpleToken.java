@@ -26,7 +26,7 @@ package com.mmnaseri.couteau.strings.token.impl;
 import com.mmnaseri.couteau.strings.token.Token;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/23/13, 11:32 AM)
  */
 public class SimpleToken implements Token {

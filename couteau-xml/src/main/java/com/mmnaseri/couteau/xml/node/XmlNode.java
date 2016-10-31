@@ -33,7 +33,7 @@ import java.util.List;
 /**
  * This class extends {@link DirectedTreeNode} to add properties peculiar to XML nodes.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/30, 1:51)
  */
 public class XmlNode extends DirectedTreeNode<XmlNode> implements SearchableNode<XmlNode> {

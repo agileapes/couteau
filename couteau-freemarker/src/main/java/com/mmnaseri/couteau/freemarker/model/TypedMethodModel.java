@@ -41,7 +41,7 @@ import static com.mmnaseri.couteau.reflection.util.ReflectionUtils.withMethods;
  * to run one of the (possibly many) methods available for execution as marked with
  * {@link Invokable}.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/8/31, 16:51)
  */
 public class TypedMethodModel extends NativeMethodModel {

@@ -27,7 +27,7 @@ package com.mmnaseri.couteau.graph.node;
  * This is an extension to the {@link NodeFilter} interface which allows for
  * arguments to be provided to the filter
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/27, 16:35)
  */
 public interface ConfigurableNodeFilter<N extends Node> extends NodeFilter<N> {

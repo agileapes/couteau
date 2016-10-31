@@ -27,7 +27,7 @@ package com.mmnaseri.couteau.lang.support;
  * An identified language input is an input for language {@code L} that can
  * identify itself uniquely among a set of inputs
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (5/20/13, 8:13 PM)
  */
 public interface IdentifiedLanguageInput<L extends Language> extends LanguageInput<L> {

@@ -30,7 +30,7 @@ import java.lang.reflect.Method;
 /**
  * Accepts all getter methods
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/6/13, 3:44 PM)
  */
 public class GetterMethodFilter implements Filter<Method> {

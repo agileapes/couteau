@@ -31,7 +31,7 @@ import java.io.Reader;
  *
  * To that end, each input provides a reader that can be used by the compiler/interpreter
  * as a means to interface with the physical end of the input chain
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (5/20/13, 7:59 PM)
  */
 public interface LanguageInput<L extends Language> {

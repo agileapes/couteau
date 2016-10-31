@@ -36,7 +36,7 @@ import java.util.List;
  * arguments passed to the execute method are of their actual types and not
  * the template representations of themselves.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/8/31, 16:46)
  */
 public abstract class NativeMethodModel implements TemplateMethodModelEx {

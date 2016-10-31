@@ -31,7 +31,7 @@ import java.lang.reflect.AnnotatedElement;
 /**
  * Filters items by their annotations
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/6/13, 2:21 PM)
  */
 public class AnnotatedElementFilter implements Filter<AnnotatedElement> {

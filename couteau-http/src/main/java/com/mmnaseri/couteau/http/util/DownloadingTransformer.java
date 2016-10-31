@@ -35,7 +35,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/15 AD, 19:18)
  */
 public class DownloadingTransformer implements Transformer<HttpResponse, HttpResponse> {

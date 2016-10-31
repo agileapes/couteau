@@ -27,7 +27,7 @@ package com.mmnaseri.couteau.enhancer.error;
  * Indicates an error that has prevented the enhancement of a class from being
  * carried out
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/9/10, 16:47)
  */
 public class EnhancementError extends Error {

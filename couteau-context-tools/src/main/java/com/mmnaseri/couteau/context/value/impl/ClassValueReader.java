@@ -33,7 +33,7 @@ import com.mmnaseri.couteau.reflection.util.ClassUtils;
  * This value reader will take as input the fully qualified name of a class within the classpath
  * as seen by the {@link #classLoader} and return the class object
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/6/4, 19:08)
  */
 public class ClassValueReader implements ValueReader {

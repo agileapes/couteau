@@ -28,7 +28,7 @@ import org.springframework.context.ApplicationEvent;
 /**
  * This is the intended root for all events translated through Couteau.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/6/30, 10:13)
  */
 public abstract class TranslatedEvent extends ApplicationEvent {

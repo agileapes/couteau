@@ -30,7 +30,7 @@ import com.mmnaseri.couteau.reflection.property.WritePropertyAccessor;
  * Classes implementing this interface are able to expose writers for the properties they are
  * working with.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/9/13, 12:53 PM)
  */
 public interface WriteAccessorAware {

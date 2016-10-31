@@ -26,7 +26,7 @@ package com.mmnaseri.couteau.strings.token.impl;
 import java.util.regex.Pattern;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/23/13, 1:19 PM)
  */
 public class UnsignedIntegerTokenReader extends PatternTokenReader {

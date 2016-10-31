@@ -29,7 +29,7 @@ import com.mmnaseri.couteau.graph.binding.impl.api.Query;
 import java.util.Date;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/3/7 AD, 19:30)
  */
 public class Simple {

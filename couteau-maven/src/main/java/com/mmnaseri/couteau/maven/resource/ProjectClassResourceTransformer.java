@@ -26,7 +26,7 @@ package com.mmnaseri.couteau.maven.resource;
 import com.mmnaseri.couteau.basics.api.Transformer;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/9/17, 14:28)
  */
 public class ProjectClassResourceTransformer implements Transformer<ProjectResource, Class<?>> {

@@ -27,7 +27,7 @@ package com.mmnaseri.couteau.concurrency.deferred;
  * This enum is for internal usages and indicates the state of a {@link com.mmnaseri.couteau.concurrency.deferred.Deferred}
  * object.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/15 AD, 12:18)
  */
 public enum DeferredStatus {

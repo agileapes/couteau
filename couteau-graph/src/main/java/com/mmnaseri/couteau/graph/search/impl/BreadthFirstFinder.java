@@ -36,7 +36,7 @@ import java.util.*;
  * <p><strong>See</strong> the <a href='http://en.wikipedia.org/wiki/Breadth-first_search'
  * >Wikipedia entry</a> on Breadth-first search</p>
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/24, 15:29)
  */
 public class BreadthFirstFinder<N extends Node<N>> implements Finder<N> {

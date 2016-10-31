@@ -32,7 +32,7 @@ import java.util.List;
  * being the root, being a leaf, and having a parent and children are considered to be
  * such general, abstract ideas representing the core being of a tree.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/25, 10:27)
  */
 public interface TreeNode<N extends TreeNode<N>> extends Node<N> {

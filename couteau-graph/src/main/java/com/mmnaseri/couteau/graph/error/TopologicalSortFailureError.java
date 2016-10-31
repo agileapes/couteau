@@ -34,7 +34,7 @@ import java.util.Collection;
  *
  * <p>The problematic nodes will be contained in {@link #getNodes()}.</p>
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/31/13, 10:32 AM)
  */
 public class TopologicalSortFailureError extends Error {

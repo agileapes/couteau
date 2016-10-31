@@ -30,7 +30,7 @@ import java.lang.reflect.Method;
 /**
  * Accepts all setter and getter methods for a given property name
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/6/13, 5:30 PM)
  */
 public class PropertyAccessorFilter implements Filter<Method> {

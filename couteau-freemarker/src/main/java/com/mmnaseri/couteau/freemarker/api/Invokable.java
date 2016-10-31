@@ -35,7 +35,7 @@ import java.lang.annotation.Target;
  * through {@link TypedMethodModel} will enable the
  * typed method to list all invokable methods for type-matching.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/8/31, 16:51)
  */
 @Retention(RetentionPolicy.RUNTIME)

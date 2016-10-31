@@ -26,7 +26,7 @@ package com.mmnaseri.couteau.basics.api;
 /**
  * This interface will encapsulate that which is the expected behaviour of a normal cache.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/4/13, 1:49 PM)
  */
 public interface Cache<K, V> {

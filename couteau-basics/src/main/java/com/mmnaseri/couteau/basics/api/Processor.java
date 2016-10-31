@@ -27,7 +27,7 @@ package com.mmnaseri.couteau.basics.api;
  * the processor will perform a single unit of work on an item. This work is usually uniformly spanned across a whole
  * collection of items.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (6/27/13, 2:55 PM)
  */
 public interface Processor<E> {

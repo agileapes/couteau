@@ -32,7 +32,7 @@ import org.xml.sax.SAXException;
 import java.util.Stack;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/1/13, 1:51 PM)
  */
 public class SaxEventHandler extends SaxEventHandlerAdapter {

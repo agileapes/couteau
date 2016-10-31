@@ -31,7 +31,7 @@ import java.io.InputStream;
 /**
  * The XmlParser interface allows for easily parsing XML documents from an input stream into an tree representation.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/29, 19:43)
  */
 public interface XmlParser {

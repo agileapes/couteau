@@ -43,7 +43,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * promises.
  *
  * @see #all(java.util.List)
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/15 AD, 13:02)
  */
 public final class DeferredTask {

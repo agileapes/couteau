@@ -34,7 +34,7 @@ import java.util.Date;
 /**
  * This strategy is designed specifically for handling freemarker bean conversion
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/15/13, 6:21 PM)
  */
 public class FreemarkerConversionStrategy implements ConversionStrategy {

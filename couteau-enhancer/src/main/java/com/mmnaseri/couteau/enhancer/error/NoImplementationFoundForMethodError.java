@@ -27,7 +27,7 @@ package com.mmnaseri.couteau.enhancer.error;
  * Indicates call to a method that has not been implemented. This is most likely the
  * result of a proxy being told to invoke the super method on an interface.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/9/10, 16:40)
  */
 public class NoImplementationFoundForMethodError extends Error {

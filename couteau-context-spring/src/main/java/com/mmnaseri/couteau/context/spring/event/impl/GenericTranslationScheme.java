@@ -39,7 +39,7 @@ import java.util.Enumeration;
  * and back into the original format. By including this translator, all events, event those that don't have any
  * exact matches will be translatable.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (6/29/13, 4:32 PM)
  */
 public class GenericTranslationScheme implements TranslationScheme {

@@ -32,7 +32,7 @@ import java.io.Reader;
  * This is a generic language input that can be used for almost any language,
  * providing access to a delegate reader
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (5/20/13, 8:03 PM)
  */
 public class GenericLanguageInput<L extends Language> implements LanguageInput<L> {

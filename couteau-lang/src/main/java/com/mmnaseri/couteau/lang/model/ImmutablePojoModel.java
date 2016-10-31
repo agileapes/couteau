@@ -26,7 +26,7 @@ package com.mmnaseri.couteau.lang.model;
 import com.mmnaseri.couteau.freemarker.api.Template;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (5/22/13, 3:22 PM)
  */
 @Template("ftl/immutablePojo.ftl")

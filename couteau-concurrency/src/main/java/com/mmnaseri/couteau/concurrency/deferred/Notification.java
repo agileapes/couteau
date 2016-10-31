@@ -28,7 +28,7 @@ package com.mmnaseri.couteau.concurrency.deferred;
  * to be used with {@link com.mmnaseri.couteau.concurrency.deferred.NotifiableDeferred} and
  * {@link com.mmnaseri.couteau.concurrency.deferred.NotifiablePromise} instances.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/15 AD, 12:11)
  */
 public interface Notification {

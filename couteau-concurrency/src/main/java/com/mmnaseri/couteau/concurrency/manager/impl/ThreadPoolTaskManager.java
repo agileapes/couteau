@@ -108,7 +108,7 @@ import java.util.Map;
  * wherein the task manager might be forced to wait upon an entry channel for tasks to arrive you are advised
  * against using the convenience flag and rather writing your own monitoring and shutdown mechanism.</p>
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/8/15, 6:07)
  */
 public class ThreadPoolTaskManager implements TaskManager {

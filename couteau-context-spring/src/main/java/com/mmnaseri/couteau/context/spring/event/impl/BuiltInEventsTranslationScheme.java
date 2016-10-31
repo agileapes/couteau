@@ -29,7 +29,7 @@ import com.mmnaseri.couteau.reflection.util.ClassUtils;
 /**
  * This translator will translate all events in {@code couteau-context} into their counterparts understandable by Spring
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/6/30, 10:28)
  */
 public class BuiltInEventsTranslationScheme extends AbstractMappedEventsTranslationScheme {

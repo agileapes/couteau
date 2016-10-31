@@ -28,7 +28,7 @@ import com.mmnaseri.couteau.http.io.HttpRequest;
 import com.mmnaseri.couteau.http.io.HttpResponse;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/15 AD, 18:56)
  */
 public class HttpRequestFailure implements Failure {

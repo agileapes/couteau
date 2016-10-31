@@ -30,7 +30,7 @@ import com.mmnaseri.couteau.graph.tree.node.TreeNode;
  * This is an extension to the {@link DirectedTreeNode} adding the property that
  * all edges become bidirectional.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/25, 10:14)
  */
 public class SimpleTreeNode<N extends SimpleTreeNode<N>> extends DirectedTreeNode<N> implements TreeNode<N> {

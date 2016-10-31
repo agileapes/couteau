@@ -32,7 +32,7 @@ import com.mmnaseri.couteau.context.error.RegistryException;
  * processors that are ordered, and need to only rewrite the method they want to. By default,
  * the ordering of the processor is set to {@link OrderedBean#NEUTRAL_PRECEDENCE}.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (6/27/13, 4:36 PM)
  */
 public abstract class BeanProcessorAdapter<E> implements BeanProcessor<E>, OrderedBean {

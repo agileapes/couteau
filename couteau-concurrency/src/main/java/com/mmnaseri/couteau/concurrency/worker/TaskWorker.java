@@ -36,7 +36,7 @@ import org.apache.commons.logging.LogFactory;
  * the owning task manager and will try to carry it out successfully.
  *
  * @see #assign(Task)
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/8/15, 5:58)
  */
 public class TaskWorker extends Thread {

@@ -27,7 +27,7 @@ package com.mmnaseri.couteau.context.error;
  * This is a general error indicating that the fed value did not follow the rules
  * we expected it to.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/4/13, 11:34 AM)
  */
 public class InvalidInputValueError extends ValueReaderError {

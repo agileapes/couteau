@@ -45,7 +45,7 @@ import java.util.TreeSet;
  * It also allows for exploration of JAR files inside the classpath of the project
  *
  * @author Ramin Farhanian (ramin@farhanian.com)
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0, (7/9/12, 6:02 PM)
  */
 @SuppressWarnings("UnusedDeclaration")

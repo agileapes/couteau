@@ -27,7 +27,7 @@ package com.mmnaseri.couteau.lang.support;
  * The Language is an abstraction for the possible scripting and multi-purpose
  * languages that this framework can provide support for.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (5/20/13, 7:59 PM)
  */
 public abstract class Language {

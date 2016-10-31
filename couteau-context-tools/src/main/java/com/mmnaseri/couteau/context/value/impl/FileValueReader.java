@@ -31,7 +31,7 @@ import java.io.File;
 /**
  * This value reader will read the path to a file and return its representing object
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/6/4, 20:35)
  */
 public class FileValueReader implements ValueReader {

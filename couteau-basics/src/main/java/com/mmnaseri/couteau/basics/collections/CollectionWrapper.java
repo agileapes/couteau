@@ -35,7 +35,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * The collection wrapper class is designed to wrap a collection and perform fluently designated operations on it.
  * It will make chained operations on the collection so much easier.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (6/27/13, 2:57 PM)
  */
 public class CollectionWrapper<I> {

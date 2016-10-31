@@ -36,7 +36,7 @@ import java.util.List;
  * This class implements the topological sort algorithm. See <a href='http://en.wikipedia.org/wiki/Topological_sorting'
  * >the Wikipedia entry</a> on topological sorting for more information.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/29, 15:42)
  */
 public class TopologicalGraphSorter<N extends DirectedNode<N>> implements GraphSorter<N> {

@@ -39,7 +39,7 @@ import java.util.Map;
 /**
  * Wraps the bean, while exposing its properties through its getter and setter methods
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/9/13, 2:07 PM)
  */
 public class MethodBeanWrapper<E> extends AbstractBeanWrapper<E> {

@@ -31,7 +31,7 @@ import com.mmnaseri.couteau.reflection.error.PropertyAccessException;
  * methods that will give access to properties in the underlying bean. The bean accessor is basically
  * a gate to read-only access to a bean's properties.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/9/13, 12:45 PM)
  */
 public interface BeanAccessor<E> extends BeanDescriptor<E> {

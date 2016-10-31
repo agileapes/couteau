@@ -29,7 +29,7 @@ import com.mmnaseri.couteau.xml.node.XmlNode;
 import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/2/24 AD, 19:27)
  */
 public class NamespaceNodeFilter<N extends XmlNode> implements ConfigurableNodeFilter<N> {

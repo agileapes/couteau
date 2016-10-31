@@ -27,7 +27,7 @@ package com.mmnaseri.couteau.concurrency.deferred;
  * This interface builds on top of {@link Deferred} to enable notifying promises via {@link #notify(Notification)}
  *
  * @see com.mmnaseri.couteau.concurrency.deferred.NotifiablePromise
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/15 AD, 12:12)
  */
 public interface NotifiableDeferred<E, N extends Notification> extends Deferred<E> {

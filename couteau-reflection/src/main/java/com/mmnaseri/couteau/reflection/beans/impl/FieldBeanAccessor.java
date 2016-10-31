@@ -37,7 +37,7 @@ import java.util.Map;
 /**
  * This implementation relies on non-static fields of a bean to generate property accessor metadata.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/9/13, 1:43 PM)
  */
 public class FieldBeanAccessor<E> extends AbstractBeanAccessor<E> {

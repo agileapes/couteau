@@ -26,7 +26,7 @@ package com.mmnaseri.couteau.concurrency.task;
 import com.mmnaseri.couteau.concurrency.error.TaskFailureException;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/15 AD, 13:15)
  */
 public interface DeferredCallable<E> {

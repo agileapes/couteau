@@ -40,7 +40,7 @@ import java.util.Map;
  * This implementation relies on non-static fields of a class to create property metadata. naturally, {@link final}
  * fields are not included in the writable properties.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/9/13, 2:09 PM)
  */
 public class FieldBeanWrapper<E> extends AbstractBeanWrapper<E> {

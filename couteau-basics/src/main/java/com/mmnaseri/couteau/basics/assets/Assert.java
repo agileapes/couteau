@@ -28,7 +28,7 @@ import java.util.Collection;
 /**
  * A simple assertion utility that helps with verification of input values
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/8/25, 16:53)
  */
 public class Assert {

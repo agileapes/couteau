@@ -28,7 +28,7 @@ import com.mmnaseri.couteau.basics.api.Stringifiable;
 /**
  * This class implements the properties expected of a binary tree.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/25, 11:08)
  */
 public class BinaryTreeNode<N extends BinaryTreeNode<N>> extends DirectedTreeNode<N> {

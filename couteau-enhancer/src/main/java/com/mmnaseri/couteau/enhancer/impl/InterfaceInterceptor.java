@@ -44,7 +44,7 @@ import static com.mmnaseri.couteau.reflection.util.ReflectionUtils.withMethods;
  * This interceptor allows for dynamic assignment of interface implementation as delegates
  * and also delegates calls to all interfaces implemented by the callback itself.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/9/10, 22:11)
  */
 public abstract class InterfaceInterceptor implements MethodInterceptor {

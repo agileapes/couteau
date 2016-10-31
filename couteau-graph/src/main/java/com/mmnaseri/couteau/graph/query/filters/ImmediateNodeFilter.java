@@ -29,7 +29,7 @@ import com.mmnaseri.couteau.graph.node.NodeFilter;
 /**
  * Accepts nodes that are immediately connected to the node of origin
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/30, 5:45)
  */
 public class ImmediateNodeFilter<N extends Node> implements NodeFilter<N>, OriginNodeAware<N> {

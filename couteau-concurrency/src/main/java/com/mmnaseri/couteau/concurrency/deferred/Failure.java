@@ -27,7 +27,7 @@ package com.mmnaseri.couteau.concurrency.deferred;
  * This interface indicates a failure that has most likely resulted in closing a deferred object with a fatal
  * rejection.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/15 AD, 12:14)
  */
 public interface Failure {

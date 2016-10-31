@@ -28,7 +28,7 @@ import com.mmnaseri.couteau.graph.tree.node.TreeNode;
 /**
  * This interface allows for processing a tree from a certain node downwards.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/27, 17:53)
  */
 public interface TreeProcessor<N extends TreeNode<N>> {

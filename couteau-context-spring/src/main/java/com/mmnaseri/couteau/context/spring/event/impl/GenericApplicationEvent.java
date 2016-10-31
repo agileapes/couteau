@@ -32,7 +32,7 @@ import java.util.Properties;
 /**
  * This is a generic event that has a set of properties.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (6/29/13, 4:29 PM)
  */
 public class GenericApplicationEvent extends TranslatedEvent {

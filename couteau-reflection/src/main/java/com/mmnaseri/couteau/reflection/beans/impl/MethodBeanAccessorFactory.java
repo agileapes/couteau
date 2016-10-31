@@ -29,7 +29,7 @@ import com.mmnaseri.couteau.reflection.beans.BeanAccessorFactory;
 /**
  * Returns {@link MethodBeanAccessor} for beans
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/13/13, 6:53 AM)
  */
 public class MethodBeanAccessorFactory implements BeanAccessorFactory {

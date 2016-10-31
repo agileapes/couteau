@@ -28,7 +28,7 @@ import java.util.Set;
 /**
  * This interface will represent a sheet of data, with a fixed set of 'columns', each represented as a property.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/21 AD, 17:01)
  */
 public interface DataSheet<P> extends Iterable<DataRow<P>> {

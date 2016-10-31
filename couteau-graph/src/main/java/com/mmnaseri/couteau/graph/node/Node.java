@@ -29,7 +29,7 @@ import java.util.Set;
  * This is the abstraction of a node. The graphs in this framework are modeled through
  * the nodes.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/24, 14:42)
  */
 public interface Node<N extends Node<N>> {

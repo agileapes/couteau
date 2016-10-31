@@ -28,7 +28,7 @@ import com.mmnaseri.couteau.graph.node.Node;
 /**
  * This interface allows for injecting the origin node into node filters.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/30, 5:46)
  */
 public interface OriginNodeAware<N extends Node> {

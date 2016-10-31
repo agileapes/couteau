@@ -47,7 +47,7 @@ import java.util.Map;
  * {@link TemplateModel} reflecting the properties within that object. This will allow for easy
  * conversion of any Java bean into a valid input for a Freemarker template.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/15/13, 5:09 PM)
  */
 public class FreemarkerModelConverter implements GenericBeanConverter<Object, TemplateModel> {

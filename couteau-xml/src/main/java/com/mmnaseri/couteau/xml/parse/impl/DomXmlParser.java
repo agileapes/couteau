@@ -35,7 +35,7 @@ import java.io.InputStream;
  * explicitly defined and cannot have any errors. As such, this parser is usually not safe for parsing HTML documents.
  * For that purpose, you should use {@link LooseHtmlParser}.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/29, 19:44)
  */
 public class DomXmlParser extends AbstractXmlDocumentParser {

@@ -32,7 +32,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * This class implements the {@link Registry}
  * interface by using a concurrent map for the underlying registry storage.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/8/30, 14:44)
  */
 public class ConcurrentRegistry<E> extends AbstractMapRegistry<E> {

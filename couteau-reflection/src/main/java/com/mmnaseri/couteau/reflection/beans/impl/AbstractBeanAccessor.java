@@ -44,7 +44,7 @@ import java.util.Set;
  * <p>To extend this abstract implementation, template method {@link #getReadAccessors()} has been provided,
  * through the implementation of which, one could easily provide the readers that will access properties.</p>
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/9/13, 12:51 PM)
  */
 public abstract class AbstractBeanAccessor<E> implements BeanAccessor<E>, ReadAccessorAware {

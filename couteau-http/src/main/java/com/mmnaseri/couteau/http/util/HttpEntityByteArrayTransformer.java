@@ -30,7 +30,7 @@ import org.apache.http.util.EntityUtils;
 import java.io.IOException;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/15 AD, 19:32)
  */
 public class HttpEntityByteArrayTransformer implements Transformer<HttpEntity,byte[]> {

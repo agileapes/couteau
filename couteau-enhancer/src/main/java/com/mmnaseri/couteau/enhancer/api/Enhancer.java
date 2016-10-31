@@ -26,7 +26,7 @@ package com.mmnaseri.couteau.enhancer.api;
 /**
  * This interface will allow for creation of enhanced objects.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/9/10, 14:56)
  */
 public interface Enhancer<E> {

@@ -35,7 +35,7 @@ import com.mmnaseri.couteau.reflection.error.BeanInstantiationException;
  * This is the default enhancer, relying on an external {@link ClassEnhancer} to provide
  * the underlying enhancing of the given class.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/9/10, 15:07)
  */
 public class DefaultEnhancer<E> implements Enhancer<E> {

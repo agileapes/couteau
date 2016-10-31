@@ -26,7 +26,7 @@ package com.mmnaseri.couteau.security;
 import com.mmnaseri.couteau.basics.api.Filter;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/8/30 AD, 10:18)
  */
 public interface AccessDeniedHandler extends Filter<AccessPolicy> {

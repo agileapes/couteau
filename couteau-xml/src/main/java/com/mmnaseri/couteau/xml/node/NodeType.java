@@ -32,7 +32,7 @@ import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
  *
  * This class adds a level of indirection between the framework and the DOM model of having constant values for node types.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/31/13, 11:52 AM)
  */
 public enum NodeType {

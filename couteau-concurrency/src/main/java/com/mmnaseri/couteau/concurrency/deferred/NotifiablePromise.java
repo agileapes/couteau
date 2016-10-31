@@ -29,7 +29,7 @@ import com.mmnaseri.couteau.basics.api.Transformer;
 /**
  * This interface builds on {@link Promise} to allow for sending notifications to listener callbacks.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/15 AD, 12:16)
  */
 public interface NotifiablePromise<E, N extends Notification> extends Promise<E> {

@@ -24,7 +24,7 @@
 package com.mmnaseri.couteau.security;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/8/30 AD, 10:15)
  */
 public interface AccessManager {

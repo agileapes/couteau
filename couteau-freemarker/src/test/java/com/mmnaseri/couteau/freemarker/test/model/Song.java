@@ -26,7 +26,7 @@ package com.mmnaseri.couteau.freemarker.test.model;
 import com.mmnaseri.couteau.freemarker.api.Template;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/15/13, 8:24 PM)
  */
 @Template("/song.ftl")

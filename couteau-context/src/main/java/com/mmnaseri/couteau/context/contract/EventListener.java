@@ -27,7 +27,7 @@ package com.mmnaseri.couteau.context.contract;
  * Event listeners are hooks that can be put in place so that they are made aware of the
  * occurrence of certain events.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/6/29, 13:58)
  */
 public interface EventListener<E extends Event> {

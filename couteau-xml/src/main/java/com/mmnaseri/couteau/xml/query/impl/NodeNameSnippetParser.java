@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/30, 13:45)
  */
 public class NodeNameSnippetParser extends QuerySnippetParser {

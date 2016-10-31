@@ -33,7 +33,7 @@ import com.mmnaseri.couteau.context.contract.OrderedBean;
  * of their classes. This ensures that singleton objects within the context are unique by
  * their types as well.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (6/27/13, 4:35 PM)
  */
 public abstract class AbstractTypeSpecificContext<E> extends AbstractThreadSafeContext<E> {

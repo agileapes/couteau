@@ -36,7 +36,7 @@ import java.util.Collection;
 import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/7/6 AD, 16:23)
  */
 public class MethodPickerMethod extends TypedMethodModel {

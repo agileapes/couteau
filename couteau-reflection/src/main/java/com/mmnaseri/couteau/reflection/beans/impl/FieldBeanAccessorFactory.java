@@ -29,7 +29,7 @@ import com.mmnaseri.couteau.reflection.beans.BeanAccessorFactory;
 /**
  * This factory returns {@link FieldBeanAccessor}s.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/13/13, 6:52 AM)
  */
 public class FieldBeanAccessorFactory implements BeanAccessorFactory {

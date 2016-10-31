@@ -28,7 +28,7 @@ package com.mmnaseri.couteau.context.value;
  * reader context into beans without exposing it as a context, to minimize access and maximize
  * object security.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/3/13, 11:43 AM)
  */
 public interface ValueReaderAware {

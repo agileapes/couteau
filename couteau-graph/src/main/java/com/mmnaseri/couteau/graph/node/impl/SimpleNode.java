@@ -32,7 +32,7 @@ import com.mmnaseri.couteau.graph.node.Node;
  * to ensure this works, all nodes within the graph should be instances of
  * {@link SimpleNode}.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/25, 10:05)
  */
 public class SimpleNode<N extends SimpleNode<N>> extends DirectedNode<N> {

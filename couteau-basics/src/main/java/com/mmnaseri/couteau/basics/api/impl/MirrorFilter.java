@@ -29,7 +29,7 @@ import com.mmnaseri.couteau.basics.api.Filter;
  * This is a filter that will help with filtering through a collection
  * of filters, by accepting all filters that accept a certain item.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/9/8, 19:43)
  */
 public class MirrorFilter<E> implements Filter<Filter<E>> {

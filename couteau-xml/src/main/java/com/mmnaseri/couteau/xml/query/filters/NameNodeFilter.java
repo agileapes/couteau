@@ -28,7 +28,7 @@ import com.mmnaseri.couteau.graph.node.NodeFilter;
 import com.mmnaseri.couteau.xml.node.XmlNode;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/30, 13:47)
  */
 public class NameNodeFilter<N extends Node> implements NodeFilter<N> {

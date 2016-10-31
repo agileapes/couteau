@@ -29,7 +29,7 @@ import com.mmnaseri.couteau.context.data.DataSheet;
 import java.util.*;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/21 AD, 17:15)
  */
 public class DefaultDataSheet<P> implements DataSheet<P> {

@@ -28,7 +28,7 @@ import org.springframework.core.io.Resource;
 /**
  * The project resource is a generic wrapper for all project artifacts available to plugin tasks
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (5/12/13, 12:07 PM)
  */
 public class ProjectResource {

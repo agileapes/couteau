@@ -30,7 +30,7 @@ import java.util.Map;
  * This is a simple registry that is <strong>not</strong> designed to be
  * thread-safe.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/8/30, 15:55)
  */
 public class SimpleRegistry<E> extends AbstractMapRegistry<E> {

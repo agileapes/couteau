@@ -30,7 +30,7 @@ import java.io.OutputStream;
  * to interface with the output environment and as such provide a clear output
  * to the compilation process.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (5/20/13, 7:59 PM)
  */
 public interface LanguageOutput<L extends Language> {

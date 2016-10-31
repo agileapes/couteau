@@ -33,7 +33,7 @@ import java.io.Serializable;
  * The event is also serializable, allowing it to be serialized to be multi-cast across a wider
  * range of platforms than the vanilla JRE over which the current application is running.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/6/29, 13:56)
  */
 public abstract class Event implements Serializable {

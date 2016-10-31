@@ -31,7 +31,7 @@ import java.lang.reflect.Field;
 /**
  * This class allows for reading of property values through declared fields
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/9/13, 12:40 PM)
  */
 public class FieldReadPropertyAccessor<E> extends AbstractFieldPropertyAccessor<E> implements ReadPropertyAccessor<E> {

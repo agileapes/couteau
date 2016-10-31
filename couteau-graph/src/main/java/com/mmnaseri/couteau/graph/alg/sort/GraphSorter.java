@@ -32,7 +32,7 @@ import java.util.List;
  * This interface abstracts the process of taking an entry point into the graph,
  * and then sorting all reachable nodes based on a certain criteria.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/29, 15:41)
  */
 public interface GraphSorter<T extends Node<T>> {

@@ -28,7 +28,7 @@ package com.mmnaseri.couteau.enhancer.api;
  * methods of an enhanced entity. Only calls to final methods will not be intercepted
  * as they will not be wrapped.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/9/10, 14:48)
  */
 public interface MethodInterceptor {

@@ -34,7 +34,7 @@ import java.util.List;
 /**
  * This parser decides whether or not a filter on the node index exists
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/30, 13:55)
  */
 public class NodeIndexSnippetParser extends QuerySnippetParser {

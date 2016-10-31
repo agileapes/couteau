@@ -36,7 +36,7 @@ import com.mmnaseri.couteau.lang.support.LanguageOutput;
  *
  * To interface available source-code compilers, see {@link SimpleSourceCompiler}
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (5/20/13, 7:53 PM)
  */
 public interface SimpleCompiler<S extends Language, T extends Language> {

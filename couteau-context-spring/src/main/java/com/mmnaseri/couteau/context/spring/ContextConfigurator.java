@@ -30,7 +30,7 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
  * This interface allows implementation of callbacks that will allow configuration of contexts
  * within a bean factory
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/6/30, 10:35)
  */
 public interface ContextConfigurator<C extends Context> {

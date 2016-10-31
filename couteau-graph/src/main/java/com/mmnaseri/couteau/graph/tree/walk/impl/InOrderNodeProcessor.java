@@ -29,7 +29,7 @@ import com.mmnaseri.couteau.graph.tree.walk.BinaryTreeNodeProcessor;
 /**
  * This processor will call {@link #process(Object)} between the child nodes
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/27, 17:59)
  */
 public abstract class InOrderNodeProcessor<N extends BinaryTreeNode<N>> extends DelegatingNodeProcessor<N> implements BinaryTreeNodeProcessor<N> {

@@ -28,7 +28,7 @@ import com.mmnaseri.couteau.security.Actor;
 import java.lang.reflect.Method;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/8/30 AD, 10:40)
  */
 public class MethodActor implements Actor {

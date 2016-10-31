@@ -24,7 +24,7 @@
 package com.mmnaseri.couteau.xml.error;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/29, 19:47)
  */
 public class XmlParseError extends Exception {

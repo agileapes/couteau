@@ -32,7 +32,7 @@ import java.io.OutputStream;
  * This is a generic language output that can be used to give access to a target
  * output stream for any language
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (5/20/13, 8:04 PM)
  */
 public class GenericLanguageOutput<L extends Language> implements LanguageOutput<L> {

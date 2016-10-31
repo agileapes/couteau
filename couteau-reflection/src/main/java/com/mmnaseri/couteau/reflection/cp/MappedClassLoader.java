@@ -37,7 +37,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * loader with the added benefit of being able to register new classes with it using
  * the {@link #register(String, byte[])} method.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/16/12)
  */
 public class MappedClassLoader extends SecureClassLoader {

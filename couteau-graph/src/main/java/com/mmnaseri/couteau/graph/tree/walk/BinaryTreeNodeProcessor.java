@@ -28,7 +28,7 @@ import com.mmnaseri.couteau.graph.tree.node.impl.BinaryTreeNode;
 /**
  * This interface allows for processing of a node in a binary tree, right between its children's processing
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/25, 14:01)
  */
 public interface BinaryTreeNodeProcessor<N extends BinaryTreeNode<N>> extends TreeNodeProcessor<N> {

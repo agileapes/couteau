@@ -33,7 +33,7 @@ import java.io.Reader;
  * a Java source code file. However, the input provided by the reader must be compatible
  * with the input expected by the compiler.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (5/20/13, 8:01 PM)
  */
 public class JavaLanguageInput extends GenericLanguageInput<Java> implements IdentifiedLanguageInput<Java> {

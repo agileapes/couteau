@@ -38,7 +38,7 @@ import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
  *
  * @see AbstractCache
  * @see RemovePolicy
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/4/13, 2:28 PM)
  */
 public abstract class AbstractCache<K, V> implements Cache<K, V> {

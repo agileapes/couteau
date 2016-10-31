@@ -27,7 +27,7 @@ package com.mmnaseri.couteau.context.contract;
  * A reconfigurable context is a context that can be reconfigured and then refreshed. The semantics of this context
  * requires that you refresh it after reconfiguring.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (6/27/13, 4:25 PM)
  */
 public interface ReconfigurableContext<E> extends Context<E> {

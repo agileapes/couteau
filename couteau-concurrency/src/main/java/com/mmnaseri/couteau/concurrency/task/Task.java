@@ -29,7 +29,7 @@ import com.mmnaseri.couteau.concurrency.error.TaskFailureException;
  * This interface encapsulates a single task that is to be performed
  * concurrently.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/8/15, 5:53)
  */
 public interface Task {

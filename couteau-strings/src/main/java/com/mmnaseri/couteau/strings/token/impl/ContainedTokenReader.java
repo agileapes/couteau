@@ -33,7 +33,7 @@ import java.util.regex.Pattern;
  * This token reader will read values that are contained within a pair of designator
  * characters (for instance, those contained within a pair of quotation marks).
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/26, 11:23)
  */
 public class ContainedTokenReader implements TokenReader {

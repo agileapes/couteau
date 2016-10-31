@@ -29,7 +29,7 @@ import com.mmnaseri.couteau.strings.token.TokenReader;
 /**
  * This reader will allow for converting existing token readers into token readers with an assignable tag
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/23/13, 12:02 PM)
  */
 public class TaggedTokenReader implements TokenReader {

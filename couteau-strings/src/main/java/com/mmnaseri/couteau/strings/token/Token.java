@@ -27,7 +27,7 @@ package com.mmnaseri.couteau.strings.token;
  * This interface defines the abstract meaning of a token as a {@code <start, end>} pair that can optionally
  * have a tag that will attach semantics to the token.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/23/13, 11:12 AM)
  */
 public interface Token {

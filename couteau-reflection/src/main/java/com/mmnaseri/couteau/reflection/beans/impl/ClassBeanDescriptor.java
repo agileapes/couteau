@@ -35,7 +35,7 @@ import java.util.Map;
  * sister {@link FieldClassBeanDescriptor}. In fact, this class is designed to combine the functionalities
  * of the two classes into one.</p>
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/22/13, 3:35 PM)
  */
 public class ClassBeanDescriptor<E> extends AbstractClassBeanDescriptor<E> {

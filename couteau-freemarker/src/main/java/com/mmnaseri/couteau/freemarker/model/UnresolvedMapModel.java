@@ -33,7 +33,7 @@ import freemarker.template.TemplateModelException;
  * to be automatically translated into <code>${x.y.z}</code> whenever this model is used
  * with the prefix <code>x</code>.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/8/30, 16:36)
  */
 public class UnresolvedMapModel implements TemplateHashModel {

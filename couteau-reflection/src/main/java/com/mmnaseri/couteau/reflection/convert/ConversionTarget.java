@@ -27,7 +27,7 @@ package com.mmnaseri.couteau.reflection.convert;
  * Beans implementing ConversionTarget are beans that want to be aware of the bean they are representing.
  * This means that these beans will have access to the bean they are being converted from.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/15/13, 5:52 PM)
  */
 public interface ConversionTarget {

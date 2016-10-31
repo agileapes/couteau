@@ -30,7 +30,7 @@ import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Member;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/9/13, 12:25 PM)
  */
 public abstract class AbstractPropertyAccessor<E> implements PropertyAccessor<E> {

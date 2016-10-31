@@ -28,7 +28,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/4/13, 6:36 PM)
  */
 public class GeneratedCodeRepository {

@@ -26,7 +26,7 @@ package com.mmnaseri.couteau.basics.collections;
 import java.util.*;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/16 AD, 16:09)
  */
 public final class MapBuilder {

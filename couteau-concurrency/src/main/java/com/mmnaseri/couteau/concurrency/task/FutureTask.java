@@ -27,7 +27,7 @@ package com.mmnaseri.couteau.concurrency.task;
  * This interface extends the {@link Task} interface to allow the task to
  * specify whether or not it is now ready to be performed.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/8/15, 5:55)
  */
 public interface FutureTask extends Task {

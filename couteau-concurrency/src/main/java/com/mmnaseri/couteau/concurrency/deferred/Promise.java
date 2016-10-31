@@ -32,7 +32,7 @@ import com.mmnaseri.couteau.concurrency.error.PromiseTimeoutError;
  * This interface will embody a task that needs to be performed at a time in future when a given promise has
  * been fulfilled.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/15 AD, 12:11)
  */
 public interface Promise<E> {

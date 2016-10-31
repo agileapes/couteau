@@ -26,7 +26,7 @@ package com.mmnaseri.couteau.http.util;
 import com.mmnaseri.couteau.concurrency.deferred.Notification;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/17 AD, 11:36)
  */
 public class DownloadNotification implements Notification {

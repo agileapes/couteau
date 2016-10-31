@@ -29,7 +29,7 @@ import com.mmnaseri.couteau.reflection.property.PropertyDescriptor;
  * A conversion strategy is a central way for abstracting the process of deciding which items should be
  * converted and which items do not need that.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/13/13, 7:31 AM)
  */
 public interface ConversionStrategy {

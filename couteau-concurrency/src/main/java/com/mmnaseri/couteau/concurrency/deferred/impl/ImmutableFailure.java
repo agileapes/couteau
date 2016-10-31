@@ -26,7 +26,7 @@ package com.mmnaseri.couteau.concurrency.deferred.impl;
 import com.mmnaseri.couteau.concurrency.deferred.Failure;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (14/6/15 AD, 12:25)
  */
 public class ImmutableFailure implements Failure {

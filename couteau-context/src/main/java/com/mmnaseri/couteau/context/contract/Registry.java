@@ -31,7 +31,7 @@ import java.util.Collection;
  * The registry is a place for storing beans of a given type with unique names. It is capable of
  * looking up the beans by name and also providing a collection of all available beans.
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (6/27/13, 3:45 PM)
  */
 public interface Registry<E> {

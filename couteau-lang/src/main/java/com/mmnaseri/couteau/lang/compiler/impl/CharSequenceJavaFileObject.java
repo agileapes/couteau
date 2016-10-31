@@ -28,7 +28,7 @@ import java.io.IOException;
 import java.net.URI;
 
 /**
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (8/16/12)
  */
 public class CharSequenceJavaFileObject extends SimpleJavaFileObject {

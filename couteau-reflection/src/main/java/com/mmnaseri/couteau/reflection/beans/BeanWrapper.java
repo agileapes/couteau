@@ -33,7 +33,7 @@ import com.mmnaseri.couteau.reflection.error.NoSuchPropertyException;
  *     <li>{@link #isReadable(String)}</li>
  * </ul>
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (7/9/13, 12:47 PM)
  */
 public interface BeanWrapper<E> extends BeanAccessor<E>, ConfigurableBean {

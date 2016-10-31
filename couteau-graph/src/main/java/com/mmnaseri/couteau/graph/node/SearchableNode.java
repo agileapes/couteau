@@ -32,7 +32,7 @@ import java.util.List;
  * using a string query, as is explained under
  * {@link GraphNodePattern}
  *
- * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
+ * @author Milad Naseri (mmnaseri@programmer.net)
  * @since 1.0 (2013/7/27, 12:45)
  */
 public interface SearchableNode<N extends SearchableNode<N>> extends Node<N> {
