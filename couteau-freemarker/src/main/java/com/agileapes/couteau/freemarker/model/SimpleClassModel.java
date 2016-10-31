@@ -23,7 +23,7 @@
 
 package com.agileapes.couteau.freemarker.model;
 
-import com.agileapes.couteau.basics.api.Transformer;
+import com.mmnaseri.couteau.basics.api.Transformer;
 import freemarker.ext.beans.BeansWrapper;
 import freemarker.ext.beans.BooleanModel;
 import freemarker.template.*;
@@ -31,7 +31,7 @@ import freemarker.template.*;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.agileapes.couteau.basics.collections.CollectionWrapper.with;
+import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
 
 /**
  * This class will model a class data model.

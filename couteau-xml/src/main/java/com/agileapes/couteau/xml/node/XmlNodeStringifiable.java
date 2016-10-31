@@ -23,12 +23,12 @@
 
 package com.agileapes.couteau.xml.node;
 
-import com.agileapes.couteau.basics.api.Stringifiable;
+import com.mmnaseri.couteau.basics.api.Stringifiable;
 import com.agileapes.couteau.graph.tree.node.TreeNode;
 
 import java.util.List;
 
-import static com.agileapes.couteau.basics.collections.CollectionWrapper.with;
+import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)

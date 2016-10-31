@@ -23,10 +23,10 @@
 
 package com.agileapes.couteau.maven.sample.task;
 
-import com.agileapes.couteau.basics.api.Filter;
-import com.agileapes.couteau.basics.api.Processor;
-import com.agileapes.couteau.basics.api.Transformer;
-import com.agileapes.couteau.basics.api.impl.NullFilter;
+import com.mmnaseri.couteau.basics.api.Filter;
+import com.mmnaseri.couteau.basics.api.Processor;
+import com.mmnaseri.couteau.basics.api.Transformer;
+import com.mmnaseri.couteau.basics.api.impl.NullFilter;
 import com.agileapes.couteau.freemarker.utils.FreemarkerUtils;
 import com.agileapes.couteau.lang.model.ImmutablePojoModel;
 import com.agileapes.couteau.maven.resource.ProjectResource;
@@ -42,7 +42,7 @@ import java.lang.reflect.Modifier;
 import java.util.AbstractMap;
 import java.util.Map;
 
-import static com.agileapes.couteau.basics.collections.CollectionWrapper.with;
+import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)

@@ -23,7 +23,7 @@
 
 package com.agileapes.couteau.maven.resource.impl;
 
-import com.agileapes.couteau.basics.api.Filter;
+import com.mmnaseri.couteau.basics.api.Filter;
 import com.agileapes.couteau.maven.resource.ClassPathScope;
 import org.apache.maven.artifact.Artifact;
 

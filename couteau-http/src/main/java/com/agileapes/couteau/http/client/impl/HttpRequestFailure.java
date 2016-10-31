@@ -23,7 +23,7 @@
 
 package com.agileapes.couteau.http.client.impl;
 
-import com.agileapes.couteau.concurrency.deferred.Failure;
+import com.mmnaseri.couteau.concurrency.deferred.Failure;
 import com.agileapes.couteau.http.io.HttpRequest;
 import com.agileapes.couteau.http.io.HttpResponse;
 

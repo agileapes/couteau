@@ -23,7 +23,7 @@
 
 package com.agileapes.couteau.http.util;
 
-import com.agileapes.couteau.basics.api.Transformer;
+import com.mmnaseri.couteau.basics.api.Transformer;
 
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -32,7 +32,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.agileapes.couteau.basics.collections.CollectionWrapper.with;
+import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)

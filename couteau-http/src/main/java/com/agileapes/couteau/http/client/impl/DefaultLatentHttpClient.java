@@ -23,8 +23,8 @@
 
 package com.agileapes.couteau.http.client.impl;
 
-import com.agileapes.couteau.concurrency.error.TaskFailureException;
-import com.agileapes.couteau.concurrency.task.DeferredCallable;
+import com.mmnaseri.couteau.concurrency.error.TaskFailureException;
+import com.mmnaseri.couteau.concurrency.task.DeferredCallable;
 import com.agileapes.couteau.http.client.LatentHttpClient;
 import com.agileapes.couteau.http.io.HttpHeader;
 import com.agileapes.couteau.http.io.HttpRequest;

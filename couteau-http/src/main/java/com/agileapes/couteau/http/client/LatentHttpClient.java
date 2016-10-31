@@ -23,7 +23,7 @@
 
 package com.agileapes.couteau.http.client;
 
-import com.agileapes.couteau.concurrency.task.DeferredCallable;
+import com.mmnaseri.couteau.concurrency.task.DeferredCallable;
 import com.agileapes.couteau.http.io.HttpHeader;
 import com.agileapes.couteau.http.io.HttpRequest;
 import com.agileapes.couteau.http.io.HttpResponse;

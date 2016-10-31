@@ -23,7 +23,7 @@
 
 package com.agileapes.couteau.graph.node.impl;
 
-import com.agileapes.couteau.basics.api.Transformer;
+import com.mmnaseri.couteau.basics.api.Transformer;
 import com.agileapes.couteau.graph.node.Node;
 import com.agileapes.couteau.graph.node.SearchableNode;
 import com.agileapes.couteau.graph.query.GraphNodePattern;
@@ -32,7 +32,7 @@ import com.agileapes.couteau.graph.tree.node.TreeNode;
 import java.util.List;
 import java.util.Set;
 
-import static com.agileapes.couteau.basics.collections.CollectionWrapper.with;
+import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
 
 /**
  * This is essentially a wrapper class that allows for normal nodes to be

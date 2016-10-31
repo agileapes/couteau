@@ -23,8 +23,8 @@
 
 package com.agileapes.couteau.freemarker.model;
 
-import com.agileapes.couteau.basics.api.Filter;
-import com.agileapes.couteau.basics.api.Processor;
+import com.mmnaseri.couteau.basics.api.Filter;
+import com.mmnaseri.couteau.basics.api.Processor;
 import com.agileapes.couteau.freemarker.api.Invokable;
 import com.agileapes.couteau.reflection.util.ReflectionUtils;
 import com.agileapes.couteau.reflection.util.assets.AnnotatedElementFilter;
@@ -33,7 +33,7 @@ import com.agileapes.couteau.reflection.util.assets.MethodReturnTypeFilter;
 import java.lang.reflect.Method;
 import java.util.*;
 
-import static com.agileapes.couteau.basics.collections.CollectionWrapper.with;
+import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
 import static com.agileapes.couteau.reflection.util.ReflectionUtils.withMethods;
 
 /**

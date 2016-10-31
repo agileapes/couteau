@@ -28,7 +28,7 @@ import com.agileapes.couteau.graph.node.Node;
 import com.agileapes.couteau.xml.node.NodeType;
 import com.agileapes.couteau.xml.node.XmlNode;
 
-import static com.agileapes.couteau.basics.collections.CollectionWrapper.with;
+import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)

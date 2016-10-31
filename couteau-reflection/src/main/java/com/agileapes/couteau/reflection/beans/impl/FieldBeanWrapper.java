@@ -23,7 +23,7 @@
 
 package com.agileapes.couteau.reflection.beans.impl;
 
-import com.agileapes.couteau.basics.api.Processor;
+import com.mmnaseri.couteau.basics.api.Processor;
 import com.agileapes.couteau.reflection.property.ReadPropertyAccessor;
 import com.agileapes.couteau.reflection.property.WritePropertyAccessor;
 import com.agileapes.couteau.reflection.property.impl.FieldReadPropertyAccessor;

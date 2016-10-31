@@ -23,12 +23,12 @@
 
 package com.agileapes.couteau.http.util;
 
-import com.agileapes.couteau.basics.api.Processor;
-import com.agileapes.couteau.basics.api.Transformer;
-import com.agileapes.couteau.concurrency.deferred.Failure;
-import com.agileapes.couteau.concurrency.deferred.NotifiableDeferred;
-import com.agileapes.couteau.concurrency.deferred.NotifiablePromise;
-import com.agileapes.couteau.concurrency.deferred.impl.DeferredTask;
+import com.mmnaseri.couteau.basics.api.Processor;
+import com.mmnaseri.couteau.basics.api.Transformer;
+import com.mmnaseri.couteau.concurrency.deferred.Failure;
+import com.mmnaseri.couteau.concurrency.deferred.NotifiableDeferred;
+import com.mmnaseri.couteau.concurrency.deferred.NotifiablePromise;
+import com.mmnaseri.couteau.concurrency.deferred.impl.DeferredTask;
 import com.agileapes.couteau.http.io.HttpResponse;
 
 import java.io.IOException;

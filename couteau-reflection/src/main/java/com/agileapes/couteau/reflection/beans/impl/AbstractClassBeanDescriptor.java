@@ -23,7 +23,7 @@
 
 package com.agileapes.couteau.reflection.beans.impl;
 
-import com.agileapes.couteau.basics.api.Processor;
+import com.mmnaseri.couteau.basics.api.Processor;
 import com.agileapes.couteau.reflection.beans.BeanDescriptor;
 import com.agileapes.couteau.reflection.beans.ReadAccessorAware;
 import com.agileapes.couteau.reflection.beans.WriteAccessorAware;

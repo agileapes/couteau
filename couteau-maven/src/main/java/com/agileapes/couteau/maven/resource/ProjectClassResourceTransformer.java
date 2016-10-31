@@ -23,7 +23,7 @@
 
 package com.agileapes.couteau.maven.resource;
 
-import com.agileapes.couteau.basics.api.Transformer;
+import com.mmnaseri.couteau.basics.api.Transformer;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)

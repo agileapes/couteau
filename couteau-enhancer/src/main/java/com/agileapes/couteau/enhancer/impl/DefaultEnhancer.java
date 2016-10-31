@@ -23,8 +23,8 @@
 
 package com.agileapes.couteau.enhancer.impl;
 
-import com.agileapes.couteau.basics.api.Cache;
-import com.agileapes.couteau.basics.api.impl.SimpleCache;
+import com.mmnaseri.couteau.basics.api.Cache;
+import com.mmnaseri.couteau.basics.api.impl.SimpleCache;
 import com.agileapes.couteau.enhancer.api.*;
 import com.agileapes.couteau.enhancer.error.BeanInitializationError;
 import com.agileapes.couteau.reflection.beans.BeanInitializer;

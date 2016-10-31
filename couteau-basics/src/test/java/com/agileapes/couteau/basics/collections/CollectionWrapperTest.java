@@ -23,16 +23,16 @@
 
 package com.agileapes.couteau.basics.collections;
 
-import com.agileapes.couteau.basics.api.Filter;
-import com.agileapes.couteau.basics.api.Processor;
-import com.agileapes.couteau.basics.api.Transformer;
+import com.mmnaseri.couteau.basics.api.Filter;
+import com.mmnaseri.couteau.basics.api.Processor;
+import com.mmnaseri.couteau.basics.api.Transformer;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static com.agileapes.couteau.basics.collections.CollectionWrapper.with;
+import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)

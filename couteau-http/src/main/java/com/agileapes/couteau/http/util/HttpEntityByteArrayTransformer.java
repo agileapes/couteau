@@ -23,7 +23,7 @@
 
 package com.agileapes.couteau.http.util;
 
-import com.agileapes.couteau.basics.api.Transformer;
+import com.mmnaseri.couteau.basics.api.Transformer;
 import org.apache.http.HttpEntity;
 import org.apache.http.util.EntityUtils;
 

@@ -23,7 +23,7 @@
 
 package com.agileapes.couteau.reflection.util;
 
-import com.agileapes.couteau.basics.collections.CollectionWrapper;
+import com.mmnaseri.couteau.basics.collections.CollectionWrapper;
 import com.agileapes.couteau.reflection.util.assets.FieldTypeFilter;
 import com.agileapes.couteau.reflection.util.assets.MemberNameFilter;
 import com.agileapes.couteau.reflection.util.assets.MethodArgumentsFilter;

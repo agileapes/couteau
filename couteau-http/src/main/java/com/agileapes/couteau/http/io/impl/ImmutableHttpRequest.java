@@ -23,7 +23,7 @@
 
 package com.agileapes.couteau.http.io.impl;
 
-import com.agileapes.couteau.basics.api.Transformer;
+import com.mmnaseri.couteau.basics.api.Transformer;
 import com.agileapes.couteau.http.io.HttpHeader;
 import com.agileapes.couteau.http.io.HttpRequest;
 import com.agileapes.couteau.http.io.HttpRequestMethod;
@@ -35,7 +35,7 @@ import java.net.URI;
 import java.net.URL;
 import java.util.*;
 
-import static com.agileapes.couteau.basics.collections.CollectionWrapper.with;
+import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)

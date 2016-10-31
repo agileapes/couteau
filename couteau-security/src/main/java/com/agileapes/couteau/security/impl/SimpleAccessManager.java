@@ -23,7 +23,7 @@
 
 package com.agileapes.couteau.security.impl;
 
-import com.agileapes.couteau.basics.api.Filter;
+import com.mmnaseri.couteau.basics.api.Filter;
 import com.agileapes.couteau.context.impl.OrderedBeanComparator;
 import com.agileapes.couteau.security.*;
 
@@ -31,7 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import static com.agileapes.couteau.basics.collections.CollectionWrapper.with;
+import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)

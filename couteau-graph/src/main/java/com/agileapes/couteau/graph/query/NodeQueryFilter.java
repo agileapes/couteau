@@ -23,8 +23,8 @@
 
 package com.agileapes.couteau.graph.query;
 
-import com.agileapes.couteau.basics.api.Filter;
-import com.agileapes.couteau.basics.api.impl.FilterChain;
+import com.mmnaseri.couteau.basics.api.Filter;
+import com.mmnaseri.couteau.basics.api.impl.FilterChain;
 import com.agileapes.couteau.graph.node.Node;
 import com.agileapes.couteau.graph.node.NodeFilter;
 import com.agileapes.couteau.graph.query.filters.OriginNodeAware;

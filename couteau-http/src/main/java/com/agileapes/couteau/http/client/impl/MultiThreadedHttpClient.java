@@ -23,14 +23,14 @@
 
 package com.agileapes.couteau.http.client.impl;
 
-import com.agileapes.couteau.concurrency.deferred.Promise;
-import com.agileapes.couteau.concurrency.error.TaskContextException;
-import com.agileapes.couteau.concurrency.error.TaskFailureException;
-import com.agileapes.couteau.concurrency.manager.TaskManager;
-import com.agileapes.couteau.concurrency.manager.TaskManagerStatus;
-import com.agileapes.couteau.concurrency.manager.impl.ThreadPoolTaskManager;
-import com.agileapes.couteau.concurrency.task.DeferredCallable;
-import com.agileapes.couteau.concurrency.task.Task;
+import com.mmnaseri.couteau.concurrency.deferred.Promise;
+import com.mmnaseri.couteau.concurrency.error.TaskContextException;
+import com.mmnaseri.couteau.concurrency.error.TaskFailureException;
+import com.mmnaseri.couteau.concurrency.manager.TaskManager;
+import com.mmnaseri.couteau.concurrency.manager.TaskManagerStatus;
+import com.mmnaseri.couteau.concurrency.manager.impl.ThreadPoolTaskManager;
+import com.mmnaseri.couteau.concurrency.task.DeferredCallable;
+import com.mmnaseri.couteau.concurrency.task.Task;
 import com.agileapes.couteau.http.client.HttpClient;
 import com.agileapes.couteau.http.client.LatentHttpClient;
 import com.agileapes.couteau.http.error.HttpResponseError;

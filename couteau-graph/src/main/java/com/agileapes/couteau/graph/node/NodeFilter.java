@@ -23,7 +23,7 @@
 
 package com.agileapes.couteau.graph.node;
 
-import com.agileapes.couteau.basics.api.Filter;
+import com.mmnaseri.couteau.basics.api.Filter;
 
 /**
  * This is essentially the filter interface, extended to make sure that later on

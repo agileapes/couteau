@@ -23,9 +23,9 @@
 
 package com.agileapes.couteau.http.client.impl;
 
-import com.agileapes.couteau.concurrency.deferred.Deferred;
-import com.agileapes.couteau.concurrency.deferred.Promise;
-import com.agileapes.couteau.concurrency.deferred.impl.DeferredTask;
+import com.mmnaseri.couteau.concurrency.deferred.Deferred;
+import com.mmnaseri.couteau.concurrency.deferred.Promise;
+import com.mmnaseri.couteau.concurrency.deferred.impl.DeferredTask;
 import com.agileapes.couteau.http.client.HttpClient;
 import com.agileapes.couteau.http.client.LatentHttpClient;
 import com.agileapes.couteau.http.io.HttpHeader;

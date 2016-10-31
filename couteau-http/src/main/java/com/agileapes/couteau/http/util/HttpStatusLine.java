@@ -23,8 +23,8 @@
 
 package com.agileapes.couteau.http.util;
 
-import com.agileapes.couteau.basics.api.Filter;
-import com.agileapes.couteau.basics.api.Transformer;
+import com.mmnaseri.couteau.basics.api.Filter;
+import com.mmnaseri.couteau.basics.api.Transformer;
 import com.agileapes.couteau.reflection.util.ReflectionUtils;
 import com.agileapes.couteau.reflection.util.assets.MemberModifierFilter;
 import com.agileapes.couteau.reflection.util.assets.Modifiers;
@@ -32,7 +32,7 @@ import org.apache.http.HttpStatus;
 
 import java.lang.reflect.Field;
 
-import static com.agileapes.couteau.basics.collections.CollectionWrapper.with;
+import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)

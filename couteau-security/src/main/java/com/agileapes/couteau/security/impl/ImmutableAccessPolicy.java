@@ -23,7 +23,7 @@
 
 package com.agileapes.couteau.security.impl;
 
-import com.agileapes.couteau.basics.api.Filter;
+import com.mmnaseri.couteau.basics.api.Filter;
 import com.agileapes.couteau.security.AccessPolicy;
 import com.agileapes.couteau.security.Actor;
 import com.agileapes.couteau.security.Decision;

@@ -23,7 +23,7 @@
 
 package com.agileapes.couteau.graph.tree.node.impl;
 
-import com.agileapes.couteau.basics.api.Stringifiable;
+import com.mmnaseri.couteau.basics.api.Stringifiable;
 import com.agileapes.couteau.graph.tree.node.TreeNode;
 
 /**

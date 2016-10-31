@@ -23,7 +23,7 @@
 
 package com.agileapes.couteau.enhancer.model;
 
-import com.agileapes.couteau.basics.api.Filter;
+import com.mmnaseri.couteau.basics.api.Filter;
 import com.agileapes.couteau.freemarker.api.Invokable;
 import com.agileapes.couteau.freemarker.model.TypedMethodModel;
 
@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static com.agileapes.couteau.basics.collections.CollectionWrapper.with;
+import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)

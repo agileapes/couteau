@@ -23,7 +23,7 @@
 
 package com.agileapes.couteau.maven.resource;
 
-import com.agileapes.couteau.basics.api.Filter;
+import com.mmnaseri.couteau.basics.api.Filter;
 
 /**
  * Filters resources based on their type

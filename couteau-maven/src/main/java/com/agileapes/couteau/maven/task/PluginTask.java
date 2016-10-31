@@ -23,10 +23,10 @@
 
 package com.agileapes.couteau.maven.task;
 
-import com.agileapes.couteau.concurrency.error.TaskFailureException;
-import com.agileapes.couteau.concurrency.task.FutureTask;
 import com.agileapes.couteau.maven.mojo.AbstractPluginExecutor;
 import com.agileapes.couteau.maven.mojo.PluginExecutorAware;
+import com.mmnaseri.couteau.concurrency.error.TaskFailureException;
+import com.mmnaseri.couteau.concurrency.task.FutureTask;
 import org.apache.maven.plugin.MojoFailureException;
 
 import java.util.Collection;

@@ -23,11 +23,10 @@
 
 package com.agileapes.couteau.maven.mojo;
 
-import com.agileapes.couteau.basics.api.Filter;
-import com.agileapes.couteau.basics.api.Processor;
-import com.agileapes.couteau.basics.api.Transformer;
-import com.agileapes.couteau.basics.api.impl.StaticStringifiable;
-import com.agileapes.couteau.concurrency.manager.impl.ThreadPoolTaskManager;
+import com.mmnaseri.couteau.basics.api.Filter;
+import com.mmnaseri.couteau.basics.api.Processor;
+import com.mmnaseri.couteau.basics.api.Transformer;
+import com.mmnaseri.couteau.basics.api.impl.StaticStringifiable;
 import com.agileapes.couteau.graph.alg.sort.impl.TopologicalGraphSorter;
 import com.agileapes.couteau.graph.node.impl.DirectedNode;
 import com.agileapes.couteau.maven.resource.ClassPathScanningClassProvider;
@@ -36,6 +35,7 @@ import com.agileapes.couteau.maven.resource.ProjectResource;
 import com.agileapes.couteau.maven.resource.impl.ClassPathScopeArtifactFilter;
 import com.agileapes.couteau.maven.task.PluginTask;
 import com.agileapes.couteau.reflection.cp.ConfigurableClassLoader;
+import com.mmnaseri.couteau.concurrency.manager.impl.ThreadPoolTaskManager;
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -53,7 +53,7 @@ import java.net.URLClassLoader;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArraySet;
 
-import static com.agileapes.couteau.basics.collections.CollectionWrapper.with;
+import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
 
 /**
  * <p>This class is the base class for all plugin execution's specified through this framework.

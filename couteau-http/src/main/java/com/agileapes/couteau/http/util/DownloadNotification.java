@@ -23,7 +23,7 @@
 
 package com.agileapes.couteau.http.util;
 
-import com.agileapes.couteau.concurrency.deferred.Notification;
+import com.mmnaseri.couteau.concurrency.deferred.Notification;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)

@@ -23,7 +23,7 @@
 
 package com.agileapes.couteau.freemarker.utils;
 
-import com.agileapes.couteau.basics.api.Transformer;
+import com.mmnaseri.couteau.basics.api.Transformer;
 import com.agileapes.couteau.freemarker.conversion.FreemarkerModelConverter;
 import com.agileapes.couteau.freemarker.model.SimpleClassModel;
 import com.agileapes.couteau.freemarker.model.SimpleMapModel;
@@ -41,7 +41,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
 
-import static com.agileapes.couteau.basics.collections.CollectionWrapper.with;
+import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)

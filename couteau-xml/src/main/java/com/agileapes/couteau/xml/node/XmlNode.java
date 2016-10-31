@@ -23,7 +23,7 @@
 
 package com.agileapes.couteau.xml.node;
 
-import com.agileapes.couteau.basics.api.Stringifiable;
+import com.mmnaseri.couteau.basics.api.Stringifiable;
 import com.agileapes.couteau.graph.node.SearchableNode;
 import com.agileapes.couteau.graph.tree.node.impl.DirectedTreeNode;
 import com.agileapes.couteau.xml.query.XmlPattern;

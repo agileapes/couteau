@@ -23,12 +23,12 @@
 
 package com.agileapes.couteau.freemarker.model;
 
-import com.agileapes.couteau.basics.api.Filter;
+import com.mmnaseri.couteau.basics.api.Filter;
 import com.agileapes.couteau.freemarker.api.Invokable;
 
 import java.util.Collection;
 
-import static com.agileapes.couteau.basics.collections.CollectionWrapper.with;
+import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
 
 /**
  * This method model is designed to help with both checking if single items match a

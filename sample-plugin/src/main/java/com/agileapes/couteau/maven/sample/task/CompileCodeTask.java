@@ -23,7 +23,7 @@
 
 package com.agileapes.couteau.maven.sample.task;
 
-import com.agileapes.couteau.basics.api.Processor;
+import com.mmnaseri.couteau.basics.api.Processor;
 import com.agileapes.couteau.lang.compiler.impl.DefaultDynamicClassCompiler;
 import com.agileapes.couteau.lang.compiler.impl.SimpleJavaSourceCompiler;
 import com.agileapes.couteau.lang.error.CompileException;
@@ -44,7 +44,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static com.agileapes.couteau.basics.collections.CollectionWrapper.with;
+import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
