@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2013 AgileApes, Ltd.
+ * Copyright (c) 2013 Milad Naseri.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -34,8 +34,8 @@ import com.mmnaseri.couteau.reflection.util.ClassUtils;
  */
 public class BuiltInEventsTranslationScheme extends AbstractMappedEventsTranslationScheme {
 
-    public static final String BUILTIN_EVENTS_PACKAGE = "com.agileapes.couteau.context.event.";
-    public static final String TRANSLATED_EVENTS_PACKAGE = "com.agileapes.couteau.context.spring.event.events.";
+    public static final String BUILTIN_EVENTS_PACKAGE = "com.mmnaseri.couteau.context.event.";
+    public static final String TRANSLATED_EVENTS_PACKAGE = "com.mmnaseri.couteau.context.spring.event.events.";
 
     @Override
     public boolean handles(Event event) {

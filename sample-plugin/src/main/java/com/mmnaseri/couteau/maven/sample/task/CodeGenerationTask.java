@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2013 AgileApes, Ltd.
+ * Copyright (c) 2013 Milad Naseri.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -78,11 +78,11 @@ public class CodeGenerationTask extends PluginTask<SampleExecutor> {
         }).drop(new Filter<Class>() {
             @Override
             public boolean accepts(Class item) {
-                return item.getCanonicalName().startsWith("com.agileapes.couteau.maven.")
-                    || item.getCanonicalName().startsWith("com.agileapes.couteau.reflection.")
-                    || item.getCanonicalName().startsWith("com.agileapes.couteau.lang.")
-                    || item.getCanonicalName().startsWith("com.agileapes.couteau.freemarker.")
-                    || item.getCanonicalName().startsWith("com.agileapes.couteau.strings.");
+                return item.getCanonicalName().startsWith("com.mmnaseri.couteau.maven.")
+                    || item.getCanonicalName().startsWith("com.mmnaseri.couteau.reflection.")
+                    || item.getCanonicalName().startsWith("com.mmnaseri.couteau.lang.")
+                    || item.getCanonicalName().startsWith("com.mmnaseri.couteau.freemarker.")
+                    || item.getCanonicalName().startsWith("com.mmnaseri.couteau.strings.");
             }
         }).transform(new Transformer<Class, MethodClassBeanDescriptor<?>>() {
             @Override
