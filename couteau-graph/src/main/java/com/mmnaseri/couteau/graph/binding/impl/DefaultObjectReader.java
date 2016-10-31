@@ -34,20 +34,20 @@ import com.mmnaseri.couteau.graph.node.Node;
 import com.mmnaseri.couteau.graph.query.GraphNodePattern;
 import com.mmnaseri.couteau.graph.query.NodePattern;
 import com.mmnaseri.couteau.graph.tree.node.TreeNode;
-import com.agileapes.couteau.reflection.beans.BeanInitializer;
-import com.agileapes.couteau.reflection.beans.BeanWrapper;
-import com.agileapes.couteau.reflection.beans.impl.ConstructorBeanInitializer;
-import com.agileapes.couteau.reflection.beans.impl.FieldBeanWrapper;
-import com.agileapes.couteau.reflection.error.BeanInstantiationException;
-import com.agileapes.couteau.reflection.util.assets.*;
+import com.mmnaseri.couteau.reflection.beans.BeanInitializer;
+import com.mmnaseri.couteau.reflection.beans.BeanWrapper;
+import com.mmnaseri.couteau.reflection.beans.impl.ConstructorBeanInitializer;
+import com.mmnaseri.couteau.reflection.beans.impl.FieldBeanWrapper;
+import com.mmnaseri.couteau.reflection.error.BeanInstantiationException;
+import com.mmnaseri.couteau.reflection.util.assets.*;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.List;
 
-import static com.agileapes.couteau.reflection.util.ReflectionUtils.withFields;
-import static com.agileapes.couteau.reflection.util.ReflectionUtils.withMethods;
+import static com.mmnaseri.couteau.reflection.util.ReflectionUtils.withFields;
+import static com.mmnaseri.couteau.reflection.util.ReflectionUtils.withMethods;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)

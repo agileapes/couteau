@@ -26,17 +26,17 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="listClassesTask" class="com.agileapes.couteau.maven.sample.task.ListClassesTask">
+    <bean id="listClassesTask" class="com.mmnaseri.couteau.maven.sample.task.ListClassesTask">
         <property name="dependencies">
             <set>
                 <ref bean="codeGenerationTask"/>
             </set>
         </property>
     </bean>
-    <bean id="codeGenerationTask" class="com.agileapes.couteau.maven.sample.task.CodeGenerationTask">
+    <bean id="codeGenerationTask" class="com.mmnaseri.couteau.maven.sample.task.CodeGenerationTask">
         <constructor-arg ref="generatedCodeRepository"/>
     </bean>
-    <bean class="com.agileapes.couteau.maven.sample.task.CompileCodeTask">
+    <bean class="com.mmnaseri.couteau.maven.sample.task.CompileCodeTask">
         <constructor-arg ref="generatedCodeRepository"/>
         <property name="dependencies">
             <set>
@@ -46,8 +46,8 @@
         </property>
     </bean>
 
-    <bean id="generatedCodeRepository" class="com.agileapes.couteau.maven.sample.code.GeneratedCodeRepository"/>
+    <bean id="generatedCodeRepository" class="com.mmnaseri.couteau.maven.sample.code.GeneratedCodeRepository"/>
 
-    <bean class="com.agileapes.couteau.maven.mojo.SpringPluginConfigurator"/>
+    <bean class="com.mmnaseri.couteau.maven.mojo.SpringPluginConfigurator"/>
 
 </beans>

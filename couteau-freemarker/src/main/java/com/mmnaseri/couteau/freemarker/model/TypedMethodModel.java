@@ -26,15 +26,15 @@ package com.mmnaseri.couteau.freemarker.model;
 import com.mmnaseri.couteau.basics.api.Filter;
 import com.mmnaseri.couteau.basics.api.Processor;
 import com.mmnaseri.couteau.freemarker.api.Invokable;
-import com.agileapes.couteau.reflection.util.ReflectionUtils;
-import com.agileapes.couteau.reflection.util.assets.AnnotatedElementFilter;
-import com.agileapes.couteau.reflection.util.assets.MethodReturnTypeFilter;
+import com.mmnaseri.couteau.reflection.util.ReflectionUtils;
+import com.mmnaseri.couteau.reflection.util.assets.AnnotatedElementFilter;
+import com.mmnaseri.couteau.reflection.util.assets.MethodReturnTypeFilter;
 
 import java.lang.reflect.Method;
 import java.util.*;
 
 import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
-import static com.agileapes.couteau.reflection.util.ReflectionUtils.withMethods;
+import static com.mmnaseri.couteau.reflection.util.ReflectionUtils.withMethods;
 
 /**
  * This model allows for automatic type-matching for executed methods within a template

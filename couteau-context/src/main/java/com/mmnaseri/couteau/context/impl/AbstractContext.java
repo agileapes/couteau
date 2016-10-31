@@ -27,7 +27,7 @@ import com.mmnaseri.couteau.context.error.FatalRegistryException;
 import com.mmnaseri.couteau.context.error.RegistryException;
 import com.mmnaseri.couteau.context.event.ContextRefreshedEvent;
 import com.mmnaseri.couteau.context.event.ContextStartupEvent;
-import com.agileapes.couteau.reflection.util.ClassUtils;
+import com.mmnaseri.couteau.reflection.util.ClassUtils;
 import com.mmnaseri.couteau.context.contract.*;
 
 import java.util.*;

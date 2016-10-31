@@ -27,9 +27,9 @@ import com.mmnaseri.couteau.basics.api.Cache;
 import com.mmnaseri.couteau.basics.api.impl.SimpleCache;
 import com.mmnaseri.couteau.enhancer.api.*;
 import com.mmnaseri.couteau.enhancer.error.BeanInitializationError;
-import com.agileapes.couteau.reflection.beans.BeanInitializer;
-import com.agileapes.couteau.reflection.beans.impl.ConstructorBeanInitializer;
-import com.agileapes.couteau.reflection.error.BeanInstantiationException;
+import com.mmnaseri.couteau.reflection.beans.BeanInitializer;
+import com.mmnaseri.couteau.reflection.beans.impl.ConstructorBeanInitializer;
+import com.mmnaseri.couteau.reflection.error.BeanInstantiationException;
 
 /**
  * This is the default enhancer, relying on an external {@link ClassEnhancer} to provide

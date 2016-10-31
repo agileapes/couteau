@@ -26,7 +26,7 @@ package com.mmnaseri.couteau.graph.query.impl;
 import com.mmnaseri.couteau.graph.node.NodeFilter;
 import com.mmnaseri.couteau.graph.query.QuerySnippetParser;
 import com.mmnaseri.couteau.graph.query.filters.NodeIndexFilter;
-import com.agileapes.couteau.strings.document.DocumentReader;
+import com.mmnaseri.couteau.strings.document.DocumentReader;
 
 import java.util.ArrayList;
 import java.util.List;

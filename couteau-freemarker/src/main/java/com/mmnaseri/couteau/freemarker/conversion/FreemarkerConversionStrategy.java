@@ -23,10 +23,10 @@
 
 package com.mmnaseri.couteau.freemarker.conversion;
 
-import com.agileapes.couteau.reflection.convert.ConversionDecision;
-import com.agileapes.couteau.reflection.convert.ConversionStrategy;
-import com.agileapes.couteau.reflection.property.PropertyDescriptor;
-import com.agileapes.couteau.reflection.util.ReflectionUtils;
+import com.mmnaseri.couteau.reflection.convert.ConversionDecision;
+import com.mmnaseri.couteau.reflection.convert.ConversionStrategy;
+import com.mmnaseri.couteau.reflection.property.PropertyDescriptor;
+import com.mmnaseri.couteau.reflection.util.ReflectionUtils;
 import freemarker.template.TemplateModel;
 
 import java.util.Date;

@@ -24,7 +24,7 @@
 package com.mmnaseri.couteau.context.spring.event.impl;
 
 import com.mmnaseri.couteau.context.contract.Event;
-import com.agileapes.couteau.reflection.util.ClassUtils;
+import com.mmnaseri.couteau.reflection.util.ClassUtils;
 
 /**
  * This translator will translate all events in {@code couteau-context} into their counterparts understandable by Spring

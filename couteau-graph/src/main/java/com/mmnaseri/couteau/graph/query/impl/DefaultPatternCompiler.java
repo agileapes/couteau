@@ -28,8 +28,8 @@ import com.mmnaseri.couteau.graph.node.NodeFilter;
 import com.mmnaseri.couteau.graph.query.NodeQueryFilter;
 import com.mmnaseri.couteau.graph.query.PatternCompiler;
 import com.mmnaseri.couteau.graph.query.QuerySnippetParser;
-import com.agileapes.couteau.strings.document.DocumentReader;
-import com.agileapes.couteau.strings.document.impl.DefaultDocumentReader;
+import com.mmnaseri.couteau.strings.document.DocumentReader;
+import com.mmnaseri.couteau.strings.document.impl.DefaultDocumentReader;
 
 import java.util.ArrayList;
 import java.util.Arrays;

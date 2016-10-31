@@ -1,4 +1,4 @@
-<#-- @ftlvariable name="" type="com.agileapes.couteau.lang.model.JavaClassModel" -->
+<#-- @ftlvariable name="" type="com.mmnaseri.couteau.lang.model.JavaClassModel" -->
 <#if packageName != "">package ${packageName};</#if>
 
 <#list imports as import>

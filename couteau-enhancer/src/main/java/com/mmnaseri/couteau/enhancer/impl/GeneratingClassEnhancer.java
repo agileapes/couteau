@@ -28,9 +28,9 @@ import com.mmnaseri.couteau.enhancer.api.NamingPolicy;
 import com.mmnaseri.couteau.enhancer.error.EnhancementError;
 import com.mmnaseri.couteau.enhancer.model.ClassEnhancementModel;
 import com.mmnaseri.couteau.freemarker.utils.FreemarkerUtils;
-import com.agileapes.couteau.lang.compiler.DynamicClassCompiler;
-import com.agileapes.couteau.lang.compiler.impl.DefaultDynamicClassCompiler;
-import com.agileapes.couteau.lang.error.CompileException;
+import com.mmnaseri.couteau.lang.compiler.DynamicClassCompiler;
+import com.mmnaseri.couteau.lang.compiler.impl.DefaultDynamicClassCompiler;
+import com.mmnaseri.couteau.lang.error.CompileException;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 

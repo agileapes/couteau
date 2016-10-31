@@ -25,7 +25,7 @@ package com.mmnaseri.couteau.context.spring;
 
 import com.mmnaseri.couteau.context.contract.*;
 import com.mmnaseri.couteau.context.error.RegistryException;
-import com.agileapes.couteau.reflection.util.ClassUtils;
+import com.mmnaseri.couteau.reflection.util.ClassUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.FatalBeanException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;

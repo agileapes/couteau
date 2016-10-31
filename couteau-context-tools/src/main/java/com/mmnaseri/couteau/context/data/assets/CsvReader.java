@@ -28,9 +28,9 @@ import com.mmnaseri.couteau.context.data.impl.DefaultDataRow;
 import com.mmnaseri.couteau.context.data.impl.DefaultDataSheet;
 import com.mmnaseri.couteau.context.data.impl.ImmutableDataRow;
 import com.mmnaseri.couteau.context.value.ValueReader;
-import com.agileapes.couteau.strings.document.DocumentReader;
-import com.agileapes.couteau.strings.document.impl.DefaultDocumentReader;
-import com.agileapes.couteau.strings.document.impl.ListParser;
+import com.mmnaseri.couteau.strings.document.DocumentReader;
+import com.mmnaseri.couteau.strings.document.impl.DefaultDocumentReader;
+import com.mmnaseri.couteau.strings.document.impl.ListParser;
 
 import java.io.BufferedReader;
 import java.io.IOException;

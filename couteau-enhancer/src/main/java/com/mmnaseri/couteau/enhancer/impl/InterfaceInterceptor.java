@@ -27,18 +27,18 @@ import com.mmnaseri.couteau.enhancer.api.MethodDescriptor;
 import com.mmnaseri.couteau.enhancer.api.MethodInterceptor;
 import com.mmnaseri.couteau.enhancer.api.MethodProxy;
 import com.mmnaseri.couteau.enhancer.error.BeanInitializationError;
-import com.agileapes.couteau.reflection.beans.BeanInitializer;
-import com.agileapes.couteau.reflection.beans.impl.ConstructorBeanInitializer;
-import com.agileapes.couteau.reflection.error.BeanInstantiationException;
-import com.agileapes.couteau.reflection.util.assets.MemberNameFilter;
-import com.agileapes.couteau.reflection.util.assets.MethodArgumentsFilter;
-import com.agileapes.couteau.reflection.util.assets.MethodReturnTypeFilter;
+import com.mmnaseri.couteau.reflection.beans.BeanInitializer;
+import com.mmnaseri.couteau.reflection.beans.impl.ConstructorBeanInitializer;
+import com.mmnaseri.couteau.reflection.error.BeanInstantiationException;
+import com.mmnaseri.couteau.reflection.util.assets.MemberNameFilter;
+import com.mmnaseri.couteau.reflection.util.assets.MethodArgumentsFilter;
+import com.mmnaseri.couteau.reflection.util.assets.MethodReturnTypeFilter;
 
 import java.lang.reflect.Method;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static com.agileapes.couteau.reflection.util.ReflectionUtils.withMethods;
+import static com.mmnaseri.couteau.reflection.util.ReflectionUtils.withMethods;
 
 /**
  * This interceptor allows for dynamic assignment of interface implementation as delegates

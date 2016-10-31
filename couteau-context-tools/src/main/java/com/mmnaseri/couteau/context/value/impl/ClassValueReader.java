@@ -27,7 +27,7 @@ import com.mmnaseri.couteau.context.error.InvalidInputValueError;
 import com.mmnaseri.couteau.context.error.InvalidValueTypeError;
 import com.mmnaseri.couteau.context.error.ValueReaderError;
 import com.mmnaseri.couteau.context.value.ValueReader;
-import com.agileapes.couteau.reflection.util.ClassUtils;
+import com.mmnaseri.couteau.reflection.util.ClassUtils;
 
 /**
  * This value reader will take as input the fully qualified name of a class within the classpath

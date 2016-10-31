@@ -25,7 +25,7 @@ package com.mmnaseri.couteau.enhancer.model;
 
 import com.mmnaseri.couteau.freemarker.api.Invokable;
 import com.mmnaseri.couteau.freemarker.model.TypedMethodModel;
-import com.agileapes.couteau.reflection.util.ReflectionUtils;
+import com.mmnaseri.couteau.reflection.util.ReflectionUtils;
 
 /**
  * This method will map primitive types to their boxed, corresponding types

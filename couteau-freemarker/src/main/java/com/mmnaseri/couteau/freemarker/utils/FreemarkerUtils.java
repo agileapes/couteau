@@ -27,7 +27,7 @@ import com.mmnaseri.couteau.basics.api.Transformer;
 import com.mmnaseri.couteau.freemarker.conversion.FreemarkerModelConverter;
 import com.mmnaseri.couteau.freemarker.model.SimpleClassModel;
 import com.mmnaseri.couteau.freemarker.model.SimpleMapModel;
-import com.agileapes.couteau.reflection.util.ClassUtils;
+import com.mmnaseri.couteau.reflection.util.ClassUtils;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.ext.beans.BeansWrapper;
 import freemarker.ext.beans.BooleanModel;
