@@ -27,7 +27,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>couteau-parent</artifactId>
-        <groupId>com.agileapes.couteau</groupId>
+        <groupId>com.mmnaseri.couteau</groupId>
         <version>1.0</version>
         <relativePath>../couteau-parent/pom.xml</relativePath>
     </parent>
@@ -37,12 +37,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.agileapes.couteau</groupId>
+            <groupId>com.mmnaseri.couteau</groupId>
             <artifactId>couteau-basics</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.agileapes.couteau</groupId>
+            <groupId>com.mmnaseri.couteau</groupId>
             <artifactId>couteau-concurrency</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -52,7 +52,7 @@
             <version>4.3.4</version>
         </dependency>
         <dependency>
-            <groupId>com.agileapes.couteau</groupId>
+            <groupId>com.mmnaseri.couteau</groupId>
             <artifactId>couteau-reflection</artifactId>
             <version>${project.version}</version>
         </dependency>

@@ -35,12 +35,12 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.agileapes.couteau</groupId>
+            <groupId>com.mmnaseri.couteau</groupId>
             <artifactId>couteau-maven</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.agileapes.couteau</groupId>
+            <groupId>com.mmnaseri.couteau</groupId>
             <artifactId>couteau-lang</artifactId>
             <version>${project.version}</version>
         </dependency>
