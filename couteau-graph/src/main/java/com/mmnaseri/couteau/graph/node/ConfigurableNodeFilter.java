@@ -21,31 +21,22 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.agileapes.couteau.xml.query.filters;
-
-import com.mmnaseri.couteau.graph.node.ConfigurableNodeFilter;
-import com.agileapes.couteau.xml.node.XmlNode;
-
-import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
+package com.mmnaseri.couteau.graph.node;
 
 /**
+ * This is an extension to the {@link NodeFilter} interface which allows for
+ * arguments to be provided to the filter
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (14/2/24 AD, 19:27)
+ * @since 1.0 (2013/7/27, 16:35)
  */
-public class NamespaceNodeFilter<N extends XmlNode> implements ConfigurableNodeFilter<N> {
+public interface ConfigurableNodeFilter<N extends Node> extends NodeFilter<N> {
 
-    private String namespace;
-
-    @Override
-    public void setAttribute(String name, String value) {
-        if (with("0", "namespace", "ns").has(name)) {
-            namespace = value;
-        }
-    }
-
-    @Override
-    public boolean accepts(N item) {
-        return item.getNamespace() != null && item.getNamespace().matches(namespace);
-    }
+    /**
+     * Sets an arbitrary attribute on the filter
+     * @param name     the name of the attribute
+     * @param value    the value of the attribute
+     */
+    void setAttribute(String name, String value);
 
 }

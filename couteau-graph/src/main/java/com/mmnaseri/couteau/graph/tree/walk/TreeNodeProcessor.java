@@ -21,31 +21,28 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.agileapes.couteau.xml.query.filters;
+package com.mmnaseri.couteau.graph.tree.walk;
 
-import com.mmnaseri.couteau.graph.node.ConfigurableNodeFilter;
-import com.agileapes.couteau.xml.node.XmlNode;
-
-import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
+import com.mmnaseri.couteau.graph.tree.node.TreeNode;
 
 /**
+ * This interface will allow for an event-driven style of processing of nodes.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (14/2/24 AD, 19:27)
+ * @since 1.0 (2013/7/25, 14:00)
  */
-public class NamespaceNodeFilter<N extends XmlNode> implements ConfigurableNodeFilter<N> {
+public interface TreeNodeProcessor<N extends TreeNode<N>> {
 
-    private String namespace;
+    /**
+     * Will be called before each node's children are processed
+     * @param node    the node to be processed
+     */
+    void processBeforeChildren(N node);
 
-    @Override
-    public void setAttribute(String name, String value) {
-        if (with("0", "namespace", "ns").has(name)) {
-            namespace = value;
-        }
-    }
-
-    @Override
-    public boolean accepts(N item) {
-        return item.getNamespace() != null && item.getNamespace().matches(namespace);
-    }
+    /**
+     * Will be called after each node's children are processed
+     * @param node    the node to be processed
+     */
+    void processAfterChildren(N node);
 
 }

@@ -21,31 +21,27 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.agileapes.couteau.xml.query.filters;
+package com.mmnaseri.couteau.graph.binding.impl.api;
 
-import com.mmnaseri.couteau.graph.node.ConfigurableNodeFilter;
-import com.agileapes.couteau.xml.node.XmlNode;
+import com.mmnaseri.couteau.graph.binding.BindingType;
 
-import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (14/2/24 AD, 19:27)
+ * @since 1.0 (14/2/17 AD, 18:08)
  */
-public class NamespaceNodeFilter<N extends XmlNode> implements ConfigurableNodeFilter<N> {
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+public @interface Query {
 
-    private String namespace;
+    String value();
 
-    @Override
-    public void setAttribute(String name, String value) {
-        if (with("0", "namespace", "ns").has(name)) {
-            namespace = value;
-        }
-    }
+    BindingType type() default BindingType.ELEMENT;
 
-    @Override
-    public boolean accepts(N item) {
-        return item.getNamespace() != null && item.getNamespace().matches(namespace);
-    }
+    String target() default "*";
 
 }

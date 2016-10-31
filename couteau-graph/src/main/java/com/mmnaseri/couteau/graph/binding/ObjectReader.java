@@ -21,31 +21,17 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.agileapes.couteau.xml.query.filters;
+package com.mmnaseri.couteau.graph.binding;
 
-import com.mmnaseri.couteau.graph.node.ConfigurableNodeFilter;
-import com.agileapes.couteau.xml.node.XmlNode;
-
-import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
+import com.mmnaseri.couteau.graph.error.GraphBindingError;
+import com.mmnaseri.couteau.graph.node.Node;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (14/2/24 AD, 19:27)
+ * @since 1.0 (14/2/17 AD, 18:24)
  */
-public class NamespaceNodeFilter<N extends XmlNode> implements ConfigurableNodeFilter<N> {
+public interface ObjectReader<N extends Node> {
 
-    private String namespace;
-
-    @Override
-    public void setAttribute(String name, String value) {
-        if (with("0", "namespace", "ns").has(name)) {
-            namespace = value;
-        }
-    }
-
-    @Override
-    public boolean accepts(N item) {
-        return item.getNamespace() != null && item.getNamespace().matches(namespace);
-    }
+    <E> E read(Class<E> type, N node) throws GraphBindingError;
 
 }

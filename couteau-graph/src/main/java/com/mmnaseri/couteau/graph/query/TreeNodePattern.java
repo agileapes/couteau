@@ -21,31 +21,38 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.agileapes.couteau.xml.query.filters;
+package com.mmnaseri.couteau.graph.query;
 
-import com.mmnaseri.couteau.graph.node.ConfigurableNodeFilter;
-import com.agileapes.couteau.xml.node.XmlNode;
+import com.mmnaseri.couteau.graph.node.Node;
+import com.mmnaseri.couteau.graph.query.impl.*;
+import com.mmnaseri.couteau.graph.search.Finder;
 
-import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
+import java.util.List;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (14/2/24 AD, 19:27)
+ * @since 1.0 (2013/7/30, 13:50)
  */
-public class NamespaceNodeFilter<N extends XmlNode> implements ConfigurableNodeFilter<N> {
+public class TreeNodePattern implements NodePattern {
 
-    private String namespace;
+    public static NodePattern compile(String pattern) {
+        final DefaultPatternCompiler compiler = new DefaultPatternCompiler();
+        compiler.addParser(new ImmediateSnippetParser());
+        compiler.addParser(new WildcardSnippetParser());
+        compiler.addParser(new NodeIndexSnippetParser());
+        compiler.addParser(new AttributesSnippetParser());
+        compiler.addParser(new FunctionCallSnippetParser(NodeFilterRepository.getFilters()));
+        return new TreeNodePattern(compiler.compile(pattern));
+    }
 
-    @Override
-    public void setAttribute(String name, String value) {
-        if (with("0", "namespace", "ns").has(name)) {
-            namespace = value;
-        }
+    private final List<NodeQueryFilter<?>> filters;
+
+    public TreeNodePattern(List<NodeQueryFilter<?>> filters) {
+        this.filters = filters;
     }
 
     @Override
-    public boolean accepts(N item) {
-        return item.getNamespace() != null && item.getNamespace().matches(namespace);
+    public <N extends Node<N>> Finder<N> finder(N origin) {
+        return new NodeQueryFinder<N>(origin, filters);
     }
-
 }

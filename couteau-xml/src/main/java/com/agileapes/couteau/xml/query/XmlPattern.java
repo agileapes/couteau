@@ -23,13 +23,13 @@
 
 package com.agileapes.couteau.xml.query;
 
-import com.agileapes.couteau.graph.node.Node;
-import com.agileapes.couteau.graph.query.NodeFilterRepository;
-import com.agileapes.couteau.graph.query.NodePattern;
-import com.agileapes.couteau.graph.query.NodeQueryFilter;
-import com.agileapes.couteau.graph.query.NodeQueryFinder;
-import com.agileapes.couteau.graph.query.impl.*;
-import com.agileapes.couteau.graph.search.Finder;
+import com.mmnaseri.couteau.graph.node.Node;
+import com.mmnaseri.couteau.graph.query.NodeFilterRepository;
+import com.mmnaseri.couteau.graph.query.NodePattern;
+import com.mmnaseri.couteau.graph.query.NodeQueryFilter;
+import com.mmnaseri.couteau.graph.query.NodeQueryFinder;
+import com.mmnaseri.couteau.graph.query.impl.*;
+import com.mmnaseri.couteau.graph.search.Finder;
 import com.agileapes.couteau.xml.query.filters.NamespaceNodeFilter;
 import com.agileapes.couteau.xml.query.filters.TypeNodeFilter;
 import com.agileapes.couteau.xml.query.filters.ValueNodeFilter;

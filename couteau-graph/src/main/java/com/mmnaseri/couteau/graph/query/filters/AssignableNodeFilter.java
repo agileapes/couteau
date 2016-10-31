@@ -21,31 +21,37 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.agileapes.couteau.xml.query.filters;
+package com.mmnaseri.couteau.graph.query.filters;
 
 import com.mmnaseri.couteau.graph.node.ConfigurableNodeFilter;
-import com.agileapes.couteau.xml.node.XmlNode;
-
-import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
+import com.mmnaseri.couteau.graph.node.Node;
 
 /**
+ * Filters nodes based on their super-type
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (14/2/24 AD, 19:27)
+ * @since 1.0 (2013/7/30, 15:38)
  */
-public class NamespaceNodeFilter<N extends XmlNode> implements ConfigurableNodeFilter<N> {
+public class AssignableNodeFilter<N extends Node> implements ConfigurableNodeFilter<N> {
 
-    private String namespace;
+    private Class<?> from = Object.class;
 
     @Override
     public void setAttribute(String name, String value) {
-        if (with("0", "namespace", "ns").has(name)) {
-            namespace = value;
+        if ("from".equals(name)) {
+            try {
+                if (!value.matches("[^\\.]*\\..*?")) {
+                    value = "java.lang." + value;
+                }
+                from = Class.forName(value);
+            } catch (ClassNotFoundException e) {
+                from = Object.class;
+            }
         }
     }
 
     @Override
     public boolean accepts(N item) {
-        return item.getNamespace() != null && item.getNamespace().matches(namespace);
+        return from.isInstance(item);
     }
-
 }

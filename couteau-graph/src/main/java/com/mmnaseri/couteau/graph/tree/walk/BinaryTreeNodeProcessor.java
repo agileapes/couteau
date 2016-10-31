@@ -21,31 +21,23 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.agileapes.couteau.xml.query.filters;
+package com.mmnaseri.couteau.graph.tree.walk;
 
-import com.mmnaseri.couteau.graph.node.ConfigurableNodeFilter;
-import com.agileapes.couteau.xml.node.XmlNode;
-
-import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
+import com.mmnaseri.couteau.graph.tree.node.impl.BinaryTreeNode;
 
 /**
+ * This interface allows for processing of a node in a binary tree, right between its children's processing
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (14/2/24 AD, 19:27)
+ * @since 1.0 (2013/7/25, 14:01)
  */
-public class NamespaceNodeFilter<N extends XmlNode> implements ConfigurableNodeFilter<N> {
+public interface BinaryTreeNodeProcessor<N extends BinaryTreeNode<N>> extends TreeNodeProcessor<N> {
 
-    private String namespace;
-
-    @Override
-    public void setAttribute(String name, String value) {
-        if (with("0", "namespace", "ns").has(name)) {
-            namespace = value;
-        }
-    }
-
-    @Override
-    public boolean accepts(N item) {
-        return item.getNamespace() != null && item.getNamespace().matches(namespace);
-    }
+    /**
+     * This method will be called after the node's left child is processed and before the right
+     * child's processing begins
+     * @param node    the node to be processed
+     */
+    void processBetweenChildren(N node);
 
 }

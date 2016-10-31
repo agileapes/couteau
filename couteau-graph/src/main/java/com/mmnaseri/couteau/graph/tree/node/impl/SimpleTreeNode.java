@@ -21,31 +21,46 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.agileapes.couteau.xml.query.filters;
+package com.mmnaseri.couteau.graph.tree.node.impl;
 
-import com.mmnaseri.couteau.graph.node.ConfigurableNodeFilter;
-import com.agileapes.couteau.xml.node.XmlNode;
-
-import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
+import com.mmnaseri.couteau.basics.api.Stringifiable;
+import com.mmnaseri.couteau.graph.tree.node.TreeNode;
 
 /**
+ * This is an extension to the {@link DirectedTreeNode} adding the property that
+ * all edges become bidirectional.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (14/2/24 AD, 19:27)
+ * @since 1.0 (2013/7/25, 10:14)
  */
-public class NamespaceNodeFilter<N extends XmlNode> implements ConfigurableNodeFilter<N> {
+public class SimpleTreeNode<N extends SimpleTreeNode<N>> extends DirectedTreeNode<N> implements TreeNode<N> {
+    
+    private final Stringifiable<SimpleTreeNode<N>> stringifiable;
 
-    private String namespace;
+    public SimpleTreeNode() {
+        this(null);
+    }
 
-    @Override
-    public void setAttribute(String name, String value) {
-        if (with("0", "namespace", "ns").has(name)) {
-            namespace = value;
-        }
+    public SimpleTreeNode(Stringifiable<SimpleTreeNode<N>> stringifiable) {
+        this.stringifiable = stringifiable;
     }
 
     @Override
-    public boolean accepts(N item) {
-        return item.getNamespace() != null && item.getNamespace().matches(namespace);
+    public void addNeighbor(N neighbor) {
+        if (getNeighbors().contains(neighbor)) {
+            return;
+        }
+        super.addNeighbor(neighbor);
+        //noinspection unchecked
+        neighbor.addNeighbor((N) this);
+    }
+
+    @Override
+    public String toString() {
+        if (stringifiable != null) {
+            return stringifiable.toString(this);
+        }
+        return super.toString();
     }
 
 }

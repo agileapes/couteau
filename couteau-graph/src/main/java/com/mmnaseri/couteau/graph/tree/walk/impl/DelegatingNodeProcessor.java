@@ -21,31 +21,27 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.agileapes.couteau.xml.query.filters;
+package com.mmnaseri.couteau.graph.tree.walk.impl;
 
-import com.mmnaseri.couteau.graph.node.ConfigurableNodeFilter;
-import com.agileapes.couteau.xml.node.XmlNode;
-
-import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
+import com.mmnaseri.couteau.basics.api.Processor;
+import com.mmnaseri.couteau.graph.tree.node.TreeNode;
+import com.mmnaseri.couteau.graph.tree.walk.TreeNodeProcessor;
 
 /**
+ * This is a node processor that has a single {@link #process(Object)} method that will be called
+ * whenever required
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (14/2/24 AD, 19:27)
+ * @since 1.0 (2013/7/27, 17:57)
  */
-public class NamespaceNodeFilter<N extends XmlNode> implements ConfigurableNodeFilter<N> {
-
-    private String namespace;
+public abstract class DelegatingNodeProcessor<N extends TreeNode<N>> implements TreeNodeProcessor<N>, Processor<N> {
 
     @Override
-    public void setAttribute(String name, String value) {
-        if (with("0", "namespace", "ns").has(name)) {
-            namespace = value;
-        }
+    public void processBeforeChildren(N node) {
     }
 
     @Override
-    public boolean accepts(N item) {
-        return item.getNamespace() != null && item.getNamespace().matches(namespace);
+    public void processAfterChildren(N node) {
     }
 
 }

@@ -23,8 +23,8 @@
 
 package com.agileapes.couteau.xml.query.filters;
 
-import com.agileapes.couteau.graph.node.ConfigurableNodeFilter;
-import com.agileapes.couteau.graph.node.Node;
+import com.mmnaseri.couteau.graph.node.ConfigurableNodeFilter;
+import com.mmnaseri.couteau.graph.node.Node;
 import com.agileapes.couteau.xml.node.NodeType;
 import com.agileapes.couteau.xml.node.XmlNode;
 

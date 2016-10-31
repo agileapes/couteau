@@ -21,31 +21,38 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.agileapes.couteau.xml.query.filters;
+package com.mmnaseri.couteau.graph.query.impl;
 
-import com.mmnaseri.couteau.graph.node.ConfigurableNodeFilter;
-import com.agileapes.couteau.xml.node.XmlNode;
+import com.mmnaseri.couteau.graph.node.NodeFilter;
+import com.mmnaseri.couteau.graph.query.QuerySnippetParser;
+import com.mmnaseri.couteau.graph.query.filters.AttributeNodeFilter;
+import com.agileapes.couteau.strings.document.DocumentReader;
+import com.agileapes.couteau.strings.document.impl.MapParser;
 
-import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
+ * This parser generates filters from string inputs that are maps formatted as
+ * '[a1=...,a2=...,...]'
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (14/2/24 AD, 19:27)
+ * @since 1.0 (2013/7/30, 6:16)
  */
-public class NamespaceNodeFilter<N extends XmlNode> implements ConfigurableNodeFilter<N> {
-
-    private String namespace;
+public class AttributesSnippetParser extends QuerySnippetParser {
 
     @Override
-    public void setAttribute(String name, String value) {
-        if (with("0", "namespace", "ns").has(name)) {
-            namespace = value;
+    public List<NodeFilter> parse(DocumentReader reader) {
+        if (!reader.hasMore() || !reader.peek(1).equals("[")) {
+            return null;
         }
-    }
-
-    @Override
-    public boolean accepts(N item) {
-        return item.getNamespace() != null && item.getNamespace().matches(namespace);
+        final ArrayList<NodeFilter> filters = new ArrayList<NodeFilter>();
+        final Map<String,String> map = reader.parse(new MapParser(MapParser.Container.SQUARE));
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            filters.add(new AttributeNodeFilter(entry.getKey(), entry.getValue()));
+        }
+        return filters;
     }
 
 }

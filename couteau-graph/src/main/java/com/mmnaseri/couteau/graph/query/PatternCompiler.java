@@ -21,31 +21,24 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.agileapes.couteau.xml.query.filters;
+package com.mmnaseri.couteau.graph.query;
 
-import com.mmnaseri.couteau.graph.node.ConfigurableNodeFilter;
-import com.agileapes.couteau.xml.node.XmlNode;
-
-import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
+import java.util.List;
 
 /**
+ * This interface encapsulates the process of compiling a string pattern into a list of filters that, when
+ * combined together, will only accept nodes described by the given pattern.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (14/2/24 AD, 19:27)
+ * @since 1.0 (2013/7/30, 5:56)
  */
-public class NamespaceNodeFilter<N extends XmlNode> implements ConfigurableNodeFilter<N> {
+public interface PatternCompiler {
 
-    private String namespace;
-
-    @Override
-    public void setAttribute(String name, String value) {
-        if (with("0", "namespace", "ns").has(name)) {
-            namespace = value;
-        }
-    }
-
-    @Override
-    public boolean accepts(N item) {
-        return item.getNamespace() != null && item.getNamespace().matches(namespace);
-    }
+    /**
+     * This method compiles the given pattern. The semantics of the pattern itself are implementation-specific.
+     * @param pattern    the pattern to be compiled
+     * @return the list of filters that are equivalent with the pattern
+     */
+    List<NodeQueryFilter<?>> compile(String pattern);
 
 }

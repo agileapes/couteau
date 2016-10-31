@@ -21,31 +21,33 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.agileapes.couteau.xml.query.filters;
+package com.mmnaseri.couteau.graph.query.impl;
 
-import com.mmnaseri.couteau.graph.node.ConfigurableNodeFilter;
-import com.agileapes.couteau.xml.node.XmlNode;
+import com.mmnaseri.couteau.graph.node.NodeFilter;
+import com.mmnaseri.couteau.graph.query.QuerySnippetParser;
+import com.mmnaseri.couteau.graph.query.filters.NodeIndexFilter;
+import com.agileapes.couteau.strings.document.DocumentReader;
 
-import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
+ * This parser decides whether or not a filter on the node index exists
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (14/2/24 AD, 19:27)
+ * @since 1.0 (2013/7/30, 13:55)
  */
-public class NamespaceNodeFilter<N extends XmlNode> implements ConfigurableNodeFilter<N> {
-
-    private String namespace;
+public class NodeIndexSnippetParser extends QuerySnippetParser {
 
     @Override
-    public void setAttribute(String name, String value) {
-        if (with("0", "namespace", "ns").has(name)) {
-            namespace = value;
+    public List<NodeFilter> parse(DocumentReader reader) {
+        if (!reader.hasMore() || !reader.has("#\\d+")) {
+            return null;
         }
-    }
-
-    @Override
-    public boolean accepts(N item) {
-        return item.getNamespace() != null && item.getNamespace().matches(namespace);
+        final ArrayList<NodeFilter> filters = new ArrayList<NodeFilter>();
+        reader.nextChar();
+        filters.add(new NodeIndexFilter(Integer.parseInt(reader.read("\\d+", false))));
+        return filters;
     }
 
 }

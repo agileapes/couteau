@@ -21,31 +21,32 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.agileapes.couteau.xml.query.filters;
+package com.mmnaseri.couteau.graph.node;
 
-import com.mmnaseri.couteau.graph.node.ConfigurableNodeFilter;
-import com.agileapes.couteau.xml.node.XmlNode;
+import com.mmnaseri.couteau.graph.query.GraphNodePattern;
 
-import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
+import java.util.List;
 
 /**
+ * Searchable nodes are nodes that can be used as an originating point for a search
+ * using a string query, as is explained under
+ * {@link GraphNodePattern}
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (14/2/24 AD, 19:27)
+ * @since 1.0 (2013/7/27, 12:45)
  */
-public class NamespaceNodeFilter<N extends XmlNode> implements ConfigurableNodeFilter<N> {
+public interface SearchableNode<N extends SearchableNode<N>> extends Node<N> {
 
-    private String namespace;
+    /**
+     * This method will search the graph, originating the search at this node.
+     * The search will be carried out according to {@link GraphNodePattern}
+     * and a list of all nodes matching the pattern will be returned, sorted by the order
+     * in which they were first encountered.
+     * @param pattern    the pattern which will be compiled into a set of matchers
+     * @return the list of matching nodes accessible from this node
+     */
+    List<N> find(String pattern);
 
-    @Override
-    public void setAttribute(String name, String value) {
-        if (with("0", "namespace", "ns").has(name)) {
-            namespace = value;
-        }
-    }
-
-    @Override
-    public boolean accepts(N item) {
-        return item.getNamespace() != null && item.getNamespace().matches(namespace);
-    }
+    String getPath();
 
 }

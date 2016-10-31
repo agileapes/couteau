@@ -24,7 +24,7 @@
 package com.agileapes.couteau.xml.node;
 
 import com.mmnaseri.couteau.basics.api.Stringifiable;
-import com.agileapes.couteau.graph.tree.node.TreeNode;
+import com.mmnaseri.couteau.graph.tree.node.TreeNode;
 
 import java.util.List;
 

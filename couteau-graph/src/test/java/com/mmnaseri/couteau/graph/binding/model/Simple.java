@@ -21,31 +21,36 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.agileapes.couteau.xml.query.filters;
+package com.mmnaseri.couteau.graph.binding.model;
 
-import com.mmnaseri.couteau.graph.node.ConfigurableNodeFilter;
-import com.agileapes.couteau.xml.node.XmlNode;
+import com.mmnaseri.couteau.graph.binding.BindingType;
+import com.mmnaseri.couteau.graph.binding.impl.api.Query;
 
-import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
+import java.util.Date;
 
 /**
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (14/2/24 AD, 19:27)
+ * @since 1.0 (14/3/7 AD, 19:30)
  */
-public class NamespaceNodeFilter<N extends XmlNode> implements ConfigurableNodeFilter<N> {
+public class Simple {
 
-    private String namespace;
+    @Query(value = "[name]", type = BindingType.ATTRIBUTE, target = "name")
+    private String name;
+    @Query(value = "[id]", type = BindingType.ATTRIBUTE, target = "id")
+    private Long id;
+    @Query(value = "[date]", type = BindingType.ATTRIBUTE, target = "date")
+    private Date date;
 
-    @Override
-    public void setAttribute(String name, String value) {
-        if (with("0", "namespace", "ns").has(name)) {
-            namespace = value;
-        }
+    public String getName() {
+        return name;
     }
 
-    @Override
-    public boolean accepts(N item) {
-        return item.getNamespace() != null && item.getNamespace().matches(namespace);
+    public Long getId() {
+        return id;
+    }
+
+    public Date getDate() {
+        return date;
     }
 
 }

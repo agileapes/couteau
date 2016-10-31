@@ -21,31 +21,33 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.agileapes.couteau.xml.query.filters;
+package com.mmnaseri.couteau.graph.error;
 
-import com.mmnaseri.couteau.graph.node.ConfigurableNodeFilter;
-import com.agileapes.couteau.xml.node.XmlNode;
+import com.mmnaseri.couteau.graph.node.Node;
 
-import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
+import java.util.Collection;
 
 /**
+ * <p>This error indicates a problem with the nodes being sorted; namely that of having a circular dependency
+ * among the nodes of a directed graph, a problem which would prevent the nodes from presenting candidates
+ * for the sorting process.</p>
+ *
+ * <p>The problematic nodes will be contained in {@link #getNodes()}.</p>
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (14/2/24 AD, 19:27)
+ * @since 1.0 (7/31/13, 10:32 AM)
  */
-public class NamespaceNodeFilter<N extends XmlNode> implements ConfigurableNodeFilter<N> {
+public class TopologicalSortFailureError extends Error {
 
-    private String namespace;
+    private final Collection<? extends Node> nodes;
 
-    @Override
-    public void setAttribute(String name, String value) {
-        if (with("0", "namespace", "ns").has(name)) {
-            namespace = value;
-        }
+    public TopologicalSortFailureError(Collection<? extends Node> nodes) {
+        super("Failed to sort nodes. There is a circular dependency between: " + nodes);
+        this.nodes = nodes;
     }
 
-    @Override
-    public boolean accepts(N item) {
-        return item.getNamespace() != null && item.getNamespace().matches(namespace);
+    public Collection<? extends Node> getNodes() {
+        return nodes;
     }
 
 }

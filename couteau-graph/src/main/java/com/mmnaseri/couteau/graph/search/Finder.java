@@ -21,31 +21,30 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.agileapes.couteau.xml.query.filters;
+package com.mmnaseri.couteau.graph.search;
 
-import com.mmnaseri.couteau.graph.node.ConfigurableNodeFilter;
-import com.agileapes.couteau.xml.node.XmlNode;
+import com.mmnaseri.couteau.graph.node.Node;
 
-import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
+import java.util.List;
 
 /**
+ * This interface encapsulates the process of finding a specific node within a graph.
+ * The finder is expected to carry out the search for the given connected component.
+ * If the desired nodes are within a different component, or if the nodes within this
+ * component are not strongly connected, the node of origin might not yield the desired
+ * nodes.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (14/2/24 AD, 19:27)
+ * @since 1.0 (2013/7/24, 15:10)
  */
-public class NamespaceNodeFilter<N extends XmlNode> implements ConfigurableNodeFilter<N> {
+public interface Finder<N extends Node> {
 
-    private String namespace;
-
-    @Override
-    public void setAttribute(String name, String value) {
-        if (with("0", "namespace", "ns").has(name)) {
-            namespace = value;
-        }
-    }
-
-    @Override
-    public boolean accepts(N item) {
-        return item.getNamespace() != null && item.getNamespace().matches(namespace);
-    }
+    /**
+     * This method will take a node and start searching from that node for all nodes
+     * that match with the given matcher
+     * @return the list of all nodes matching the given description. This list is sorted
+     * according to the order with which the nodes were first encountered by the finder.
+     */
+    List<N> find();
 
 }

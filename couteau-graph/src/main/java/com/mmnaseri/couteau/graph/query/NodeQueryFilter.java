@@ -21,31 +21,37 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.agileapes.couteau.xml.query.filters;
+package com.mmnaseri.couteau.graph.query;
 
-import com.mmnaseri.couteau.graph.node.ConfigurableNodeFilter;
-import com.agileapes.couteau.xml.node.XmlNode;
-
-import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
+import com.mmnaseri.couteau.basics.api.Filter;
+import com.mmnaseri.couteau.basics.api.impl.FilterChain;
+import com.mmnaseri.couteau.graph.node.Node;
+import com.mmnaseri.couteau.graph.node.NodeFilter;
+import com.mmnaseri.couteau.graph.query.filters.OriginNodeAware;
 
 /**
+ * NodeQueryFilter is a filter chain that will hold all other filters applicable throughout the search
+ * process.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (14/2/24 AD, 19:27)
+ * @since 1.0 (2013/7/26, 11:03)
  */
-public class NamespaceNodeFilter<N extends XmlNode> implements ConfigurableNodeFilter<N> {
+public class NodeQueryFilter<N extends Node> extends FilterChain<N> implements NodeFilter<N> {
 
-    private String namespace;
-
-    @Override
-    public void setAttribute(String name, String value) {
-        if (with("0", "namespace", "ns").has(name)) {
-            namespace = value;
+    /**
+     * will change the origin of the search
+     *
+     * @param origin    the new origin
+     * @return will return the current filter (for chaining purposes)
+     */
+    public NodeQueryFilter<?> forOrigin(Node origin) {
+        for (Filter<? super N> filter : filters) {
+            if (filter instanceof OriginNodeAware) {
+                //noinspection unchecked
+                ((OriginNodeAware) filter).setOrigin(origin);
+            }
         }
-    }
-
-    @Override
-    public boolean accepts(N item) {
-        return item.getNamespace() != null && item.getNamespace().matches(namespace);
+        return this;
     }
 
 }

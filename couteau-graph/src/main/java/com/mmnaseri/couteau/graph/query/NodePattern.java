@@ -21,31 +21,26 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.agileapes.couteau.xml.query.filters;
+package com.mmnaseri.couteau.graph.query;
 
-import com.mmnaseri.couteau.graph.node.ConfigurableNodeFilter;
-import com.agileapes.couteau.xml.node.XmlNode;
-
-import static com.mmnaseri.couteau.basics.collections.CollectionWrapper.with;
+import com.mmnaseri.couteau.graph.node.Node;
+import com.mmnaseri.couteau.graph.search.Finder;
 
 /**
+ * A node pattern is an object capable of dispensing finders for a specific matching process. The pattern itself
+ * holds semantic data as to what is called an <em>acceptable</em> node in a graph of nodes, and what is not.
+ *
  * @author Mohammad Milad Naseri (m.m.naseri@gmail.com)
- * @since 1.0 (14/2/24 AD, 19:27)
+ * @since 1.0 (2013/7/30, 5:56)
  */
-public class NamespaceNodeFilter<N extends XmlNode> implements ConfigurableNodeFilter<N> {
+public interface NodePattern {
 
-    private String namespace;
-
-    @Override
-    public void setAttribute(String name, String value) {
-        if (with("0", "namespace", "ns").has(name)) {
-            namespace = value;
-        }
-    }
-
-    @Override
-    public boolean accepts(N item) {
-        return item.getNamespace() != null && item.getNamespace().matches(namespace);
-    }
+    /**
+     * This method will create and return a finder object that is capable of looking up nodes in the graph
+     * component accessible from the origin node that match the internally held description.
+     * @param origin    the node of origin
+     * @return a finder which is capable of finding matching nodes
+     */
+    <N extends Node<N>> Finder<N> finder(N origin);
 
 }
