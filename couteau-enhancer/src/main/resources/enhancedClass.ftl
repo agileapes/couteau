@@ -1,15 +1,15 @@
-<#-- @ftlvariable name="" type="com.agileapes.couteau.enhancer.model.ClassEnhancementModel" -->
+<#-- @ftlvariable name="" type="com.mmnaseri.couteau.enhancer.model.ClassEnhancementModel" -->
 package ${superClass.canonicalName?substring(0, superClass.canonicalName?last_index_of('.'))};
 <#assign simpleName = enhancedName?substring(enhancedName?last_index_of(".") + 1)/>
 
-import com.agileapes.couteau.enhancer.api.MethodInterceptor;
-import com.agileapes.couteau.enhancer.api.Interceptible;
-import com.agileapes.couteau.enhancer.impl.NoOpInterceptor;
-import com.agileapes.couteau.enhancer.error.InvocationTargetError;
-import com.agileapes.couteau.enhancer.api.MethodProxy;
-import com.agileapes.couteau.enhancer.error.NoImplementationFoundForMethodError;
-import com.agileapes.couteau.enhancer.impl.ImmutableMethodDescriptor;
-import com.agileapes.couteau.enhancer.api.MethodDescriptor;
+import MethodInterceptor;
+import Interceptible;
+import NoOpInterceptor;
+import InvocationTargetError;
+import MethodProxy;
+import NoImplementationFoundForMethodError;
+import ImmutableMethodDescriptor;
+import MethodDescriptor;
 import java.lang.annotation.Annotation;
 import java.util.Map;
 import java.util.HashMap;
